@@ -12,7 +12,7 @@ export function ScrollReveal({ children, className = "", delay = 0 }: { children
       return;
     }
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting || entry.intersectionRatio > 0) {
+      if (entry && (entry.isIntersecting || entry.intersectionRatio > 0)) {
         setVisible(true);
         observer.unobserve(entry.target);
       }

@@ -1,10 +1,10 @@
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { X, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
-export const Route=createFileRoute("/estrutura")({head: () => ({ links: canonicalLink("/estrutura"), meta:[{title:"Nossa Estrutura | Instituto Educacional G.I."},{name:"description",content:"Conheça os ambientes de aprendizagem e convivência do Instituto Educacional G.I."},{name:"keywords",content:"estrutura escolar, ambientes de aprendizagem, Instituto Educacional G.I."}]}),component:Estrutura});
+export const Route=createFileRoute("/estrutura")({head: () => pageHead("/estrutura",{title:"Nossa Estrutura | Instituto Educacional G.I.",description:"Conheça os ambientes de aprendizagem e convivência do Instituto Educacional G.I.",keywords:"estrutura escolar, ambientes de aprendizagem, Instituto Educacional G.I."}),component:Estrutura});
 const fotos=[
   {title:"Ambientes de aprendizagem",description:"Espaços preparados para apoiar as descobertas e a construção do conhecimento.",image:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1400&q=85"},
   {title:"Leitura e imaginação",description:"Momentos de contato com histórias, livros e novas ideias.",image:"https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1400&q=85"},
@@ -13,6 +13,7 @@ const fotos=[
 ];
 function Estrutura(){
   const [selected,setSelected]=useState<number|null>(null);
+  const current=selected!==null?fotos[selected]:undefined;
   const close=()=>setSelected(null);
   return <SiteLayout>
     <PageHeader title="Um ambiente preparado para acolher e ensinar." intro="Conheça os espaços que fazem parte da experiência educativa do Instituto Educacional G.I."/>
@@ -21,6 +22,6 @@ function Estrutura(){
       <div className="mt-12 grid gap-6 sm:grid-cols-2">{fotos.map((foto,i)=><button key={foto.title} onClick={()=>setSelected(i)} className="gallery-button text-left focus-visible:outline-offset-4"><img src={foto.image} alt={foto.title+" — imagem ilustrativa"} loading="lazy" className="h-64 w-full object-cover"/><span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#14245f]/90 to-transparent p-6 pt-14 text-left text-white"><strong className="block font-display text-xl">{foto.title}</strong><span className="mt-1 block text-sm text-white/85">Ver imagem ampliada</span></span></button>)}</div>
       <p className="mt-8 flex items-center justify-center gap-2 text-center text-sm text-muted-foreground"><Images size={17}/> Imagens ilustrativas. Fotos reais da instituição serão adicionadas posteriormente.</p>
     </section>
-    {selected!==null&&<div role="dialog" aria-modal="true" aria-label={fotos[selected].title} className="fixed inset-0 z-[100] flex items-center justify-center bg-[#101936]/95 p-4" onClick={close}><button onClick={close} aria-label="Fechar galeria" className="absolute right-5 top-5 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"><X/></button><button onClick={e=>{e.stopPropagation();setSelected((selected+fotos.length-1)%fotos.length)}} aria-label="Imagem anterior" className="absolute left-3 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 sm:left-8"><ChevronLeft/></button><div className="max-w-5xl" onClick={e=>e.stopPropagation()}><img src={fotos[selected].image} alt={fotos[selected].title+" — imagem ilustrativa"} className="max-h-[78vh] w-auto rounded-xl object-contain"/><p className="mt-4 text-center font-semibold text-white">{fotos[selected].title}</p></div><button onClick={e=>{e.stopPropagation();setSelected((selected+1)%fotos.length)}} aria-label="Próxima imagem" className="absolute right-3 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 sm:right-8"><ChevronRight/></button></div>}
+    {selected!==null&&current&&<div role="dialog" aria-modal="true" aria-label={current.title} className="fixed inset-0 z-[100] flex items-center justify-center bg-[#101936]/95 p-4" onClick={close}><button onClick={close} aria-label="Fechar galeria" className="absolute right-5 top-5 rounded-full bg-white/10 p-3 text-white hover:bg-white/20"><X/></button><button onClick={e=>{e.stopPropagation();setSelected((selected+fotos.length-1)%fotos.length)}} aria-label="Imagem anterior" className="absolute left-3 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 sm:left-8"><ChevronLeft/></button><div className="max-w-5xl" onClick={e=>e.stopPropagation()}><img src={current.image} alt={current.title+" — imagem ilustrativa"} className="max-h-[78vh] w-auto rounded-xl object-contain"/><p className="mt-4 text-center font-semibold text-white">{current.title}</p></div><button onClick={e=>{e.stopPropagation();setSelected((selected+1)%fotos.length)}} aria-label="Próxima imagem" className="absolute right-3 rounded-full bg-white/10 p-3 text-white hover:bg-white/20 sm:right-8"><ChevronRight/></button></div>}
   </SiteLayout>;
 }

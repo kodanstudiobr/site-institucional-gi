@@ -1,7 +1,7 @@
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
-export const Route=createFileRoute("/vivencias")({head: () => ({ links: canonicalLink("/vivencias"), meta:[{title:"Vivências e Projetos | Instituto Educacional G.I."},{name:"description",content:"Conheça as experiências, atividades e projetos pedagógicos do Instituto Educacional G.I."},{name:"keywords",content:"projetos pedagógicos, atividades escolares, vivências educativas, Instituto Educacional G.I."}]}),component:Vivencias});
+export const Route=createFileRoute("/vivencias")({head: () => pageHead("/vivencias",{title:"Vivências e Projetos | Instituto Educacional G.I.",description:"Conheça as experiências, atividades e projetos pedagógicos do Instituto Educacional G.I.",keywords:"projetos pedagógicos, atividades escolares, vivências educativas, Instituto Educacional G.I."}),component:Vivencias});
 const items=[
   ["Projetos pedagógicos","Investigações, descobertas e atividades que aproximam o conhecimento da vida.","https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85","Projetos"],
   ["Arte e cultura","Experiências que valorizam a expressão, a imaginação e a criatividade.","https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=1000&q=85","Criatividade"],

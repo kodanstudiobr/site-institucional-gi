@@ -1,4 +1,4 @@
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -6,14 +6,11 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ links: canonicalLink("/"), meta: [
-    { title: "Instituto Educacional G.I. | Educação Infantil e Anos Iniciais" },
-    { name: "description", content: "Conheça o Instituto Educacional G.I. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes." },
-    { name: "keywords", content: "Instituto Educacional G.I., Educação Infantil, Anos Iniciais, escola, educação de qualidade, matrículas escolares" },
-    { property: "og:title", content: "Instituto Educacional G.I. | Educação que transforma vidas" },
-    { property: "og:description", content: "Educação que acolhe, ensina e transforma vidas." },
-    { property: "og:type", content: "website" }
-  ] }),
+  head: () => pageHead("/", {
+    title: "Instituto Educacional G.I. | Educação Infantil e Anos Iniciais",
+    description: "Conheça o Instituto Educacional G.I. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes.",
+    keywords: "Instituto Educacional G.I., Educação Infantil, Anos Iniciais, escola, educação de qualidade, matrículas escolares",
+  }),
   component: Index,
 });
 
@@ -48,7 +45,7 @@ function AnimatedNumber({ value }: { value: number }) {
     if (!node) return;
     let interval: ReturnType<typeof setInterval> | undefined;
     const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting || interval) return;
+      if (!entry || !entry.isIntersecting || interval) return;
       const duration = 1500;
       const steps = 45;
       let step = 0;

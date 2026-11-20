@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Target, Eye, HeartHandshake, ShieldCheck, HandHeart, BookOpen, Users, Scale, Lightbulb, Heart } from "lucide-react";
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/sobre")({
-  head: () => ({ links: canonicalLink("/sobre"), meta: [
-    { title: "Nossa Escola | Instituto Educacional G.I." },
-    { name: "description", content: "Conheça a apresentação, missão, visão e valores do Instituto Educacional G.I." },
-    { name: "keywords", content: "nossa escola, missão, visão, valores, Instituto Educacional G.I." }
-  ] }),
+  head: () => pageHead("/sobre", {
+    title: "Nossa Escola | Instituto Educacional G.I.",
+    description: "Conheça a apresentação, missão, visão e valores do Instituto Educacional G.I.",
+    keywords: "nossa escola, missão, visão, valores, Instituto Educacional G.I.",
+  }),
   component: Sobre,
 });
 const pilares=[

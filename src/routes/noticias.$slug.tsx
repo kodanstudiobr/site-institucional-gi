@@ -1,10 +1,10 @@
-import { canonicalLink } from "@/lib/seo";
+import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Newspaper } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route=createFileRoute("/noticias/$slug")({
-  head: ({ params }) => ({ links: canonicalLink("/noticias/" + params.slug), meta:[{title:"Notícia | Instituto Educacional G.I."},{name:"description",content:"Acompanhe as notícias e comunicados do Instituto Educacional G.I."}]}),
+  head: ({ params }) => pageHead("/noticias/" + params.slug,{title:"Notícia | Instituto Educacional G.I.",description:"Acompanhe as notícias e comunicados do Instituto Educacional G.I.",type:"article"}),
   component:Noticia,
 });
 function Noticia(){
