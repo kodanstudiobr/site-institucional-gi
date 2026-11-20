@@ -14,40 +14,8 @@ const links = [
 ] as const;
 
 export function SiteLayout({ children, transparentHeader = false }: { children: ReactNode; transparentHeader?: boolean }) {
-  const mainRef = useRef<HTMLElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const root = mainRef.current;
-    if (!root) return;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return;
-
-    const targets = Array.from(root.querySelectorAll<HTMLElement>(
-      "section:not(.learning-words-section), article, .feature-card, .mission-paper-card, .gallery-button, .bilingual-segment-note, .testimonial-card"
-    ));
-    targets.forEach((element, index) => {
-      element.dataset.scrollReveal = "true";
-      element.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 85}ms`);
-    });
-
-    if (!("IntersectionObserver" in window)) {
-      targets.forEach((element) => element.classList.add("is-in-view"));
-      return;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-in-view");
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: "0px 0px -36px 0px" });
-
-    targets.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     if (!transparentHeader) return;
@@ -79,7 +47,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         </div>
         {menuOpen && <nav className="border-t border-border bg-white px-5 py-4 shadow-lg 2xl:hidden" aria-label="Menu móvel">{links.map(l => <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Matrículas e informações</Link></nav>}
       </header>
-      <main ref={mainRef} className="site-main flex-1">{children}</main>
+      <main className="site-main flex-1">{children}</main>
       <footer className="bg-primary text-primary-foreground">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3 lg:px-8">
           <div><div className="flex items-center gap-3"><img src="/logo-gi.svg" alt="" className="h-14 w-14 rounded-xl"/><span className="font-display text-xl font-bold">Instituto Educacional G.I.</span></div><p className="mt-4 max-w-sm text-sm leading-7 text-white/80">Educação que acolhe, ensina e transforma vidas. Uma jornada de descobertas, conhecimento e desenvolvimento.</p></div>
