@@ -9,7 +9,7 @@ const links = [
   { to: "/ensino", label: "Ensino" },
   { to: "/estrutura", label: "Estrutura" },
   { to: "/vivencias", label: "Vivências" },
-  { to: "/noticias", label: "Notícias" },
+  { to: "/ensino-integral", label: "Ensino Integral" },
   { to: "/contato", label: "Contato" },
 ] as const;
 
