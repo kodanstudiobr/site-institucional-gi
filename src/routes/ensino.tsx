@@ -1,31 +1,21 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { BookOpen, Palette, Users } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
-  head: () => ({ meta: [{ title: "Ensino — Colégio Horizonte" }, { name: "description", content: "Educação infantil, ensino fundamental e ensino médio no Colégio Horizonte." }, { property: "og:title", content: "Ensino — Colégio Horizonte" }, { property: "og:description", content: "Educação infantil, ensino fundamental e ensino médio no Colégio Horizonte." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ meta: [{ title: "Ensino | Instituto Educacional G.I." }, { name: "description", content: "Conheça a Educação Infantil e os Anos Iniciais do Ensino Fundamental do Instituto Educacional G.I." }] }),
   component: Ensino,
 });
 
-const niveis = [
-  ["Educação Infantil", "2 a 5 anos", "Aprender brincando, com foco em descoberta, convivência e linguagem."],
-  ["Ensino Fundamental I", "1º ao 5º ano", "Alfabetização sólida, raciocínio lógico e projetos interdisciplinares."],
-  ["Ensino Fundamental II", "6º ao 9º ano", "Autonomia, pensamento crítico e iniciação científica."],
-  ["Ensino Médio", "1ª à 3ª série", "Preparação para o ENEM e vestibulares com projeto de vida."],
-];
-
 function Ensino() {
-  return (
-    <SiteLayout>
-      <PageHeader title="Nosso ensino" intro="Uma jornada contínua, do primeiro dia na escola até a universidade." />
-      <section className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-2 gap-6">
-        {niveis.map(([t,i,d])=>(
-          <div key={t} className="rounded-xl border border-border p-8">
-            <p className="text-sm uppercase tracking-wider text-accent-foreground">{i}</p>
-            <h2 className="font-display text-3xl text-primary mt-2">{t}</h2>
-            <p className="mt-3 text-muted-foreground">{d}</p>
-          </div>
-        ))}
-      </section>
-    </SiteLayout>
-  );
+  const [active, setActive] = useState<"infantil" | "iniciais">("infantil");
+  return <SiteLayout>
+    <PageHeader title="Aprender, descobrir e evoluir." intro="Uma proposta educativa que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
+    <section className="section-wrap py-20"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2></div>
+      <div className="mx-auto mt-10 flex max-w-xl rounded-full bg-soft p-1.5"><button onClick={()=>setActive("infantil")} className={`flex-1 rounded-full px-4 py-3 text-sm font-bold transition ${active==="infantil"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Educação Infantil</button><button onClick={()=>setActive("iniciais")} className={`flex-1 rounded-full px-4 py-3 text-sm font-bold transition ${active==="iniciais"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Anos Iniciais</button></div>
+      {active==="infantil"?<div className="mt-10 grid items-center gap-10 lg:grid-cols-2"><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1100&q=85" alt="Crianças em atividade lúdica na Educação Infantil" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lg"/><div><p className="eyebrow">EDUCAÇÃO INFANTIL</p><h3 className="font-display text-3xl font-bold text-primary md:text-4xl">Descobrir, brincar e aprender.</h3><p className="mt-6 text-lg leading-8 text-muted-foreground">A Educação Infantil é uma etapa fundamental para o desenvolvimento da criança. Por meio de brincadeiras, interações e experiências lúdicas, buscamos estimular a curiosidade, a criatividade, a autonomia e a construção de vínculos.</p><p className="mt-4 leading-8 text-muted-foreground">Nosso objetivo é proporcionar um ambiente acolhedor, onde cada criança possa explorar, descobrir e desenvolver suas habilidades respeitando seu próprio ritmo de aprendizagem.</p><div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-primary"><span className="tag"><Palette size={15}/> Exploração e criatividade</span><span className="tag"><Users size={15}/> Interação e vínculos</span></div></div></div>:<div className="mt-10 grid items-center gap-10 lg:grid-cols-2"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1100&q=85" alt="Estudantes dos Anos Iniciais em atividade em sala" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-lg"/><div><p className="eyebrow">ANOS INICIAIS DO ENSINO FUNDAMENTAL</p><h3 className="font-display text-3xl font-bold text-primary md:text-4xl">Conhecimento que constrói possibilidades.</h3><p className="mt-6 text-lg leading-8 text-muted-foreground">Nos Anos Iniciais, fortalecemos as bases da aprendizagem, incentivando a leitura, a escrita, o raciocínio lógico, a criatividade e o pensamento crítico.</p><p className="mt-4 leading-8 text-muted-foreground">Valorizamos experiências educativas que estimulam a participação, a autonomia e a construção do conhecimento, acompanhando o desenvolvimento de cada estudante.</p><div className="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-primary"><span className="tag"><BookOpen size={15}/> Leitura e escrita</span><span className="tag"><Palette size={15}/> Criatividade</span></div></div></div>}
+    </section>
+    <section className="bg-soft py-16"><div className="section-wrap text-center"><h2 className="section-title">Uma aprendizagem construída com cuidado e propósito.</h2><p className="mx-auto mt-4 max-w-2xl leading-8 text-muted-foreground">Em cada etapa, buscamos criar oportunidades para que os estudantes participem, experimentem, construam conhecimentos e desenvolvam suas potencialidades.</p></div></section>
+  </SiteLayout>;
 }
