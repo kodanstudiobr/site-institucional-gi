@@ -1,7 +1,7 @@
 import { pageHead } from "@/lib/seo";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Sparkles, Heart, Brain, HandHeart } from "lucide-react";
+import { Blocks, BookOpen, Telescope, Heart, Brain, HandHeart } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
@@ -28,7 +28,7 @@ const segmentos = {
     development: {
       intro:"Na Educação Infantil, o desenvolvimento integral acontece por meio do brincar, das interações e das descobertas. Cada experiência respeita o tempo da criança e fortalece suas primeiras aprendizagens.",
       cards:[
-        {icon:Sparkles,title:"Descobertas e curiosidade",text:"Explorar, observar, perguntar e experimentar para conhecer o mundo ao redor."},
+        {icon:Blocks,title:"Descobertas e curiosidade",text:"Explorar, observar, perguntar e experimentar para conhecer o mundo ao redor."},
         {icon:Heart,title:"Acolhimento e segurança",text:"Construir vínculos afetivos em um ambiente de cuidado, confiança e respeito."},
         {icon:Brain,title:"Aprendizagem pelo brincar",text:"Desenvolver linguagem, imaginação, coordenação e pensamento em experiências lúdicas."},
         {icon:HandHeart,title:"Convivência e autonomia",text:"Aprender a compartilhar, expressar sentimentos e conquistar pequenas independências."}
@@ -49,7 +49,7 @@ const segmentos = {
     development: {
       intro:"Nos Anos Iniciais, o desenvolvimento integral une a consolidação das aprendizagens fundamentais à formação de atitudes, relações e habilidades. Os estudantes são incentivados a participar, pensar e agir com autonomia crescente.",
       cards:[
-        {icon:Sparkles,title:"Curiosidade e investigação",text:"Estimular perguntas, observações e a busca por respostas em diferentes áreas do conhecimento."},
+        {icon:BookOpen,title:"Curiosidade e investigação",text:"Estimular perguntas, observações e a busca por respostas em diferentes áreas do conhecimento."},
         {icon:Heart,title:"Acolhimento e confiança",text:"Valorizar cada trajetória, fortalecer a autoestima e respeitar diferentes ritmos de aprendizagem."},
         {icon:Brain,title:"Conhecimento e pensamento",text:"Consolidar leitura, escrita e raciocínio lógico, desenvolvendo criatividade e pensamento crítico."},
         {icon:HandHeart,title:"Autonomia e cidadania",text:"Ampliar a responsabilidade, a cooperação e o respeito nas relações com o outro."}
@@ -70,7 +70,7 @@ const segmentos = {
     development: {
       intro:"Nos Anos Finais, o desenvolvimento integral aprofunda conhecimentos e fortalece a capacidade de analisar, argumentar e tomar decisões. A proposta valoriza o protagonismo, a responsabilidade e a preparação para novos desafios.",
       cards:[
-        {icon:Sparkles,title:"Investigação e inovação",text:"Transformar curiosidade em pesquisa, análise e construção de soluções para situações reais."},
+        {icon:Telescope,title:"Investigação e inovação",text:"Transformar curiosidade em pesquisa, análise e construção de soluções para situações reais."},
         {icon:Heart,title:"Bem-estar e identidade",text:"Fortalecer autoestima, respeito às diferenças e relações saudáveis nesta fase de mudanças."},
         {icon:Brain,title:"Pensamento crítico",text:"Articular conhecimentos, interpretar informações e desenvolver argumentos consistentes."},
         {icon:HandHeart,title:"Protagonismo e responsabilidade",text:"Exercitar escolhas conscientes, colaboração e participação ativa na comunidade."}
