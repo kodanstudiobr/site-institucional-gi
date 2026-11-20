@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Menu, X, Instagram, Phone, MapPin, ArrowUpRight, Mail } from "lucide-react";
 import { institutionalConfig } from "@/data/institutional";
@@ -16,28 +16,30 @@ const links = [
 export function SiteLayout({ children, transparentHeader = false }: { children: ReactNode; transparentHeader?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
     const main = document.querySelector(".site-main");
     if (!main) return;
 
-    const targets = main.querySelectorAll<HTMLElement>(
+    const candidates = Array.from(main.querySelectorAll<HTMLElement>(
       "section .section-wrap > *, section .section-wrap article, .page-hero .mx-auto > *"
-    );
-    const revealTargets = Array.from(targets).filter((element) => {
-      if (element.closest(".learning-words-section")) return false;
-      return !Array.from(element.parentElement?.children ?? []).some(
-        (sibling) => sibling !== element && sibling.contains(element) && sibling.hasAttribute("data-scroll-reveal")
-      );
+    )).filter((element) => !element.closest(".learning-words-section"));
+
+    // Evita animar um contêiner inteiro e, ao mesmo tempo, seus próprios cards.
+    const targets = candidates.filter((element) => {
+      const isContainerOfCards = element.querySelector("article") !== null && !element.matches("article");
+      return !isContainerOfCards;
     });
 
-    revealTargets.forEach((element, index) => {
+    targets.forEach((element, index) => {
       element.setAttribute("data-scroll-reveal", "");
-      element.style.setProperty("--reveal-delay", `${(index % 5) * 90}ms`);
+      element.classList.remove("is-visible");
+      element.style.setProperty("--reveal-delay", `${(index % 5) * 100}ms`);
     });
 
     if (!("IntersectionObserver" in window)) {
-      revealTargets.forEach((element) => element.classList.add("is-visible"));
+      targets.forEach((element) => element.classList.add("is-visible"));
       return;
     }
 
@@ -48,11 +50,11 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -45px 0px" });
+    }, { threshold: 0.08, rootMargin: "0px 0px -35px 0px" });
 
-    revealTargets.forEach((element) => observer.observe(element));
+    targets.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [children]);
+  }, [pathname]);
 
   useEffect(() => {
     if (!transparentHeader) return;
@@ -84,7 +86,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         </div>
         {menuOpen && <nav className="border-t border-border bg-white px-5 py-4 shadow-lg 2xl:hidden" aria-label="Menu móvel">{links.map(l => <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Matrículas e informações</Link></nav>}
       </header>
-      <main className="site-main page-transition-enter flex-1">{children}</main>
+      <main key={pathname} className="site-main page-transition-enter flex-1">{children}</main>
       <footer className="bg-primary text-primary-foreground">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3 lg:px-8">
           <div><div className="flex items-center gap-3"><img src="/logo-gi.svg" alt="" className="h-14 w-14 rounded-xl"/><span className="font-display text-xl font-bold">Instituto Educacional G.I.</span></div><p className="mt-4 max-w-sm text-sm leading-7 text-white/80">Educação que acolhe, ensina e transforma vidas. Uma jornada de descobertas, conhecimento e desenvolvimento.</p></div>
