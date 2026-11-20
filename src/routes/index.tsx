@@ -37,7 +37,61 @@ const perguntas = [
 ];
 
 function AnimatedNumber({ value }: { value: number }) {
-  return <span className="history-counter__number">{value}</span>;
+  const numberRef = useRef<HTMLSpanElement>(null);
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    const element = numberRef.current;
+    if (!element) return;
+
+    let frame = 0;
+    let started = false;
+    let observer: IntersectionObserver | undefined;
+
+    const animate = () => {
+      if (started) return;
+      started = true;
+      const duration = 1800;
+      const startTime = performance.now();
+
+      const tick = (now: number) => {
+        const progress = Math.min(1, (now - startTime) / duration);
+        const easedProgress = 1 - Math.pow(1 - progress, 4);
+        setDisplayValue(Math.round(value * easedProgress));
+        if (progress < 1) {
+          frame = window.requestAnimationFrame(tick);
+        } else {
+          setDisplayValue(value);
+        }
+      };
+
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplayValue(value);
+      return;
+    }
+
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          animate();
+          observer?.disconnect();
+        }
+      }, { threshold: 0.45 });
+      observer.observe(element);
+    } else {
+      animate();
+    }
+
+    return () => {
+      observer?.disconnect();
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [value]);
+
+  return <span ref={numberRef} className="history-counter__number" aria-label={String(value)}>{displayValue}</span>;
 }
 
 const palavrasDaAprendizagem = ["É crescer.", "É perguntar.", "É criar.", "É vivenciar."];
