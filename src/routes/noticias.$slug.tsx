@@ -4,7 +4,7 @@ import { ArrowLeft, Newspaper } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route=createFileRoute("/noticias/$slug")({
-  head: () => ({ links: canonicalLink("/noticias"), meta:[{title:"Notícia | Instituto Educacional G.I."},{name:"description",content:"Acompanhe as notícias e comunicados do Instituto Educacional G.I."}]}),
+  head: ({ params }) => ({ links: canonicalLink("/noticias/" + params.slug), meta:[{title:"Notícia | Instituto Educacional G.I."},{name:"description",content:"Acompanhe as notícias e comunicados do Instituto Educacional G.I."}]}),
   component:Noticia,
 });
 function Noticia(){
