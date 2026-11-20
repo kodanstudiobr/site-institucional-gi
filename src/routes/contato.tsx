@@ -1,20 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { MapPin, Phone, Instagram, Send, MessageCircle } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/contato")({
-  head: () => ({ meta: [{ title: "Contato — Colégio Horizonte" }, { name: "description", content: "Agende uma visita e fale com a secretaria do Colégio Horizonte." }, { property: "og:title", content: "Contato — Colégio Horizonte" }, { property: "og:description", content: "Agende uma visita e fale com a secretaria do Colégio Horizonte." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  head: () => ({ meta: [{ title: "Contato e matrículas | Instituto Educacional G.I." }, { name: "description", content: "Entre em contato com o Instituto Educacional G.I. e solicite informações sobre matrículas." }] }),
   component: Contato,
 });
 
 function Contato() {
-  return (
-    <SiteLayout>
-      <PageHeader title="Fale conosco" intro="Venha conhecer a escola. Nossa secretaria atende de segunda a sexta, das 7h às 18h." />
-      <section className="mx-auto max-w-6xl px-6 py-16 grid md:grid-cols-3 gap-8">
-        {[["Endereço","Rua das Acácias, 120 — Centro"],["Telefone","(11) 4000-1234"],["E-mail","contato@colegiohorizonte.com.br"]].map(([t,d])=>(
-          <div key={t} className="rounded-xl bg-secondary p-8"><h2 className="font-display text-2xl text-primary">{t}</h2><p className="mt-2">{d}</p></div>
-        ))}
-      </section>
-    </SiteLayout>
-  );
+  const [form,setForm] = useState({responsavel:"",aluno:"",telefone:"",etapa:"Educação Infantil",mensagem:""});
+  const update = (field:keyof typeof form,value:string) => setForm(old=>({...old,[field]:value}));
+  const message = encodeURIComponent(`Olá! Gostaria de informações sobre matrículas no Instituto Educacional G.I.\nResponsável: ${form.responsavel}\nAluno: ${form.aluno}\nWhatsApp: ${form.telefone}\nEtapa: ${form.etapa}\nMensagem: ${form.mensagem}`);
+  return <SiteLayout>
+    <PageHeader title="Vamos conversar?" intro="Será um prazer apresentar o Instituto Educacional G.I. e ajudar você a conhecer nossa proposta de ensino."/>
+    <section className="section-wrap grid gap-12 py-20 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow">FALE COM A GENTE</p><h2 className="section-title">Estamos prontos para receber você.</h2><p className="mt-5 leading-8 text-muted-foreground">Entre em contato para tirar dúvidas, solicitar informações sobre os segmentos de ensino ou conversar sobre matrículas.</p><div className="mt-8 space-y-5"><div className="contact-item"><MapPin/><div><strong>Endereço</strong><p>Informações em atualização</p></div></div><div className="contact-item"><Phone/><div><strong>Telefone e WhatsApp</strong><p>Contato oficial em atualização</p></div></div><div className="contact-item"><Instagram/><div><strong>Instagram</strong><p>Perfil oficial em atualização</p></div></div></div></div>
+      <form className="rounded-3xl border border-border bg-white p-6 shadow-xl md:p-9" onSubmit={e=>{e.preventDefault();window.open(`https://wa.me/?text=${message}`,"_blank","noopener,noreferrer");}}><h3 className="font-display text-2xl font-bold text-primary">Solicite informações</h3><p className="mt-2 text-sm text-muted-foreground">Preencha os campos e envie sua solicitação pelo WhatsApp.</p><div className="mt-7 grid gap-5 sm:grid-cols-2"><label className="field-label">Nome do responsável<input required value={form.responsavel} onChange={e=>update("responsavel",e.target.value)} placeholder="Seu nome" className="field-input"/></label><label className="field-label">Nome do aluno<input value={form.aluno} onChange={e=>update("aluno",e.target.value)} placeholder="Nome da criança" className="field-input"/></label><label className="field-label">WhatsApp<input required value={form.telefone} onChange={e=>update("telefone",e.target.value)} placeholder="(83) 99999-9999" className="field-input"/></label><label className="field-label">Etapa de interesse<select value={form.etapa} onChange={e=>update("etapa",e.target.value)} className="field-input"><option>Educação Infantil</option><option>Anos Iniciais</option></select></label><label className="field-label sm:col-span-2">Mensagem (opcional)<textarea value={form.mensagem} onChange={e=>update("mensagem",e.target.value)} rows={4} placeholder="Como podemos ajudar?" className="field-input"/></label></div><button className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 font-extrabold text-accent-foreground transition hover:-translate-y-0.5"><Send size={17}/> Enviar pelo WhatsApp</button><p className="mt-3 text-center text-xs text-muted-foreground">O WhatsApp será aberto para você revisar e enviar a mensagem.</p></form></section>
+    <section className="bg-soft py-14"><div className="section-wrap flex flex-wrap items-center justify-between gap-5"><div><h2 className="font-display text-2xl font-bold text-primary">Quer conhecer nossa escola?</h2><p className="mt-2 text-muted-foreground">Fale com nossa equipe e saiba como agendar uma visita.</p></div><Link to="/ensino" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-bold text-white"><MessageCircle size={17}/> Conheça nossos segmentos</Link></div></section>
+  </SiteLayout>;
 }
