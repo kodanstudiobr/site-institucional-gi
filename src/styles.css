@@ -679,6 +679,15 @@
   transition:transform .4s cubic-bezier(.2,.75,.25,1),background .4s ease;
 }
 .integral-card:hover .integral-card__icon { transform:translateY(-3px) rotate(-5deg) scale(1.06); background:#fff12c; }
+/* Ao entrar na viewport, o ícone recebe o mesmo destaque sem exigir toque no card. */
+.integral-card.is-visible .integral-card__icon {
+  animation:integralIconReveal .75s cubic-bezier(.22,1,.36,1) both!important;
+}
+@keyframes integralIconReveal {
+  0% { transform:translateY(8px) rotate(-12deg) scale(.78); background:#fff9bd; }
+  62% { transform:translateY(-4px) rotate(5deg) scale(1.12); background:#fff12c; }
+  100% { transform:translateY(0) rotate(0) scale(1); background:#fff12c; }
+}
 .integral-card__number {
   position:absolute;
   top:1.25rem;
@@ -702,7 +711,7 @@
   .integral-card:after { left:1.35rem; right:1.35rem; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .integral-card { animation:none; transition:none; }
+  .integral-card,.integral-card.is-visible .integral-card__icon { animation:none!important; transition:none; }
   .integral-card:hover,.integral-card:hover .integral-card__icon { transform:none; }
 }
 
