@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -760,77 +761,63 @@ article:hover {
 }
 
 
-/* Movimento global: entrada das seções e cards conforme entram na área visível. */
+
+
+
+/* Animações CSS-first: Animate.css + scroll-driven animations nativas. */
 .site-main {
-  animation:sitePageEnter .62s cubic-bezier(.22,1,.36,1) both;
+  animation:animate__fadeIn .7s both;
 }
-@keyframes sitePageEnter {
-  from { opacity:.72; transform:translateY(8px); }
-  to { opacity:1; transform:translateY(0); }
+.site-main > section:not(.learning-words-section) {
+  animation:animate__fadeInUp .85s cubic-bezier(.22,1,.36,1) both;
 }
-[data-scroll-reveal],
-.scroll-reveal {
-  opacity:0;
-  transform:translate3d(0,24px,0);
-  filter:blur(2px);
-  transition:
-    opacity .72s cubic-bezier(.22,1,.36,1),
-    transform .72s cubic-bezier(.22,1,.36,1),
-    filter .72s ease;
-  transition-delay:var(--reveal-delay,0ms);
-  will-change:opacity,transform;
-}
-[data-scroll-reveal].is-in-view,
-.scroll-reveal.is-visible {
-  opacity:1;
-  transform:translate3d(0,0,0);
-  filter:blur(0);
-}
-article,
-.feature-card,
-.mission-paper-card,
-.gallery-button,
-.testimonial-card,
-.integral-card {
-  transition:
-    transform .55s cubic-bezier(.22,1,.36,1),
-    box-shadow .55s cubic-bezier(.22,1,.36,1),
-    border-color .45s ease,
-    background-color .45s ease;
+.site-main article,
+.site-main .feature-card,
+.site-main .mission-paper-card,
+.site-main .testimonial-card,
+.site-main .integral-card,
+.site-main .bilingual-segment-note {
+  transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1),border-color .4s ease,filter .4s ease;
 }
 @media (hover:hover) and (pointer:fine) {
-  article:hover,
-  .feature-card:hover,
-  .mission-paper-card:hover,
-  .testimonial-card:hover,
-  .integral-card:hover {
-    transform:translate3d(0,-7px,0);
+  .site-main article:hover,
+  .site-main .feature-card:hover,
+  .site-main .mission-paper-card:hover,
+  .site-main .testimonial-card:hover,
+  .site-main .integral-card:hover,
+  .site-main .bilingual-segment-note:hover {
+    transform:translate3d(0,-6px,0);
+    box-shadow:0 18px 38px rgba(36,51,111,.12);
   }
-  .gallery-button:hover {
-    transform:translate3d(0,-5px,0);
+  .site-main article img,
+  .site-main .gallery-button img {
+    transition:transform .7s cubic-bezier(.22,1,.36,1),filter .7s ease;
   }
-  .gallery-button:hover img,
-  article:hover img {
-    transform:scale(1.045);
+  .site-main article:hover img,
+  .site-main .gallery-button:hover img {
+    transform:scale(1.035);
+    filter:saturate(1.06);
+  }
+}
+/* O navegador controla a animação conforme a seção entra na área visível. */
+@supports (animation-timeline:view()) {
+  .site-main > section:not(.learning-words-section) {
+    animation-name:animate__fadeInUp;
+    animation-timeline:view();
+    animation-range:entry 0% entry 38%;
+    animation-duration:1ms;
+    animation-fill-mode:both;
   }
 }
 @media (prefers-reduced-motion:reduce) {
   .site-main,
-  [data-scroll-reveal],
-  .scroll-reveal,
-  article,
-  article img,
-  .feature-card,
-  .mission-paper-card,
-  .gallery-button,
-  .gallery-button img,
-  .testimonial-card,
-  .integral-card {
-    animation:none!important;
-    transition:none!important;
-    opacity:1!important;
-    transform:none!important;
-    filter:none!important;
-    will-change:auto!important;
-  }
+  .site-main > section:not(.learning-words-section) { animation:none!important; }
+  .site-main article,
+  .site-main .feature-card,
+  .site-main .mission-paper-card,
+  .site-main .testimonial-card,
+  .site-main .integral-card,
+  .site-main .bilingual-segment-note,
+  .site-main article img,
+  .site-main .gallery-button img { transition:none!important; }
 }
