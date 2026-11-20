@@ -53,6 +53,23 @@
 @media (max-width:1279px) { .nav-link { font-size:.9rem; } }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
 
+/* Header sobre a fotografia principal: transparente no topo, branco ao rolar. */
+.site-header { transition: background .32s ease, border-color .32s ease, box-shadow .32s ease, backdrop-filter .32s ease; }
+.site-header--overlay { background:transparent; border-bottom-color:transparent; backdrop-filter:none; box-shadow:none; }
+.site-header--overlay .header-brand,
+.site-header--overlay .header-brand span { color:#fff; }
+.site-header--overlay .nav-link { color:rgba(255,255,255,.94); text-shadow:0 1px 8px rgba(0,0,0,.18); }
+.site-header--overlay .nav-link:hover,
+.site-header--overlay .nav-link-active { color:#fff12c; }
+.site-header--overlay .header-menu { color:#fff; border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.08); }
+.site-header--overlay.is-scrolled { background:rgba(255,255,255,.97); border-bottom-color:#e8eaf3; backdrop-filter:blur(16px); box-shadow:0 8px 28px rgba(24,38,91,.08); }
+.site-header--overlay.is-scrolled .header-brand,
+.site-header--overlay.is-scrolled .header-brand span { color:#324594; }
+.site-header--overlay.is-scrolled .nav-link { color:#344477; text-shadow:none; }
+.site-header--overlay.is-scrolled .nav-link:hover,
+.site-header--overlay.is-scrolled .nav-link-active { color:#324594; }
+.site-header--overlay.is-scrolled .header-menu { color:#324594; border-color:#e4e7f1; background:#fff; }
+
 /* Elementos decorativos: apenas estrelas amarelas, posicionadas em áreas livres das seções. */
 .section-decor-wrap { position:relative; }
 .section-spark { position:absolute; z-index:0; color:#fff12c; opacity:.9; pointer-events:none; filter:drop-shadow(0 2px 5px rgba(50,69,148,.12)); animation:decorFloat 5.5s ease-in-out infinite; }
