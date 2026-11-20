@@ -41,11 +41,11 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             {links.map((l) => <Link key={l.to} to={l.to} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{l.label}</Link>)}
           </nav>
           <div className="flex items-center gap-3">
-            <Link to="/contato" className="header-cta hidden rounded-full bg-primary px-5 py-3 text-sm font-extrabold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:inline-flex">Matrículas</Link>
+            <Link to="/contato" className="header-cta hidden rounded-full bg-accent px-5 py-3 text-sm font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:inline-flex">Matrículas</Link>
             <button className="header-menu rounded-xl border border-border p-2 text-primary 2xl:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
           </div>
         </div>
-        {menuOpen && <nav className="border-t border-border bg-white px-5 py-4 shadow-lg 2xl:hidden" aria-label="Menu móvel">{links.map(l => <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-primary px-4 py-3 text-center font-bold text-white">Matrículas e informações</Link></nav>}
+        {menuOpen && <nav className="border-t border-border bg-white px-5 py-4 shadow-lg 2xl:hidden" aria-label="Menu móvel">{links.map(l => <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Matrículas e informações</Link></nav>}
       </header>
       <main className="flex-1">{children}</main>
       <footer className="bg-primary text-primary-foreground">
