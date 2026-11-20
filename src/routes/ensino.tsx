@@ -15,7 +15,7 @@ export const Route = createFileRoute("/ensino")({
 
 const segmentos = {
   infantil: {
-    bilingualText:"Na Educação Infantil, o contato com a língua inglesa acontece de forma lúdica e acolhedora, por meio de músicas, histórias, brincadeiras e situações do cotidiano. As crianças ampliam seu repertório sonoro e começam a reconhecer novas palavras enquanto descobrem diferentes formas de se comunicar.",
+    bilingualText:"As crianças têm contato com o inglês por meio de músicas, histórias e brincadeiras, reconhecendo palavras e expressões do dia a dia.",
     eyebrow:"EDUCAÇÃO INFANTIL",
     title:"Descobrir, brincar e aprender.",
     image:"https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1200&q=85",
@@ -36,7 +36,7 @@ const segmentos = {
     },
   },
   iniciais: {
-    bilingualText:"Nos Anos Iniciais, o ensino bilíngue amplia o contato com a língua inglesa e favorece a construção gradual do vocabulário e da compreensão. Atividades contextualizadas estimulam a escuta, a comunicação e a curiosidade por diferentes culturas, respeitando o desenvolvimento de cada estudante.",
+    bilingualText:"Atividades contextualizadas ampliam o vocabulário e a compreensão do inglês, estimulando a escuta, a comunicação e o contato com outras culturas.",
     eyebrow:"ANOS INICIAIS DO ENSINO FUNDAMENTAL",
     title:"Conhecimento que constrói possibilidades.",
     image:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85",
@@ -57,7 +57,7 @@ const segmentos = {
     },
   },
   finais: {
-    bilingualText:"Nos Anos Finais, o ensino bilíngue fortalece a compreensão e o uso da língua inglesa em contextos cada vez mais variados. Os estudantes são incentivados a ampliar o vocabulário, interpretar informações e desenvolver a comunicação, conectando a aprendizagem a situações do mundo contemporâneo.",
+    bilingualText:"Os estudantes ampliam o vocabulário, interpretam textos e praticam a comunicação em inglês em situações do cotidiano e do mundo atual.",
     eyebrow:"ANOS FINAIS DO ENSINO FUNDAMENTAL",
     title:"Conhecimento, autonomia e novos horizontes.",
     image:"https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1200&q=85",
