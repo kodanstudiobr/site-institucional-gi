@@ -544,7 +544,7 @@
 }
 
  
-/* Transição suave entre as palavras da seção de abertura. */
+/* Crossfade real entre as palavras: cada camada anima desde o primeiro frame. */
 .learning-word-stack {
   position:relative;
   display:grid;
@@ -554,23 +554,30 @@
 }
 .learning-word-stack .learning-word {
   grid-area:1 / 1;
-  transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1),filter .7s ease;
-  animation:none;
+  width:100%;
+  margin:0;
+  animation-duration:950ms;
+  animation-fill-mode:both;
+  animation-timing-function:cubic-bezier(.22,1,.36,1);
   will-change:opacity,transform,filter;
 }
 .learning-word-stack .learning-word--current {
-  opacity:1;
-  transform:translateY(0) scale(1);
-  filter:blur(0);
+  animation-name:learningWordCrossfadeIn;
 }
 .learning-word-stack .learning-word--outgoing {
-  opacity:0;
-  transform:translateY(-18px) scale(.985);
-  filter:blur(5px);
+  animation-name:learningWordCrossfadeOut;
   pointer-events:none;
 }
+@keyframes learningWordCrossfadeIn {
+  from { opacity:0; transform:translate3d(0,22px,0) scale(.975); filter:blur(9px); }
+  to { opacity:1; transform:translate3d(0,0,0) scale(1); filter:blur(0); }
+}
+@keyframes learningWordCrossfadeOut {
+  from { opacity:1; transform:translate3d(0,0,0) scale(1); filter:blur(0); }
+  to { opacity:0; transform:translate3d(0,-16px,0) scale(1.015); filter:blur(8px); }
+}
 @media (prefers-reduced-motion:reduce) {
-  .learning-word-stack .learning-word { transition:none; }
+  .learning-word-stack .learning-word { animation-duration:1ms; }
 }
 
 /* A seção de palavras fica minimalista: somente a expressão central muda ao rolar. */
