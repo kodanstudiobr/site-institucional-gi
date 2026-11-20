@@ -758,3 +758,79 @@ article:hover {
   background:#eef0fa;
   color:#324594;
 }
+
+
+/* Movimento global: entrada das seções e cards conforme entram na área visível. */
+.site-main {
+  animation:sitePageEnter .62s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes sitePageEnter {
+  from { opacity:.72; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+[data-scroll-reveal],
+.scroll-reveal {
+  opacity:0;
+  transform:translate3d(0,24px,0);
+  filter:blur(2px);
+  transition:
+    opacity .72s cubic-bezier(.22,1,.36,1),
+    transform .72s cubic-bezier(.22,1,.36,1),
+    filter .72s ease;
+  transition-delay:var(--reveal-delay,0ms);
+  will-change:opacity,transform;
+}
+[data-scroll-reveal].is-in-view,
+.scroll-reveal.is-visible {
+  opacity:1;
+  transform:translate3d(0,0,0);
+  filter:blur(0);
+}
+article,
+.feature-card,
+.mission-paper-card,
+.gallery-button,
+.testimonial-card,
+.integral-card {
+  transition:
+    transform .55s cubic-bezier(.22,1,.36,1),
+    box-shadow .55s cubic-bezier(.22,1,.36,1),
+    border-color .45s ease,
+    background-color .45s ease;
+}
+@media (hover:hover) and (pointer:fine) {
+  article:hover,
+  .feature-card:hover,
+  .mission-paper-card:hover,
+  .testimonial-card:hover,
+  .integral-card:hover {
+    transform:translate3d(0,-7px,0);
+  }
+  .gallery-button:hover {
+    transform:translate3d(0,-5px,0);
+  }
+  .gallery-button:hover img,
+  article:hover img {
+    transform:scale(1.045);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-main,
+  [data-scroll-reveal],
+  .scroll-reveal,
+  article,
+  article img,
+  .feature-card,
+  .mission-paper-card,
+  .gallery-button,
+  .gallery-button img,
+  .testimonial-card,
+  .integral-card {
+    animation:none!important;
+    transition:none!important;
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    will-change:auto!important;
+  }
+}
