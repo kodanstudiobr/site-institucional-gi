@@ -157,3 +157,32 @@
   .mission-vision-grid { margin-top:2rem; }
   .mission-vision-card { padding:1.5rem; }
 }
+
+
+/* Aviões decorativos maiores no desktop; no mobile são ocultados para nunca cobrir conteúdo. */
+.section-plane { gap:10px; opacity:.62; }
+.section-plane svg { width:clamp(38px,4vw,58px); height:auto; }
+.section-plane--move { right:4%; bottom:6%; }
+.section-plane--learning { right:2.5%; top:7%; }
+.section-plane--mission { left:3%; bottom:5%; }
+.plane-trail { width:clamp(55px,7vw,110px); height:30px; border-top-width:3px; }
+.plane-arrow { font-size:2.8rem; }
+.section-spark { width:clamp(48px,5vw,72px); }
+.section-spark--history { right:2%; top:8%; }
+.section-plane--history { left:2%; bottom:12%; }
+.history-highlight { position:relative; overflow:hidden; background:#324594; color:white; }
+.history-highlight__eyebrow { color:#fff12c; font-size:.78rem; font-weight:800; letter-spacing:.19em; text-transform:uppercase; }
+.history-counter { display:flex; justify-content:center; align-items:baseline; gap:.35rem; color:#fff12c; font-family:"Poppins",sans-serif; font-weight:850; line-height:1; }
+.history-counter__number { font-size:clamp(6rem,17vw,12rem); letter-spacing:-.09em; font-variant-numeric:tabular-nums; }
+.history-counter__suffix { font-size:clamp(1.8rem,4vw,3rem); font-weight:750; }
+.history-highlight__caption { margin:1.2rem auto 0; max-width:36rem; color:rgba(255,255,255,.86); font-size:clamp(1rem,2vw,1.2rem); line-height:1.7; }
+.history-community { border-top:1px solid rgba(255,255,255,.22); padding-top:2.2rem; }
+.history-community__eyebrow { color:#fff12c; font-size:clamp(1.25rem,3vw,2rem); font-weight:850; letter-spacing:.035em; }
+.history-community__copy { margin:1rem auto 0; max-width:38rem; color:rgba(255,255,255,.82); line-height:1.75; }
+@media (max-width:767px) {
+  /* Evita qualquer sobreposição de estrelas e aviões com texto ou fotografia em telas pequenas. */
+  .section-plane,.section-spark { display:none!important; }
+  .history-counter__number { font-size:clamp(6rem,28vw,9rem); }
+  .history-highlight { padding-block:4rem; }
+  .history-community { margin-top:2.5rem; padding-top:1.8rem; }
+}
