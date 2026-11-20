@@ -849,3 +849,59 @@ article:hover {
     transition:none!important;
   }
 }
+
+
+/* Correção específica da Home: seus cards usam wrappers .scroll-reveal,
+   enquanto suas seções têm estruturas próprias e carrossel horizontal. */
+.site-main > .hero-home {
+  animation:animate__fadeIn .9s ease both;
+}
+.site-main > section:not(.learning-words-section) {
+  view-timeline-name:--gi-home-section;
+  view-timeline-axis:block;
+}
+.site-main > section:not(.learning-words-section) > .section-wrap,
+.site-main > section:not(.learning-words-section) > div,
+.site-main > section:not(.learning-words-section) .section-title,
+.site-main > section:not(.learning-words-section) .eyebrow {
+  animation:giRevealUp .8s cubic-bezier(.22,1,.36,1) both;
+}
+@supports (animation-timeline:view()) {
+  .site-main > section:not(.learning-words-section) > .section-wrap,
+  .site-main > section:not(.learning-words-section) > div,
+  .site-main > section:not(.learning-words-section) .section-title,
+  .site-main > section:not(.learning-words-section) .eyebrow,
+  .site-main .scroll-reveal {
+    animation-name:giRevealUp;
+    animation-timeline:view(block);
+    animation-range:entry 0% entry 32%;
+    animation-duration:auto;
+    animation-fill-mode:both;
+  }
+}
+/* O wrapper dos destaques e depoimentos da Home agora tem animação visual
+   CSS mesmo sem depender do estado React is-visible. */
+.site-main .scroll-reveal {
+  opacity:1;
+  transform:none;
+  filter:none;
+}
+.site-main .scroll-reveal > * {
+  transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease;
+}
+@media (hover:hover) and (pointer:fine) {
+  .site-main .scroll-reveal:hover > article {
+    transform:translate3d(0,-6px,0);
+    box-shadow:0 18px 38px rgba(36,51,111,.13);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-main > .hero-home,
+  .site-main > section:not(.learning-words-section) > .section-wrap,
+  .site-main > section:not(.learning-words-section) > div,
+  .site-main > section:not(.learning-words-section) .section-title,
+  .site-main > section:not(.learning-words-section) .eyebrow,
+  .site-main .scroll-reveal {
+    animation:none!important;
+  }
+}
