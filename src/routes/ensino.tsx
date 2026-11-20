@@ -1,5 +1,5 @@
 import { pageHead } from "@/lib/seo";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Blocks, BookOpen, Telescope, Heart, Brain, HandHeart } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
@@ -81,6 +81,29 @@ const segmentos = {
 function Ensino() {
   const [active,setActive]=useState<"infantil"|"iniciais"|"finais">("infantil");
   const current=segmentos[active];
+  const integralCardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = integralCardsRef.current;
+    if (!container) return;
+    const cards = Array.from(container.querySelectorAll<HTMLElement>(".integral-card"));
+    cards.forEach((card) => card.classList.remove("is-icon-visible"));
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach((card) => card.classList.add("is-icon-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-icon-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2, rootMargin: "0px 0px -24px 0px" });
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [active]);
+
   return <SiteLayout>
     <PageHeader title="Aprender, descobrir e evoluir." intro="Uma proposta educativa que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
     <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
@@ -105,11 +128,11 @@ function Ensino() {
         <button role="tab" aria-selected={active==="iniciais"} onClick={()=>setActive("iniciais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="iniciais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Iniciais</span></button>
         <button role="tab" aria-selected={active==="finais"} onClick={()=>setActive("finais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="finais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Finais</span></button>
       </div>
-      <div role="tabpanel" className="mt-10 grid items-center gap-10 lg:grid-cols-2">
+      <div key={active} role="tabpanel" className="segment-content-enter mt-10 grid items-center gap-10 lg:grid-cols-2">
         <div className="overflow-hidden rounded-[2rem]"><img key={current.image} src={current.image} alt={current.alt} className="aspect-[4/3] w-full object-cover shadow-lg"/><p className="bg-soft px-4 py-2 text-xs text-muted-foreground">Fotografia ilustrativa — será substituída por imagens reais da escola.</p></div>
         <div><p className="eyebrow">{current.eyebrow}</p><h3 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{current.title}</h3>{current.paragraphs.map(p=><p key={p} className="mt-5 leading-8 text-muted-foreground">{p}</p>)}<div className="bilingual-segment-note mt-6"><span className="bilingual-segment-note__icon" role="img" aria-label="Globo terrestre">🌍</span><div><p className="text-sm font-extrabold text-primary">Ensino bilíngue nesta etapa</p><p className="mt-2 text-sm leading-7 text-muted-foreground">{current.bilingualText}</p></div></div><div className="mt-7 grid gap-3 sm:grid-cols-2">{current.topics.map((topic,i)=><div key={topic} className="flex items-center gap-3 rounded-xl bg-soft px-4 py-3 text-sm font-semibold text-primary"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-primary">{i+1}</span>{topic}</div>)}</div></div>
       </div>
     </section>
-    <section className="integral-section bg-soft py-16 lg:py-20"><div className="section-wrap"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">DESENVOLVIMENTO INTEGRAL</p><h2 className="section-title">{active==="infantil"?"Crescer descobrindo, brincando e criando vínculos.":active==="iniciais"?"Aprender, participar e construir autonomia.":"Aprofundar conhecimentos e assumir novos desafios."}</h2><p className="mt-4 leading-8 text-muted-foreground">{current.development.intro}</p></div><div className="integral-cards mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{current.development.cards.map(({icon:Icon,title,text},i)=><article key={title} className="integral-card" style={{"--card-index":i} as React.CSSProperties}><span className="integral-card__icon"><Icon size={24}/></span><h3 className="mt-5 font-display text-lg font-bold text-primary">{title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p><span className="integral-card__number">0{i+1}</span></article>)}</div></div></section>
+    <section className="integral-section bg-soft py-16 lg:py-20"><div className="section-wrap"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">DESENVOLVIMENTO INTEGRAL</p><h2 className="section-title">{active==="infantil"?"Crescer descobrindo, brincando e criando vínculos.":active==="iniciais"?"Aprender, participar e construir autonomia.":"Aprofundar conhecimentos e assumir novos desafios."}</h2><p className="mt-4 leading-8 text-muted-foreground">{current.development.intro}</p></div><div key={active} ref={integralCardsRef} className="integral-cards segment-content-enter mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{current.development.cards.map(({icon:Icon,title,text},i)=><article key={title} className="integral-card" style={{"--card-index":i} as React.CSSProperties}><span className="integral-card__icon"><Icon size={24}/></span><h3 className="mt-5 font-display text-lg font-bold text-primary">{title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p><span className="integral-card__number">0{i+1}</span></article>)}</div></div></section>
   </SiteLayout>;
 }
