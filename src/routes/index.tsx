@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "Colégio Horizonte — Educação que transforma" }, { name: "description", content: "Escola da educação infantil ao ensino médio, com ensino de excelência e formação humana." }, { property: "og:title", content: "Colégio Horizonte — Educação que transforma" }, { property: "og:description", content: "Escola da educação infantil ao ensino médio, com ensino de excelência e formação humana." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),,
+  head: () => ({ meta: [{ title: "Colégio Horizonte — Educação que transforma" }, { name: "description", content: "Escola da educação infantil ao ensino médio, com ensino de excelência e formação humana." }, { property: "og:title", content: "Colégio Horizonte — Educação que transforma" }, { property: "og:description", content: "Escola da educação infantil ao ensino médio, com ensino de excelência e formação humana." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
   component: Index,
 });
 
