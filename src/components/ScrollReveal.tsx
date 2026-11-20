@@ -12,11 +12,11 @@ export function ScrollReveal({ children, className = "", delay = 0 }: { children
       return;
     }
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting || entry.intersectionRatio > 0) {
         setVisible(true);
         observer.unobserve(entry.target);
       }
-    }, { threshold: 0.14, rootMargin: "0px 0px -36px 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px 80px 0px" });
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
