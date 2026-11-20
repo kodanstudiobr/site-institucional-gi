@@ -7,7 +7,14 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-const organizationSchema = JSON.stringify({\n  "@context": "https://schema.org",\n  "@type": "EducationalOrganization",\n  name: "Instituto Educacional G.I.",\n  description: "Educação que acolhe, ensina e transforma vidas."\n});\n\nfunction NotFoundComponent() {
+const organizationSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: "Instituto Educacional G.I.",
+  description: "Educação que acolhe, ensina e transforma vidas."
+});
+
+function NotFoundComponent() {
   return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-7xl font-bold text-primary">404</h1><h2 className="mt-4 text-xl font-semibold text-primary">Página não encontrada</h2><p className="mt-2 text-sm text-muted-foreground">A página que você procura não existe ou foi movida.</p><div className="mt-6"><Link to="/" className="inline-flex items-center rounded-full bg-primary px-5 py-3 text-sm font-bold text-white">Voltar ao início</Link></div></div></div>;
 }
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
