@@ -1,9 +1,10 @@
+import { canonicalLink } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Target, Eye, HeartHandshake } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/sobre")({
-  head: () => ({ meta: [{ title: "Nossa escola | Instituto Educacional G.I." }, { name: "description", content: "Conheça a apresentação, missão, visão e valores do Instituto Educacional G.I." }] }),
+  head: () => ({ links: canonicalLink("/sobre"), meta: [{ title: "Nossa escola | Instituto Educacional G.I." }, { name: "description", content: "Conheça a apresentação, missão, visão e valores do Instituto Educacional G.I." }] }),
   component: Sobre,
 });
 
