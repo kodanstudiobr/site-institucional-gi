@@ -484,7 +484,7 @@
   font-variant-numeric:tabular-nums;
 }
 .learning-word {
-  animation:learningWordEnter .85s cubic-bezier(.22,.72,.2,1) both;
+  animation:learningWordEnter 1s cubic-bezier(.22,.72,.2,1) both;
   color:#fff12c;
   font-family:"Poppins",sans-serif;
   font-size:clamp(3.4rem,10vw,7.5rem);
