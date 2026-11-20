@@ -43,10 +43,44 @@ function AnimatedNumber({ value }: { value: number }) {
 const palavrasDaAprendizagem = ["É crescer.", "É perguntar.", "É criar.", "É vivenciar."];
 
 function ExperienceWords() {
-  return <section className="learning-words-section" aria-label="Aprender é crescer">
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeWord, setActiveWord] = useState(0);
+  const [outgoingWord, setOutgoingWord] = useState<number | null>(null);
+
+  useEffect(() => {
+    const updateWord = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
+      const next = Math.min(palavrasDaAprendizagem.length - 1, Math.floor(progress * palavrasDaAprendizagem.length));
+      setActiveWord((current) => {
+        if (current === next) return current;
+        setOutgoingWord(current);
+        return next;
+      });
+    };
+    updateWord();
+    window.addEventListener("scroll", updateWord, { passive: true });
+    window.addEventListener("resize", updateWord);
+    return () => {
+      window.removeEventListener("scroll", updateWord);
+      window.removeEventListener("resize", updateWord);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (outgoingWord === null) return;
+    const timeout = window.setTimeout(() => setOutgoingWord(null), 1000);
+    return () => window.clearTimeout(timeout);
+  }, [outgoingWord]);
+
+  return <section ref={sectionRef} className="learning-words-section" aria-label="É perguntar, crescer, criar, compartilhar e viver">
     <div className="learning-words-sticky">
-      <div className="learning-word-stack">
-        <p className="learning-word">É crescer.</p>
+      <div className="learning-word-stack" aria-live="polite" aria-atomic="true">
+        {outgoingWord !== null && <p className="learning-word learning-word--outgoing" aria-hidden="true">{palavrasDaAprendizagem[outgoingWord]}</p>}
+        <p className="learning-word learning-word--current">{palavrasDaAprendizagem[activeWord]}</p>
       </div>
     </div>
   </section>;
