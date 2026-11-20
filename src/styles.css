@@ -405,3 +405,139 @@
     padding-bottom:1.5rem;
   }
 }
+
+ 
+/* Palavras centrais que mudam conforme a pessoa percorre a seção com a rolagem. */
+.learning-words-section {
+  position:relative;
+  height:260vh;
+  background:
+    radial-gradient(circle at 15% 18%,rgba(255,241,44,.10) 0 1.2px,transparent 1.8px),
+    radial-gradient(circle at 85% 78%,rgba(255,255,255,.08) 0 1px,transparent 1.7px),
+    linear-gradient(135deg,#263a8b 0%,#324594 55%,#263878 100%);
+  background-size:24px 24px,30px 30px,100% 100%;
+  color:#fff;
+}
+.learning-words-sticky {
+  position:sticky;
+  top:0;
+  display:grid;
+  min-height:100svh;
+  place-items:center;
+  overflow:hidden;
+  padding:5rem 1.25rem;
+}
+.learning-words-sticky:before,
+.learning-words-sticky:after {
+  content:"";
+  position:absolute;
+  width:clamp(250px,42vw,580px);
+  aspect-ratio:1;
+  border:1px solid rgba(255,241,44,.18);
+  border-radius:50%;
+  pointer-events:none;
+}
+.learning-words-sticky:before {
+  top:-28%;
+  right:-12%;
+  box-shadow:0 0 0 34px rgba(255,241,44,.035),0 0 0 70px rgba(255,241,44,.025);
+}
+.learning-words-sticky:after {
+  bottom:-42%;
+  left:-13%;
+  width:clamp(220px,34vw,440px);
+  border-color:rgba(255,255,255,.13);
+  box-shadow:0 0 0 32px rgba(255,255,255,.025);
+}
+.learning-words-content {
+  position:relative;
+  z-index:1;
+  width:min(100%,900px);
+  text-align:center;
+}
+.learning-words-eyebrow { color:#fff12c; }
+.learning-words-heading {
+  max-width:760px;
+  margin:1.1rem auto 0;
+  color:#fff;
+  font-family:"Poppins",sans-serif;
+  font-size:clamp(1.8rem,4.2vw,3.3rem);
+  font-weight:800;
+  line-height:1.16;
+  letter-spacing:-.045em;
+}
+.learning-word-stage {
+  position:relative;
+  display:flex;
+  min-height:clamp(190px,28vw,290px);
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:1.5rem auto 0;
+}
+.learning-word-index {
+  margin-bottom:.6rem;
+  color:rgba(255,255,255,.55);
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.2em;
+  font-variant-numeric:tabular-nums;
+}
+.learning-word {
+  animation:learningWordEnter .55s cubic-bezier(.2,.75,.25,1) both;
+  color:#fff12c;
+  font-family:"Poppins",sans-serif;
+  font-size:clamp(3.4rem,10vw,7.5rem);
+  font-weight:850;
+  line-height:1.05;
+  letter-spacing:-.065em;
+}
+.learning-word span { color:#fff; }
+.learning-word-support {
+  max-width:520px;
+  margin:1rem auto 0;
+  color:rgba(255,255,255,.82);
+  font-size:clamp(.95rem,1.7vw,1.15rem);
+  line-height:1.7;
+}
+.learning-word-progress {
+  display:flex;
+  justify-content:center;
+  gap:.55rem;
+  margin:1.7rem auto 0;
+}
+.learning-word-progress span {
+  width:28px;
+  height:4px;
+  border-radius:99px;
+  background:rgba(255,255,255,.25);
+  transition:background .3s ease,transform .3s ease;
+}
+.learning-word-progress span.is-active {
+  background:#fff12c;
+  transform:scaleY(1.35);
+}
+.learning-words-hint {
+  margin-top:2.1rem;
+  color:rgba(255,255,255,.55);
+  font-size:.7rem;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+@keyframes learningWordEnter {
+  from { opacity:0; transform:translateY(22px) scale(.97); filter:blur(5px); }
+  to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+}
+@media (max-width:767px) {
+  .learning-words-section { height:230vh; }
+  .learning-words-sticky { padding:4rem 1.15rem; }
+  .learning-words-heading { max-width:440px; }
+  .learning-word-stage { min-height:210px; }
+  .learning-word { font-size:clamp(3.1rem,14vw,5rem); }
+  .learning-word-progress span { width:22px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .learning-word { animation:none; }
+  .learning-word-progress span { transition:none; }
+}
