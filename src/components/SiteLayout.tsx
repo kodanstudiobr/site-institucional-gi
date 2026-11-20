@@ -23,7 +23,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     if (!main) return;
 
     const candidates = Array.from(main.querySelectorAll<HTMLElement>(
-      "section .section-wrap > *, section .section-wrap article, .page-hero .mx-auto > *"
+      "section .section-wrap > *, section .section-wrap article, section .integral-cards .integral-card, .page-hero .mx-auto > *"
     )).filter((element) => !element.closest(".learning-words-section"));
 
     // Evita animar um contêiner inteiro e, ao mesmo tempo, seus próprios cards.
