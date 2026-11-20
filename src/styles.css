@@ -736,3 +736,25 @@ article:hover {
   }
 }
 
+
+/* Destaque do ensino bilíngue dentro de cada segmento. */
+.bilingual-segment-note {
+  display:flex;
+  align-items:flex-start;
+  gap:.9rem;
+  border:1px solid rgba(50,69,148,.10);
+  border-left:4px solid #fff12c;
+  border-radius:1rem;
+  background:linear-gradient(120deg,#f8f9ff,#fff);
+  padding:1.1rem 1.2rem;
+}
+.bilingual-segment-note__icon {
+  display:grid;
+  width:2.5rem;
+  height:2.5rem;
+  flex:0 0 2.5rem;
+  place-items:center;
+  border-radius:.8rem;
+  background:#eef0fa;
+  color:#324594;
+}
