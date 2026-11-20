@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { MapPin, Phone, Instagram, Send, MessageCircle, Mail } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
@@ -16,7 +16,7 @@ function Contato() {
   const [feedback,setFeedback] = useState("");
   const update = (field:keyof typeof form,value:string) => setForm(old=>({...old,[field]:value}));
   const message = encodeURIComponent(`Olá! Gostaria de informações sobre matrículas no Instituto Educacional G.I.\nResponsável: ${form.responsavel}\nAluno: ${form.aluno}\nWhatsApp: ${form.telefone}\nEtapa: ${form.etapa}\nMensagem: ${form.mensagem}`);
-  function submit(e:React.FormEvent<HTMLFormElement>){
+  function submit(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
     if(!WHATSAPP_OFICIAL){setFeedback("O formulário está pronto. Para enviar, a escola precisa configurar o número oficial de WhatsApp no projeto.");return;}
     window.open(`https://wa.me/${WHATSAPP_OFICIAL}?text=${message}`,"_blank","noopener,noreferrer");
