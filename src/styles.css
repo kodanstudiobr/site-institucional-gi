@@ -128,13 +128,6 @@
 .section-spark { width:clamp(38px,4.2vw,64px); height:auto; }
 .section-spark--left { left:clamp(8px,2.2vw,30px); top:12%; }
 .section-spark--pedagogy { right:clamp(8px,2.2vw,30px); top:10%; }
-.section-plane { position:absolute; z-index:0; display:flex; align-items:center; gap:6px; color:#324594; opacity:.55; pointer-events:none; }
-.section-plane svg { color:#324594; fill:rgba(255,241,44,.8); stroke-width:1.8; filter:drop-shadow(0 2px 2px rgba(50,69,148,.12)); }
-.section-plane--move { right:3%; bottom:9%; transform:rotate(-12deg); }
-.section-plane--learning { right:2%; top:12%; transform:rotate(-10deg); }
-.section-plane--mission { left:2%; bottom:8%; transform:rotate(-12deg); }
-.plane-trail { display:block; width:clamp(35px,5vw,80px); height:24px; border-top:2px dashed currentColor; border-radius:50%; transform:rotate(-18deg) translateY(8px); opacity:.65; }
-.plane-arrow { font-size:2rem; line-height:1; color:#324594; opacity:.7; transform:translateX(-6px); }
 .section-decor-wrap > .section-wrap { position:relative; z-index:1; }
 
 /* Faixa institucional amarela com missão e visão oficiais da página Nossa Escola. */
@@ -150,26 +143,14 @@
   .section-spark { width:clamp(42px,12vw,58px); }
   .section-spark--left { left:8px; top:5%; }
   .section-spark--pedagogy { right:8px; top:4%; }
-  .section-plane { opacity:.36; }
-  .section-plane--move { right:4%; bottom:3%; }
-  .section-plane--learning { right:3%; top:3%; }
-  .section-plane--mission { left:3%; bottom:2%; }
   .mission-vision-grid { margin-top:2rem; }
   .mission-vision-card { padding:1.5rem; }
 }
 
 
 /* Aviões decorativos maiores no desktop; no mobile são ocultados para nunca cobrir conteúdo. */
-.section-plane { gap:10px; opacity:.62; }
-.section-plane svg { width:clamp(38px,4vw,58px); height:auto; }
-.section-plane--move { right:4%; bottom:6%; }
-.section-plane--learning { right:2.5%; top:7%; }
-.section-plane--mission { left:3%; bottom:5%; }
-.plane-trail { width:clamp(55px,7vw,110px); height:30px; border-top-width:3px; }
-.plane-arrow { font-size:2.8rem; }
 .section-spark { width:clamp(48px,5vw,72px); }
 .section-spark--history { right:2%; top:8%; }
-.section-plane--history { left:2%; bottom:12%; }
 .history-highlight { position:relative; overflow:hidden; background:#324594; color:white; }
 .history-highlight__eyebrow { color:#fff12c; font-size:.78rem; font-weight:800; letter-spacing:.19em; text-transform:uppercase; }
 .history-counter { display:flex; justify-content:center; align-items:baseline; gap:.35rem; color:#fff12c; font-family:"Poppins",sans-serif; font-weight:850; line-height:1; }
@@ -181,7 +162,6 @@
 .history-community__copy { margin:1rem auto 0; max-width:38rem; color:rgba(255,255,255,.82); line-height:1.75; }
 @media (max-width:767px) {
   /* Evita qualquer sobreposição de estrelas e aviões com texto ou fotografia em telas pequenas. */
-  .section-plane,.section-spark { display:none!important; }
   .history-counter__number { font-size:clamp(6rem,28vw,9rem); }
   .history-highlight { padding-block:4rem; }
   .history-community { margin-top:2.5rem; padding-top:1.8rem; }
@@ -190,22 +170,15 @@
 
 /* Ajustes finais dos elementos decorativos da página inicial. */
 .history-counter__plus { font-size:clamp(3.8rem,9vw,6.5rem); font-weight:800; letter-spacing:-.08em; line-height:1; }
-.section-plane--mission { left:auto; right:3%; top:17%; bottom:auto; transform:rotate(-12deg); }
-.section-spark--intro { right:3%; top:8%; }
+
 .section-spark--learning { right:1%; top:4%; }
 .section-spark--structure { left:2%; top:8%; }
-.section-plane--structure { right:2%; bottom:8%; transform:rotate(-12deg); }
 @media (max-width:767px) {
-  .section-plane--mission { right:3%; top:3%; }
-  .section-spark--intro,.section-spark--learning,.section-spark--structure { display:none!important; }
+  .section-spark--learning,.section-spark--structure { display:none!important; }
 }
 
  
 /* Avião de papel autoral: desenho em contorno, trilha curva pontilhada e movimento leve. */
-.paper-plane-art { position:relative; display:block; width:clamp(88px,10vw,142px); height:clamp(58px,6vw,82px); color:#324594; animation:paperPlaneDrift 5.8s ease-in-out infinite; }
-.paper-plane-art__trail { position:absolute; width:100%; height:100%; inset:0; overflow:visible; color:currentColor; opacity:.72; }
-.paper-plane-art__icon { position:absolute; width:48%; height:auto; right:0; top:0; color:currentColor; filter:drop-shadow(0 3px 3px rgba(50,69,148,.14)); }
-@keyframes paperPlaneDrift { 0%,100% { transform:translate3d(0,0,0) rotate(-2deg); } 50% { transform:translate3d(5px,-7px,0) rotate(2deg); } }
 
 /* Contador com respiro entre o sinal de + e os algarismos. */
 .history-counter { gap:clamp(.65rem,1.6vw,1.15rem); }
@@ -228,21 +201,11 @@
 .testimonial-card__person strong { color:#324594; font-size:.82rem; font-weight:800; }
 .testimonial-card__person small { margin-top:3px; color:#8991aa; font-size:.68rem; }
 .testimonial-card__spark { margin-left:auto; flex:0 0 auto; color:#d5b800; }
-.section-plane--testimonials { right:2%; bottom:2%; }
 .section-spark--testimonials { left:2%; top:8%; }
 @media (max-width:767px) {
   /* Os detalhes continuam presentes no mobile, menores e posicionados nas bordas livres. */
-  .section-plane,.section-spark { display:flex!important; }
   .section-spark { width:clamp(23px,7vw,34px)!important; height:auto; opacity:.7; }
-  .paper-plane-art { width:76px; height:48px; }
-  .paper-plane-art__icon { width:43%; }
-  .section-plane--move { right:2%; bottom:1%; }
-  .section-plane--learning { right:2%; top:1%; }
-  .section-plane--mission { right:2%; top:auto; bottom:1%; left:auto; }
-  .section-plane--structure { right:2%; bottom:1%; }
-  .section-plane--history { left:2%; bottom:2%; }
-  .section-plane--testimonials { right:2%; bottom:1%; }
-  .section-spark--intro { right:4%; top:2%; }
+  
   .section-spark--left { left:3%; top:2%; }
   .section-spark--learning { right:3%; top:1%; }
   .section-spark--structure { left:3%; top:2%; }
@@ -254,5 +217,4 @@
   .testimonial-card { min-height:260px; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .paper-plane-art { animation:none!important; }
 }
