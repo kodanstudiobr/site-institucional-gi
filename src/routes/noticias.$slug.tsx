@@ -1,9 +1,10 @@
+import { canonicalLink } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Newspaper } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route=createFileRoute("/noticias/$slug")({
-  head:()=>({meta:[{title:"Notícia | Instituto Educacional G.I."},{name:"description",content:"Acompanhe as notícias e comunicados do Instituto Educacional G.I."}]}),
+  head: () => ({ links: canonicalLink("/noticias"), meta:[{title:"Notícia | Instituto Educacional G.I."},{name:"description",content:"Acompanhe as notícias e comunicados do Instituto Educacional G.I."}]}),
   component:Noticia,
 });
 function Noticia(){
