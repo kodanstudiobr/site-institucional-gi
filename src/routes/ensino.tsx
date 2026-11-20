@@ -23,7 +23,7 @@ const segmentos = {
       "A Educação Infantil é uma etapa fundamental para o desenvolvimento da criança. Por meio de brincadeiras, interações e experiências lúdicas, buscamos estimular a curiosidade, a criatividade, a autonomia e a construção de vínculos.",
       "Nosso objetivo é proporcionar um ambiente acolhedor, onde cada criança possa explorar, descobrir e desenvolver suas habilidades respeitando seu próprio ritmo de aprendizagem."
     ],
-    topics:["Brincadeiras e experiências","Desenvolvimento da autonomia","Interação e socialização","Criatividade e exploração","Aprendizagem lúdica"]
+    topics:["Brincadeiras e experiências","Desenvolvimento da autonomia","Interação e socialização","Criatividade e exploração","Aprendizagem lúdica"],
     development: {
       intro:"Na Educação Infantil, o desenvolvimento integral acontece por meio do brincar, das interações e das descobertas. Cada experiência respeita o tempo da criança e fortalece suas primeiras aprendizagens.",
       cards:[
@@ -43,7 +43,7 @@ const segmentos = {
       "Nos Anos Iniciais, fortalecemos as bases da aprendizagem, incentivando a leitura, a escrita, o raciocínio lógico, a criatividade e o pensamento crítico.",
       "Valorizamos experiências educativas que estimulam a participação, a autonomia e a construção do conhecimento, acompanhando o desenvolvimento de cada estudante."
     ],
-    topics:["Alfabetização e letramento","Leitura e escrita","Raciocínio lógico e matemática","Criatividade","Autonomia","Formação cidadã"]
+    topics:["Alfabetização e letramento","Leitura e escrita","Raciocínio lógico e matemática","Criatividade","Autonomia","Formação cidadã"],
     development: {
       intro:"Nos Anos Iniciais, o desenvolvimento integral une a consolidação das aprendizagens fundamentais à formação de atitudes, relações e habilidades. Os estudantes são incentivados a participar, pensar e agir com autonomia crescente.",
       cards:[
@@ -63,7 +63,7 @@ const segmentos = {
       "Nos Anos Finais do Ensino Fundamental, do 6º ao 9º ano, ampliamos e aprofundamos os conhecimentos construídos ao longo da trajetória escolar. Os estudantes são incentivados a investigar, argumentar, resolver problemas e desenvolver o pensamento crítico.",
       "Por meio de experiências contextualizadas e propostas interdisciplinares, estimulamos a autonomia, a responsabilidade e o protagonismo, preparando cada estudante para novos desafios acadêmicos e para a continuidade dos estudos."
     ],
-    topics:["Aprofundamento dos conhecimentos","Pensamento crítico e investigação","Resolução de problemas","Projetos interdisciplinares","Autonomia e protagonismo","Preparação para novos desafios"]
+    topics:["Aprofundamento dos conhecimentos","Pensamento crítico e investigação","Resolução de problemas","Projetos interdisciplinares","Autonomia e protagonismo","Preparação para novos desafios"],
     development: {
       intro:"Nos Anos Finais, o desenvolvimento integral aprofunda conhecimentos e fortalece a capacidade de analisar, argumentar e tomar decisões. A proposta valoriza o protagonismo, a responsabilidade e a preparação para novos desafios.",
       cards:[
