@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { BookOpen, Palette, Users, Sparkles, Heart, PencilRuler, Brain, HandHeart } from "lucide-react";
+import { Sparkles, Heart, Brain, HandHeart } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
