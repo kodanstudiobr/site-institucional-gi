@@ -83,17 +83,19 @@ function Ensino() {
   const current=segmentos[active];
   return <SiteLayout>
     <PageHeader title="Aprender, descobrir e evoluir." intro="Uma proposta educativa que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
-    <section className="bilingual-section py-16 lg:py-20">
-      <div className="section-wrap">
-        <div className="bilingual-panel">
-          <div className="bilingual-icon"><Languages size={30}/></div>
-          <div className="bilingual-copy">
-            <p className="eyebrow">APRENDIZAGEM SEM FRONTEIRAS</p>
-            <h2 className="section-title">O ensino bilíngue faz parte da nossa jornada.</h2>
-            <p className="mt-5 max-w-3xl leading-8 text-muted-foreground">A presença da língua inglesa em nossa proposta educativa amplia as possibilidades de aprendizagem e comunicação. Por meio de experiências adequadas a cada etapa escolar, os estudantes têm contato com novos vocabulários, expressões e culturas, desenvolvendo gradualmente a compreensão e a confiança para se comunicar em outro idioma.</p>
-          </div>
-          <span className="bilingual-decoration" aria-hidden="true">EN</span>
+    <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
+      <div className="bilingual-copy">
+        <p className="eyebrow">APRENDIZAGEM SEM FRONTEIRAS</p>
+        <h2 className="section-title mt-3">O ensino bilíngue faz parte da nossa jornada.</h2>
+        <p className="mt-6 text-lg leading-8 text-muted-foreground">A presença da língua inglesa em nossa proposta educativa amplia as possibilidades de aprendizagem e comunicação. Por meio de experiências adequadas a cada etapa escolar, os estudantes têm contato com novos vocabulários, expressões e culturas, desenvolvendo gradualmente a compreensão e a confiança para se comunicar em outro idioma.</p>
+        <div className="mt-7 inline-flex items-center gap-3 rounded-2xl bg-accent px-5 py-4 font-display text-base font-bold text-accent-foreground shadow-lg">
+          <Languages size={24}/>
+          <span>Aprender novos idiomas é descobrir novos mundos.</span>
         </div>
+      </div>
+      <div className="bilingual-image-wrap relative">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1100&q=85" alt="Estudantes em atividade de aprendizagem — imagem ilustrativa" loading="lazy" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/>
+        <div className="absolute -bottom-5 -right-3 rounded-2xl bg-primary px-6 py-5 font-display text-lg font-bold text-white shadow-lg sm:-right-5">Learning together</div>
       </div>
     </section>
     <section className="section-wrap py-20 lg:py-24">
