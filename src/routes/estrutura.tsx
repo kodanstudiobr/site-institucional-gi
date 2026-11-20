@@ -1,9 +1,10 @@
+import { canonicalLink } from "@/lib/seo";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { X, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
-export const Route=createFileRoute("/estrutura")({head:()=>({meta:[{title:"Nossa Estrutura | Instituto Educacional G.I."},{name:"description",content:"Conheça os ambientes de aprendizagem e convivência do Instituto Educacional G.I."},{name:"keywords",content:"estrutura escolar, ambientes de aprendizagem, Instituto Educacional G.I."}]}),component:Estrutura});
+export const Route=createFileRoute("/estrutura")({head: () => ({ links: canonicalLink("/estrutura"), meta:[{title:"Nossa Estrutura | Instituto Educacional G.I."},{name:"description",content:"Conheça os ambientes de aprendizagem e convivência do Instituto Educacional G.I."},{name:"keywords",content:"estrutura escolar, ambientes de aprendizagem, Instituto Educacional G.I."}]}),component:Estrutura});
 const fotos=[
   {title:"Ambientes de aprendizagem",description:"Espaços preparados para apoiar as descobertas e a construção do conhecimento.",image:"https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1400&q=85"},
   {title:"Leitura e imaginação",description:"Momentos de contato com histórias, livros e novas ideias.",image:"https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1400&q=85"},
