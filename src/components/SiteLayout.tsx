@@ -57,16 +57,14 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   }, [pathname]);
 
   useEffect(() => {
-    if (!transparentHeader) return;
     const updateScroll = () => setScrolled(window.scrollY > 36);
     updateScroll();
     window.addEventListener("scroll", updateScroll, { passive: true });
     return () => window.removeEventListener("scroll", updateScroll);
-  }, [transparentHeader]);
+  }, [pathname]);
 
-  const headerClass = transparentHeader
-    ? `site-header site-header--overlay fixed inset-x-0 top-0 z-50 ${scrolled ? "is-scrolled" : ""}`
-    : "site-header sticky top-0 z-50";
+  // O mesmo header transparente no topo e branco após a rolagem em todas as rotas.
+  const headerClass = `site-header site-header--overlay fixed inset-x-0 top-0 z-50 ${scrolled ? "is-scrolled" : ""}`;
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -100,5 +98,5 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 }
 
 export function PageHeader({ title, intro, eyebrow = "INSTITUTO EDUCACIONAL G.I." }: { title: string; intro: string; eyebrow?: string }) {
-  return <section className="page-hero"><div className="mx-auto max-w-7xl px-5 py-16 lg:px-8 lg:py-20"><p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">{eyebrow}</p><h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">{title}</h1><p className="mt-5 max-w-2xl text-lg leading-8 text-white/85">{intro}</p></div></section>;
+  return <section className="page-hero"><div className="mx-auto max-w-7xl px-5 pt-28 pb-16 lg:px-8 lg:pt-32 lg:pb-20"><p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">{eyebrow}</p><h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">{title}</h1><p className="mt-5 max-w-2xl text-lg leading-8 text-white/85">{intro}</p></div></section>;
 }
