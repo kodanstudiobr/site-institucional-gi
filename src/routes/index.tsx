@@ -74,6 +74,7 @@ const palavrasDaAprendizagem = ["É crescer.", "É perguntar.", "É criar.", "É
 function ExperienceWords() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeWord, setActiveWord] = useState(0);
+  const [outgoingWord, setOutgoingWord] = useState<number | null>(null);
 
   useEffect(() => {
     const updateWord = () => {
@@ -83,7 +84,11 @@ function ExperienceWords() {
       const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
       const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
       const next = Math.min(palavrasDaAprendizagem.length - 1, Math.floor(progress * palavrasDaAprendizagem.length));
-      setActiveWord((current) => current === next ? current : next);
+      setActiveWord((current) => {
+        if (current === next) return current;
+        setOutgoingWord(current);
+        return next;
+      });
     };
     updateWord();
     window.addEventListener("scroll", updateWord, { passive: true });
@@ -94,9 +99,18 @@ function ExperienceWords() {
     };
   }, []);
 
+  useEffect(() => {
+    if (outgoingWord === null) return;
+    const timeout = window.setTimeout(() => setOutgoingWord(null), 750);
+    return () => window.clearTimeout(timeout);
+  }, [outgoingWord]);
+
   return <section ref={sectionRef} className="learning-words-section" aria-label="É perguntar, crescer, criar, compartilhar e viver">
     <div className="learning-words-sticky">
-      <p key={palavrasDaAprendizagem[activeWord]} className="learning-word" aria-live="polite">{palavrasDaAprendizagem[activeWord]}</p>
+      <div className="learning-word-stack" aria-live="polite" aria-atomic="true">
+        {outgoingWord !== null && <p className="learning-word learning-word--outgoing" aria-hidden="true">{palavrasDaAprendizagem[outgoingWord]}</p>}
+        <p className="learning-word learning-word--current">{palavrasDaAprendizagem[activeWord]}</p>
+      </div>
     </div>
   </section>;
 }
