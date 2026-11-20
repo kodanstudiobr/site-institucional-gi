@@ -52,3 +52,79 @@
 @keyframes heroEnter { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
 @media (max-width:1279px) { .nav-link { font-size:.9rem; } }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important; } }
+
+/* Header sobre a fotografia principal: transparente no topo, branco ao rolar. */
+.site-header { transition: background .32s ease, border-color .32s ease, box-shadow .32s ease, backdrop-filter .32s ease; }
+.site-header--overlay { background:transparent; border-bottom-color:transparent; backdrop-filter:none; box-shadow:none; }
+.site-header--overlay .header-brand,
+.site-header--overlay .header-brand span { color:#fff; }
+.site-header--overlay .nav-link { color:rgba(255,255,255,.94); text-shadow:0 1px 8px rgba(0,0,0,.18); }
+.site-header--overlay .nav-link:hover,
+.site-header--overlay .nav-link-active { color:#fff12c; }
+.site-header--overlay .header-menu { color:#fff; border-color:rgba(255,255,255,.55); background:rgba(255,255,255,.08); }
+.site-header--overlay.is-scrolled { background:rgba(255,255,255,.97); border-bottom-color:#e8eaf3; backdrop-filter:blur(16px); box-shadow:0 8px 28px rgba(24,38,91,.08); }
+.site-header--overlay.is-scrolled .header-brand,
+.site-header--overlay.is-scrolled .header-brand span { color:#324594; }
+.site-header--overlay.is-scrolled .nav-link { color:#344477; text-shadow:none; }
+.site-header--overlay.is-scrolled .nav-link:hover,
+.site-header--overlay.is-scrolled .nav-link-active { color:#324594; }
+.site-header--overlay.is-scrolled .header-menu { color:#324594; border-color:#e4e7f1; background:#fff; }
+
+/* Entrada delicada dos cards quando entram na área visível. */
+.scroll-reveal { height:100%; opacity:0; transform:translate3d(0,24px,0) scale(.985); transition:opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1); }
+.scroll-reveal.is-visible { opacity:1; transform:translate3d(0,0,0) scale(1); }
+.feature-card--glow { position:relative; overflow:hidden; isolation:isolate; }
+.feature-card--glow:before { content:""; position:absolute; inset:0; z-index:-1; background:radial-gradient(circle at 18% 12%,rgba(255,241,44,.22),transparent 44%); opacity:0; transition:opacity .45s ease; }
+.feature-card--glow .feature-icon { transition:background .38s ease,color .38s ease,transform .38s cubic-bezier(.2,.8,.2,1),box-shadow .38s ease; }
+.feature-card--glow.is-visible .feature-icon { background:#fff12c; color:#324594; box-shadow:0 8px 22px rgba(255,215,0,.24); animation:iconPop .65s cubic-bezier(.2,.8,.2,1) both; }
+.feature-card--glow.is-visible:before { opacity:1; }
+.feature-card--glow:hover { border-color:rgba(255,213,0,.65); }
+.feature-card--glow:hover:before { opacity:1; }
+.feature-card--glow:hover .feature-icon { background:#fff12c; color:#324594; transform:translateY(-4px) rotate(-5deg) scale(1.08); box-shadow:0 10px 25px rgba(255,215,0,.3); }
+.feature-card__spark { position:absolute; top:22px; right:22px; color:#e7c900; opacity:0; transform:scale(.4) rotate(-35deg); transition:opacity .35s ease,transform .45s ease; }
+.feature-card--glow:hover .feature-card__spark,
+.feature-card--glow.is-visible .feature-card__spark { opacity:.85; transform:scale(1) rotate(0); }
+@keyframes iconPop { 0% { transform:scale(.72) rotate(-12deg); } 65% { transform:scale(1.12) rotate(4deg); } 100% { transform:scale(1) rotate(0); } }
+
+/* Carrossel horizontal com snap, arraste no toque e navegação por setas. */
+.experience-carousel { display:flex; gap:1.35rem; overflow-x:auto; overscroll-behavior-inline:contain; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; padding:4px 2px 18px; -webkit-overflow-scrolling:touch; }
+.experience-carousel::-webkit-scrollbar { display:none; }
+.experience-card { flex:0 0 min(84vw,350px); overflow:hidden; scroll-snap-align:start; border:1px solid #e6e9f3; border-radius:1.35rem; background:#fff; box-shadow:0 8px 28px rgba(36,51,111,.055); transition:transform .3s ease,box-shadow .3s ease; }
+.experience-card:hover { transform:translateY(-6px); box-shadow:0 18px 38px rgba(36,51,111,.13); }
+.experience-card__image { position:relative; overflow:hidden; height:220px; background:#eef0fa; }
+.experience-card__image img { width:100%; height:100%; object-fit:cover; transition:transform .65s cubic-bezier(.2,.7,.2,1); }
+.experience-card:hover .experience-card__image img { transform:scale(1.055); }
+.experience-card__number { position:absolute; right:16px; bottom:14px; display:grid; place-items:center; width:42px; height:42px; border-radius:50%; background:#fff12c; color:#324594; font-size:.75rem; font-weight:800; box-shadow:0 4px 14px rgba(0,0,0,.12); }
+.carousel-arrow { display:grid; place-items:center; width:44px; height:44px; border:1px solid #dfe3f1; border-radius:50%; background:white; color:#324594; box-shadow:0 4px 14px rgba(36,51,111,.06); transition:transform .2s ease,background .2s ease,border-color .2s ease; }
+.carousel-arrow:hover { transform:translateY(-2px); border-color:#fff12c; background:#fff12c; }
+.carousel-plane { position:absolute; right:3%; bottom:-38px; color:#7382c6; opacity:.22; transform:rotate(-12deg); pointer-events:none; }
+
+/* Pequenos detalhes ilustrados que dão movimento sem competir com o conteúdo. */
+.section-decor-wrap { position:relative; overflow:hidden; }
+.section-spark { position:absolute; color:#d7bd19; opacity:.48; pointer-events:none; animation:decorFloat 5.5s ease-in-out infinite; }
+.section-spark--left { left:-12px; top:14%; }
+.section-spark--right { right:2%; top:5%; animation-delay:-2s; }
+.section-spark--pedagogy { right:1%; top:12%; }
+.section-spark--structure { right:2%; top:8%; }
+.hero-flight { position:absolute; z-index:2; color:#fff12c; pointer-events:none; }
+.hero-flight--one { top:24%; right:14%; transform:rotate(-14deg); animation:planeDrift 8s ease-in-out infinite; }
+.flight-trail { position:absolute; width:125px; height:48px; right:14px; top:18px; border-top:2px dashed rgba(255,255,255,.65); border-radius:50%; transform:rotate(-20deg); }
+.hero-star { position:absolute; z-index:2; color:#fff12c; pointer-events:none; animation:decorFloat 4.8s ease-in-out infinite; }
+.hero-star--one { top:22%; right:35%; }
+.hero-star--two { bottom:24%; right:9%; animation-delay:-2.2s; }
+@keyframes decorFloat { 0%,100% { transform:translateY(0) rotate(0); } 50% { transform:translateY(-10px) rotate(9deg); } }
+@keyframes planeDrift { 0%,100% { transform:translate(0,0) rotate(-14deg); } 50% { transform:translate(-13px,-9px) rotate(-8deg); } }
+
+@media (max-width:767px) {
+  .hero-flight--one { top:18%; right:9%; opacity:.78; }
+  .hero-star--one { top:15%; right:43%; }
+  .hero-star--two { bottom:17%; right:7%; }
+  .section-spark--left { left:0; top:5%; }
+  .section-spark--right { right:0; top:2%; }
+  .experience-card { flex-basis:min(84vw,330px); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .scroll-reveal,.feature-card--glow .feature-icon,.feature-card__spark,.hero-flight,.hero-star,.section-spark { animation:none!important; transition:none!important; }
+  .scroll-reveal { opacity:1; transform:none; }
+  .experience-carousel { scroll-behavior:auto; }
+}
