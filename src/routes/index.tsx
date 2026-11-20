@@ -1,9 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Star, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, Sparkles, ChevronDown, School, Star, Shapes, Compass } from "lucide-react";
+import { useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "Instituto Educacional G.I. | Educação que transforma vidas" }, { name: "description", content: "Conheça o Instituto Educacional G.I., sua proposta pedagógica, Educação Infantil e Anos Iniciais. Entre em contato e saiba mais sobre matrículas." }, { property: "og:title", content: "Instituto Educacional G.I." }, { property: "og:description", content: "Educação que acolhe, ensina e transforma vidas." }] }),
+  head: () => ({ meta: [
+    { title: "Instituto Educacional G.I. | Educação Infantil e Anos Iniciais" },
+    { name: "description", content: "Conheça o Instituto Educacional G.I. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes." },
+    { name: "keywords", content: "Instituto Educacional G.I., Educação Infantil, Anos Iniciais, escola, educação de qualidade, matrículas escolares" },
+    { property: "og:title", content: "Instituto Educacional G.I. | Educação que transforma vidas" },
+    { property: "og:description", content: "Educação que acolhe, ensina e transforma vidas." },
+    { property: "og:type", content: "website" }
+  ] }),
   component: Index,
 });
 
@@ -15,16 +23,25 @@ const destaques = [
 ];
 const vivencias = [
   { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85" },
-  { title: "Arte e cultura", text: "Espaço para expressão, imaginação, sensibilidade e novas formas de aprender.", image: "https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=900&q=85" },
+  { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=900&q=85" },
   { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "https://images.unsplash.com/photo-1472162314594-eba3c3d2b7e3?auto=format&fit=crop&w=900&q=85" },
+];
+const perguntas = [
+  ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende à Educação Infantil e aos Anos Iniciais do Ensino Fundamental."],
+  ["Como funciona o processo de matrícula?", "Entre em contato com a escola pelo formulário desta página para receber orientações sobre o processo de matrícula."],
+  ["Quais documentos são necessários?", "A relação de documentos é informada pela equipe da escola durante o atendimento à família."],
+  ["Como conhecer a estrutura da escola?", "Entre em contato para conversar com a equipe e consultar a possibilidade de agendar uma visita."],
+  ["Como funciona a proposta pedagógica?", "Nossa comunicação institucional valoriza o acolhimento, a aprendizagem significativa e o desenvolvimento integral dos estudantes."],
+  ["Como entrar em contato com a instituição?", "Acesse a página Contato e envie seus dados para solicitar informações à equipe do Instituto Educacional G.I."],
 ];
 
 function Index() {
+  const [faqOpen, setFaqOpen] = useState<number | null>(0);
   return <SiteLayout>
     <section className="hero-home">
       <div className="hero-overlay"/>
-      <div className="relative mx-auto flex min-h-[610px] max-w-7xl items-center px-5 py-24 lg:min-h-[690px] lg:px-8">
-        <div className="max-w-3xl">
+      <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-5 py-24 lg:min-h-[710px] lg:px-8">
+        <div className="max-w-3xl hero-copy">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold tracking-widest text-white backdrop-blur"><Sparkles size={14} className="text-accent"/> INSTITUTO EDUCACIONAL G.I.</span>
           <h1 className="mt-7 font-display text-5xl font-bold leading-[1.08] text-white md:text-7xl">Educação que acolhe, ensina e <span className="text-accent">transforma vidas.</span></h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-white/90 md:text-xl">Um ambiente de aprendizagem, descobertas e desenvolvimento, onde cada estudante é valorizado em sua individualidade e preparado para construir seu futuro.</p>
@@ -33,12 +50,24 @@ function Index() {
       </div>
       <div className="hero-bottom"/>
     </section>
+
     <section className="section-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
       <div className="relative"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1100&q=85" alt="Estudantes em atividade de aprendizagem" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/><div className="absolute -bottom-5 -right-3 rounded-2xl bg-accent px-6 py-5 font-display text-lg font-bold text-accent-foreground shadow-lg sm:-right-5">Aprender para a vida</div></div>
-      <div><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Educação que acredita no potencial de cada criança.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão de conhecimentos. É proporcionar experiências, despertar potencialidades, fortalecer valores e contribuir para a formação de pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa história <ArrowRight size={18}/></Link></div>
+      <div><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Educação que acredita no potencial de cada criança.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão de conhecimentos. É proporcionar experiências, despertar potencialidades, fortalecer valores e contribuir para a formação de pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa escola <ArrowRight size={18}/></Link></div>
     </section>
+
     <section className="bg-soft py-20 lg:py-24"><div className="section-wrap"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que cresce junto com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text})=><article key={title} className="feature-card"><span className="icon-bubble"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p></article>)}</div></div></section>
-    <section className="section-wrap py-20 lg:py-24"><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivências que ensinam e momentos que ficam.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa.</p></div><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link></div><div className="mt-10 grid gap-6 md:grid-cols-3">{vivencias.map(v=><article key={v.title} className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm"><img src={v.image} alt="" className="h-56 w-full object-cover"/><div className="p-6"><h3 className="font-display text-xl font-bold text-primary">{v.title}</h3><p className="mt-3 leading-7 text-muted-foreground">{v.text}</p></div></article>)}</div></section>
-    <section className="bg-primary py-20 text-white"><div className="section-wrap grid items-center gap-8 lg:grid-cols-[1fr_auto]"><div><p className="eyebrow text-accent">VENHA NOS CONHECER</p><h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">O próximo capítulo da história do seu filho começa aqui.</h2><p className="mt-5 max-w-2xl leading-8 text-white/80">Entre em contato com nossa equipe e descubra uma escola preparada para acolher, ensinar e acompanhar cada etapa do desenvolvimento.</p></div><Link to="/contato" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-extrabold text-accent-foreground">Fale sobre matrículas <ArrowRight size={18}/></Link></div></section>
+
+    <section className="section-wrap py-20 lg:py-24"><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivências que ensinam e momentos que ficam.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link></div><div className="mt-10 grid gap-6 md:grid-cols-3">{vivencias.map(v=><article key={v.title} className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-lg"><img src={v.image} alt={v.title} loading="lazy" className="h-56 w-full object-cover"/><div className="p-6"><h3 className="font-display text-xl font-bold text-primary">{v.title}</h3><p className="mt-3 leading-7 text-muted-foreground">{v.text}</p></div></article>)}</div></section>
+
+    <section className="bg-soft py-20 lg:py-24"><div className="section-wrap grid items-center gap-12 lg:grid-cols-[.95fr_1.05fr]"><div><p className="eyebrow">NOSSA PROPOSTA PEDAGÓGICA</p><h2 className="section-title">Desenvolver conhecimentos. Construir valores. Formar pessoas.</h2><p className="mt-5 leading-8 text-muted-foreground">Uma educação que vai além dos conteúdos escolares, incentivando o pensamento crítico, a criatividade, a autonomia, o respeito e o desenvolvimento de habilidades essenciais para a vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa proposta <ArrowRight size={18}/></Link></div><div className="grid grid-cols-2 gap-4">{[{icon:Brain,title:"Desenvolvimento intelectual",text:"Curiosidade e construção do conhecimento."},{icon:HandHeart,title:"Desenvolvimento emocional",text:"Autoconhecimento, respeito e empatia."},{icon:Users,title:"Desenvolvimento social",text:"Convivência, cooperação e cidadania."},{icon:Palette,title:"Desenvolvimento criativo",text:"Imaginação, expressão e novas ideias."}].map(({icon:Icon,title,text})=><article key={title} className="feature-card min-h-48"><span className="icon-bubble"><Icon size={23}/></span><h3 className="mt-4 font-display font-bold text-primary">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}</div></div></section>
+
+    <section className="section-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:py-24"><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="Ambiente de aprendizagem escolar" loading="lazy" className="aspect-[5/4] w-full object-cover"/></div><div><p className="eyebrow">NOSSA ESTRUTURA</p><h2 className="section-title">Ambientes preparados para grandes descobertas.</h2><p className="mt-5 leading-8 text-muted-foreground">Cada espaço da escola faz parte da experiência de aprendizagem. Valorizamos ambientes que favoreçam a convivência, a criatividade, a participação e o desenvolvimento dos estudantes.</p><p className="mt-3 text-sm leading-7 text-muted-foreground">As imagens desta prévia são ilustrativas e serão substituídas por fotografias reais da instituição.</p><Link to="/estrutura" className="link-arrow mt-6">Conheça nossa estrutura <ArrowRight size={18}/></Link></div></section>
+
+    <section className="bg-soft py-20"><div className="section-wrap"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">NOSSA COMUNIDADE</p><h2 className="section-title">A confiança de quem faz parte da nossa história.</h2><p className="mt-4 leading-7 text-muted-foreground">A parceria entre escola e família fortalece a trajetória de aprendizagem.</p></div><div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-dashed border-primary/30 bg-white p-9 text-center"><span className="icon-bubble"><Star size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">Este espaço será preenchido com depoimentos reais.</h3><p className="mt-3 leading-7 text-muted-foreground">Em breve, compartilharemos experiências de pais e responsáveis que fazem parte da comunidade do Instituto Educacional G.I.</p></div></div></section>
+
+    <section className="section-wrap py-20 lg:py-24"><div className="mx-auto max-w-3xl"><div className="text-center"><p className="eyebrow">DÚVIDAS FREQUENTES</p><h2 className="section-title">Estamos aqui para ajudar.</h2></div><div className="mt-10 divide-y divide-border border-y border-border">{perguntas.map(([q,a],i)=><div key={q} className="py-5"><button className="flex w-full items-center justify-between gap-4 text-left font-semibold text-primary" aria-expanded={faqOpen===i} onClick={()=>setFaqOpen(faqOpen===i?null:i)}><span>{q}</span><ChevronDown className={`shrink-0 transition-transform ${faqOpen===i?"rotate-180":""}`}/></button>{faqOpen===i&&<p className="max-w-2xl pt-4 leading-7 text-muted-foreground">{a}</p>}</div>)}</div></div></section>
+
+    <section className="bg-primary py-20 text-white"><div className="section-wrap grid items-center gap-8 lg:grid-cols-[1fr_auto]"><div><p className="eyebrow text-accent">VENHA NOS CONHECER</p><h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">O próximo capítulo da história do seu filho começa aqui.</h2><p className="mt-5 max-w-2xl leading-8 text-white/80">Venha conhecer o Instituto Educacional G.I. e descubra um ambiente preparado para ensinar, acolher e acompanhar cada etapa do desenvolvimento dos nossos estudantes.</p></div><Link to="/contato" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-extrabold text-accent-foreground transition hover:-translate-y-1">Quero conhecer a escola <ArrowRight size={18}/></Link></div></section>
   </SiteLayout>;
 }
