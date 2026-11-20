@@ -721,17 +721,12 @@ article:hover img,
 .gallery-button:hover img {
   filter:saturate(1.035);
 }
-.section-wrap article:hover,
-.integral-section article:hover,
-.mission-vision-grid article:hover,
-.testimonials-grid article:hover {
-  transform:translateY(-4px);
+article:hover {
+  filter:brightness(1.015);
 }
 @media (hover:hover) and (pointer:fine) {
-  .section-wrap article:hover img,
-  .integral-section article:hover img,
-  .mission-vision-grid article:hover img,
-  .testimonials-grid article:hover img {
+  article:hover img,
+  .gallery-button:hover img {
     transform:scale(1.025);
   }
 }
@@ -739,10 +734,6 @@ article:hover img,
   article,article img,.gallery-button,.gallery-button img {
     transition:none!important;
   }
-  .section-wrap article:hover,
-  .integral-section article:hover,
-  .mission-vision-grid article:hover,
-  .testimonials-grid article:hover { transform:none; }
 }
 
 /* Seção institucional dedicada ao ensino bilíngue. */
