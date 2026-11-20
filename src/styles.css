@@ -544,6 +544,35 @@
 }
 
  
+/* Transição suave entre as palavras da seção de abertura. */
+.learning-word-stack {
+  position:relative;
+  display:grid;
+  width:100%;
+  min-height:1.2em;
+  place-items:center;
+}
+.learning-word-stack .learning-word {
+  grid-area:1 / 1;
+  transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1),filter .7s ease;
+  animation:none;
+  will-change:opacity,transform,filter;
+}
+.learning-word-stack .learning-word--current {
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+.learning-word-stack .learning-word--outgoing {
+  opacity:0;
+  transform:translateY(-18px) scale(.985);
+  filter:blur(5px);
+  pointer-events:none;
+}
+@media (prefers-reduced-motion:reduce) {
+  .learning-word-stack .learning-word { transition:none; }
+}
+
 /* A seção de palavras fica minimalista: somente a expressão central muda ao rolar. */
 .learning-words-sticky {
   display:flex;
