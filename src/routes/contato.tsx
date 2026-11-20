@@ -1,4 +1,5 @@
 import { canonicalLink } from "@/lib/seo";
+import { institutionalConfig } from "@/data/institutional";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { MapPin, Phone, Instagram, Send, MessageCircle, Mail } from "lucide-react";
@@ -9,9 +10,6 @@ export const Route = createFileRoute("/contato")({
   component: Contato,
 });
 
-// Preencha com o WhatsApp oficial da escola, incluindo DDI e DDD, somente números.
-const WHATSAPP_OFICIAL = "";
-
 function Contato() {
   const [form,setForm] = useState({responsavel:"",aluno:"",telefone:"",etapa:"Educação Infantil",mensagem:""});
   const [feedback,setFeedback] = useState("");
@@ -19,8 +17,8 @@ function Contato() {
   const message = encodeURIComponent(`Olá! Gostaria de informações sobre matrículas no Instituto Educacional G.I.\nResponsável: ${form.responsavel}\nAluno: ${form.aluno}\nWhatsApp: ${form.telefone}\nEtapa: ${form.etapa}\nMensagem: ${form.mensagem}`);
   function submit(e:FormEvent<HTMLFormElement>){
     e.preventDefault();
-    if(!WHATSAPP_OFICIAL){setFeedback("O formulário está pronto. Para enviar, a escola precisa configurar o número oficial de WhatsApp no projeto.");return;}
-    window.open(`https://wa.me/${WHATSAPP_OFICIAL}?text=${message}`,"_blank","noopener,noreferrer");
+    if(!institutionalConfig.whatsapp){setFeedback("O formulário está pronto. Para enviar, a escola precisa configurar o número oficial de WhatsApp no projeto.");return;}
+    window.open(`https://wa.me/${institutionalConfig.whatsapp}?text=${message}`,"_blank","noopener,noreferrer");
     setFeedback("O WhatsApp foi aberto para você revisar e enviar a mensagem.");
   }
   return <SiteLayout>
