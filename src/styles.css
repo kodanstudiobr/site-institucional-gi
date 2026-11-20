@@ -218,3 +218,79 @@
 }
 @media (prefers-reduced-motion:reduce) {
 }
+
+
+/* Texturas institucionais para destacar as faixas amarelas e azuis. */
+.mission-vision-section {
+  isolation:isolate;
+  background-color:#fff12c;
+  background-image:
+    radial-gradient(circle at 12% 18%,rgba(50,69,148,.10) 0 1.2px,transparent 1.8px),
+    radial-gradient(circle at 82% 76%,rgba(50,69,148,.08) 0 1px,transparent 1.7px),
+    linear-gradient(135deg,rgba(255,255,255,.24),transparent 42%,rgba(255,255,255,.12));
+  background-size:22px 22px,28px 28px,100% 100%;
+}
+.mission-vision-section:before,
+.history-highlight:before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:clamp(260px,38vw,560px);
+  aspect-ratio:1;
+  border:1px solid currentColor;
+  border-radius:50%;
+  opacity:.13;
+  pointer-events:none;
+}
+.mission-vision-section:before {
+  top:-48%;
+  right:-9%;
+  color:#324594;
+  box-shadow:0 0 0 26px rgba(50,69,148,.08),0 0 0 54px rgba(50,69,148,.06),0 0 0 82px rgba(50,69,148,.045);
+}
+.mission-vision-section:after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-5%;
+  bottom:-32%;
+  width:clamp(170px,24vw,340px);
+  aspect-ratio:1;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.38),rgba(255,255,255,0) 70%);
+  pointer-events:none;
+}
+.history-highlight {
+  isolation:isolate;
+  background-color:#324594;
+  background-image:
+    radial-gradient(circle at 14% 22%,rgba(255,241,44,.17) 0 1.2px,transparent 1.8px),
+    radial-gradient(circle at 78% 68%,rgba(255,255,255,.10) 0 1px,transparent 1.7px),
+    linear-gradient(115deg,rgba(17,34,99,.28),transparent 48%,rgba(255,241,44,.07));
+  background-size:24px 24px,31px 31px,100% 100%;
+}
+.history-highlight:before {
+  top:-42%;
+  left:-11%;
+  color:#fff12c;
+  box-shadow:0 0 0 28px rgba(255,241,44,.07),0 0 0 58px rgba(255,241,44,.045),0 0 0 88px rgba(255,241,44,.025);
+}
+.history-highlight:after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  right:-7%;
+  bottom:-40%;
+  width:clamp(220px,32vw,460px);
+  aspect-ratio:1;
+  border:1px solid rgba(255,241,44,.18);
+  border-radius:50%;
+  box-shadow:0 0 0 24px rgba(255,241,44,.045),0 0 0 48px rgba(255,241,44,.025);
+  pointer-events:none;
+}
+@media (max-width:767px) {
+  .mission-vision-section:before { top:-8%; right:-42%; }
+  .mission-vision-section:after { left:-28%; bottom:-15%; }
+  .history-highlight:before { top:-7%; left:-42%; }
+  .history-highlight:after { right:-35%; bottom:-12%; }
+}
