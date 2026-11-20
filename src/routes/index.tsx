@@ -101,7 +101,7 @@ function ExperienceWords() {
 
   useEffect(() => {
     if (outgoingWord === null) return;
-    const timeout = window.setTimeout(() => setOutgoingWord(null), 750);
+    const timeout = window.setTimeout(() => setOutgoingWord(null), 1000);
     return () => window.clearTimeout(timeout);
   }, [outgoingWord]);
 
