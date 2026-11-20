@@ -645,8 +645,8 @@
 .integral-card:hover .integral-card__icon { transform:translateY(-3px) rotate(-5deg) scale(1.06); background:#fff12c; }
 .integral-card__number {
   position:absolute;
+  top:1.25rem;
   right:1.35rem;
-  bottom:1rem;
   color:rgba(50,69,148,.10);
   font-family:"Poppins",sans-serif;
   font-size:2.7rem;
