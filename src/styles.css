@@ -385,3 +385,23 @@
   .mission-vision-section .mission-vision-card { padding-bottom:2.8rem; }
   .mission-vision-section .mission-vision-card:before { width:58px; height:18px; }
 }
+
+
+/* Ajuste dos cards: fitas azuis no topo e acabamento inferior reto. */
+.mission-paper-card:after,
+.mission-vision-section .mission-vision-card:after {
+  content:none;
+  display:none;
+}
+.mission-paper-card:before,
+.mission-vision-section .mission-vision-card:before {
+  border-color:rgba(50,69,148,.28);
+  background:#324594;
+  box-shadow:0 2px 6px rgba(25,43,112,.18);
+}
+@media (max-width:767px) {
+  .mission-paper-card,
+  .mission-vision-section .mission-vision-card {
+    padding-bottom:1.5rem;
+  }
+}
