@@ -1,7 +1,6 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -904,4 +903,19 @@ article:hover {
   .site-main .scroll-reveal {
     animation:none!important;
   }
+}
+
+
+/* Modo neutro: desativa animações, transições e microinterações globalmente.
+   Base limpa para uma futura implementação de movimento. */
+*,*::before,*::after {
+  animation:none!important;
+  transition:none!important;
+  scroll-behavior:auto!important;
+}
+*:hover,
+*:focus,
+*:focus-visible {
+  transform:none!important;
+  filter:none!important;
 }
