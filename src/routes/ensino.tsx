@@ -1,10 +1,11 @@
+import { canonicalLink } from "@/lib/seo";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Sparkles, Heart, Brain, HandHeart } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
-  head: () => ({ meta: [
+  head: () => ({ links: canonicalLink("/ensino"), meta: [
     { title: "Educação Infantil e Anos Iniciais | Instituto Educacional G.I." },
     { name: "description", content: "Conheça os segmentos de Educação Infantil e Anos Iniciais do Instituto Educacional G.I. e nossa proposta de aprendizagem." },
     { name: "keywords", content: "Educação Infantil, Anos Iniciais do Ensino Fundamental, aprendizagem, Instituto Educacional G.I." }
