@@ -764,60 +764,88 @@ article:hover {
 
 
 
-/* Animações CSS-first: Animate.css + scroll-driven animations nativas. */
+/* Animações de rolagem nativas: seções, conteúdos e cards entram suavemente na viewport. */
 .site-main {
   animation:animate__fadeIn .7s both;
 }
-.site-main > section:not(.learning-words-section) {
-  animation:animate__fadeInUp .85s cubic-bezier(.22,1,.36,1) both;
+@keyframes giRevealUp {
+  from { opacity:0; transform:translate3d(0,34px,0); filter:blur(3px); }
+  to { opacity:1; transform:translate3d(0,0,0); filter:blur(0); }
 }
+@supports (animation-timeline:view()) {
+  .site-main > section:not(.learning-words-section),
+  .site-main section article,
+  .site-main section .feature-card,
+  .site-main section .mission-paper-card,
+  .site-main section .mission-vision-card,
+  .site-main section .testimonial-card,
+  .site-main section .integral-card,
+  .site-main section .experience-card,
+  .site-main section .bilingual-segment-note,
+  .site-main section .gallery-button {
+    animation-name:giRevealUp;
+    animation-timeline:view();
+    animation-range:entry 0% entry 38%;
+    animation-duration:auto;
+    animation-fill-mode:both;
+  }
+}
+/* Microinterações consistentes em todos os cards do site. */
 .site-main article,
 .site-main .feature-card,
 .site-main .mission-paper-card,
+.site-main .mission-vision-card,
 .site-main .testimonial-card,
 .site-main .integral-card,
-.site-main .bilingual-segment-note {
-  transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s cubic-bezier(.22,1,.36,1),border-color .4s ease,filter .4s ease;
+.site-main .experience-card,
+.site-main .bilingual-segment-note,
+.site-main .gallery-button {
+  transition:
+    transform .48s cubic-bezier(.22,1,.36,1),
+    box-shadow .48s cubic-bezier(.22,1,.36,1),
+    border-color .4s ease,
+    filter .48s ease;
 }
 @media (hover:hover) and (pointer:fine) {
   .site-main article:hover,
   .site-main .feature-card:hover,
   .site-main .mission-paper-card:hover,
+  .site-main .mission-vision-card:hover,
   .site-main .testimonial-card:hover,
   .site-main .integral-card:hover,
-  .site-main .bilingual-segment-note:hover {
+  .site-main .experience-card:hover,
+  .site-main .bilingual-segment-note:hover,
+  .site-main .gallery-button:hover {
     transform:translate3d(0,-6px,0);
-    box-shadow:0 18px 38px rgba(36,51,111,.12);
+    box-shadow:0 18px 38px rgba(36,51,111,.13);
+    filter:saturate(1.035);
   }
   .site-main article img,
-  .site-main .gallery-button img {
-    transition:transform .7s cubic-bezier(.22,1,.36,1),filter .7s ease;
+  .site-main .gallery-button img,
+  .site-main .experience-card__background {
+    transition:transform .75s cubic-bezier(.22,1,.36,1),filter .75s ease;
   }
   .site-main article:hover img,
-  .site-main .gallery-button:hover img {
-    transform:scale(1.035);
-    filter:saturate(1.06);
-  }
-}
-/* O navegador controla a animação conforme a seção entra na área visível. */
-@supports (animation-timeline:view()) {
-  .site-main > section:not(.learning-words-section) {
-    animation-name:animate__fadeInUp;
-    animation-timeline:view();
-    animation-range:entry 0% entry 38%;
-    animation-duration:1ms;
-    animation-fill-mode:both;
+  .site-main .gallery-button:hover img,
+  .site-main .experience-card:hover .experience-card__background {
+    transform:scale(1.045);
+    filter:saturate(1.07);
   }
 }
 @media (prefers-reduced-motion:reduce) {
-  .site-main,
-  .site-main > section:not(.learning-words-section) { animation:none!important; }
+  .site-main { animation:none!important; }
   .site-main article,
   .site-main .feature-card,
   .site-main .mission-paper-card,
+  .site-main .mission-vision-card,
   .site-main .testimonial-card,
   .site-main .integral-card,
+  .site-main .experience-card,
   .site-main .bilingual-segment-note,
+  .site-main .gallery-button,
   .site-main article img,
-  .site-main .gallery-button img { transition:none!important; }
+  .site-main .gallery-button img,
+  .site-main .experience-card__background {
+    transition:none!important;
+  }
 }
