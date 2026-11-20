@@ -94,7 +94,7 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span ref={numberRef} className="history-counter__number" aria-label={String(value)}>{displayValue}</span>;
 }
 
-const palavrasDaAprendizagem = ["É crescer.", "É perguntar.", "É criar.", "É vivenciar."];
+const palavrasDaAprendizagem = ["É crescer.", "É aprender.", "É criar.", "É vivenciar."];
 
 function ExperienceWords() {
   const sectionRef = useRef<HTMLElement>(null);
