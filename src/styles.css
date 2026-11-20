@@ -484,7 +484,7 @@
   font-variant-numeric:tabular-nums;
 }
 .learning-word {
-  animation:learningWordEnter .55s cubic-bezier(.2,.75,.25,1) both;
+  animation:learningWordEnter .85s cubic-bezier(.22,.72,.2,1) both;
   color:#fff12c;
   font-family:"Poppins",sans-serif;
   font-size:clamp(3.4rem,10vw,7.5rem);
@@ -526,7 +526,7 @@
   text-transform:uppercase;
 }
 @keyframes learningWordEnter {
-  from { opacity:0; transform:translateY(22px) scale(.97); filter:blur(5px); }
+  from { opacity:0; transform:translateY(16px) scale(.985); filter:blur(3px); }
   to { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
 }
 @media (max-width:767px) {
