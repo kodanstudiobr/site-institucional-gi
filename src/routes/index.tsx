@@ -3,7 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { ScrollReveal } from "@/components/ScrollReveal";
 
 export const Route = createFileRoute("/")({
   head: () => pageHead("/", {
@@ -38,78 +37,16 @@ const perguntas = [
 ];
 
 function AnimatedNumber({ value }: { value: number }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    let interval: ReturnType<typeof setInterval> | undefined;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry || !entry.isIntersecting || interval) return;
-      const duration = 1500;
-      const steps = 45;
-      let step = 0;
-      interval = setInterval(() => {
-        step += 1;
-        const progress = Math.min(step / steps, 1);
-        setCount(Math.round(value * (1 - Math.pow(1 - progress, 3))));
-        if (step >= steps && interval) {
-          clearInterval(interval);
-          interval = undefined;
-          observer.disconnect();
-        }
-      }, duration / steps);
-    }, { threshold: 0.35 });
-    observer.observe(node);
-    return () => {
-      observer.disconnect();
-      if (interval) clearInterval(interval);
-    };
-  }, [value]);
-  return <span ref={ref} className="history-counter__number">{count}</span>;
+  return <span className="history-counter__number">{value}</span>;
 }
 
 const palavrasDaAprendizagem = ["É crescer.", "É perguntar.", "É criar.", "É vivenciar."];
 
 function ExperienceWords() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [activeWord, setActiveWord] = useState(0);
-  const [outgoingWord, setOutgoingWord] = useState<number | null>(null);
-
-  useEffect(() => {
-    const updateWord = () => {
-      const section = sectionRef.current;
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
-      const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
-      const next = Math.min(palavrasDaAprendizagem.length - 1, Math.floor(progress * palavrasDaAprendizagem.length));
-      setActiveWord((current) => {
-        if (current === next) return current;
-        setOutgoingWord(current);
-        return next;
-      });
-    };
-    updateWord();
-    window.addEventListener("scroll", updateWord, { passive: true });
-    window.addEventListener("resize", updateWord);
-    return () => {
-      window.removeEventListener("scroll", updateWord);
-      window.removeEventListener("resize", updateWord);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (outgoingWord === null) return;
-    const timeout = window.setTimeout(() => setOutgoingWord(null), 1000);
-    return () => window.clearTimeout(timeout);
-  }, [outgoingWord]);
-
-  return <section ref={sectionRef} className="learning-words-section" aria-label="É perguntar, crescer, criar, compartilhar e viver">
+  return <section className="learning-words-section" aria-label="Aprender é crescer">
     <div className="learning-words-sticky">
-      <div className="learning-word-stack" aria-live="polite" aria-atomic="true">
-        {outgoingWord !== null && <p className="learning-word learning-word--outgoing" aria-hidden="true">{palavrasDaAprendizagem[outgoingWord]}</p>}
-        <p className="learning-word learning-word--current">{palavrasDaAprendizagem[activeWord]}</p>
+      <div className="learning-word-stack">
+        <p className="learning-word">É crescer.</p>
       </div>
     </div>
   </section>;
@@ -163,7 +100,7 @@ function Index() {
       <div><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Educação que acredita no potencial de cada criança.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão de conhecimentos. É proporcionar experiências, despertar potencialidades, fortalecer valores e contribuir para a formação de pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa escola <ArrowRight size={18}/></Link></div>
     </section>
 
-    <section className="bg-soft section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><Star className="section-spark section-spark--left" size={48} fill="currentColor" aria-hidden="true"/><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que cresce junto com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text},i)=><ScrollReveal key={title} delay={i*100}><article className="feature-card feature-card--glow h-full"><span className="icon-bubble feature-icon"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article></ScrollReveal>)}</div></div></section>
+    <section className="bg-soft section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><Star className="section-spark section-spark--left" size={48} fill="currentColor" aria-hidden="true"/><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que cresce junto com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text},i)=><div key={title}><article className="feature-card feature-card--glow h-full"><span className="icon-bubble feature-icon"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article></div>)}</div></div></section>
 
     <ExperienceWords />
 
@@ -173,7 +110,7 @@ function Index() {
 
     <section className="section-wrap section-decor-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:py-24"><Star className="section-spark section-spark--structure" size={46} fill="currentColor" aria-hidden="true"/><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="Ambiente de aprendizagem escolar" loading="lazy" className="aspect-[5/4] w-full object-cover"/></div><div><p className="eyebrow">NOSSA ESTRUTURA</p><h2 className="section-title">Ambientes preparados para grandes descobertas.</h2><p className="mt-5 leading-8 text-muted-foreground">Cada espaço da escola faz parte da experiência de aprendizagem. Valorizamos ambientes que favoreçam a convivência, a criatividade, a participação e o desenvolvimento dos estudantes.</p><p className="mt-3 text-sm leading-7 text-muted-foreground">As imagens desta prévia são ilustrativas e serão substituídas por fotografias reais da instituição.</p><Link to="/estrutura" className="link-arrow mt-6">Conheça nossa estrutura <ArrowRight size={18}/></Link></div></section>
 
-    <section className="history-highlight section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative text-center"><p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p><div className="history-counter mt-4"><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedNumber value={26}/><span className="history-counter__suffix"> anos</span></div><p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p><div className="history-community mt-14"><p className="history-community__eyebrow">QUEM VIVE SABE E FAZ PARTE</p><p className="history-community__copy">Cada história, cada conquista e cada lembrança fazem parte da nossa comunidade.</p><div className="testimonials-grid mt-10 grid gap-5 text-left md:grid-cols-2 xl:grid-cols-3">{["Família da Educação Infantil","Família dos Anos Iniciais","Família G.I."].map((label,i)=><ScrollReveal key={label} delay={i*100}><article className="testimonial-card h-full"><div className="testimonial-card__top"><span className="testimonial-card__quote"><Quote size={23}/></span><span className="testimonial-card__stars" aria-label="Espaço visual para avaliação"><Star/><Star/><Star/><Star/><Star/></span></div><p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p><div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div></article></ScrollReveal>)}</div></div><Star className="section-spark section-spark--history" size={58} fill="currentColor" aria-hidden="true"/></div></section>
+    <section className="history-highlight section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative text-center"><p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p><div className="history-counter mt-4"><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedNumber value={26}/><span className="history-counter__suffix"> anos</span></div><p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p><div className="history-community mt-14"><p className="history-community__eyebrow">QUEM VIVE SABE E FAZ PARTE</p><p className="history-community__copy">Cada história, cada conquista e cada lembrança fazem parte da nossa comunidade.</p><div className="testimonials-grid mt-10 grid gap-5 text-left md:grid-cols-2 xl:grid-cols-3">{["Família da Educação Infantil","Família dos Anos Iniciais","Família G.I."].map((label,i)=><div key={label}><article className="testimonial-card h-full"><div className="testimonial-card__top"><span className="testimonial-card__quote"><Quote size={23}/></span><span className="testimonial-card__stars" aria-label="Espaço visual para avaliação"><Star/><Star/><Star/><Star/><Star/></span></div><p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p><div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div></article></div>)}</div></div><Star className="section-spark section-spark--history" size={58} fill="currentColor" aria-hidden="true"/></div></section>
 
     <section className="section-wrap py-20 lg:py-24"><div className="mx-auto max-w-3xl"><div className="text-center"><p className="eyebrow">DÚVIDAS FREQUENTES</p><h2 className="section-title">Estamos aqui para ajudar.</h2></div><div className="mt-10 divide-y divide-border border-y border-border">{perguntas.map(([q,a],i)=><div key={q} className="py-5"><button className="flex w-full items-center justify-between gap-4 text-left font-semibold text-primary" aria-expanded={faqOpen===i} onClick={()=>setFaqOpen(faqOpen===i?null:i)}><span>{q}</span><ChevronDown className={`shrink-0 transition-transform ${faqOpen===i?"rotate-180":""}`}/></button>{faqOpen===i&&<p className="max-w-2xl pt-4 leading-7 text-muted-foreground">{a}</p>}</div>)}</div></div></section>
 
