@@ -186,3 +186,16 @@
   .history-highlight { padding-block:4rem; }
   .history-community { margin-top:2.5rem; padding-top:1.8rem; }
 }
+
+
+/* Ajustes finais dos elementos decorativos da página inicial. */
+.history-counter__plus { font-size:clamp(3.8rem,9vw,6.5rem); font-weight:800; letter-spacing:-.08em; line-height:1; }
+.section-plane--mission { left:auto; right:3%; top:17%; bottom:auto; transform:rotate(-12deg); }
+.section-spark--intro { right:3%; top:8%; }
+.section-spark--learning { right:1%; top:4%; }
+.section-spark--structure { left:2%; top:8%; }
+.section-plane--structure { right:2%; bottom:8%; transform:rotate(-12deg); }
+@media (max-width:767px) {
+  .section-plane--mission { right:3%; top:3%; }
+  .section-spark--intro,.section-spark--learning,.section-spark--structure { display:none!important; }
+}
