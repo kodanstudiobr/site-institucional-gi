@@ -24,6 +24,15 @@ const segmentos = {
       "Nosso objetivo é proporcionar um ambiente acolhedor, onde cada criança possa explorar, descobrir e desenvolver suas habilidades respeitando seu próprio ritmo de aprendizagem."
     ],
     topics:["Brincadeiras e experiências","Desenvolvimento da autonomia","Interação e socialização","Criatividade e exploração","Aprendizagem lúdica"]
+    development: {
+      intro:"Na Educação Infantil, o desenvolvimento integral acontece por meio do brincar, das interações e das descobertas. Cada experiência respeita o tempo da criança e fortalece suas primeiras aprendizagens.",
+      cards:[
+        {icon:Sparkles,title:"Descobertas e curiosidade",text:"Explorar, observar, perguntar e experimentar para conhecer o mundo ao redor."},
+        {icon:Heart,title:"Acolhimento e segurança",text:"Construir vínculos afetivos em um ambiente de cuidado, confiança e respeito."},
+        {icon:Brain,title:"Aprendizagem pelo brincar",text:"Desenvolver linguagem, imaginação, coordenação e pensamento em experiências lúdicas."},
+        {icon:HandHeart,title:"Convivência e autonomia",text:"Aprender a compartilhar, expressar sentimentos e conquistar pequenas independências."}
+      ]
+    },
   },
   iniciais: {
     eyebrow:"ANOS INICIAIS DO ENSINO FUNDAMENTAL",
@@ -35,6 +44,15 @@ const segmentos = {
       "Valorizamos experiências educativas que estimulam a participação, a autonomia e a construção do conhecimento, acompanhando o desenvolvimento de cada estudante."
     ],
     topics:["Alfabetização e letramento","Leitura e escrita","Raciocínio lógico e matemática","Criatividade","Autonomia","Formação cidadã"]
+    development: {
+      intro:"Nos Anos Iniciais, o desenvolvimento integral une a consolidação das aprendizagens fundamentais à formação de atitudes, relações e habilidades. Os estudantes são incentivados a participar, pensar e agir com autonomia crescente.",
+      cards:[
+        {icon:Sparkles,title:"Curiosidade e investigação",text:"Estimular perguntas, observações e a busca por respostas em diferentes áreas do conhecimento."},
+        {icon:Heart,title:"Acolhimento e confiança",text:"Valorizar cada trajetória, fortalecer a autoestima e respeitar diferentes ritmos de aprendizagem."},
+        {icon:Brain,title:"Conhecimento e pensamento",text:"Consolidar leitura, escrita e raciocínio lógico, desenvolvendo criatividade e pensamento crítico."},
+        {icon:HandHeart,title:"Autonomia e cidadania",text:"Ampliar a responsabilidade, a cooperação e o respeito nas relações com o outro."}
+      ]
+    },
   },
   finais: {
     eyebrow:"ANOS FINAIS DO ENSINO FUNDAMENTAL",
@@ -46,6 +64,15 @@ const segmentos = {
       "Por meio de experiências contextualizadas e propostas interdisciplinares, estimulamos a autonomia, a responsabilidade e o protagonismo, preparando cada estudante para novos desafios acadêmicos e para a continuidade dos estudos."
     ],
     topics:["Aprofundamento dos conhecimentos","Pensamento crítico e investigação","Resolução de problemas","Projetos interdisciplinares","Autonomia e protagonismo","Preparação para novos desafios"]
+    development: {
+      intro:"Nos Anos Finais, o desenvolvimento integral aprofunda conhecimentos e fortalece a capacidade de analisar, argumentar e tomar decisões. A proposta valoriza o protagonismo, a responsabilidade e a preparação para novos desafios.",
+      cards:[
+        {icon:Sparkles,title:"Investigação e inovação",text:"Transformar curiosidade em pesquisa, análise e construção de soluções para situações reais."},
+        {icon:Heart,title:"Bem-estar e identidade",text:"Fortalecer autoestima, respeito às diferenças e relações saudáveis nesta fase de mudanças."},
+        {icon:Brain,title:"Pensamento crítico",text:"Articular conhecimentos, interpretar informações e desenvolver argumentos consistentes."},
+        {icon:HandHeart,title:"Protagonismo e responsabilidade",text:"Exercitar escolhas conscientes, colaboração e participação ativa na comunidade."}
+      ]
+    },
   }
 };
 function Ensino() {
@@ -65,6 +92,6 @@ function Ensino() {
         <div><p className="eyebrow">{current.eyebrow}</p><h3 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{current.title}</h3>{current.paragraphs.map(p=><p key={p} className="mt-5 leading-8 text-muted-foreground">{p}</p>)}<div className="mt-7 grid gap-3 sm:grid-cols-2">{current.topics.map((topic,i)=><div key={topic} className="flex items-center gap-3 rounded-xl bg-soft px-4 py-3 text-sm font-semibold text-primary"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-primary">{i+1}</span>{topic}</div>)}</div></div>
       </div>
     </section>
-    <section className="bg-soft py-16"><div className="section-wrap"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">DESENVOLVIMENTO INTEGRAL</p><h2 className="section-title">Uma aprendizagem construída com cuidado e propósito.</h2><p className="mt-4 leading-8 text-muted-foreground">Em cada etapa, buscamos criar oportunidades para que os estudantes participem, experimentem, construam conhecimentos e desenvolvam suas potencialidades.</p></div><div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{[{icon:Sparkles,title:"Curiosidade",text:"Incentivo às descobertas e perguntas."},{icon:Heart,title:"Acolhimento",text:"Respeito às individualidades e aos ritmos."},{icon:Brain,title:"Conhecimento",text:"Construção de aprendizagens significativas."},{icon:HandHeart,title:"Convivência",text:"Vínculos, cooperação e respeito."}].map(({icon:Icon,title,text})=><article key={title} className="feature-card"><span className="icon-bubble"><Icon size={23}/></span><h3 className="mt-4 font-display font-bold text-primary">{title}</h3><p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p></article>)}</div></div></section>
+    <section className="integral-section bg-soft py-16 lg:py-20"><div className="section-wrap"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">DESENVOLVIMENTO INTEGRAL</p><h2 className="section-title">{active==="infantil"?"Crescer descobrindo, brincando e criando vínculos.":active==="iniciais"?"Aprender, participar e construir autonomia.":"Aprofundar conhecimentos e assumir novos desafios."}</h2><p className="mt-4 leading-8 text-muted-foreground">{current.development.intro}</p></div><div className="integral-cards mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{current.development.cards.map(({icon:Icon,title,text},i)=><article key={title} className="integral-card" style={{"--card-index":i} as React.CSSProperties}><span className="integral-card__icon"><Icon size={24}/></span><h3 className="mt-5 font-display text-lg font-bold text-primary">{title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p><span className="integral-card__number">0{i+1}</span></article>)}</div></div></section>
   </SiteLayout>;
 }
