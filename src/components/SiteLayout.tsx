@@ -47,7 +47,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 
     targets.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, [children]);
+  }, []);
 
   useEffect(() => {
     if (!transparentHeader) return;
