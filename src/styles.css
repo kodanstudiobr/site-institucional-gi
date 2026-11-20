@@ -341,3 +341,47 @@
   .mission-paper-card { padding-bottom:2.8rem; }
   .mission-paper-card:before { width:58px; height:18px; }
 }
+
+
+/* Reaproveita o acabamento de papel rasgado também nos cards da identidade da home. */
+.mission-vision-section .mission-vision-card {
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+  border:1px solid rgba(50,69,148,.12);
+  border-radius:1.65rem 1.65rem 1.15rem 1.15rem;
+  background-color:#fff;
+  background-image:radial-gradient(rgba(50,69,148,.055) .75px,transparent .75px),linear-gradient(145deg,#fff 0%,#fdfdff 100%);
+  background-size:13px 13px,100% 100%;
+  box-shadow:0 18px 38px rgba(36,51,111,.10),0 4px 10px rgba(36,51,111,.045);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.mission-vision-section .mission-vision-card:after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:0; right:0; bottom:-1px;
+  height:15px;
+  background:#fff12c;
+  clip-path:polygon(0 38%,5% 57%,10% 35%,15% 62%,20% 40%,25% 60%,30% 34%,35% 58%,40% 38%,45% 62%,50% 36%,55% 58%,60% 34%,65% 61%,70% 39%,75% 59%,80% 35%,85% 61%,90% 38%,95% 58%,100% 36%,100% 100%,0 100%);
+}
+.mission-vision-section .mission-vision-card:before {
+  content:"";
+  position:absolute;
+  top:-9px;
+  right:clamp(24px,5vw,58px);
+  width:76px;
+  height:22px;
+  border:1px solid rgba(255,241,44,.65);
+  background:rgba(255,241,44,.82);
+  box-shadow:0 2px 5px rgba(50,69,148,.08);
+  transform:rotate(3deg);
+}
+.mission-vision-section .mission-vision-card:hover {
+  transform:translateY(-6px) rotate(-.25deg);
+  box-shadow:0 25px 48px rgba(36,51,111,.15),0 6px 14px rgba(36,51,111,.06);
+}
+@media (max-width:767px) {
+  .mission-vision-section .mission-vision-card { padding-bottom:2.8rem; }
+  .mission-vision-section .mission-vision-card:before { width:58px; height:18px; }
+}
