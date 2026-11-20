@@ -199,3 +199,60 @@
   .section-plane--mission { right:3%; top:3%; }
   .section-spark--intro,.section-spark--learning,.section-spark--structure { display:none!important; }
 }
+
+ 
+/* Avião de papel autoral: desenho em contorno, trilha curva pontilhada e movimento leve. */
+.paper-plane-art { position:relative; display:block; width:clamp(88px,10vw,142px); height:clamp(58px,6vw,82px); color:#324594; animation:paperPlaneDrift 5.8s ease-in-out infinite; }
+.paper-plane-art__trail { position:absolute; width:100%; height:100%; inset:0; overflow:visible; color:currentColor; opacity:.72; }
+.paper-plane-art__icon { position:absolute; width:48%; height:auto; right:0; top:0; color:currentColor; filter:drop-shadow(0 3px 3px rgba(50,69,148,.14)); }
+@keyframes paperPlaneDrift { 0%,100% { transform:translate3d(0,0,0) rotate(-2deg); } 50% { transform:translate3d(5px,-7px,0) rotate(2deg); } }
+
+/* Contador com respiro entre o sinal de + e os algarismos. */
+.history-counter { gap:clamp(.65rem,1.6vw,1.15rem); }
+.history-counter__plus { margin-right:.08em; font-size:clamp(3.8rem,9vw,6.5rem); }
+.history-counter__number { letter-spacing:-.035em; }
+
+/* Cards premium de depoimentos: estrutura pronta para substituir pelos relatos reais. */
+.testimonials-section { position:relative; overflow:hidden; background:#f7f8fd; }
+.testimonial-card { position:relative; display:flex; min-height:285px; flex-direction:column; overflow:hidden; border:1px solid rgba(50,69,148,.1); border-radius:1.6rem; background:linear-gradient(145deg,#fff 0%,#fbfbff 100%); padding:clamp(1.4rem,2.4vw,2rem); box-shadow:0 12px 34px rgba(36,51,111,.07),0 2px 8px rgba(36,51,111,.035); transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease; }
+.testimonial-card:before { position:absolute; content:""; width:170px; height:170px; right:-72px; top:-80px; border-radius:50%; background:radial-gradient(circle,rgba(255,241,44,.42),rgba(255,241,44,0) 70%); pointer-events:none; }
+.testimonial-card:hover { transform:translateY(-7px); border-color:rgba(255,210,0,.55); box-shadow:0 22px 48px rgba(36,51,111,.12); }
+.testimonial-card__top { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.testimonial-card__quote { display:grid; width:48px; height:48px; place-items:center; border-radius:15px; background:#324594; color:#fff12c; box-shadow:0 7px 18px rgba(50,69,148,.18); }
+.testimonial-card__stars { display:flex; gap:3px; color:#e2bd00; }
+.testimonial-card__stars svg { width:15px; height:15px; fill:currentColor; stroke-width:1.5; }
+.testimonial-card__placeholder { flex:1; margin:1.5rem 0 1.7rem; color:#626d8e; font-size:.94rem; line-height:1.85; }
+.testimonial-card__person { display:flex; align-items:center; gap:.85rem; border-top:1px solid #edf0f8; padding-top:1.15rem; }
+.testimonial-card__avatar { display:grid; width:44px; height:44px; flex:0 0 44px; place-items:center; border-radius:50%; background:#fff5a6; color:#324594; }
+.testimonial-card__person strong,.testimonial-card__person small { display:block; }
+.testimonial-card__person strong { color:#324594; font-size:.82rem; font-weight:800; }
+.testimonial-card__person small { margin-top:3px; color:#8991aa; font-size:.68rem; }
+.testimonial-card__spark { margin-left:auto; flex:0 0 auto; color:#d5b800; }
+.section-plane--testimonials { right:2%; bottom:2%; }
+.section-spark--testimonials { left:2%; top:8%; }
+@media (max-width:767px) {
+  /* Os detalhes continuam presentes no mobile, menores e posicionados nas bordas livres. */
+  .section-plane,.section-spark { display:flex!important; }
+  .section-spark { width:clamp(23px,7vw,34px)!important; height:auto; opacity:.7; }
+  .paper-plane-art { width:76px; height:48px; }
+  .paper-plane-art__icon { width:43%; }
+  .section-plane--move { right:2%; bottom:1%; }
+  .section-plane--learning { right:2%; top:1%; }
+  .section-plane--mission { right:2%; top:auto; bottom:1%; left:auto; }
+  .section-plane--structure { right:2%; bottom:1%; }
+  .section-plane--history { left:2%; bottom:2%; }
+  .section-plane--testimonials { right:2%; bottom:1%; }
+  .section-spark--intro { right:4%; top:2%; }
+  .section-spark--left { left:3%; top:2%; }
+  .section-spark--learning { right:3%; top:1%; }
+  .section-spark--structure { left:3%; top:2%; }
+  .section-spark--history { right:3%; top:2%; }
+  .section-spark--testimonials { left:3%; top:2%; }
+  .mission-vision-section { padding-bottom:5.5rem; }
+  .history-highlight { padding-bottom:5.5rem; }
+  .testimonials-section { padding-bottom:5.5rem; }
+  .testimonial-card { min-height:260px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .paper-plane-art { animation:none!important; }
+}
