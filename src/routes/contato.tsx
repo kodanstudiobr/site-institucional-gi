@@ -1,10 +1,11 @@
+import { canonicalLink } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { MapPin, Phone, Instagram, Send, MessageCircle, Mail } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/contato")({
-  head: () => ({ meta: [{ title: "Contato e Matrículas | Instituto Educacional G.I." }, { name: "description", content: "Entre em contato com o Instituto Educacional G.I. e solicite informações sobre matrículas e segmentos de ensino." }, { name: "keywords", content: "contato escola, matrículas, Educação Infantil, Anos Iniciais, Instituto Educacional G.I." }] }),
+  head: () => ({ links: canonicalLink("/contato"), meta: [{ title: "Contato e Matrículas | Instituto Educacional G.I." }, { name: "description", content: "Entre em contato com o Instituto Educacional G.I. e solicite informações sobre matrículas e segmentos de ensino." }, { name: "keywords", content: "contato escola, matrículas, Educação Infantil, Anos Iniciais, Instituto Educacional G.I." }] }),
   component: Contato,
 });
 
