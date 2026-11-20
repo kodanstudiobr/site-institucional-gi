@@ -919,3 +919,13 @@ article:hover {
   transform:none!important;
   filter:none!important;
 }
+
+
+/* Exceção intencional: a troca de frases da seção inicial mantém seu crossfade
+   controlado pela rolagem, mesmo com as demais animações globalmente desativadas. */
+.learning-word-stack .learning-word--current {
+  animation:learningWordCrossfadeIn 950ms cubic-bezier(.22,1,.36,1) both!important;
+}
+.learning-word-stack .learning-word--outgoing {
+  animation:learningWordCrossfadeOut 950ms cubic-bezier(.22,1,.36,1) both!important;
+}
