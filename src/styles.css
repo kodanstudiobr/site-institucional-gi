@@ -541,3 +541,27 @@
   .learning-word { animation:none; }
   .learning-word-progress span { transition:none; }
 }
+
+ 
+/* A seção de palavras fica minimalista: somente a expressão central muda ao rolar. */
+.learning-words-sticky {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100svh;
+  padding:2rem 1.25rem;
+  text-align:center;
+}
+.learning-word {
+  width:100%;
+  margin:0;
+  font-size:clamp(3.5rem,11vw,8.5rem);
+  line-height:1.05;
+  letter-spacing:-.065em;
+  text-align:center;
+}
+@media (max-width:767px) {
+  .learning-words-section { height:230vh; }
+  .learning-words-sticky { padding:1.5rem 1rem; }
+  .learning-word { font-size:clamp(3rem,13vw,5.2rem); }
+}
