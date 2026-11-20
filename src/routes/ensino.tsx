@@ -6,9 +6,9 @@ import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
   head: () => pageHead("/ensino", {
-    title: "Educação Infantil e Anos Iniciais | Instituto Educacional G.I.",
-    description: "Conheça os segmentos de Educação Infantil e Anos Iniciais do Instituto Educacional G.I. e nossa proposta de aprendizagem.",
-    keywords: "Educação Infantil, Anos Iniciais do Ensino Fundamental, aprendizagem, Instituto Educacional G.I.",
+    title: "Educação Infantil, Anos Iniciais e Anos Finais | Instituto Educacional G.I.",
+    description: "Conheça os segmentos de Educação Infantil, Anos Iniciais e Anos Finais do Instituto Educacional G.I. e nossa proposta de aprendizagem.",
+    keywords: "Educação Infantil, Anos Iniciais, Anos Finais do Ensino Fundamental, aprendizagem, Instituto Educacional G.I.",
   }),
   component: Ensino,
 });
@@ -35,18 +35,30 @@ const segmentos = {
       "Valorizamos experiências educativas que estimulam a participação, a autonomia e a construção do conhecimento, acompanhando o desenvolvimento de cada estudante."
     ],
     topics:["Alfabetização e letramento","Leitura e escrita","Raciocínio lógico e matemática","Criatividade","Autonomia","Formação cidadã"]
+  },
+  finais: {
+    eyebrow:"ANOS FINAIS DO ENSINO FUNDAMENTAL",
+    title:"Conhecimento, autonomia e novos horizontes.",
+    image:"https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=1200&q=85",
+    alt:"Estudantes em atividade de aprendizagem — imagem ilustrativa",
+    paragraphs:[
+      "Nos Anos Finais do Ensino Fundamental, do 6º ao 9º ano, ampliamos e aprofundamos os conhecimentos construídos ao longo da trajetória escolar. Os estudantes são incentivados a investigar, argumentar, resolver problemas e desenvolver o pensamento crítico.",
+      "Por meio de experiências contextualizadas e propostas interdisciplinares, estimulamos a autonomia, a responsabilidade e o protagonismo, preparando cada estudante para novos desafios acadêmicos e para a continuidade dos estudos."
+    ],
+    topics:["Aprofundamento dos conhecimentos","Pensamento crítico e investigação","Resolução de problemas","Projetos interdisciplinares","Autonomia e protagonismo","Preparação para novos desafios"]
   }
 };
 function Ensino() {
-  const [active,setActive]=useState<"infantil"|"iniciais">("infantil");
+  const [active,setActive]=useState<"infantil"|"iniciais"|"finais">("infantil");
   const current=segmentos[active];
   return <SiteLayout>
     <PageHeader title="Aprender, descobrir e evoluir." intro="Uma proposta educativa que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
     <section className="section-wrap py-20 lg:py-24">
       <div className="mx-auto max-w-3xl text-center"><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
-      <div role="tablist" aria-label="Segmentos de ensino" className="mx-auto mt-10 flex max-w-xl rounded-full bg-soft p-1.5">
-        <button role="tab" aria-selected={active==="infantil"} onClick={()=>setActive("infantil")} className={`flex-1 rounded-full px-4 py-3 text-sm font-bold transition ${active==="infantil"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Educação Infantil</button>
-        <button role="tab" aria-selected={active==="iniciais"} onClick={()=>setActive("iniciais")} className={`flex-1 rounded-full px-4 py-3 text-sm font-bold transition ${active==="iniciais"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Anos Iniciais</button>
+      <div role="tablist" aria-label="Segmentos de ensino" className="mx-auto mt-10 flex max-w-3xl flex-wrap rounded-2xl bg-soft p-1.5 sm:flex-nowrap sm:rounded-full">
+        <button role="tab" aria-selected={active==="infantil"} onClick={()=>setActive("infantil")} className={`min-w-0 flex-1 rounded-full px-2 py-3 text-xs font-bold transition sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Educação Infantil</button>
+        <button role="tab" aria-selected={active==="iniciais"} onClick={()=>setActive("iniciais")} className={`min-w-0 flex-1 rounded-full px-2 py-3 text-xs font-bold transition sm:px-4 sm:text-sm ${active==="iniciais"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Anos Iniciais</button>
+        <button role="tab" aria-selected={active==="finais"} onClick={()=>setActive("finais")} className={`min-w-0 flex-1 rounded-full px-2 py-3 text-xs font-bold transition sm:px-4 sm:text-sm ${active==="finais"?"bg-primary text-white shadow":"text-primary hover:bg-white"}`}>Anos Finais</button>
       </div>
       <div role="tabpanel" className="mt-10 grid items-center gap-10 lg:grid-cols-2">
         <div className="overflow-hidden rounded-[2rem]"><img key={current.image} src={current.image} alt={current.alt} className="aspect-[4/3] w-full object-cover shadow-lg"/><p className="bg-soft px-4 py-2 text-xs text-muted-foreground">Fotografia ilustrativa — será substituída por imagens reais da escola.</p></div>
