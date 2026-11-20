@@ -69,6 +69,57 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span ref={ref} className="history-counter__number">{count}</span>;
 }
 
+const palavrasDaAprendizagem = [
+  { palavra: "Descobrir", apoio: "A curiosidade abre caminhos para o conhecimento." },
+  { palavra: "Experimentar", apoio: "Cada vivência transforma perguntas em descobertas." },
+  { palavra: "Criar", apoio: "A imaginação ganha espaço para construir novas ideias." },
+  { palavra: "Compartilhar", apoio: "Aprendemos também nas trocas e nas relações." },
+  { palavra: "Transformar", apoio: "O conhecimento inspira escolhas e novos futuros." },
+];
+
+function ExperienceWords() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [activeWord, setActiveWord] = useState(0);
+
+  useEffect(() => {
+    const updateWord = () => {
+      const section = sectionRef.current;
+      if (!section) return;
+      const rect = section.getBoundingClientRect();
+      const scrollableDistance = Math.max(1, rect.height - window.innerHeight);
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
+      const next = Math.min(palavrasDaAprendizagem.length - 1, Math.floor(progress * palavrasDaAprendizagem.length));
+      setActiveWord((current) => current === next ? current : next);
+    };
+    updateWord();
+    window.addEventListener("scroll", updateWord, { passive: true });
+    window.addEventListener("resize", updateWord);
+    return () => {
+      window.removeEventListener("scroll", updateWord);
+      window.removeEventListener("resize", updateWord);
+    };
+  }, []);
+
+  const current = palavrasDaAprendizagem[activeWord];
+  return <section ref={sectionRef} className="learning-words-section" aria-label="Nossa maneira de aprender">
+    <div className="learning-words-sticky">
+      <div className="learning-words-content">
+        <p className="eyebrow learning-words-eyebrow">APRENDER É VIVER EXPERIÊNCIAS</p>
+        <h2 className="learning-words-heading">É aprender a cada nova experiência.</h2>
+        <div className="learning-word-stage" aria-live="polite" aria-atomic="true">
+          <span className="learning-word-index">0{activeWord + 1} / 0{palavrasDaAprendizagem.length}</span>
+          <p key={current.palavra} className="learning-word">{current.palavra}<span>.</span></p>
+          <p className="learning-word-support">{current.apoio}</p>
+        </div>
+        <div className="learning-word-progress" aria-hidden="true">
+          {palavrasDaAprendizagem.map((item, index) => <span key={item.palavra} className={index <= activeWord ? "is-active" : ""}/>)}
+        </div>
+        <p className="learning-words-hint">Continue descendo para descobrir</p>
+      </div>
+    </div>
+  </section>;
+}
+
 function Index() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -121,7 +172,7 @@ function Index() {
 
     <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivências que ensinam e momentos que ficam.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><article key={v.title} className="experience-card"><img className="experience-card__background" src={v.image} alt={v.title+" — imagem ilustrativa"} loading="lazy"/><div className="experience-card__shade"/><span className="experience-card__number">0{i+1}</span><div className="experience-card__content"><h3 className="font-display text-xl font-bold text-white">{v.title}</h3><p className="mt-2 leading-6 text-white/90">{v.text}</p></div></article>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
 
-    <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
+    <ExperienceWords />\n\n    <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
 
     <section className="section-wrap section-decor-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:py-24"><Star className="section-spark section-spark--structure" size={46} fill="currentColor" aria-hidden="true"/><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="Ambiente de aprendizagem escolar" loading="lazy" className="aspect-[5/4] w-full object-cover"/></div><div><p className="eyebrow">NOSSA ESTRUTURA</p><h2 className="section-title">Ambientes preparados para grandes descobertas.</h2><p className="mt-5 leading-8 text-muted-foreground">Cada espaço da escola faz parte da experiência de aprendizagem. Valorizamos ambientes que favoreçam a convivência, a criatividade, a participação e o desenvolvimento dos estudantes.</p><p className="mt-3 text-sm leading-7 text-muted-foreground">As imagens desta prévia são ilustrativas e serão substituídas por fotografias reais da instituição.</p><Link to="/estrutura" className="link-arrow mt-6">Conheça nossa estrutura <ArrowRight size={18}/></Link></div></section>
 
