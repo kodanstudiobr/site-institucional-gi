@@ -1,7 +1,7 @@
 import { pageHead } from "@/lib/seo";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Sparkles, Heart, Brain, HandHeart, Languages } from "lucide-react";
+import { Sparkles, Heart, Brain, HandHeart } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
@@ -89,7 +89,7 @@ function Ensino() {
         <h2 className="section-title mt-3">O ensino bilíngue faz parte da nossa jornada.</h2>
         <p className="mt-6 text-lg leading-8 text-muted-foreground">A presença da língua inglesa em nossa proposta educativa amplia as possibilidades de aprendizagem e comunicação. Por meio de experiências adequadas a cada etapa escolar, os estudantes têm contato com novos vocabulários, expressões e culturas, desenvolvendo gradualmente a compreensão e a confiança para se comunicar em outro idioma.</p>
         <div className="mt-7 inline-flex items-center gap-3 rounded-2xl bg-accent px-5 py-4 font-display text-base font-bold text-accent-foreground shadow-lg">
-          <Languages size={24}/>
+          <span className="text-2xl leading-none" role="img" aria-label="Globo terrestre">🌍</span>
           <span>Aprender novos idiomas é descobrir novos mundos.</span>
         </div>
       </div>
@@ -107,7 +107,7 @@ function Ensino() {
       </div>
       <div role="tabpanel" className="mt-10 grid items-center gap-10 lg:grid-cols-2">
         <div className="overflow-hidden rounded-[2rem]"><img key={current.image} src={current.image} alt={current.alt} className="aspect-[4/3] w-full object-cover shadow-lg"/><p className="bg-soft px-4 py-2 text-xs text-muted-foreground">Fotografia ilustrativa — será substituída por imagens reais da escola.</p></div>
-        <div><p className="eyebrow">{current.eyebrow}</p><h3 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{current.title}</h3>{current.paragraphs.map(p=><p key={p} className="mt-5 leading-8 text-muted-foreground">{p}</p>)}<div className="bilingual-segment-note mt-6"><span className="bilingual-segment-note__icon"><Languages size={19}/></span><div><p className="text-sm font-extrabold text-primary">Ensino bilíngue nesta etapa</p><p className="mt-2 text-sm leading-7 text-muted-foreground">{current.bilingualText}</p></div></div><div className="mt-7 grid gap-3 sm:grid-cols-2">{current.topics.map((topic,i)=><div key={topic} className="flex items-center gap-3 rounded-xl bg-soft px-4 py-3 text-sm font-semibold text-primary"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-primary">{i+1}</span>{topic}</div>)}</div></div>
+        <div><p className="eyebrow">{current.eyebrow}</p><h3 className="mt-3 font-display text-3xl font-bold text-primary md:text-4xl">{current.title}</h3>{current.paragraphs.map(p=><p key={p} className="mt-5 leading-8 text-muted-foreground">{p}</p>)}<div className="bilingual-segment-note mt-6"><span className="bilingual-segment-note__icon" role="img" aria-label="Globo terrestre">🌍</span><div><p className="text-sm font-extrabold text-primary">Ensino bilíngue nesta etapa</p><p className="mt-2 text-sm leading-7 text-muted-foreground">{current.bilingualText}</p></div></div><div className="mt-7 grid gap-3 sm:grid-cols-2">{current.topics.map((topic,i)=><div key={topic} className="flex items-center gap-3 rounded-xl bg-soft px-4 py-3 text-sm font-semibold text-primary"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-primary">{i+1}</span>{topic}</div>)}</div></div>
       </div>
     </section>
     <section className="integral-section bg-soft py-16 lg:py-20"><div className="section-wrap"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow">DESENVOLVIMENTO INTEGRAL</p><h2 className="section-title">{active==="infantil"?"Crescer descobrindo, brincando e criando vínculos.":active==="iniciais"?"Aprender, participar e construir autonomia.":"Aprofundar conhecimentos e assumir novos desafios."}</h2><p className="mt-4 leading-8 text-muted-foreground">{current.development.intro}</p></div><div className="integral-cards mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{current.development.cards.map(({icon:Icon,title,text},i)=><article key={title} className="integral-card" style={{"--card-index":i} as React.CSSProperties}><span className="integral-card__icon"><Icon size={24}/></span><h3 className="mt-5 font-display text-lg font-bold text-primary">{title}</h3><p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p><span className="integral-card__number">0{i+1}</span></article>)}</div></div></section>
