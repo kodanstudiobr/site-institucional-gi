@@ -94,6 +94,19 @@ function AnimatedNumber({ value }: { value: number }) {
   return <span ref={numberRef} className="history-counter__number" aria-label={String(value)}>{displayValue}</span>;
 }
 
+const heroSlides = [
+  {
+    desktop: "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp",
+    mobile: "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela%20-%20mobile.webp",
+    alt: "Fachada do Instituto Educacional G.I.",
+  },
+  {
+    desktop: "/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp",
+    mobile: "/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp",
+    alt: "Criança sorridente brincando com massinha verde",
+  },
+];
+
 const palavrasDaAprendizagem = ["É crescer.", "É aprender.", "É criar.", "É vivenciar."];
 
 function ExperienceWords() {
@@ -142,6 +155,15 @@ function ExperienceWords() {
 
 function Index() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const interval = window.setInterval(() => {
+      setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
+    }, 6500);
+    return () => window.clearInterval(interval);
+  }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeExperience, setActiveExperience] = useState(0);
   const moveCarousel = (direction: "prev" | "next") => {
@@ -171,6 +193,14 @@ function Index() {
   };
   return <SiteLayout transparentHeader>
     <section className="hero-home">
+      <div className="hero-slides" aria-hidden="true">
+        {heroSlides.map((slide, index) => (
+          <picture key={slide.desktop} className={`hero-slide ${activeHeroSlide === index ? "is-active" : ""}`}>
+            <source media="(max-width: 767px)" srcSet={slide.mobile} />
+            <img src={slide.desktop} alt="" />
+          </picture>
+        ))}
+      </div>
       <div className="hero-overlay"/>
       <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-5 pt-36 pb-24 lg:min-h-[710px] lg:px-8 lg:pt-44 lg:pb-24">
         <div className="max-w-3xl hero-copy">
