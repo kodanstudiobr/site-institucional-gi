@@ -23,7 +23,7 @@
   .site-header { background:rgba(255,255,255,.97); border-bottom:1px solid #e8eaf3; backdrop-filter:blur(16px); }
   .nav-link { color:#344477; font-size:.8rem; font-weight:650; transition:color .2s; white-space:nowrap; }
   .nav-link:hover,.nav-link-active { color:#324594; }
-  .hero-home { position:relative; overflow:hidden; background-image:url("/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp"); background-position:center 42%; background-size:contain; background-repeat:no-repeat; }
+  .hero-home { position:relative; overflow:hidden; background-image:url("/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp"); background-position:42% 42%; background-size:cover; background-repeat:no-repeat; }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(23,40,105,.95) 0%,rgba(43,62,143,.84) 53%,rgba(31,48,111,.42) 100%); }
   .hero-copy { animation:heroEnter .85s ease-out both; }
   .hero-bottom { position:absolute; bottom:-1px; left:0; right:0; height:12px; background:#fff12c; clip-path:polygon(0 70%,100% 0,100% 100%,0 100%); }
