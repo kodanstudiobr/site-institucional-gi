@@ -1,16 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, Instagram, Phone, MapPin, ArrowUpRight, Mail } from "lucide-react";
+import { Menu, X, Instagram, Phone, MapPin, ArrowUpRight, Mail, Home, School, BookOpen, Building2, Camera, Sun, PhoneCall } from "lucide-react";
 import { institutionalConfig } from "@/data/institutional";
 
 const links = [
-  { to: "/", label: "Início" },
-  { to: "/sobre", label: "Nossa escola" },
-  { to: "/ensino", label: "Ensino" },
-  { to: "/estrutura", label: "Estrutura" },
-  { to: "/vivencias", label: "Vivências" },
-  { to: "/ensino-integral", label: "Ensino Integral" },
-  { to: "/contato", label: "Contato" },
+  { to: "/", label: "Início", icon: Home },
+  { to: "/sobre", label: "Nossa escola", icon: School },
+  { to: "/ensino", label: "Ensino", icon: BookOpen },
+  { to: "/estrutura", label: "Estrutura", icon: Building2 },
+  { to: "/vivencias", label: "Vivências", icon: Camera },
+  { to: "/ensino-integral", label: "Ensino Integral", icon: Sun },
+  { to: "/contato", label: "Contato", icon: PhoneCall },
 ] as const;
 
 export function SiteLayout({ children, transparentHeader = false }: { children: ReactNode; transparentHeader?: boolean }) {
@@ -75,7 +75,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             <span className="header-brand hidden font-display text-base font-bold leading-tight sm:block">Instituto Educacional<br/><span>G.I.</span></span>
           </Link>
           <nav className="hidden items-center gap-4 2xl:flex" aria-label="Navegação principal">
-            {links.map((l) => <Link key={l.to} to={l.to} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{l.label}</Link>)}
+            {links.map(({ to, label, icon: Icon }) => <Link key={to} to={to} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}><Icon className="nav-link__icon" size={20} strokeWidth={2.1}/><span>{label}</span></Link>)}
           </nav>
           <div className="flex items-center gap-3">
             <Link to="/contato" className="header-cta hidden rounded-full bg-accent px-5 py-3 text-sm font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:inline-flex">Matrículas</Link>
