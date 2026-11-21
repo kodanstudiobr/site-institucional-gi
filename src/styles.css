@@ -1548,22 +1548,6 @@ html {
     object-position:center center;
   }
 
-  /* Desloca a segunda foto para a direita, destacando o rosto da criança. */
-  .hero-slide:nth-child(2) img {
-    width:125%;
-    max-width:none;
-    object-position:0% 35%;
-    transform:translateX(10%);
-  }
-
-  /* Desloca a terceira foto um pouco para a direita apenas no mobile. */
-  .hero-slide:nth-child(3) img {
-    width:125%;
-    max-width:none;
-    object-position:0% 35%;
-    transform:translateX(5%);
-  }
-
   .hero-copy {
     display:flex;
     flex-direction:column;
