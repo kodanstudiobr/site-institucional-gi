@@ -161,7 +161,7 @@ function Index() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = window.setInterval(() => {
       setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 3500);
+    }, 3000);
     return () => window.clearInterval(interval);
   }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -197,7 +197,7 @@ function Index() {
         {heroSlides.map((slide, index) => (
           <picture key={slide.desktop} className={`hero-slide ${activeHeroSlide === index ? "is-active" : ""}`}>
             <source media="(max-width: 767px)" srcSet={slide.mobile} />
-            <img src={slide.desktop} alt="" />
+            <img src={slide.desktop} alt="" loading="eager" decoding="async" />
           </picture>
         ))}
       </div>
