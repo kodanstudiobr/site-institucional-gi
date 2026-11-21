@@ -1535,9 +1535,10 @@ html {
 }
 @media (max-width:767px) {
   .hero-home > .relative {
-    justify-content:center;
+    align-items:flex-end;
+    justify-content:flex-start;
     padding-top:6rem;
-    padding-bottom:6rem;
+    padding-bottom:2.5rem;
   }
 
   .hero-slide img {
