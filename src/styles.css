@@ -1540,7 +1540,7 @@ html {
 
   /* Desloca a segunda foto para a direita, destacando o rosto da criança. */
   .hero-slide:nth-child(2) img {
-    object-position:35% center;
+    object-position:15% center;
   }
 }
 @media (prefers-reduced-motion:reduce) {
