@@ -1429,3 +1429,11 @@ html {
   background-size:cover;
   background-repeat:no-repeat;
 }
+
+
+/* Sombreamento de destaque consistente no header desktop ao rolar a página. */
+@media (min-width:1536px) {
+  .site-header--overlay.is-scrolled {
+    box-shadow:0 16px 38px rgba(8,20,65,.34),0 5px 16px rgba(8,20,65,.20) !important;
+  }
+}
