@@ -162,25 +162,13 @@ function ExperienceWords() {
 type ExperienceItem = (typeof vivencias)[number];
 
 function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
-  const [activeImage, setActiveImage] = useState(0);
-
-  useEffect(() => {
-    if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => {
-      setActiveImage((current) => (current + 1) % item.images.length);
-    }, 3600 + (index % 3) * 350);
-    return () => window.clearInterval(timer);
-  }, [item.images.length, index]);
-
   return (
-    <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}, ${item.images.length} fotos`}>
-      {item.images.map((src, imageIndex) => (
-        <img key={src} className={`experience-card__background ${imageIndex === activeImage ? "is-visible" : ""} ${item.title === "Arte e cultura" || item.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={src} alt="" loading="lazy" />
-      ))}
+    <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
+      <img className={`experience-card__background ${item.title === "Arte e cultura" || item.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={item.image} alt="" loading="lazy" />
       <div className="experience-card__shade"/>
       <span className="experience-card__number">0{index + 1}</span>
       <div className="experience-card__content">
-        <span className="experience-card__gallery-hint"><Images size={15}/> {item.images.length} fotos <span>·</span> Ver galeria <ArrowRight size={14}/></span>
+        <span className="experience-card__gallery-hint"><Images size={15}/> Ver galeria <ArrowRight size={14}/></span>
         <h3 className="mt-3 font-display text-xl font-bold text-white">{item.title}</h3>
         <p className="mt-2 leading-6 text-white/90">{item.text}</p>
       </div>
