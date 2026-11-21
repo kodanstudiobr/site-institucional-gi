@@ -1550,6 +1550,7 @@ html {
     width:125%;
     max-width:none;
     object-position:0% 35%;
+    transform:translateX(10%);
   }
 
   .hero-copy {
