@@ -34,7 +34,7 @@ function EnsinoIntegral() {
   return (
     <SiteLayout>
       <PageHeader
-        eyebrow="NOSSA PROPOSTA EDUCATIVA"
+        eyebrow="ENSINO INTEGRAL"
         title="Ensino Integral: aprender em todos os momentos."
         intro="Um espaço para conhecer a proposta de Ensino Integral do Instituto Educacional G.I., sua organização e a dinâmica das experiências ao longo do dia."
       />
