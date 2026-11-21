@@ -1587,3 +1587,23 @@ html {
     transition:none;
   }
 }
+
+
+/* Identificação simples da etapa de ensino na Hero. */
+.hero-kicker {
+  display:inline-flex;
+  align-items:center;
+  gap:.65rem;
+  color:#fff;
+  font-size:.9rem;
+  font-weight:600;
+  letter-spacing:.01em;
+}
+.hero-kicker::before {
+  content:"";
+  display:inline-block;
+  width:2rem;
+  height:2px;
+  flex:0 0 2rem;
+  background:#fff12c;
+}
