@@ -1547,7 +1547,23 @@ html {
 
   /* Desloca a segunda foto para a direita, destacando o rosto da criança. */
   .hero-slide:nth-child(2) img {
-    object-position:-100% 35%;
+    object-position:0% 35%;
+  }
+
+  .hero-copy {
+    display:flex;
+    flex-direction:column;
+  }
+
+  .hero-kicker {
+    order:2;
+    align-self:flex-start;
+    margin-top:1rem;
+  }
+
+  .hero-heading {
+    order:1;
+    margin-top:0;
   }
 }
 @media (prefers-reduced-motion:reduce) {
