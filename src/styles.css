@@ -1602,3 +1602,10 @@ html {
   flex:0 0 2rem;
   background:#fff12c;
 }
+
+/* Imagem da seção Nossa Essência: mais altura em telas pequenas e grandes. */
+.essence-image { height: min(118vw, 560px); min-height: 440px; object-position: center; }
+@media (min-width: 1024px) { .essence-image { height: 640px; min-height: 640px; } }
+
+/* Ajuste de enquadramento para destacar os rostos nas fotos dos cards. */
+.experience-card__background--face-focus { object-position: center 35%; }
