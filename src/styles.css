@@ -1556,21 +1556,30 @@ html {
   .hero-copy {
     display:flex;
     flex-direction:column;
-  }
-
-  .hero-heading {
-    order:1;
-    margin-top:0;
+    gap:0;
   }
 
   .hero-kicker {
-    order:2;
+    order:1;
     align-self:flex-start;
-    margin-top:1rem;
+    margin:0 0 .25rem;
+    padding:.35rem .7rem;
+  }
+
+  .hero-heading {
+    order:2;
+    margin:0;
+    line-height:1.02;
   }
 
   .hero-copy > div {
     order:3;
+    margin-top:.75rem;
+    gap:.5rem;
+  }
+
+  .hero-copy > div a {
+    padding:.7rem 1rem;
   }
 }
 @media (prefers-reduced-motion:reduce) {
