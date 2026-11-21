@@ -1,6 +1,6 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, X, Images } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
@@ -20,13 +20,13 @@ const destaques = [
   { icon: Lightbulb, title: "Desenvolvimento integral", text: "Conhecimentos, habilidades, criatividade e formação humana." },
 ];
 const vivencias = [
-  { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "/imagens/Setembro Amarelo_ Todos Pela Vida.webp" },
-  { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "/imagens/Atividade Escolar com Arte em Família.webp" },
-  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp" },
-  { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp" },
-  { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp" },
-  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp" },
-  { title: "Esportes e Lazer", text: "Movimento, diversão e trabalho em equipe em experiências que estimulam a saúde e a convivência.", image: "/imagens/Momento de vôlei no ginásio.webp" },
+  { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "/imagens/Setembro Amarelo_ Todos Pela Vida.webp", images: ["/imagens/Setembro Amarelo_ Todos Pela Vida.webp", "/imagens/Apresentação Escolar de Impactos Ambientais.webp", "/imagens/Duas Alunas com Projetos Escolares.webp", "/imagens/Meninas na Feira de Sanduíches Escolares.webp", "/imagens/Equipe Lince com Bandeira do Lobo.webp"] },
+  { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "/imagens/Atividade Escolar com Arte em Família.webp", images: ["/imagens/Atividade Escolar com Arte em Família.webp", "/imagens/Arte Escolar_ Folha Pintada no Colégio.webp", "/imagens/IMG_3937.webp", "/imagens/IMG_3939.webp"] },
+  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: ["/imagens/Atividade em grupo na sala de aula.webp", "/imagens/Assembleia Escolar no Ginásio.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp", "/imagens/Equipe Lince com Bandeira do Lobo.webp"] },
+  { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp", images: ["/imagens/Leitura em roda na sala de aula.webp", "/imagens/Professora Contando Histórias na Sala de Aula.webp", "/imagens/Atividade de cartas ilustradas na sala de aula.webp", "/imagens/Menina monta palavras no chão 广发.webp"] },
+  { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp", images: ["/imagens/IMG_3501.webp", "/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/Apresentação Escolar de Impactos Ambientais.webp", "/imagens/Duas Alunas com Projetos Escolares.webp"] },
+  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: ["/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/Atividade Escolar com Arte em Família.webp", "/imagens/Arte Escolar_ Folha Pintada no Colégio.webp", "/imagens/IMG_3937.webp"] },
+  { title: "Esportes e Lazer", text: "Movimento, diversão e trabalho em equipe em experiências que estimulam a saúde e a convivência.", image: "/imagens/Momento de vôlei no ginásio.webp", images: ["/imagens/Momento de vôlei no ginásio.webp", "/imagens/Meninas Sorridentes no Playground Escolar.webp", "/imagens/Meninas Sorridentes no Playground Escolar (1).webp", "/imagens/Alegria no escorregador vermelho.webp", "/imagens/Três Meninos Sorrindo no Playground.webp", "/imagens/Menino sorridente no brinquedo azul.webp"] },
 ];
 const perguntas = [
   ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende à Educação Infantil e aos Anos Iniciais do Ensino Fundamental."],
@@ -159,9 +159,38 @@ function ExperienceWords() {
   </section>;
 }
 
+type ExperienceItem = (typeof vivencias)[number];
+
+function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => {
+      setActiveImage((current) => (current + 1) % item.images.length);
+    }, 3600 + (index % 3) * 350);
+    return () => window.clearInterval(timer);
+  }, [item.images.length, index]);
+
+  return (
+    <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}, ${item.images.length} fotos`}>
+      {item.images.map((src, imageIndex) => (
+        <img key={src} className={`experience-card__background ${imageIndex === activeImage ? "is-visible" : ""} ${item.title === "Arte e cultura" || item.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={src} alt="" loading="lazy" />
+      ))}
+      <div className="experience-card__shade"/>
+      <span className="experience-card__number">0{index + 1}</span>
+      <div className="experience-card__content">
+        <span className="experience-card__gallery-hint"><Images size={15}/> {item.images.length} fotos <span>·</span> Ver galeria <ArrowRight size={14}/></span>
+        <h3 className="mt-3 font-display text-xl font-bold text-white">{item.title}</h3>
+        <p className="mt-2 leading-6 text-white/90">{item.text}</p>
+      </div>
+    </button>
+  );
+}
+
 function Index() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);\n  const [selectedGallery, setSelectedGallery] = useState<number | null>(null);\n  const [activeGalleryImage, setActiveGalleryImage] = useState(0);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -170,6 +199,28 @@ function Index() {
     }, 4000);
     return () => window.clearInterval(interval);
   }, []);
+  const selectedExperience = selectedGallery !== null ? vivencias[selectedGallery] : null;
+  const changeGalleryImage = (direction: "prev" | "next") => {
+    if (!selectedExperience) return;
+    setActiveGalleryImage((current) => (current + (direction === "next" ? 1 : -1) + selectedExperience.images.length) % selectedExperience.images.length);
+  };
+
+  useEffect(() => {
+    if (!selectedExperience) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedGallery(null);
+      if (event.key === "ArrowRight") changeGalleryImage("next");
+      if (event.key === "ArrowLeft") changeGalleryImage("prev");
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedGallery, selectedExperience?.images.length]);
+
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeExperience, setActiveExperience] = useState(0);
   const moveCarousel = (direction: "prev" | "next") => {
@@ -228,9 +279,32 @@ function Index() {
 
     <ExperienceWords />
 
-    <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivenciar momentos que ensinam e ficam na memória.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><article key={v.title} className="experience-card"><img className={`experience-card__background ${v.title === "Arte e cultura" || v.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={v.image} alt={v.title+" — imagem ilustrativa"} loading="lazy"/><div className="experience-card__shade"/><span className="experience-card__number">0{i+1}</span><div className="experience-card__content"><h3 className="font-display text-xl font-bold text-white">{v.title}</h3><p className="mt-2 leading-6 text-white/90">{v.text}</p></div></article>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
+    <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivenciar momentos que ensinam e ficam na memória.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><ExperienceCard key={v.title} item={v} index={i} onOpen={()=>{setSelectedGallery(i);setActiveGalleryImage(0);}}/>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
 
-    <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
+    {selectedExperience && selectedGallery !== null && (
+      <div className="experience-lightbox" role="presentation" onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelectedGallery(null);}}>
+        <section className="experience-lightbox__panel" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
+          <header className="experience-lightbox__header">
+            <div><p className="experience-lightbox__eyebrow">APRENDER FAZENDO · GALERIA {String(selectedGallery+1).padStart(2,"0")}</p><h2>{selectedExperience.title}</h2><p>{selectedExperience.text}</p></div>
+            <button type="button" className="experience-lightbox__close" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={22}/></button>
+          </header>
+          <div className="experience-lightbox__stage">
+            <img src={selectedExperience.images[activeGalleryImage]} alt={`${selectedExperience.title} — foto ${activeGalleryImage+1}`} />
+            {selectedExperience.images.length>1 && <>
+              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev" onClick={()=>changeGalleryImage("prev")} aria-label="Foto anterior"><ChevronLeft size={27}/></button>
+              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next" onClick={()=>changeGalleryImage("next")} aria-label="Próxima foto"><ChevronRight size={27}/></button>
+            </>}
+            <span className="experience-lightbox__counter">{String(activeGalleryImage+1).padStart(2,"0")} / {String(selectedExperience.images.length).padStart(2,"0")}</span>
+          </div>
+          <div className="experience-lightbox__footer">
+            <span>Explore os momentos dessa vivência</span>
+            <div className="experience-lightbox__thumbs" aria-label="Selecionar foto">
+              {selectedExperience.images.map((src,index)=><button type="button" key={src} className={index===activeGalleryImage?"is-active":""} onClick={()=>setActiveGalleryImage(index)} aria-label={`Ver foto ${index+1}`} aria-current={index===activeGalleryImage?"true":undefined}><img src={src} alt=""/></button>)}
+            </div>
+          </div>
+        </section>
+      </div>
+    )}\n\n    <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
 
     <section className="section-wrap section-decor-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:py-24"><Star className="section-spark section-spark--structure" size={46} fill="currentColor" aria-hidden="true"/><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="Ambiente de aprendizagem escolar" loading="lazy" className="aspect-[5/4] w-full object-cover"/></div><div><p className="eyebrow">NOSSA ESTRUTURA</p><h2 className="section-title">Ambientes preparados para grandes descobertas.</h2><p className="mt-5 leading-8 text-muted-foreground">Cada espaço da escola faz parte da experiência de aprendizagem. Valorizamos ambientes que favoreçam a convivência, a criatividade, a participação e o desenvolvimento dos estudantes.</p><p className="mt-3 text-sm leading-7 text-muted-foreground">As imagens desta prévia são ilustrativas e serão substituídas por fotografias reais da instituição.</p><Link to="/estrutura" className="link-arrow mt-6">Conheça nossa estrutura <ArrowRight size={18}/></Link></div></section>
 
