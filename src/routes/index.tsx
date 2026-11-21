@@ -190,7 +190,9 @@ function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: 
 
 function Index() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0);\n  const [selectedGallery, setSelectedGallery] = useState<number | null>(null);\n  const [activeGalleryImage, setActiveGalleryImage] = useState(0);
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
+  const [activeGalleryImage, setActiveGalleryImage] = useState(0);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
