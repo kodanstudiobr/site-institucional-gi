@@ -1417,3 +1417,15 @@ html {
     will-change:auto;
   }
 }
+
+
+/* Cabeçalhos internos preparados para receber a fotografia institucional de fundo. */
+.page-hero {
+  background-color:#293d91;
+  background-image:
+    linear-gradient(112deg,rgba(35,53,130,.86) 0%,rgba(50,69,148,.76) 55%,rgba(50,69,148,.58) 100%),
+    url('/imagens/fundo-paginas.jpg');
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+}
