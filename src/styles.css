@@ -1534,6 +1534,12 @@ html {
   z-index:3;
 }
 @media (max-width:767px) {
+  .hero-home > .relative {
+    justify-content:center;
+    padding-top:6rem;
+    padding-bottom:6rem;
+  }
+
   .hero-slide img {
     object-position:center center;
   }
