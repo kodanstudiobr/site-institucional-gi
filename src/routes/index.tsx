@@ -274,22 +274,15 @@ function Index() {
     {selectedExperience && selectedGallery !== null && (
       <div className="experience-lightbox experience-lightbox--fullscreen" role="presentation" onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelectedGallery(null);}}>
         <section className="experience-lightbox__panel experience-lightbox__panel--fullscreen" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
-          <header className="experience-lightbox__header experience-lightbox__header--fullscreen">
-            <div><p className="experience-lightbox__eyebrow">APRENDER FAZENDO · GALERIA {String(selectedGallery+1).padStart(2,"0")}</p><h2>{selectedExperience.title}</h2><p>{selectedExperience.text}</p></div>
-            <button type="button" className="experience-lightbox__close" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={22}/></button>
-          </header>
+          <button type="button" className="experience-lightbox__close experience-lightbox__close--floating" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={24}/></button>
           <div className="experience-lightbox__stage experience-lightbox__stage--fullscreen">
             <img src={galleryImages[activeGalleryImage]} alt={`${selectedExperience.title} — foto ${activeGalleryImage+1}`} />
-            {galleryImages.length > 1 && <>
-              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev" onClick={showPreviousGalleryImage} aria-label="Foto anterior"><ChevronLeft size={28}/></button>
-              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next" onClick={showNextGalleryImage} aria-label="Próxima foto"><ChevronRight size={28}/></button>
-            </>}
-            <span className="experience-lightbox__counter">{String(activeGalleryImage+1).padStart(2,"0")} / {String(galleryImages.length).padStart(2,"0")}</span>
           </div>
-          <footer className="experience-lightbox__footer experience-lightbox__footer--fullscreen">
-            <span>{galleryImages.length > 1 ? "Use as setas ou o teclado para navegar" : "Mais fotos desta vivência poderão ser adicionadas à galeria"}</span>
-            {galleryImages.length > 1 && <div className="experience-lightbox__thumbs" aria-label="Selecionar foto">{galleryImages.map((src,index)=><button key={src+index} type="button" className={activeGalleryImage===index?"is-active":""} onClick={()=>setActiveGalleryImage(index)} aria-label={`Ver foto ${index+1}`}><img src={src} alt=""/></button>)}</div>}
-          </footer>
+          {galleryImages.length > 1 && <>
+            <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev experience-lightbox__arrow--floating" onClick={showPreviousGalleryImage} aria-label="Foto anterior"><ChevronLeft size={30}/></button>
+            <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next experience-lightbox__arrow--floating" onClick={showNextGalleryImage} aria-label="Próxima foto"><ChevronRight size={30}/></button>
+          </>}
+          <div className="experience-lightbox__counter experience-lightbox__counter--below">{String(activeGalleryImage+1).padStart(2,"0")} / {String(galleryImages.length).padStart(2,"0")}</div>
         </section>
       </div>
     )}
