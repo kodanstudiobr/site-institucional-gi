@@ -108,7 +108,7 @@
 .carousel-arrow:hover { transform:translateY(-2px); border-color:#fff12c; background:#fff12c; }
 @media (max-width:767px) {
   .hero-overlay {
-    background:linear-gradient(0deg,rgba(23,40,105,.72) 0%,rgba(43,62,143,.56) 53%,rgba(31,48,111,.24) 100%);
+    background:linear-gradient(0deg,rgba(23,40,105,.86) 0%,rgba(43,62,143,.70) 53%,rgba(31,48,111,.34) 100%);
   }
   .section-spark--left { left:2%; top:3%; }
   .section-spark--pedagogy { right:2%; top:2%; }
