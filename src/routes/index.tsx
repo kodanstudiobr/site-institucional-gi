@@ -189,19 +189,27 @@ function Index() {
     return () => window.clearInterval(interval);
   }, []);
   const selectedExperience = selectedGallery !== null ? vivencias[selectedGallery] : null;
+  const galleryImages = selectedExperience
+    ? (selectedExperience.images.length > 0 ? selectedExperience.images : [selectedExperience.image])
+    : [];
+  const showPreviousGalleryImage = () => setActiveGalleryImage((current) => (current - 1 + galleryImages.length) % galleryImages.length);
+  const showNextGalleryImage = () => setActiveGalleryImage((current) => (current + 1) % galleryImages.length);
+
   useEffect(() => {
     if (!selectedExperience) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelectedGallery(null);
+      if (galleryImages.length > 1 && event.key === "ArrowLeft") showPreviousGalleryImage();
+      if (galleryImages.length > 1 && event.key === "ArrowRight") showNextGalleryImage();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedGallery, selectedExperience?.images.length]);
+  }, [selectedGallery, galleryImages.length]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeExperience, setActiveExperience] = useState(0);
@@ -264,20 +272,24 @@ function Index() {
     <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivenciar momentos que ensinam e ficam na memória.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><ExperienceCard key={v.title} item={v} index={i} onOpen={()=>{setSelectedGallery(i);setActiveGalleryImage(0);}}/>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
 
     {selectedExperience && selectedGallery !== null && (
-      <div className="experience-lightbox" role="presentation" onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelectedGallery(null);}}>
-        <section className="experience-lightbox__panel" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
-          <header className="experience-lightbox__header">
+      <div className="experience-lightbox experience-lightbox--fullscreen" role="presentation" onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelectedGallery(null);}}>
+        <section className="experience-lightbox__panel experience-lightbox__panel--fullscreen" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
+          <header className="experience-lightbox__header experience-lightbox__header--fullscreen">
             <div><p className="experience-lightbox__eyebrow">APRENDER FAZENDO · GALERIA {String(selectedGallery+1).padStart(2,"0")}</p><h2>{selectedExperience.title}</h2><p>{selectedExperience.text}</p></div>
             <button type="button" className="experience-lightbox__close" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={22}/></button>
           </header>
-          <div className="experience-lightbox__empty" role="status">
-            <div className="experience-lightbox__empty-icon"><Images size={34}/></div>
-            <h3>Galeria em preparação</h3>
-            <p>As fotos desta vivência serão adicionadas em breve.</p>
+          <div className="experience-lightbox__stage experience-lightbox__stage--fullscreen">
+            <img src={galleryImages[activeGalleryImage]} alt={`${selectedExperience.title} — foto ${activeGalleryImage+1}`} />
+            {galleryImages.length > 1 && <>
+              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev" onClick={showPreviousGalleryImage} aria-label="Foto anterior"><ChevronLeft size={28}/></button>
+              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next" onClick={showNextGalleryImage} aria-label="Próxima foto"><ChevronRight size={28}/></button>
+            </>}
+            <span className="experience-lightbox__counter">{String(activeGalleryImage+1).padStart(2,"0")} / {String(galleryImages.length).padStart(2,"0")}</span>
           </div>
-          <div className="experience-lightbox__footer">
-            <span>Em breve, novos registros desta vivência</span>
-          </div>
+          <footer className="experience-lightbox__footer experience-lightbox__footer--fullscreen">
+            <span>{galleryImages.length > 1 ? "Use as setas ou o teclado para navegar" : "Mais fotos desta vivência poderão ser adicionadas à galeria"}</span>
+            {galleryImages.length > 1 && <div className="experience-lightbox__thumbs" aria-label="Selecionar foto">{galleryImages.map((src,index)=><button key={src+index} type="button" className={activeGalleryImage===index?"is-active":""} onClick={()=>setActiveGalleryImage(index)} aria-label={`Ver foto ${index+1}`}><img src={src} alt=""/></button>)}</div>}
+          </footer>
         </section>
       </div>
     )}
