@@ -1306,3 +1306,68 @@ html {
   }
 }
 
+/* Ajuste definitivo do menu mobile: sobrescreve o reset global de transições. */
+@media (max-width:1535px) {
+  .site-header--overlay.is-scrolled {
+    box-shadow:0 16px 38px rgba(8,20,65,.34),0 5px 16px rgba(8,20,65,.20) !important;
+  }
+  .site-header--overlay.is-scrolled.is-menu-open {
+    box-shadow:0 20px 48px rgba(8,20,65,.42),0 7px 20px rgba(8,20,65,.24) !important;
+  }
+  .mobile-menu-panel {
+    max-height:0;
+    padding:0 1.25rem;
+    opacity:0;
+    visibility:hidden;
+    overflow:hidden;
+    transform:translate3d(0,-16px,0);
+    transform-origin:top center;
+    border-top:1px solid transparent;
+    border-radius:0 0 22px 22px;
+    background:#fff;
+    box-shadow:0 22px 38px rgba(8,20,65,.22);
+    transition:max-height .48s cubic-bezier(.22,1,.36,1),
+      padding .42s cubic-bezier(.22,1,.36,1),
+      opacity .32s ease,
+      transform .42s cubic-bezier(.22,1,.36,1),
+      visibility 0s linear .48s !important;
+  }
+  .mobile-menu-panel.is-open {
+    max-height:560px;
+    padding:1rem 1.25rem 1.35rem;
+    opacity:1;
+    visibility:visible;
+    transform:translate3d(0,0,0);
+    border-top-color:rgba(50,69,148,.10);
+    transition:max-height .48s cubic-bezier(.22,1,.36,1),
+      padding .42s cubic-bezier(.22,1,.36,1),
+      opacity .32s ease,
+      transform .42s cubic-bezier(.22,1,.36,1),
+      visibility 0s linear 0s !important;
+  }
+  .mobile-menu-panel a {
+    opacity:0;
+    transform:translate3d(0,-7px,0);
+    transition:opacity .24s ease,transform .32s cubic-bezier(.22,1,.36,1) !important;
+  }
+  .mobile-menu-panel.is-open a {
+    opacity:1;
+    transform:translate3d(0,0,0);
+  }
+  .mobile-menu-panel.is-open a:nth-child(1) { transition-delay:.05s !important; }
+  .mobile-menu-panel.is-open a:nth-child(2) { transition-delay:.09s !important; }
+  .mobile-menu-panel.is-open a:nth-child(3) { transition-delay:.13s !important; }
+  .mobile-menu-panel.is-open a:nth-child(4) { transition-delay:.17s !important; }
+  .mobile-menu-panel.is-open a:nth-child(5) { transition-delay:.21s !important; }
+  .mobile-menu-panel.is-open a:nth-child(6) { transition-delay:.25s !important; }
+  .mobile-menu-panel.is-open a:nth-child(7) { transition-delay:.29s !important; }
+  .mobile-menu-panel.is-open a:nth-child(8) { transition-delay:.33s !important; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .mobile-menu-panel,
+  .mobile-menu-panel a {
+    transition:none!important;
+    transform:none!important;
+  }
+}
+
