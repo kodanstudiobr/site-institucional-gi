@@ -1104,3 +1104,36 @@ html {
     transition:none!important;
   }
 }
+
+
+/* Correção definitiva do sublinhado animado do menu desktop.
+   A regra global de redução de transições era mais forte e anulava o efeito. */
+@media (min-width:1536px) {
+  .site-header nav[aria-label="Navegação principal"] .nav-link {
+    position:relative;
+  }
+  .site-header nav[aria-label="Navegação principal"] .nav-link::after {
+    content:"";
+    position:absolute;
+    display:block;
+    left:.48rem;
+    right:.48rem;
+    bottom:.48rem;
+    height:3px;
+    border-radius:999px;
+    background:#fff12c;
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:transform .65s cubic-bezier(.22,1,.36,1)!important;
+    pointer-events:none;
+  }
+  .site-header nav[aria-label="Navegação principal"] .nav-link:hover::after,
+  .site-header nav[aria-label="Navegação principal"] .nav-link-active::after {
+    transform:scaleX(1);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-header nav[aria-label="Navegação principal"] .nav-link::after {
+    transition:none!important;
+  }
+}
