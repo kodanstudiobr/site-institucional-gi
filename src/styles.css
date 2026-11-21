@@ -1231,3 +1231,37 @@ html {
     transition:none !important;
   }
 }
+
+/* Estado compacto azul: contraste correto e acabamento arredondado no mobile. */
+.site-header--overlay.is-scrolled .nav-link,
+.site-header--overlay.is-scrolled .nav-link:hover,
+.site-header--overlay.is-scrolled .nav-link-active {
+  color:#fff !important;
+  text-shadow:none;
+}
+.site-header--overlay.is-scrolled .nav-link-active {
+  background:rgba(255,255,255,.12);
+}
+.site-header--overlay.is-scrolled .nav-link::after {
+  background:#fff12c !important;
+}
+.site-header--overlay.is-scrolled .header-cta {
+  background:#fff12c !important;
+  color:#324594 !important;
+  box-shadow:0 4px 14px rgba(16,29,78,.24);
+}
+.site-header--overlay.is-scrolled .header-cta:hover {
+  background:#fff8a6 !important;
+  color:#324594 !important;
+}
+.site-header--overlay.is-scrolled .header-menu {
+  color:#fff !important;
+  border-color:rgba(255,255,255,.38);
+  background:rgba(255,255,255,.10);
+}
+@media (max-width:1535px) {
+  .site-header--overlay.is-scrolled {
+    border-radius:0 0 22px 22px;
+  }
+}
+
