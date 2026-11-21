@@ -39,7 +39,7 @@ function EnsinoIntegral() {
         intro="Um espaço para conhecer a proposta de Ensino Integral do Instituto Educacional G.I., sua organização e a dinâmica das experiências ao longo do dia."
       />
 
-      <section className="section-wrap section-decor-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:py-24">
+      <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-24">
         <div>
           <p className="eyebrow">ENSINO INTEGRAL</p>
           <h2 className="section-title mt-3">Uma jornada de aprendizagem que vai além da sala de aula.</h2>
