@@ -105,7 +105,7 @@ function Ensino() {
   }, [active]);
 
   return <SiteLayout>
-    <PageHeader title="Aprender, descobrir e evoluir." intro="Uma proposta educativa que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
+    <PageHeader eyebrow="NOSSO ENSINO" title="Aprender, descobrir e evoluir." intro="Conheça nossa proposta de ensino, que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
     <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
       <div className="bilingual-copy">
         <p className="eyebrow">APRENDIZAGEM SEM FRONTEIRAS</p>
