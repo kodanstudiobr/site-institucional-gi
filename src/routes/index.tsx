@@ -172,7 +172,7 @@ function Index() {
   return <SiteLayout transparentHeader>
     <section className="hero-home">
       <div className="hero-overlay"/>
-      <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-5 py-24 lg:min-h-[710px] lg:px-8">
+      <div className="relative mx-auto flex min-h-[620px] max-w-7xl items-center px-5 pt-36 pb-24 lg:min-h-[710px] lg:px-8 lg:pt-44 lg:pb-24">
         <div className="max-w-3xl hero-copy">
           <span className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold tracking-widest text-white backdrop-blur">Educação Infantil aos Anos Finais</span>
           <h1 className="mt-7 font-display text-5xl font-bold leading-[1.08] text-white md:text-7xl">Educação que acolhe, ensina e <span className="text-accent">transforma vidas.</span></h1>
