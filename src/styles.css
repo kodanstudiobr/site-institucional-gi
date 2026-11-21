@@ -1137,3 +1137,10 @@ html {
     transition:none!important;
   }
 }
+
+/* Mais espaço entre os links da navegação em telas desktop grandes. */
+@media (min-width:1536px) {
+  .site-header nav[aria-label="Navegação principal"] {
+    gap:clamp(1rem,1.5vw,2rem);
+  }
+}
