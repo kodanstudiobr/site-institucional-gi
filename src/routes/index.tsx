@@ -20,13 +20,12 @@ const destaques = [
   { icon: Lightbulb, title: "Desenvolvimento integral", text: "Conhecimentos, habilidades, criatividade e formação humana." },
 ];
 const vivencias = [
-  { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "/imagens/Setembro Amarelo_ Todos Pela Vida.webp", images: ["/imagens/Setembro Amarelo_ Todos Pela Vida.webp", "/imagens/Apresentação Escolar de Impactos Ambientais.webp", "/imagens/Duas Alunas com Projetos Escolares.webp", "/imagens/Meninas na Feira de Sanduíches Escolares.webp", "/imagens/Equipe Lince com Bandeira do Lobo.webp"] },
-  { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "/imagens/Atividade Escolar com Arte em Família.webp", images: ["/imagens/Atividade Escolar com Arte em Família.webp", "/imagens/Arte Escolar_ Folha Pintada no Colégio.webp", "/imagens/IMG_3937.webp", "/imagens/IMG_3939.webp"] },
-  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: ["/imagens/Atividade em grupo na sala de aula.webp", "/imagens/Assembleia Escolar no Ginásio.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp", "/imagens/Equipe Lince com Bandeira do Lobo.webp"] },
-  { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp", images: ["/imagens/Leitura em roda na sala de aula.webp", "/imagens/Professora Contando Histórias na Sala de Aula.webp", "/imagens/Atividade de cartas ilustradas na sala de aula.webp"] },
-  { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp", images: ["/imagens/IMG_3501.webp", "/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/Apresentação Escolar de Impactos Ambientais.webp", "/imagens/Duas Alunas com Projetos Escolares.webp"] },
-  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: ["/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/Atividade Escolar com Arte em Família.webp", "/imagens/Arte Escolar_ Folha Pintada no Colégio.webp", "/imagens/IMG_3937.webp"] },
-  { title: "Esportes e Lazer", text: "Movimento, diversão e trabalho em equipe em experiências que estimulam a saúde e a convivência.", image: "/imagens/Momento de vôlei no ginásio.webp", images: ["/imagens/Momento de vôlei no ginásio.webp", "/imagens/Meninas Sorridentes no Playground Escolar.webp", "/imagens/Meninas Sorridentes no Playground Escolar (1).webp", "/imagens/Alegria no escorregador vermelho.webp", "/imagens/Três Meninos Sorrindo no Playground.webp", "/imagens/Menino sorridente no brinquedo azul.webp"] },
+  { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "/imagens/Setembro Amarelo_ Todos Pela Vida.webp", images: [] },
+  { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "/imagens/Atividade Escolar com Arte em Família.webp", images: [] },
+  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: [] },
+  { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp", images: [] },
+  { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp", images: [] },
+  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: [] },
 ];
 const perguntas = [
   ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende à Educação Infantil e aos Anos Iniciais do Ensino Fundamental."],
@@ -190,19 +189,12 @@ function Index() {
     return () => window.clearInterval(interval);
   }, []);
   const selectedExperience = selectedGallery !== null ? vivencias[selectedGallery] : null;
-  const changeGalleryImage = (direction: "prev" | "next") => {
-    if (!selectedExperience) return;
-    setActiveGalleryImage((current) => (current + (direction === "next" ? 1 : -1) + selectedExperience.images.length) % selectedExperience.images.length);
-  };
-
   useEffect(() => {
     if (!selectedExperience) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelectedGallery(null);
-      if (event.key === "ArrowRight") changeGalleryImage("next");
-      if (event.key === "ArrowLeft") changeGalleryImage("prev");
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => {
