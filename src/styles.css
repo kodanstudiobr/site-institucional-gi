@@ -23,7 +23,7 @@
   .site-header { background:rgba(255,255,255,.97); border-bottom:1px solid #e8eaf3; backdrop-filter:blur(16px); }
   .nav-link { color:#344477; font-size:.8rem; font-weight:650; transition:color .2s; white-space:nowrap; }
   .nav-link:hover,.nav-link-active { color:#324594; }
-  .hero-home { position:relative; overflow:hidden; background-image:url("/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp"); background-position:0% 42%; background-size:cover; background-repeat:no-repeat; }
+  .hero-home { position:relative; overflow:hidden; background-color:#263878; }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(23,40,105,.95) 0%,rgba(43,62,143,.84) 53%,rgba(31,48,111,.42) 100%); }
   .hero-copy { animation:heroEnter .85s ease-out both; }
   .hero-bottom { position:absolute; bottom:-1px; left:0; right:0; height:12px; background:#fff12c; clip-path:polygon(0 70%,100% 0,100% 100%,0 100%); }
@@ -1490,9 +1490,52 @@ html {
 /* Fotografia específica da fachada para a versão mobile da Hero. */
 @media (max-width:767px) {
   .hero-home {
-    background-image:url("/imagens/Fachada%20Escolar%20Azul%20e%20Amarela%20-%20mobile.webp");
-    background-position:center center;
-    background-size:cover;
-    background-repeat:no-repeat;
+    background-image:none;
+  }
+}
+
+
+/* Hero com troca automática e transição suave entre fotografias institucionais. */
+.hero-slides {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+}
+.hero-slide {
+  position:absolute;
+  inset:0;
+  display:block;
+  opacity:0;
+  transition:opacity 1.2s ease-in-out;
+}
+.hero-slide.is-active {
+  opacity:1;
+}
+.hero-slide img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:0% 42%;
+}
+.hero-overlay {
+  z-index:1;
+}
+.hero-home > .relative {
+  z-index:2;
+}
+.hero-home > span,
+.hero-home > .hero-bottom {
+  z-index:3;
+}
+@media (max-width:767px) {
+  .hero-slide img {
+    object-position:center center;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .hero-slide {
+    transition:none;
   }
 }
