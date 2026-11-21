@@ -102,7 +102,7 @@ const heroSlides = [
   },
   {
     desktop: "/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp",
-    mobile: "/imagens/Menino%20sorridente%20brincando%20com%20areia%20verde-mobile.webp",
+    mobile: "/imagens/Menino%20sorridente%20brincando%20com%20areia%20verde.webp",
     alt: "Criança sorridente brincando com massinha verde",
   },
 ];
