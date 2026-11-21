@@ -1144,3 +1144,51 @@ html {
     gap:clamp(1rem,1.5vw,2rem);
   }
 }
+
+/* Header compacto: transição suave para o amarelo institucional ao rolar. */
+.site-header--overlay {
+  transition:background-color .55s cubic-bezier(.22,1,.36,1),
+    border-color .55s cubic-bezier(.22,1,.36,1),
+    box-shadow .55s cubic-bezier(.22,1,.36,1),
+    backdrop-filter .55s cubic-bezier(.22,1,.36,1);
+}
+.site-header--overlay.is-scrolled {
+  background:#fff12c;
+  border-bottom-color:rgba(50,69,148,.14);
+  backdrop-filter:blur(14px);
+  box-shadow:0 8px 28px rgba(36,51,111,.12);
+}
+.site-header--overlay.is-scrolled .nav-link,
+.site-header--overlay.is-scrolled .nav-link:hover,
+.site-header--overlay.is-scrolled .nav-link-active {
+  color:#324594;
+  text-shadow:none;
+}
+.site-header--overlay.is-scrolled .nav-link-active {
+  background:rgba(50,69,148,.10);
+}
+.site-header--overlay.is-scrolled .nav-link::after {
+  background:#324594;
+}
+.site-header--overlay.is-scrolled .header-cta {
+  background:#324594;
+  color:#fff12c;
+  box-shadow:0 4px 12px rgba(36,51,111,.18);
+}
+.site-header--overlay.is-scrolled .header-cta:hover {
+  background:#263878;
+  color:#fff12c;
+}
+.site-header--overlay.is-scrolled .header-menu {
+  color:#324594;
+  border-color:rgba(50,69,148,.28);
+  background:rgba(255,255,255,.35);
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-header--overlay,
+  .site-header--overlay .nav-link,
+  .site-header--overlay .header-cta,
+  .site-header--overlay img {
+    transition:none!important;
+  }
+}
