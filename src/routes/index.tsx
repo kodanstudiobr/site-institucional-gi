@@ -105,6 +105,11 @@ const heroSlides = [
     mobile: "/imagens/Menino%20sorridente%20brincando%20com%20areia%20verde.webp",
     alt: "Criança sorridente brincando com massinha verde",
   },
+  {
+    desktop: "/imagens/Aluno-Sorridente-Apontando-no-Corredor-desktop.webp",
+    mobile: "/imagens/Aluno%20sorridente%20apontando%20no%20corredor%20escolar.webp",
+    alt: "Aluno sorridente apontando no corredor escolar",
+  },
 ];
 
 const palavrasDaAprendizagem = ["É crescer.", "É aprender.", "É criar.", "É vivenciar."];
