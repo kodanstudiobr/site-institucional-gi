@@ -1866,3 +1866,12 @@ html {
     margin-inline:auto;
   }
 }
+
+
+/* Ajustes solicitados: mostrar o topo da foto da Nossa Essência e garantir as fotos dos cards. */
+.essence-image {
+  object-position:center 20% !important;
+}
+.experience-card__background {
+  opacity:1 !important;
+}
