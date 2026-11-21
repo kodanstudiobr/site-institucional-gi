@@ -1383,3 +1383,37 @@ html {
     height:5rem !important;
   }
 }
+
+
+/* Transição mais fluida do header ao rolar: desktop e mobile. */
+.site-header--overlay,
+.site-header--overlay > div,
+.site-header--overlay > div > a:first-child,
+.site-header--overlay > div > a:first-child img,
+.site-header--overlay .nav-link,
+.site-header--overlay .header-cta,
+.site-header--overlay .header-menu {
+  transition-property:background-color,color,border-color,box-shadow,backdrop-filter,border-radius,opacity,transform,width,height,padding !important;
+  transition-duration:780ms !important;
+  transition-timing-function:cubic-bezier(.22,1,.36,1) !important;
+  transition-delay:0ms !important;
+}
+.site-header--overlay {
+  will-change:background-color,box-shadow,backdrop-filter;
+}
+.site-header--overlay > div > a:first-child,
+.site-header--overlay > div > a:first-child img {
+  will-change:width,height;
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-header--overlay,
+  .site-header--overlay > div,
+  .site-header--overlay > div > a:first-child,
+  .site-header--overlay > div > a:first-child img,
+  .site-header--overlay .nav-link,
+  .site-header--overlay .header-cta,
+  .site-header--overlay .header-menu {
+    transition:none !important;
+    will-change:auto;
+  }
+}
