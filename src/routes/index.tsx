@@ -290,19 +290,13 @@ function Index() {
             <div><p className="experience-lightbox__eyebrow">APRENDER FAZENDO · GALERIA {String(selectedGallery+1).padStart(2,"0")}</p><h2>{selectedExperience.title}</h2><p>{selectedExperience.text}</p></div>
             <button type="button" className="experience-lightbox__close" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={22}/></button>
           </header>
-          <div className="experience-lightbox__stage">
-            <img src={selectedExperience.images[activeGalleryImage]} alt={`${selectedExperience.title} — foto ${activeGalleryImage+1}`} />
-            {selectedExperience.images.length>1 && <>
-              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev" onClick={()=>changeGalleryImage("prev")} aria-label="Foto anterior"><ChevronLeft size={27}/></button>
-              <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next" onClick={()=>changeGalleryImage("next")} aria-label="Próxima foto"><ChevronRight size={27}/></button>
-            </>}
-            <span className="experience-lightbox__counter">{String(activeGalleryImage+1).padStart(2,"0")} / {String(selectedExperience.images.length).padStart(2,"0")}</span>
+          <div className="experience-lightbox__empty" role="status">
+            <div className="experience-lightbox__empty-icon"><Images size={34}/></div>
+            <h3>Galeria em preparação</h3>
+            <p>As fotos desta vivência serão adicionadas em breve.</p>
           </div>
           <div className="experience-lightbox__footer">
-            <span>Explore os momentos dessa vivência</span>
-            <div className="experience-lightbox__thumbs" aria-label="Selecionar foto">
-              {selectedExperience.images.map((src,index)=><button type="button" key={src} className={index===activeGalleryImage?"is-active":""} onClick={()=>setActiveGalleryImage(index)} aria-label={`Ver foto ${index+1}`} aria-current={index===activeGalleryImage?"true":undefined}><img src={src} alt=""/></button>)}
-            </div>
+            <span>Em breve, novos registros desta vivência</span>
           </div>
         </section>
       </div>
