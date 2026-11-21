@@ -16,7 +16,7 @@ function Estrutura(){
   const current=selected!==null?fotos[selected]:undefined;
   const close=()=>setSelected(null);
   return <SiteLayout>
-    <PageHeader title="Um ambiente preparado para acolher e ensinar." intro="Conheça os espaços que fazem parte da experiência educativa do Instituto Educacional G.I."/>
+    <PageHeader eyebrow="NOSSA ESTRUTURA" title="Um ambiente preparado para acolher e ensinar." intro="Conheça os espaços e ambientes que fazem parte da experiência educativa da nossa escola."/>
     <section className="section-wrap py-20">
       <div className="mx-auto max-w-2xl text-center"><p className="eyebrow">NOSSA ESTRUTURA</p><h2 className="section-title">Espaços para aprender, conviver e descobrir.</h2><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que o ambiente escolar contribui para experiências significativas. Esta galeria apresenta referências visuais provisórias e será atualizada com fotografias reais da escola.</p></div>
       <div className="mt-12 grid gap-6 sm:grid-cols-2">{fotos.map((foto,i)=><button key={foto.title} onClick={()=>setSelected(i)} className="gallery-button text-left focus-visible:outline-offset-4"><img src={foto.image} alt={foto.title+" — imagem ilustrativa"} loading="lazy" className="h-64 w-full object-cover"/><span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#14245f]/90 to-transparent p-6 pt-14 text-left text-white"><strong className="block font-display text-xl">{foto.title}</strong><span className="mt-1 block text-sm text-white/85">Ver imagem ampliada</span></span></button>)}</div>
