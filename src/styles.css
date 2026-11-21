@@ -1603,9 +1603,24 @@ html {
   background:#fff12c;
 }
 
-/* Imagem da seção Nossa Essência: mais altura em telas pequenas e grandes. */
-.essence-image { height: min(118vw, 560px); min-height: 440px; object-position: center; }
-@media (min-width: 1024px) { .essence-image { height: 640px; min-height: 640px; } }
+/* Nossa Essência: área da foto mais alta em mobile e desktop. */
+.essence-image {
+  display:block;
+  width:100%;
+  height:520px;
+  min-height:520px;
+  aspect-ratio:auto;
+  object-fit:cover;
+  object-position:center;
+}
+@media (min-width:1024px) {
+  .essence-image {
+    height:720px;
+    min-height:720px;
+  }
+}
 
-/* Ajuste de enquadramento para destacar os rostos nas fotos dos cards. */
-.experience-card__background--face-focus { object-position: center 35%; }
+/* Reposiciona as fotos para baixo, revelando melhor a região dos rostos. */
+.experience-card__background--face-focus {
+  object-position:center 22% !important;
+}
