@@ -1856,3 +1856,13 @@ html {
 @media (max-width:640px) {
   .experience-lightbox__empty { min-height:260px; padding:32px 18px; }
 }
+
+
+/* Nossa Essência: fotografia mais estreita no desktop para equilibrar a composição. */
+@media (min-width:1024px) {
+  .essence-image {
+    width:88%;
+    max-width:540px;
+    margin-inline:auto;
+  }
+}
