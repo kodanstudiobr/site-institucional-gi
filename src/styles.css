@@ -1486,3 +1486,13 @@ html {
     }
   }
 }
+
+/* Fotografia específica da fachada para a versão mobile da Hero. */
+@media (max-width:767px) {
+  .hero-home {
+    background-image:url("/imagens/Fachada%20Escolar%20Azul%20e%20Amarela%20-%20mobile.webp");
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+}
