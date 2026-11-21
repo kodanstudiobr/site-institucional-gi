@@ -1371,3 +1371,15 @@ html {
   }
 }
 
+
+/* Logo um pouco maior somente quando o menu mobile está aberto durante a rolagem. */
+@media (max-width:1535px) {
+  .site-header--overlay.is-scrolled.is-menu-open > div > a:first-child {
+    width:5.5rem !important;
+    height:4.5rem !important;
+  }
+  .site-header--overlay.is-scrolled.is-menu-open > div > a:first-child img {
+    width:4.5rem !important;
+    height:4.5rem !important;
+  }
+}
