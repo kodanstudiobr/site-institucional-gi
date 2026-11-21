@@ -102,7 +102,7 @@ const heroSlides = [
   },
   {
     desktop: "/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp",
-    mobile: "/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp",
+    mobile: "/imagens/Menino%20sorridente%20brincando%20com%20areia%20verde-mobile.webp",
     alt: "Criança sorridente brincando com massinha verde",
   },
 ];
@@ -161,7 +161,7 @@ function Index() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = window.setInterval(() => {
       setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 3000);
+    }, 4000);
     return () => window.clearInterval(interval);
   }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
