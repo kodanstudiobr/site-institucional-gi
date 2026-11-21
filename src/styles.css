@@ -1153,10 +1153,10 @@ html {
     backdrop-filter .55s cubic-bezier(.22,1,.36,1);
 }
 .site-header--overlay.is-scrolled {
-  background:#fff12c;
-  border-bottom-color:rgba(50,69,148,.14);
+  background:#324594;
+  border-bottom-color:rgba(255,255,255,.16);
   backdrop-filter:blur(14px);
-  box-shadow:0 8px 28px rgba(36,51,111,.12);
+  box-shadow:0 8px 28px rgba(16,29,78,.22);
 }
 .site-header--overlay.is-scrolled .nav-link,
 .site-header--overlay.is-scrolled .nav-link:hover,
