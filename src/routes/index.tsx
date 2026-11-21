@@ -218,8 +218,8 @@ function Index() {
       <div className="hero-bottom"/>
     </section>
 
-    <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-[1.15fr_.85fr] lg:py-28">
-      <div className="relative"><img src="/imagens/Arte%20Escolar_%20Folha%20Pintada%20no%20Col%C3%A9gio.webp" alt="Atividade artística escolar com folha pintada" className="aspect-[5/4] w-full rounded-[2rem] object-cover shadow-xl"/><div className="absolute -bottom-5 -right-3 rounded-2xl bg-accent px-6 py-5 font-display text-lg font-bold text-accent-foreground shadow-lg sm:-right-5">Aprender para a vida</div></div>
+    <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
+      <div className="relative"><img src="/imagens/Arte%20Escolar_%20Folha%20Pintada%20no%20Col%C3%A9gio.webp" alt="Atividade artística escolar com folha pintada" className="aspect-[4/5] w-full rounded-[2rem] object-cover shadow-xl"/><div className="absolute -bottom-5 -right-3 rounded-2xl bg-accent px-6 py-5 font-display text-lg font-bold text-accent-foreground shadow-lg sm:-right-5">Aprender para a vida</div></div>
       <div><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Educação que acredita no potencial de cada criança.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão de conhecimentos. É proporcionar experiências, despertar potencialidades, fortalecer valores e contribuir para a formação de pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa escola <ArrowRight size={18}/></Link></div>
     </section>
 
