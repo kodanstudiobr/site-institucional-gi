@@ -70,9 +70,8 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <header className={headerClass}>
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 py-3 lg:px-8">
-          <Link to="/" className="flex shrink-0 items-center gap-3" onClick={() => setMenuOpen(false)}>
-            <img src="/imagens/logo-gi.svg" alt="Instituto Educacional G.I." className="h-14 w-14 object-contain" />
-            <span className="header-brand hidden font-display text-base font-bold leading-tight sm:block">Instituto Educacional<br/><span>G.I.</span></span>
+          <Link to="/" className="flex h-16 w-20 shrink-0 items-center justify-center sm:h-[4.5rem] sm:w-24" onClick={() => setMenuOpen(false)}>
+            <img src="/imagens/logo-gi.svg" alt="Instituto Educacional G.I." className="h-16 w-16 object-contain sm:h-[4.5rem] sm:w-[4.5rem]" />
           </Link>
           <nav className="hidden items-center gap-4 2xl:flex" aria-label="Navegação principal">
             {links.map(({ to, label }) => <Link key={to} to={to} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{label}</Link>)}
