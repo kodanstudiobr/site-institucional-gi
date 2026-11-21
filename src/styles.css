@@ -1069,3 +1069,38 @@ html {
     transition:none!important;
   }
 }
+
+
+/* Menu desktop tipográfico: somente os nomes, com respiro e sublinhado de entrada suave. */
+@media (min-width:1536px) {
+  .site-header nav[aria-label="Navegação principal"] {
+    gap:clamp(.65rem,1.05vw,1.25rem);
+  }
+  .site-header .nav-link {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:.9rem .48rem 1.05rem;
+    font-size:.88rem;
+    font-weight:750;
+    letter-spacing:.005em;
+  }
+  .site-header .nav-link::after {
+    left:.48rem;
+    right:.48rem;
+    bottom:.48rem;
+    height:3px;
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:transform .55s cubic-bezier(.22,1,.36,1);
+  }
+  .site-header .nav-link:hover::after,
+  .site-header .nav-link-active::after {
+    transform:scaleX(1);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-header .nav-link::after {
+    transition:none!important;
+  }
+}
