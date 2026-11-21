@@ -2,6 +2,10 @@ import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, X, Images } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperInstance } from "swiper";
+import "swiper/css";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
@@ -180,6 +184,7 @@ function Index() {
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
   const [activeGalleryImage, setActiveGalleryImage] = useState(0);
+  const gallerySwiperRef = useRef<SwiperInstance | null>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -192,8 +197,8 @@ function Index() {
   const galleryImages = selectedExperience
     ? (selectedExperience.images.length > 0 ? selectedExperience.images : [selectedExperience.image])
     : [];
-  const showPreviousGalleryImage = () => setActiveGalleryImage((current) => (current - 1 + galleryImages.length) % galleryImages.length);
-  const showNextGalleryImage = () => setActiveGalleryImage((current) => (current + 1) % galleryImages.length);
+  const showPreviousGalleryImage = () => gallerySwiperRef.current?.slidePrev();
+  const showNextGalleryImage = () => gallerySwiperRef.current?.slideNext();
 
   useEffect(() => {
     if (!selectedExperience) return;
@@ -271,12 +276,26 @@ function Index() {
 
     <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivenciar momentos que ensinam e ficam na memória.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><ExperienceCard key={v.title} item={v} index={i} onOpen={()=>{setSelectedGallery(i);setActiveGalleryImage(0);}}/>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
 
-    {selectedExperience && selectedGallery !== null && (
+    {selectedExperience && selectedGallery !== null && createPortal(
       <div className="experience-lightbox experience-lightbox--fullscreen" role="presentation" onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelectedGallery(null);}}>
         <section className="experience-lightbox__panel experience-lightbox__panel--fullscreen" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
           <button type="button" className="experience-lightbox__close experience-lightbox__close--floating" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={24}/></button>
           <div className="experience-lightbox__stage experience-lightbox__stage--fullscreen">
-            <img src={galleryImages[activeGalleryImage]} alt={`${selectedExperience.title} — foto ${activeGalleryImage+1}`} />
+            <Swiper
+              className="experience-gallery-swiper"
+              initialSlide={activeGalleryImage}
+              onSwiper={(swiper)=>{gallerySwiperRef.current=swiper;}}
+              onSlideChange={(swiper)=>setActiveGalleryImage(swiper.activeIndex)}
+              speed={450}
+              slidesPerView={1}
+              allowTouchMove={true}
+              simulateTouch={true}
+              resistanceRatio={0.65}
+            >
+              {galleryImages.map((image,index)=><SwiperSlide key={`${image}-${index}`}>
+                <img src={image} alt={`${selectedExperience.title} — foto ${index+1}`} />
+              </SwiperSlide>)}
+            </Swiper>
           </div>
           {galleryImages.length > 1 && <>
             <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev experience-lightbox__arrow--floating" onClick={showPreviousGalleryImage} aria-label="Foto anterior"><ChevronLeft size={30}/></button>
@@ -284,7 +303,7 @@ function Index() {
           </>}
           <div className="experience-lightbox__counter experience-lightbox__counter--below">{String(activeGalleryImage+1).padStart(2,"0")} / {String(galleryImages.length).padStart(2,"0")}</div>
         </section>
-      </div>
+      </div>, document.body
     )}
 
     <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
