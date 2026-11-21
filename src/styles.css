@@ -1875,3 +1875,90 @@ html {
 .experience-card__background {
   opacity:1 !important;
 }
+
+
+/* Galeria de vivências em tela cheia, com foco total na fotografia. */
+.experience-lightbox--fullscreen {
+  padding:clamp(12px,2.4vw,32px);
+  background:rgba(5,10,28,.94);
+}
+.experience-lightbox__panel--fullscreen {
+  display:flex;
+  width:min(100%,1500px);
+  height:min(94dvh,1100px);
+  max-height:94dvh;
+  flex-direction:column;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  background:#0b1022;
+  color:#fff;
+}
+.experience-lightbox__header--fullscreen {
+  flex:0 0 auto;
+  align-items:center;
+  padding:clamp(16px,2vw,26px) clamp(18px,3vw,38px);
+  background:#fff;
+}
+.experience-lightbox__stage--fullscreen {
+  flex:1 1 auto;
+  min-height:0;
+  max-height:none;
+  background:#080d1c;
+}
+.experience-lightbox__stage--fullscreen img {
+  width:100%;
+  height:100%;
+  max-height:none;
+  object-fit:contain;
+}
+.experience-lightbox__footer--fullscreen {
+  flex:0 0 auto;
+  min-height:68px;
+  padding:12px clamp(18px,3vw,34px);
+  background:#fff;
+}
+.experience-lightbox__footer--fullscreen .experience-lightbox__thumbs {
+  max-width:75%;
+}
+.experience-lightbox__footer--fullscreen .experience-lightbox__thumbs button {
+  width:72px;
+  height:54px;
+  flex-basis:72px;
+}
+@media (max-width:640px) {
+  .experience-lightbox--fullscreen { padding:0; }
+  .experience-lightbox__panel--fullscreen {
+    width:100%;
+    height:100dvh;
+    max-height:100dvh;
+    border:0;
+    border-radius:0;
+  }
+  .experience-lightbox__header--fullscreen {
+    padding:16px 14px;
+    gap:10px;
+  }
+  .experience-lightbox__header--fullscreen p:last-child {
+    max-width:calc(100vw - 86px);
+    font-size:.8rem;
+  }
+  .experience-lightbox__stage--fullscreen {
+    min-height:0;
+    max-height:none;
+  }
+  .experience-lightbox__footer--fullscreen {
+    align-items:center;
+    gap:10px;
+    padding:12px 14px max(12px,env(safe-area-inset-bottom));
+    font-size:.72rem;
+  }
+  .experience-lightbox__footer--fullscreen .experience-lightbox__thumbs {
+    max-width:58%;
+  }
+  .experience-lightbox__footer--fullscreen .experience-lightbox__thumbs button {
+    width:54px;
+    height:44px;
+    flex-basis:54px;
+  }
+}
