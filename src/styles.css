@@ -1192,3 +1192,42 @@ html {
     transition:none!important;
   }
 }
+
+
+/* Header: exceção explícita à regra global que desativa transições.
+   Mantém a troca suave entre o topo transparente e o estado amarelo compacto. */
+.site-header--overlay,
+.site-header--overlay > div,
+.site-header--overlay .nav-link,
+.site-header--overlay .header-cta,
+.site-header--overlay .header-menu,
+.site-header--overlay img {
+  transition-property:background-color,color,border-color,box-shadow,backdrop-filter,opacity,transform,width,height,padding;
+  transition-duration:650ms;
+  transition-timing-function:cubic-bezier(.22,1,.36,1);
+  transition-delay:0ms;
+}
+.site-header--overlay {
+  transition:background-color 650ms cubic-bezier(.22,1,.36,1),
+    border-color 650ms cubic-bezier(.22,1,.36,1),
+    box-shadow 650ms cubic-bezier(.22,1,.36,1),
+    backdrop-filter 650ms cubic-bezier(.22,1,.36,1) !important;
+}
+.site-header--overlay > div,
+.site-header--overlay .nav-link,
+.site-header--overlay .header-cta,
+.site-header--overlay .header-menu,
+.site-header--overlay img {
+  transition-duration:650ms !important;
+  transition-timing-function:cubic-bezier(.22,1,.36,1) !important;
+}
+@media (prefers-reduced-motion:reduce) {
+  .site-header--overlay,
+  .site-header--overlay > div,
+  .site-header--overlay .nav-link,
+  .site-header--overlay .header-cta,
+  .site-header--overlay .header-menu,
+  .site-header--overlay img {
+    transition:none !important;
+  }
+}
