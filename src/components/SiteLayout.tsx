@@ -65,7 +65,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 
   // O mesmo header transparente no topo e branco após a rolagem em todas as rotas.
   const compactHeader = scrolled || menuOpen;
-  const headerClass = `site-header site-header--overlay fixed inset-x-0 top-0 z-50 ${compactHeader ? "is-scrolled" : ""}`;
+  const headerClass = `site-header site-header--overlay fixed inset-x-0 top-0 z-50 ${compactHeader ? "is-scrolled" : ""} ${menuOpen ? "is-menu-open" : ""}`;
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -82,7 +82,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             <button className="header-menu rounded-xl border border-border p-2 text-primary 2xl:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
           </div>
         </div>
-        {menuOpen && <nav className="border-t border-border bg-white px-5 py-4 shadow-lg 2xl:hidden" aria-label="Menu móvel">{links.map(l => <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Matrículas e informações</Link></nav>}
+        <nav className={`mobile-menu-panel 2xl:hidden ${menuOpen ? "is-open" : ""}`} aria-label="Menu móvel" aria-hidden={!menuOpen}>{links.map(l => <Link key={l.to} to={l.to} onClick={() => setMenuOpen(false)} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Matrículas e informações</Link></nav>
       </header>
       <main key={pathname} className="site-main page-transition-enter flex-1">{children}</main>
       <footer className="bg-primary text-primary-foreground">
