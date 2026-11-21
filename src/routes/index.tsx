@@ -161,7 +161,7 @@ function Index() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const interval = window.setInterval(() => {
       setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 6500);
+    }, 4200);
     return () => window.clearInterval(interval);
   }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
