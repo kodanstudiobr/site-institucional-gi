@@ -1,13 +1,113 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { ChevronLeft, ChevronRight, X, Images, ArrowRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import type { Swiper as SwiperInstance } from "swiper";
+import "swiper/css";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
-export const Route=createFileRoute("/vivencias")({head: () => pageHead("/vivencias",{title:"Vivências e Projetos | Instituto Educacional G.I.",description:"Conheça as experiências, atividades e projetos pedagógicos do Instituto Educacional G.I.",keywords:"projetos pedagógicos, atividades escolares, vivências educativas, Instituto Educacional G.I."}),component:Vivencias});
-const items=[
-  ["Projetos pedagógicos","Investigações, descobertas e atividades que aproximam o conhecimento da vida.","https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85","Projetos"],
-  ["Arte e cultura","Experiências que valorizam a expressão, a imaginação e a criatividade.","https://images.unsplash.com/photo-1560785496-3c9d27877182?auto=format&fit=crop&w=1000&q=85","Criatividade"],
-  ["Convivência e cidadania","Momentos coletivos que fortalecem vínculos, respeito e cooperação.","https://images.unsplash.com/photo-1472162314594-eba3c3d2b7e3?auto=format&fit=crop&w=1000&q=85","Comunidade"],
-  ["Leitura e conhecimento","Descobertas que ampliam repertórios e despertam o prazer de aprender.","https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1000&q=85","Leitura"],
-  ["Movimento e expressão","Atividades que integram corpo, movimento e desenvolvimento.","https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1000&q=85","Expressão"],
-  ["Datas especiais","Celebrações e experiências que marcam a vida escolar.","https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=85","Eventos"]
+
+export const Route = createFileRoute("/vivencias")({
+  head: () => pageHead("/vivencias", {
+    title: "Vivências e Projetos | Instituto Educacional G.I.",
+    description: "Conheça as experiências, atividades e projetos pedagógicos do Instituto Educacional G.I.",
+    keywords: "projetos pedagógicos, atividades escolares, vivências educativas, Instituto Educacional G.I.",
+  }),
+  component: Vivencias,
+});
+
+const items = [
+  { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "/imagens/Setembro Amarelo_ Todos Pela Vida.webp", images: ["/imagens/Setembro Amarelo_ Todos Pela Vida.webp", "/imagens/Crianças na Canoa dos Povos Indígenas.webp", "/imagens/projeto-foto-1.webp", "/imagens/Jovens Apresentam Mostra Cultural.webp", "/imagens/Menina sorridente com carro rosa na escola.webp", "/imagens/Meninas na Feira de Sanduíches Escolares.webp"] },
+  { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "/imagens/Atividade Escolar com Arte em Família.webp", images: ["/imagens/Atividade Escolar com Arte em Família.webp", "/imagens/Estudantes diante da exposição artística escolar.webp", "/imagens/Menina com máscara de fantasia colorida.webp", "/imagens/projeto-arte-3.webp", "/imagens/Pintura com balão azul.webp", "/imagens/Seminário de Saberes Indígenas e Mel.webp", "/imagens/Dança Caipira no Ginásio Escolar.webp"] },
+  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: ["/imagens/Atividade em grupo na sala de aula.webp", "/imagens/Fila de Alunos no Ginásio Escolar.webp", "/imagens/Roda de atividades e criatividade.webp", "/imagens/Aula Infantil com Mesa Amarela e Aprendizado.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp"] },
+  { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp", images: ["/imagens/Leitura em roda na sala de aula.webp", "/imagens/projeto-leitura-02.webp", "/imagens/projeto leitura-01.webp", "/imagens/Criança em fantasia branca na escolinha.webp"] },
+  { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp", images: ["/imagens/IMG_3501.webp", "/imagens/projeto-descorbertas-01.webp", "/imagens/projeto-descorbetas-02 (1).webp", "/imagens/projeto-descorbetas-03.webp"] },
+  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: ["/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/projeto-criatividade-01 (1).webp", "/imagens/Emoções e Sentimentos na Escola (1).webp", "/imagens/Dia da Meia Maluca Colorido (1).webp", "/imagens/Apresentação Escolar de Impactos Ambientais (1).webp"] },
+  { title: "Esporte e Lazer", text: "Movimento, brincadeiras e atividades que estimulam a saúde, a integração e o espírito de equipe.", image: "/imagens/Momento de vôlei no ginásio.webp", images: ["/imagens/Momento de vôlei no ginásio.webp", "/imagens/Alegria no escorregador vermelho.webp", "/imagens/Meninas Sorridentes no Playground Escolar.webp", "/imagens/Menino sorridente no brinquedo azul.webp", "/imagens/Três Meninos Sorrindo no Playground.webp"] },
+  { title: "Festividades e Eventos", text: "Celebrações, apresentações e momentos especiais que aproximam toda a comunidade escolar.", image: "/imagens/Dança Caipira no Ginásio Escolar.webp", images: ["/imagens/Dança Caipira no Ginásio Escolar.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp", "/imagens/Dia da Meia Maluca Colorido (1).webp", "/imagens/Jovens Apresentam Mostra Cultural.webp", "/imagens/Assembleia Escolar no Ginásio.webp", "/imagens/Menina com máscara de fantasia colorida.webp"] },
 ];
-function Vivencias(){return <SiteLayout><PageHeader eyebrow="NOSSAS VIVÊNCIAS" title="Aprender também é viver experiências." intro="Projetos, atividades e momentos que tornam a aprendizagem ainda mais significativa em nossa escola."/><section className="section-wrap py-20"><div className="mx-auto mb-12 max-w-2xl text-center"><p className="eyebrow">VIVÊNCIAS G.I.</p><h2 className="section-title">Experiências que ampliam horizontes.</h2><p className="mt-4 leading-8 text-muted-foreground">A aprendizagem ganha significado nas descobertas, nas relações e nas experiências compartilhadas.</p></div><div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">{items.map(([t,d,img,tag])=><article key={t} className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"><img src={img} alt={t+" — imagem ilustrativa"} loading="lazy" className="h-56 w-full object-cover"/><div className="p-6"><span className="rounded-full bg-soft px-3 py-1 text-xs font-bold text-primary">{tag}</span><h2 className="mt-3 font-display text-xl font-bold text-primary">{t}</h2><p className="mt-3 leading-7 text-muted-foreground">{d}</p></div></article>)}</div><p className="mt-10 rounded-2xl bg-soft p-6 text-sm leading-7 text-muted-foreground">As imagens são referências ilustrativas. Esta página será atualizada com registros e fotografias reais dos projetos e eventos da escola.</p></section></SiteLayout>}
+
+type ExperienceItem = (typeof items)[number];
+
+function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  useEffect(() => {
+    if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const startTimeout = window.setTimeout(() => {
+      setActiveImageIndex((current) => (current + 1) % item.images.length);
+      const interval = window.setInterval(() => setActiveImageIndex((current) => (current + 1) % item.images.length), 4000);
+      (VivenciaCard as any)._intervals?.push(interval);
+    }, index * 450);
+    return () => window.clearTimeout(startTimeout);
+  }, [item.images.length, index]);
+  const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
+  return <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
+    {item.images.map((image, imageIndex) => <img key={image} className={`experience-card__background experience-card__background--slideshow ${imageIndex === activeImageIndex ? "is-active" : ""} ${focusFace ? "experience-card__background--face-focus" : ""}`} src={image} alt="" loading={imageIndex === 0 ? "eager" : "lazy"} aria-hidden="true" />)}
+    <div className="experience-card__shade" />
+    <span className="experience-card__number">0{index + 1}</span>
+    <div className="experience-card__content">
+      <span className="experience-card__gallery-hint"><Images size={15} /> Ver galeria <ArrowRight size={14} /></span>
+      <h2 className="mt-3 font-display text-xl font-bold text-white">{item.title}</h2>
+      <p className="mt-2 leading-6 text-white/90">{item.text}</p>
+    </div>
+  </button>;
+}
+
+function Vivencias() {
+  const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
+  const [activeGalleryImage, setActiveGalleryImage] = useState(0);
+  const [activeImage, setActiveImage] = useState(0);
+  const swiperRef = { current: null as SwiperInstance | null };
+  const selectedExperience = selectedGallery !== null ? items[selectedGallery] : null;
+  const galleryImages = selectedExperience?.images ?? [];
+  const showPrevious = () => swiperRef.current?.slidePrev();
+  const showNext = () => swiperRef.current?.slideNext();
+
+  useEffect(() => {
+    if (!selectedExperience) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedGallery(null);
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [selectedGallery, galleryImages.length]);
+
+  return <SiteLayout>
+    <PageHeader eyebrow="NOSSAS VIVÊNCIAS" title="Aprender também é viver experiências." intro="Projetos, atividades e momentos que tornam a aprendizagem ainda mais significativa em nossa escola." />
+    <section className="section-wrap py-20">
+      <div className="mx-auto mb-12 max-w-2xl text-center">
+        <p className="eyebrow">VIVÊNCIAS G.I.</p>
+        <h2 className="section-title">Experiências que ampliam horizontes.</h2>
+        <p className="mt-4 leading-8 text-muted-foreground">A aprendizagem ganha significado nas descobertas, nas relações e nas experiências compartilhadas. Selecione uma categoria para conhecer os registros da nossa escola.</p>
+      </div>
+      <div className="experience-gallery-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item, index) => <VivenciaCard key={item.title} item={item} index={index} onOpen={() => { setSelectedGallery(index); setActiveGalleryImage(0); }} />)}
+      </div>
+    </section>
+    {selectedExperience && createPortal(
+      <div className="experience-lightbox experience-lightbox--fullscreen" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSelectedGallery(null); }}>
+        <section className="experience-lightbox__panel experience-lightbox__panel--fullscreen" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
+          <button type="button" className="experience-lightbox__close experience-lightbox__close--floating" onClick={() => setSelectedGallery(null)} aria-label="Fechar galeria"><X size={24} /></button>
+          <div className="experience-lightbox__stage experience-lightbox__stage--fullscreen">
+            <Swiper className="experience-gallery-swiper" initialSlide={activeGalleryImage} onSwiper={(swiper) => { swiperRef.current = swiper; }} onSlideChange={(swiper) => setActiveGalleryImage(swiper.activeIndex)} speed={450} slidesPerView={1} allowTouchMove simulateTouch resistanceRatio={0.65}>
+              {galleryImages.map((image, index) => <SwiperSlide key={`${image}-${index}`}><img src={image} alt={`${selectedExperience.title} — foto ${index + 1}`} /></SwiperSlide>)}
+            </Swiper>
+          </div>
+          {galleryImages.length > 1 && <>
+            <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev experience-lightbox__arrow--floating" onClick={showPrevious} aria-label="Foto anterior"><ChevronLeft size={30} /></button>
+            <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next experience-lightbox__arrow--floating" onClick={showNext} aria-label="Próxima foto"><ChevronRight size={30} /></button>
+          </>}
+          <div className="experience-lightbox__counter experience-lightbox__counter--below">{String(activeGalleryImage + 1).padStart(2, "0")} / {String(galleryImages.length).padStart(2, "0")}</div>
+        </section>
+      </div>, document.body
+    )}
+  </SiteLayout>;
+}
