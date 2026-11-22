@@ -34,19 +34,39 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   useEffect(() => {
     if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const card = document.querySelectorAll<HTMLElement>(".experience-card__button")[index];
+    if (!card) return;
+
     let interval: number | undefined;
-    const startTimeout = window.setTimeout(() => {
-      setActiveImageIndex((current) => (current + 1) % item.images.length);
-      interval = window.setInterval(() => setActiveImageIndex((current) => (current + 1) % item.images.length), 4000);
-    }, index * 450);
-    return () => {
-      window.clearTimeout(startTimeout);
-      if (interval !== undefined) window.clearInterval(interval);
+    const start = () => {
+      if (interval !== undefined) return;
+      interval = window.setInterval(() => {
+        setActiveImageIndex((current) => (current + 1) % item.images.length);
+      }, 5000);
     };
+    const stop = () => {
+      if (interval !== undefined) window.clearInterval(interval);
+      interval = undefined;
+    };
+
+    if (!("IntersectionObserver" in window)) start();
+    else {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      }, { threshold: 0.15 });
+      observer.observe(card);
+      return () => {
+        observer.disconnect();
+        stop();
+      };
+    }
+    return stop;
   }, [item.images.length, index]);
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
   return <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
-    {item.images.map((image, imageIndex) => <img key={image} className={`experience-card__background experience-card__background--slideshow ${imageIndex === activeImageIndex ? "is-active" : ""} ${focusFace ? "experience-card__background--face-focus" : ""}`} src={image} alt="" loading={imageIndex === 0 ? "eager" : "lazy"} aria-hidden="true" />)}
+    <img key={item.images[activeImageIndex]} className={`experience-card__background experience-card__background--slideshow is-active ${focusFace ? "experience-card__background--face-focus" : ""}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
     <div className="experience-card__shade" />
     <span className="experience-card__number">0{index + 1}</span>
     <div className="experience-card__content">
