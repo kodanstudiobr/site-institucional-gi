@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { Target, Eye, HeartHandshake, ShieldCheck, HandHeart, BookOpen, Users, Scale, Lightbulb, Heart, Star, Compass } from "lucide-react";
 import { pageHead } from "@/lib/seo";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -25,6 +26,20 @@ const valores=[
   {icon:Users,title:"Parcerias com as famílias",text:"Fortalecer o diálogo, a confiança e a participação das famílias na trajetória educativa dos estudantes."}
 ];
 function Sobre() {
+  const directorsGridRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const grid = directorsGridRef.current;
+    if (!grid) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        grid.classList.add("is-visible");
+        observer.disconnect();
+      }
+    }, { threshold: 0.2, rootMargin: "0px 0px -40px 0px" });
+    observer.observe(grid);
+    return () => observer.disconnect();
+  }, []);
+
   return <SiteLayout>
     <section className="page-hero school-page-hero">
       <picture><source media="(max-width: 767px)" srcSet="/imagens/Atividade%20escolar%20com%20ovo%20de%20papel.webp"/><img className="school-page-hero__image" src="/imagens/Momento%20de%20arte%20com%20carinho.webp" alt="" aria-hidden="true" fetchPriority="high"/></picture>
@@ -42,8 +57,7 @@ function Sobre() {
     </section>
     <section className="school-dream-section py-8 sm:py-10 lg:py-14">
       <div className="section-wrap">
-        <h2 className="school-dream-heading">Nossa Gestão</h2>
-        <div className="school-dream-grid mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-7 md:gap-14">
+        <div ref={directorsGridRef} className="school-dream-grid mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-7 md:gap-14">
           <article className="school-dream-card school-dream-card--left">
             <div className="school-dream-card__photo"><img src="/imagens/IMG_3972.webp" alt="Felina Sousa, Diretora Escolar" loading="lazy"/></div>
             <div className="px-1 pb-2 pt-3 text-center"><h3 className="font-display text-sm font-extrabold text-primary sm:text-lg">Felina Sousa</h3><p className="mt-1 text-[.62rem] font-bold uppercase tracking-[.08em] text-muted-foreground sm:text-xs">Diretora Escolar</p></div>
