@@ -165,9 +165,20 @@ function ExperienceWords() {
 type ExperienceItem = (typeof vivencias)[number];
 
 function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const cardImages = item.images.length > 0 ? item.images : [item.image];
+
+  useEffect(() => {
+    if (cardImages.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const interval = window.setInterval(() => {
+      setActiveImageIndex((current) => (current + 1) % cardImages.length);
+    }, 3000);
+    return () => window.clearInterval(interval);
+  }, [cardImages.length]);
+
   return (
     <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
-      <img className={`experience-card__background ${item.title === "Arte e cultura" || item.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={item.image} alt="" loading="lazy" />
+      <img key={cardImages[activeImageIndex]} className={`experience-card__background is-visible experience-card__background--slideshow ${item.title === "Arte e cultura" || item.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={cardImages[activeImageIndex]} alt="" loading="lazy" />
       <div className="experience-card__shade"/>
       <span className="experience-card__number">0{index + 1}</span>
       <div className="experience-card__content">
