@@ -2564,3 +2564,65 @@ html {
   .school-dream-card { animation:none; transition:none; }
   .school-dream-card__photo img { transition:none; }
 }
+
+
+/* Mobile reading order: section label and headline, then image, then supporting copy. */
+.home-essence-layout,
+.school-presentation-layout,
+.bilingual-layout {
+  display:grid;
+}
+.home-essence-heading,
+.school-presentation-heading,
+.bilingual-heading { grid-area:heading; }
+.home-essence-image,
+.school-presentation-image,
+.bilingual-image { grid-area:image; }
+.home-essence-copy,
+.school-presentation-copy,
+.bilingual-description { grid-area:copy; }
+
+@media (min-width:1024px) {
+  .home-essence-layout {
+    grid-template-areas:"image heading" "image copy";
+    grid-template-rows:auto 1fr;
+  }
+  .school-presentation-layout {
+    grid-template-areas:"heading image" "copy image";
+    grid-template-rows:auto 1fr;
+  }
+  .bilingual-layout {
+    grid-template-areas:"heading image" "copy image";
+    grid-template-rows:auto 1fr;
+  }
+  .home-essence-copy { align-self:start; }
+  .school-presentation-copy,.bilingual-description { align-self:start; }
+}
+@media (max-width:1023px) {
+  .home-essence-layout,
+  .school-presentation-layout,
+  .bilingual-layout {
+    grid-template-areas:"heading" "image" "copy";
+    grid-template-columns:minmax(0,1fr);
+    gap:1.5rem;
+  }
+  .school-presentation-copy { margin-top:0; }
+  .home-essence-image,
+  .school-presentation-image,
+  .bilingual-image { width:100%; }
+  .home-essence-image { margin-bottom:.5rem; }
+  .school-presentation-layout,.bilingual-layout { row-gap:1.5rem; }
+}
+.school-dream-heading {
+  margin:-.55rem auto 1.5rem;
+  color:#293d91;
+  font-family:var(--font-display,inherit);
+  font-size:clamp(1.35rem,2.5vw,1.9rem);
+  font-weight:850;
+  letter-spacing:-.035em;
+  line-height:1.15;
+  text-align:center;
+}
+@media (max-width:767px) {
+  .school-dream-heading { margin:-.35rem auto 1.1rem; font-size:1.25rem; }
+}
