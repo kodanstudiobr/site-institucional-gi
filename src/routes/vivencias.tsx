@@ -121,7 +121,19 @@ function Vivencias() {
   }, [selectedGallery, galleryImages.length]);
 
   return <SiteLayout>
-    <PageHeader className="vivencias-page-hero" eyebrow="GALERIA DE FOTOS" title={<>Momentos que <span className="text-accent">contam nossa história.</span></>} intro="Explore os registros das atividades, projetos, celebrações e experiências vividas pelos estudantes do Instituto Educacional G.I." />
+    <section className="page-hero school-page-hero vivencias-page-hero">
+      <picture>
+        <source media="(max-width: 767px)" srcSet="/imagens/IMG_4001.webp" />
+        <img className="school-page-hero__image" src="/imagens/IMG_4002.webp" alt="" aria-hidden="true" fetchPriority="high" />
+      </picture>
+      <div className="school-page-hero__overlay" aria-hidden="true" />
+      <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
+        <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">GALERIA DE FOTOS</p>
+        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Momentos que <span className="text-accent">contam nossa história.</span></h1>
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Explore os registros das atividades, projetos, celebrações e experiências vividas pelos estudantes do Instituto Educacional G.I.</p>
+      </div>
+      <span className="absolute bottom-4 right-5 z-10 rounded-full bg-black/35 px-3 py-1 text-[10px] font-medium text-white/85">Imagem ilustrativa</span>
+    </section>
     <section className="section-wrap py-20">
       <div className="mx-auto mb-12 max-w-2xl text-center">
         <p className="eyebrow">REGISTROS DA NOSSA ESCOLA</p>
