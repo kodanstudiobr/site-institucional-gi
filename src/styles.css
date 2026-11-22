@@ -1504,6 +1504,45 @@ html {
 }
 
 
+/* Hero da página Nossa Escola com fotografia de fundo, como na homepage. */
+.school-page-hero {
+  min-height:560px;
+  display:flex;
+  align-items:stretch;
+  background:#263878;
+}
+.school-page-hero__image {
+  position:absolute;
+  inset:0;
+  z-index:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 38%;
+  animation:schoolPageHeroReveal 1.8s cubic-bezier(.2,.7,.2,1) both;
+  transform:scale(1.025);
+}
+.school-page-hero__overlay {
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:linear-gradient(90deg,rgba(23,40,105,.94) 0%,rgba(43,62,143,.78) 52%,rgba(31,48,111,.35) 100%);
+}
+@keyframes schoolPageHeroReveal {
+  from { opacity:.45; transform:scale(1.09); }
+  to { opacity:1; transform:scale(1.025); }
+}
+@media (max-width:767px) {
+  .school-page-hero { min-height:560px; }
+  .school-page-hero__image { object-position:center center; }
+  .school-page-hero__overlay {
+    background:linear-gradient(180deg,rgba(23,40,105,.58) 0%,rgba(23,40,105,.78) 48%,rgba(23,40,105,.94) 100%);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .school-page-hero__image { animation:none; transform:none; }
+}
+
 /* Enquadramento das fotografias nas páginas institucionais. */
 .bilingual-classroom-image {
   object-position:center 34%;
