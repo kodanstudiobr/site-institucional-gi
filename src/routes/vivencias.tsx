@@ -123,7 +123,7 @@ function Vivencias() {
     <section className="section-wrap py-20">
       <div className="mx-auto mb-12 max-w-2xl text-center">
         <p className="eyebrow">VIVÊNCIAS G.I.</p>
-        <h2 className="section-title">Experiências que ampliam horizontes.</h2>
+        <h2 className="section-title">Experiências que <span className="title-highlight">ampliam horizontes.</span></h2>
         <p className="mt-4 leading-8 text-muted-foreground">A aprendizagem ganha significado nas descobertas, nas relações e nas experiências compartilhadas. Selecione uma categoria para conhecer os registros da nossa escola.</p>
       </div>
       <div className="experience-gallery-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
