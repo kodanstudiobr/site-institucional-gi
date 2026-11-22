@@ -2817,6 +2817,7 @@ main .learning-word-stack p.learning-word {
 }
 @media (max-width:767px) {
   .vivencias-page-hero .school-page-hero__image {
-    object-position:35% center;
+    object-position:22% center;
+    transform:scale(1.10);
   }
 }
