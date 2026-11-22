@@ -77,7 +77,7 @@ function HistoryTestimonials() {
         <div className="history-counter"><span className="history-counter__plus" aria-hidden="true">+</span><span className="history-counter__number">26</span><span className="history-counter__suffix"> anos</span></div>
         <p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p>
       </div>
-      <div className="history-scroll-testimonials" aria-hidden={storyMode}>
+      <div className="history-scroll-testimonials" aria-hidden={storyMode} style={{ opacity: Math.min(1, Math.max(0, (progress - 0.30) / 0.10)), transform: `translateY(${(1 - Math.min(1, Math.max(0, (progress - 0.30) / 0.10))) * 28}px)` }}>
         <p className="history-scroll-kicker">QUEM VIVE, SABE.</p>
         <h2 className="history-scroll-heading">E faz parte.</h2>
         <div className="history-scroll-cards">
