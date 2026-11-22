@@ -140,7 +140,7 @@ function Ensino() {
         </div>
       </div>
       <div className="bilingual-image-wrap relative">
-        <img src="/imagens/Atividade%20de%20cartas%20ilustradas%20na%20sala%20de%20aula.webp" alt="Atividade de cartas ilustradas na sala de aula" loading="lazy" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/>
+        <img src="/imagens/Atividade%20de%20cartas%20ilustradas%20na%20sala%20de%20aula.webp" alt="Atividade de cartas ilustradas na sala de aula" loading="lazy" className="bilingual-classroom-image aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/>
         <div className="absolute -bottom-5 -right-3 rounded-2xl bg-primary px-6 py-5 font-display text-lg font-bold text-white shadow-lg sm:-right-5">Learning together</div>
       </div>
     </section>
