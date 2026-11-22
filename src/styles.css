@@ -2722,7 +2722,7 @@ main .learning-word-stack p.learning-word {
 
   .experience-card__background--slideshow {
     animation:none !important;
-    transition:opacity 1.25s cubic-bezier(.22,.61,.36,1) !important;
+    transition:opacity 1800ms cubic-bezier(.4,0,.2,1) !important;
   }
 
   .learning-word-stack .learning-word--current,
