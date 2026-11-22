@@ -116,24 +116,34 @@
   }
   .section-spark--left { left:2%; top:3%; }
   .section-spark--pedagogy { right:2%; top:2%; }
-  /* Mantém uma faixa do próximo card visível para indicar que a lista desliza. */
-  .experience-carousel {
+  /* Os dois trilhos usam a mesma medida e deixam o próximo card à mostra. */
+  .experience-carousel,
+  .school-segments-grid {
+    display:flex;
     gap:14px;
-    padding:4px 0 12px;
+    overflow-x:auto;
     overflow-y:hidden;
-    max-height:410px;
+    padding:5px 0 14px;
+    margin-inline:0;
     scroll-padding-inline:0;
     scroll-snap-type:none;
     scroll-behavior:auto;
     overscroll-behavior-x:contain;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
     touch-action:pan-x pan-y;
     cursor:grab;
   }
-  .experience-carousel:active { cursor:grabbing; }
-  .experience-card {
+  .experience-carousel:active,
+  .school-segments-grid:active { cursor:grabbing; }
+  .experience-carousel::-webkit-scrollbar,
+  .school-segments-grid::-webkit-scrollbar { display:none; }
+  .experience-card,
+  .school-segment-card {
     flex:0 0 min(82vw,350px);
     width:min(82vw,350px);
     height:410px;
+    min-height:410px;
     scroll-snap-align:none;
   }
   .experience-card__button { width:100%; }
@@ -2141,9 +2151,11 @@ html {
   transition:opacity 1.25s cubic-bezier(.22,.61,.36,1);
   will-change:opacity;
 }
-.experience-card__background--slideshow.is-entering,
-.experience-card__background--slideshow.is-outgoing {
+.experience-card__background--slideshow.is-entering {
   opacity:0;
+}
+.experience-card__background--slideshow.is-outgoing {
+  opacity:1;
 }
 .experience-card__background--slideshow.is-active {
   opacity:1;
@@ -2363,30 +2375,7 @@ html {
   .school-segment-card { min-height:370px; }
 }
 @media (max-width:767px) {
-  .school-segments-grid {
-    display:flex;
-    gap:14px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    overscroll-behavior-x:contain;
-    scroll-snap-type:none;
-    scroll-behavior:auto;
-    scrollbar-width:none;
-    padding:5px 0 14px;
-    margin-inline:0;
-    -webkit-overflow-scrolling:touch;
-    touch-action:pan-x pan-y;
-    cursor:grab;
-  }
-  .school-segments-grid:active { cursor:grabbing; }
-  .school-segments-grid::-webkit-scrollbar { display:none; }
-  .school-segment-card {
-    flex:0 0 min(82vw,350px);
-    width:min(82vw,350px);
-    min-height:420px;
-    scroll-snap-align:none;
-    border-radius:25px;
-  }
+  .school-segment-card { border-radius:25px; }
   .school-segment-card__content { right:21px; bottom:22px; left:21px; }
   .school-segment-card__content h3 { font-size:1.65rem; }
   .school-segments-dots { display:flex; align-items:center; justify-content:center; gap:.5rem; }
