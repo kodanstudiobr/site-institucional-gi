@@ -170,15 +170,36 @@ function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: 
 
   useEffect(() => {
     if (cardImages.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const interval = window.setInterval(() => {
+
+    let intervalId: number | undefined;
+    const staggerDelay = index * 650;
+    const startTimeout = window.setTimeout(() => {
       setActiveImageIndex((current) => (current + 1) % cardImages.length);
-    }, 3000);
-    return () => window.clearInterval(interval);
-  }, [cardImages.length]);
+      intervalId = window.setInterval(() => {
+        setActiveImageIndex((current) => (current + 1) % cardImages.length);
+      }, 3000);
+    }, staggerDelay);
+
+    return () => {
+      window.clearTimeout(startTimeout);
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+    };
+  }, [cardImages.length, index]);
+
+  const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
 
   return (
     <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
-      <img key={cardImages[activeImageIndex]} className={`experience-card__background is-visible experience-card__background--slideshow ${item.title === "Arte e cultura" || item.title === "Criatividade em ação" ? "experience-card__background--face-focus" : ""}`} src={cardImages[activeImageIndex]} alt="" loading="lazy" />
+      {cardImages.map((image, imageIndex) => (
+        <img
+          key={image}
+          className={`experience-card__background experience-card__background--slideshow ${imageIndex === activeImageIndex ? "is-active" : ""} ${focusFace ? "experience-card__background--face-focus" : ""}`}
+          src={image}
+          alt=""
+          loading={imageIndex === 0 ? "eager" : "lazy"}
+          aria-hidden="true"
+        />
+      ))}
       <div className="experience-card__shade"/>
       <span className="experience-card__number">0{index + 1}</span>
       <div className="experience-card__content">
