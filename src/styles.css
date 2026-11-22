@@ -117,8 +117,23 @@
   .section-spark--left { left:2%; top:3%; }
   .section-spark--pedagogy { right:2%; top:2%; }
   /* Mantém uma faixa do próximo card visível para indicar que a lista desliza. */
-  .experience-carousel { gap:14px; padding:4px 0 12px; scroll-padding-inline:0; }
-  .experience-card { flex:0 0 min(82vw,350px); width:min(82vw,350px); height:410px; scroll-snap-align:start; }
+  .experience-carousel {
+    gap:14px;
+    padding:4px 0 12px;
+    scroll-padding-inline:0;
+    scroll-snap-type:none;
+    scroll-behavior:auto;
+    overscroll-behavior-x:contain;
+    touch-action:pan-x pan-y;
+    cursor:grab;
+  }
+  .experience-carousel:active { cursor:grabbing; }
+  .experience-card {
+    flex:0 0 min(82vw,350px);
+    width:min(82vw,350px);
+    height:410px;
+    scroll-snap-align:none;
+  }
   .experience-card__button { width:100%; }
   .experience-card__content { padding:1.35rem; }
   .experience-card__content h3 { font-size:1.3rem; }
@@ -2346,20 +2361,22 @@ html {
     gap:14px;
     overflow-x:auto;
     overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory;
-    scroll-behavior:smooth;
+    scroll-snap-type:none;
+    scroll-behavior:auto;
     scrollbar-width:none;
     padding:5px 0 14px;
     margin-inline:0;
     -webkit-overflow-scrolling:touch;
     touch-action:pan-x pan-y;
+    cursor:grab;
   }
+  .school-segments-grid:active { cursor:grabbing; }
   .school-segments-grid::-webkit-scrollbar { display:none; }
   .school-segment-card {
     flex:0 0 min(82vw,350px);
     width:min(82vw,350px);
     min-height:420px;
-    scroll-snap-align:start;
+    scroll-snap-align:none;
     border-radius:25px;
   }
   .school-segment-card__content { right:21px; bottom:22px; left:21px; }
