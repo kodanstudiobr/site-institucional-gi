@@ -38,62 +38,61 @@ const perguntas = [
   ["Como entrar em contato com a instituição?", "Acesse a página Contato e envie seus dados para solicitar informações à equipe do Instituto Educacional G.I."],
 ];
 
-function AnimatedNumber({ value }: { value: number }) {
-  const numberRef = useRef<HTMLSpanElement>(null);
-  const [displayValue, setDisplayValue] = useState(0);
+function HistoryTestimonials() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const element = numberRef.current;
-    if (!element) return;
-
+    const section = sectionRef.current;
+    if (!section) return;
     let frame = 0;
-    let started = false;
-    let observer: IntersectionObserver | undefined;
-
-    const animate = () => {
-      if (started) return;
-      started = true;
-      const duration = 1800;
-      const startTime = performance.now();
-
-      const tick = (now: number) => {
-        const progress = Math.min(1, (now - startTime) / duration);
-        const easedProgress = 1 - Math.pow(1 - progress, 4);
-        setDisplayValue(Math.round(value * easedProgress));
-        if (progress < 1) {
-          frame = window.requestAnimationFrame(tick);
-        } else {
-          setDisplayValue(value);
-        }
-      };
-
-      frame = window.requestAnimationFrame(tick);
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const distance = Math.max(1, rect.height - window.innerHeight);
+        setProgress(Math.min(1, Math.max(0, -rect.top / distance)));
+      });
     };
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setDisplayValue(value);
-      return;
-    }
-
-    if ("IntersectionObserver" in window) {
-      observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          animate();
-          observer?.disconnect();
-        }
-      }, { threshold: 0.45 });
-      observer.observe(element);
-    } else {
-      animate();
-    }
-
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
     return () => {
-      observer?.disconnect();
-      if (frame) window.cancelAnimationFrame(frame);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
-  }, [value]);
+  }, []);
 
-  return <span ref={numberRef} className="history-counter__number" aria-label={String(value)}>{displayValue}</span>;
+  const cards = ["Família da Educação Infantil", "Família dos Anos Iniciais", "Família G.I."];
+  const storyMode = progress < 0.34;
+  const introOpacity = Math.max(0, 1 - Math.max(0, (progress - 0.19) / 0.15));
+  const testimonialsProgress = Math.max(0, Math.min(1, (progress - 0.34) / 0.66));
+  const visibleCards = Math.min(3, Math.floor(testimonialsProgress * 3.35));
+
+  return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
+    <div className={`history-scroll-stage ${storyMode ? "is-story" : "is-testimonials"}`}>
+      <div className="history-scroll-story" style={{ opacity: introOpacity, transform: `translateY(${(1 - introOpacity) * -34}px)` }}>
+        <p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p>
+        <div className="history-counter"><span className="history-counter__plus" aria-hidden="true">+</span><span className="history-counter__number">26</span><span className="history-counter__suffix"> anos</span></div>
+        <p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p>
+      </div>
+      <div className="history-scroll-testimonials" aria-hidden={storyMode}>
+        <p className="history-scroll-kicker">QUEM VIVE, SABE.</p>
+        <h2 className="history-scroll-heading">E faz parte.</h2>
+        <div className="history-scroll-cards">
+          {cards.map((label, index) => {
+            const shown = index < visibleCards;
+            return <article key={label} className={`testimonial-card history-scroll-card history-scroll-card--${index + 1} ${shown ? "is-visible" : ""}`}>
+              <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
+              <p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p>
+              <div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+            </article>;
+          })}
+        </div>
+      </div>
+    </div>
+  </section>;
 }
 
 const heroSlides = [
@@ -428,7 +427,7 @@ function Index() {
       <p className="mt-5 text-center text-xs text-muted-foreground">Imagens ilustrativas — serão substituídas por fotografias reais da estrutura da escola.</p>
     </section>
 
-    <section className="history-highlight section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative text-center"><p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p><div className="history-counter mt-4"><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedNumber value={26}/><span className="history-counter__suffix"> anos</span></div><p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p><div className="history-community mt-14"><p className="history-community__eyebrow">QUEM VIVE SABE E FAZ PARTE</p><p className="history-community__copy">Cada história, cada conquista e cada lembrança fazem parte da nossa comunidade.</p><div className="testimonials-stack mt-12 text-left">{["Família da Educação Infantil","Família dos Anos Iniciais","Família G.I."].map((label,i)=><div className="testimonials-stack__step" key={label}><article className="testimonial-card testimonials-stack__card"><div className="testimonial-card__top"><span className="testimonial-card__quote"><Quote size={23}/></span><span className="testimonial-card__stars" aria-label="Espaço visual para avaliação"><Star/><Star/><Star/><Star/><Star/></span></div><p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p><div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div></article></div>)}</div></div><Star className="section-spark section-spark--history" size={58} fill="currentColor" aria-hidden="true"/></div></section>
+    <HistoryTestimonials />
 
     <section className="section-wrap py-20 lg:py-24"><div className="mx-auto max-w-3xl"><div className="text-center"><p className="eyebrow">DÚVIDAS FREQUENTES</p><h2 className="section-title">Estamos aqui para <span className="title-highlight">ajudar.</span></h2></div><div className="mt-10 divide-y divide-border border-y border-border">{perguntas.map(([q,a],i)=><div key={q} className="py-5"><button className="flex w-full items-center justify-between gap-4 text-left font-semibold text-primary" aria-expanded={faqOpen===i} onClick={()=>setFaqOpen(faqOpen===i?null:i)}><span>{q}</span><ChevronDown className={`shrink-0 transition-transform ${faqOpen===i?"rotate-180":""}`}/></button>{faqOpen===i&&<p className="max-w-2xl pt-4 leading-7 text-muted-foreground">{a}</p>}</div>)}</div></div></section>
 
