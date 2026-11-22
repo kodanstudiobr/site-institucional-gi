@@ -1,11 +1,7 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, X, Images } from "lucide-react";
+import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import type { Swiper as SwiperInstance } from "swiper";
-import "swiper/css";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
@@ -26,7 +22,7 @@ const destaques = [
 const vivencias = [
   { title: "Projetos pedagógicos", text: "Investigações, descobertas e atividades que aproximam o conhecimento da vida.", image: "/imagens/Setembro Amarelo_ Todos Pela Vida.webp", images: ["/imagens/Setembro Amarelo_ Todos Pela Vida.webp", "/imagens/Crianças na Canoa dos Povos Indígenas.webp", "/imagens/projeto-foto-1.webp", "/imagens/Jovens Apresentam Mostra Cultural.webp", "/imagens/Menina sorridente com carro rosa na escola.webp", "/imagens/Meninas na Feira de Sanduíches Escolares.webp"] },
   { title: "Arte e cultura", text: "Experiências que valorizam a expressão, a imaginação e a criatividade.", image: "/imagens/Atividade Escolar com Arte em Família.webp", images: ["/imagens/Atividade Escolar com Arte em Família.webp", "/imagens/Estudantes diante da exposição artística escolar.webp", "/imagens/Menina com máscara de fantasia colorida.webp", "/imagens/projeto-arte-3.webp", "/imagens/Pintura com balão azul.webp", "/imagens/Seminário de Saberes Indígenas e Mel.webp", "/imagens/Dança Caipira no Ginásio Escolar.webp"] },
-  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: ["/imagens/Atividade em grupo na sala de aula.webp", "/imagens/Fila de Alunos no Ginásio Escolar.webp", "/imagens/Roda de atividades e criatividade.webp", "/imagens/Aula Infantil com Mesa Amarela e Aprendizado.webp"] },
+  { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: ["/imagens/Atividade em grupo na sala de aula.webp", "/imagens/Fila de Alunos no Ginásio Escolar.webp", "/imagens/Roda de atividades e criatividade.webp", "/imagens/Aula Infantil com Mesa Amarela e Aprendizado.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp"] },
   { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp", images: ["/imagens/Leitura em roda na sala de aula.webp", "/imagens/projeto-leitura-02.webp", "/imagens/projeto leitura-01.webp", "/imagens/Criança em fantasia branca na escolinha.webp"] },
   { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp", images: ["/imagens/IMG_3501.webp", "/imagens/projeto-descorbertas-01.webp", "/imagens/projeto-descorbetas-02 (1).webp", "/imagens/projeto-descorbetas-03.webp"] },
   { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: ["/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/projeto-criatividade-01 (1).webp", "/imagens/Emoções e Sentimentos na Escola (1).webp", "/imagens/Dia da Meia Maluca Colorido (1).webp", "/imagens/Apresentação Escolar de Impactos Ambientais (1).webp"] },
@@ -37,7 +33,7 @@ const perguntas = [
   ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende à Educação Infantil e aos Anos Iniciais do Ensino Fundamental."],
   ["Como funciona o processo de matrícula?", "Entre em contato com a escola pelo formulário desta página para receber orientações sobre o processo de matrícula."],
   ["Quais documentos são necessários?", "A relação de documentos é informada pela equipe da escola durante o atendimento à família."],
-  ["Como conhecer a estrutura da escola?", "Entre em contato para conversar com a equipe e consultar a possibilidade de agendar uma visita."],
+  ["Como conhecer a escola?", "Entre em contato com a equipe para conversar e consultar a possibilidade de agendar uma visita."],
   ["Como funciona a proposta pedagógica?", "Nossa comunicação institucional valoriza o acolhimento, a aprendizagem significativa e o desenvolvimento integral dos estudantes."],
   ["Como entrar em contato com a instituição?", "Acesse a página Contato e envie seus dados para solicitar informações à equipe do Instituto Educacional G.I."],
 ];
@@ -166,7 +162,7 @@ function ExperienceWords() {
 
 type ExperienceItem = (typeof vivencias)[number];
 
-function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
+function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const cardImages = item.images.length > 0 ? item.images : [item.image];
 
@@ -191,7 +187,7 @@ function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: 
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
 
   return (
-    <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
+    <div className="experience-card" aria-label={item.title}>
       {cardImages.map((image, imageIndex) => (
         <img
           key={image}
@@ -205,51 +201,16 @@ function ExperienceCard({ item, index, onOpen }: { item: ExperienceItem; index: 
       <div className="experience-card__shade"/>
       <span className="experience-card__number">0{index + 1}</span>
       <div className="experience-card__content">
-        <span className="experience-card__gallery-hint"><Images size={15}/> Ver galeria <ArrowRight size={14}/></span>
         <h3 className="mt-3 font-display text-xl font-bold text-white">{item.title}</h3>
         <p className="mt-2 leading-6 text-white/90">{item.text}</p>
       </div>
-    </button>
+    </div>
   );
 }
 
 function Index() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
-  const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
-  const [activeGalleryImage, setActiveGalleryImage] = useState(0);
-  const gallerySwiperRef = useRef<SwiperInstance | null>(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const interval = window.setInterval(() => {
-      setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 4000);
-    return () => window.clearInterval(interval);
-  }, []);
-  const selectedExperience = selectedGallery !== null ? vivencias[selectedGallery] : null;
-  const galleryImages = selectedExperience
-    ? (selectedExperience.images.length > 0 ? selectedExperience.images : [selectedExperience.image])
-    : [];
-  const showPreviousGalleryImage = () => gallerySwiperRef.current?.slidePrev();
-  const showNextGalleryImage = () => gallerySwiperRef.current?.slideNext();
-
-  useEffect(() => {
-    if (!selectedExperience) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedGallery(null);
-      if (galleryImages.length > 1 && event.key === "ArrowLeft") showPreviousGalleryImage();
-      if (galleryImages.length > 1 && event.key === "ArrowRight") showNextGalleryImage();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedGallery, galleryImages.length]);
-
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeExperience, setActiveExperience] = useState(0);
   const moveCarousel = (direction: "prev" | "next") => {
@@ -308,41 +269,13 @@ function Index() {
 
     <ExperienceWords />
 
-    <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivenciar momentos que ensinam e ficam na memória.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><ExperienceCard key={v.title} item={v} index={i} onOpen={()=>{setSelectedGallery(i);setActiveGalleryImage(0);}}/>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
+    <section className="section-wrap section-decor-wrap py-20 lg:py-24"><div className="relative"><Star className="section-spark section-spark--learning" size={46} fill="currentColor" aria-hidden="true"/><div className="flex flex-wrap items-end justify-between gap-6"><div className="max-w-2xl"><p className="eyebrow">APRENDER FAZENDO</p><h2 className="section-title">Vivenciar momentos que ensinam e ficam na memória.</h2><p className="mt-4 leading-7 text-muted-foreground">Projetos, experiências e atividades que tornam a aprendizagem significativa, estimulam a criatividade e fortalecem os vínculos entre os estudantes.</p></div><div className="flex items-center gap-4"><Link to="/vivencias" className="link-arrow">Ver nossas vivências <ArrowRight size={18}/></Link><div className="hidden gap-2 sm:flex"><button type="button" onClick={()=>moveCarousel("prev")} aria-label="Ver vivências anteriores" className="carousel-arrow"><ChevronLeft size={20}/></button><button type="button" onClick={()=>moveCarousel("next")} aria-label="Ver próximas vivências" className="carousel-arrow"><ChevronRight size={20}/></button></div></div></div><div ref={carouselRef} onScroll={handleExperienceScroll} className="experience-carousel mt-10" aria-label="Carrossel de vivências escolares">{vivencias.map((v,i)=><ExperienceCard key={v.title} item={v} index={i}/>)}</div><div className="experience-dots mt-5" role="group" aria-label="Selecionar vivência">{vivencias.map((v,i)=><button key={v.title} type="button" onClick={()=>goToExperience(i)} className={`experience-dot ${activeExperience===i?"is-active":""}`} aria-label={`Ir para ${v.title}`} aria-current={activeExperience===i?"true":undefined}/>)}</div></div></section>
 
-    {selectedExperience && selectedGallery !== null && createPortal(
-      <div className="experience-lightbox experience-lightbox--fullscreen" role="presentation" onMouseDown={(event)=>{if(event.target===event.currentTarget)setSelectedGallery(null);}}>
-        <section className="experience-lightbox__panel experience-lightbox__panel--fullscreen" role="dialog" aria-modal="true" aria-label={`Galeria: ${selectedExperience.title}`}>
-          <button type="button" className="experience-lightbox__close experience-lightbox__close--floating" onClick={()=>setSelectedGallery(null)} aria-label="Fechar galeria"><X size={24}/></button>
-          <div className="experience-lightbox__stage experience-lightbox__stage--fullscreen">
-            <Swiper
-              className="experience-gallery-swiper"
-              initialSlide={activeGalleryImage}
-              onSwiper={(swiper)=>{gallerySwiperRef.current=swiper;}}
-              onSlideChange={(swiper)=>setActiveGalleryImage(swiper.activeIndex)}
-              speed={450}
-              slidesPerView={1}
-              allowTouchMove={true}
-              simulateTouch={true}
-              resistanceRatio={0.65}
-            >
-              {galleryImages.map((image,index)=><SwiperSlide key={`${image}-${index}`}>
-                <img src={image} alt={`${selectedExperience.title} — foto ${index+1}`} />
-              </SwiperSlide>)}
-            </Swiper>
-          </div>
-          {galleryImages.length > 1 && <>
-            <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--prev experience-lightbox__arrow--floating" onClick={showPreviousGalleryImage} aria-label="Foto anterior"><ChevronLeft size={30}/></button>
-            <button type="button" className="experience-lightbox__arrow experience-lightbox__arrow--next experience-lightbox__arrow--floating" onClick={showNextGalleryImage} aria-label="Próxima foto"><ChevronRight size={30}/></button>
-          </>}
-          <div className="experience-lightbox__counter experience-lightbox__counter--below">{String(activeGalleryImage+1).padStart(2,"0")} / {String(galleryImages.length).padStart(2,"0")}</div>
-        </section>
-      </div>, document.body
-    )}
+
 
     <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
 
-    <section className="section-wrap section-decor-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:py-24"><Star className="section-spark section-spark--structure" size={46} fill="currentColor" aria-hidden="true"/><div className="overflow-hidden rounded-[2rem]"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85" alt="Ambiente de aprendizagem escolar" loading="lazy" className="aspect-[5/4] w-full object-cover"/></div><div><p className="eyebrow">NOSSA ESTRUTURA</p><h2 className="section-title">Ambientes preparados para grandes descobertas.</h2><p className="mt-5 leading-8 text-muted-foreground">Cada espaço da escola faz parte da experiência de aprendizagem. Valorizamos ambientes que favoreçam a convivência, a criatividade, a participação e o desenvolvimento dos estudantes.</p><p className="mt-3 text-sm leading-7 text-muted-foreground">As imagens desta prévia são ilustrativas e serão substituídas por fotografias reais da instituição.</p><Link to="/estrutura" className="link-arrow mt-6">Conheça nossa estrutura <ArrowRight size={18}/></Link></div></section>
+    
 
     <section className="history-highlight section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative text-center"><p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p><div className="history-counter mt-4"><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedNumber value={26}/><span className="history-counter__suffix"> anos</span></div><p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p><div className="history-community mt-14"><p className="history-community__eyebrow">QUEM VIVE SABE E FAZ PARTE</p><p className="history-community__copy">Cada história, cada conquista e cada lembrança fazem parte da nossa comunidade.</p><div className="testimonials-grid mt-10 grid gap-5 text-left md:grid-cols-2 xl:grid-cols-3">{["Família da Educação Infantil","Família dos Anos Iniciais","Família G.I."].map((label,i)=><div key={label}><article className="testimonial-card h-full"><div className="testimonial-card__top"><span className="testimonial-card__quote"><Quote size={23}/></span><span className="testimonial-card__stars" aria-label="Espaço visual para avaliação"><Star/><Star/><Star/><Star/><Star/></span></div><p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p><div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div></article></div>)}</div></div><Star className="section-spark section-spark--history" size={58} fill="currentColor" aria-hidden="true"/></div></section>
 
