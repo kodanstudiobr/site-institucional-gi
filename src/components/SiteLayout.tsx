@@ -21,10 +21,18 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     const main = document.querySelector(".site-main");
     if (!main) return;
 
+    const horizontalCarousels = ".experience-carousel, .school-segments-grid, .structure-carousel";
     const candidates = Array.from(main.querySelectorAll<HTMLElement>(
       [
+        "section > div",
+        "section > article",
+        "section > figure",
+        "section > header",
+        "section > div > *",
         "section .section-wrap > *",
         "section article",
+        "section figure",
+        "section [class*='-card']",
         "section .feature-card",
         "section .mission-paper-card",
         "section .mission-vision-card",
@@ -33,18 +41,22 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         "section .experience-card",
         "section .bilingual-segment-note",
         "section .gallery-button",
-        "section .school-segment-card",
         ".page-hero__content",
         ".school-page-hero > .relative",
       ].join(", ")
-    )).filter((element) => !element.closest(".learning-words-section"));
+    )).filter((element) =>
+      !element.closest(".learning-words-section") &&
+      !element.closest(horizontalCarousels) &&
+      !element.matches(horizontalCarousels)
+    );
 
-    // Evita revelar um wrapper e seus cards simultaneamente: cada bloco visual
-    // e cada card entram individualmente, conforme chegam à área visível.
+    // Revela blocos e cards em todos os formatos de seção, sem animar
+    // simultaneamente um contêiner e seus descendentes.
     const cardSelector = [
-      "article", ".feature-card", ".mission-paper-card", ".mission-vision-card",
-      ".testimonial-card", ".integral-card", ".experience-card",
-      ".bilingual-segment-note", ".gallery-button", ".school-segment-card",
+      "article", "figure", "[class*='-card']", ".feature-card",
+      ".mission-paper-card", ".mission-vision-card", ".testimonial-card",
+      ".integral-card", ".experience-card", ".bilingual-segment-note",
+      ".gallery-button",
     ].join(", ");
     const targets = candidates.filter((element) => {
       const containsCards = element.querySelector(cardSelector) !== null;
