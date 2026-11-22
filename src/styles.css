@@ -2278,11 +2278,8 @@ html {
     scroll-snap-type:x mandatory;
     scroll-behavior:smooth;
     scrollbar-width:none;
-    padding:5px 2px 14px;
-    margin-right:-1.25rem;
-    margin-left:-1.25rem;
-    padding-right:1.25rem;
-    padding-left:1.25rem;
+    padding:5px 0 14px;
+    margin-inline:0;
     -webkit-overflow-scrolling:touch;
     touch-action:pan-x pan-y;
   }
@@ -2306,4 +2303,39 @@ html {
 }
 @media (prefers-reduced-motion:reduce) {
   .school-segment-card,.school-segment-card > img,.school-segment-card__button,.school-segments-dot { transition:none; }
+}
+
+
+/* Segmentos do Ensino: seletor acessível durante a leitura do conteúdo. */
+.school-segment-tabs {
+  position:sticky;
+  top:88px;
+  z-index:40;
+  background:rgba(255,255,255,.96);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  scroll-margin-top:100px;
+}
+.segment-feature-image {
+  display:block;
+  height:420px;
+  min-height:420px;
+  object-fit:cover;
+  object-position:center 24%;
+}
+@media (min-width:1024px) {
+  .segment-feature-image {
+    height:540px;
+    min-height:540px;
+  }
+}
+@media (max-width:767px) {
+  .school-segment-tabs {
+    top:72px;
+    border-radius:18px;
+  }
+  .segment-feature-image {
+    height:420px;
+    min-height:420px;
+  }
 }
