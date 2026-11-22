@@ -25,7 +25,7 @@ const vivencias = [
   { title: "Convivência e cidadania", text: "Momentos coletivos que fortalecem vínculos, respeito e cooperação.", image: "/imagens/Atividade em grupo na sala de aula.webp", images: ["/imagens/Atividade em grupo na sala de aula.webp", "/imagens/Fila de Alunos no Ginásio Escolar.webp", "/imagens/Roda de atividades e criatividade.webp", "/imagens/Aula Infantil com Mesa Amarela e Aprendizado.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp"] },
   { title: "Leitura e imaginação", text: "Histórias que despertam a curiosidade e ampliam o repertório das crianças.", image: "/imagens/Leitura em roda na sala de aula.webp", images: ["/imagens/Leitura em roda na sala de aula.webp", "/imagens/projeto-leitura-02.webp", "/imagens/projeto leitura-01.webp", "/imagens/Criança em fantasia branca na escolinha.webp"] },
   { title: "Descobertas e experiências", text: "Explorar, experimentar e aprender com o mundo ao redor.", image: "/imagens/IMG_3501.webp", images: ["/imagens/IMG_3501.webp", "/imagens/projeto-descorbertas-01.webp", "/imagens/projeto-descorbetas-02 (1).webp", "/imagens/projeto-descorbetas-03.webp"] },
-  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: ["/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/projeto-criatividade-01 (1).webp", "/imagens/Emoções e Sentimentos na Escola (1).webp", "/imagens/Dia da Meia Maluca Colorido (1).webp", "/imagens/Apresentação Escolar de Impactos Ambientais (1).webp"] },
+  { title: "Criatividade em ação", text: "Atividades que valorizam a expressão, a imaginação e novas ideias.", image: "/imagens/Estudante Apresenta Terrário Escolar.webp", images: ["/imagens/Estudante Apresenta Terrário Escolar.webp", "/imagens/Duas Alunas com Projetos Escolares.webp", "/imagens/projeto-criatividade-01 (1).webp", "/imagens/Emoções e Sentimentos na Escola (1).webp", "/imagens/Dia da Meia Maluca Colorido (1).webp", "/imagens/Apresentação Escolar de Impactos Ambientais (1).webp"] },
   { title: "Esporte e Lazer", text: "Movimento, brincadeiras e atividades que estimulam a saúde, a integração e o espírito de equipe.", image: "/imagens/Momento de vôlei no ginásio.webp", images: ["/imagens/Momento de vôlei no ginásio.webp", "/imagens/Alegria no escorregador vermelho.webp", "/imagens/Meninas Sorridentes no Playground Escolar.webp", "/imagens/Menino sorridente no brinquedo azul.webp", "/imagens/Três Meninos Sorrindo no Playground.webp"] },
   { title: "Festividades e Eventos", text: "Celebrações, apresentações e momentos especiais que aproximam toda a comunidade escolar.", image: "/imagens/Dança Caipira no Ginásio Escolar.webp", images: ["/imagens/Dança Caipira no Ginásio Escolar.webp", "/imagens/Crianças em Fantasias diante da Bandeira Brasileira.webp", "/imagens/Dia da Meia Maluca Colorido (1).webp", "/imagens/Jovens Apresentam Mostra Cultural.webp", "/imagens/Assembleia Escolar no Ginásio.webp", "/imagens/Menina com máscara de fantasia colorida.webp"] },
 ];
@@ -220,6 +220,8 @@ function Index() {
   }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeExperience, setActiveExperience] = useState(0);
+  const segmentCarouselRef = useRef<HTMLDivElement>(null);
+  const [activeSegment, setActiveSegment] = useState(0);
   const moveCarousel = (direction: "prev" | "next") => {
     const next = Math.max(0, Math.min(vivencias.length - 1, activeExperience + (direction === "next" ? 1 : -1)));
     goToExperience(next);
@@ -288,24 +290,49 @@ function Index() {
         <h2 id="school-segments-title" className="section-title">Uma jornada de aprendizagem para cada etapa.</h2>
         <p className="mt-5 leading-8 text-muted-foreground">Conheça os segmentos do Instituto Educacional G.I. e descubra as experiências preparadas para cada fase do desenvolvimento.</p>
       </div>
-      <div className="school-segments-grid mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+      <div ref={segmentCarouselRef} onScroll={() => {
+        const container = segmentCarouselRef.current;
+        if (!container) return;
+        const cards = Array.from(container.children) as HTMLElement[];
+        const center = container.scrollLeft + container.clientWidth / 2;
+        let nearest = 0;
+        let distance = Number.POSITIVE_INFINITY;
+        cards.forEach((card, i) => {
+          const cardCenter = card.offsetLeft - container.offsetLeft + card.offsetWidth / 2;
+          const currentDistance = Math.abs(center - cardCenter);
+          if (currentDistance < distance) { distance = currentDistance; nearest = i; }
+        });
+        setActiveSegment(nearest);
+      }} className="school-segments-grid mt-12" aria-label="Carrossel de segmentos escolares">
         {[
           { title: "Educação Infantil", image: "/imagens/Menino%20sorridente%20no%20brinquedo%20azul.webp", href: "/ensino#segmento-infantil", kind: "blue" },
           { title: "Anos Iniciais", image: "/imagens/Sorriso%20na%20sala%20de%20aula.webp", href: "/ensino#segmento-iniciais", kind: "blue" },
           { title: "Anos Finais", image: "/imagens/IMG_3939.webp", href: "/ensino#segmento-finais", kind: "blue" },
-          { title: "Ensino Integral", image: "/imagens/Menina%20sorridente%20no%20escorregador%20roxo.webp", href: "/ensino-integral", kind: "yellow" },
+          { title: "Ensino Integral", image: "/imagens/Retrato%20escolar%20infantil%20com%20uniforme%20G.I.webp", href: "/ensino-integral", kind: "yellow" },
         ].map((segment, index) => (
-          <article className="school-segment-card" key={segment.title}>
+          <article className={`school-segment-card school-segment-card--${segment.kind}`} key={segment.title}>
             <img src={segment.image} alt={segment.title} loading="lazy" />
             <div className="school-segment-card__shade" />
             <span className="school-segment-card__number">0{index + 1}</span>
             <div className="school-segment-card__content">
+              <span className="school-segment-card__eyebrow">INSTITUTO EDUCACIONAL G.I.</span>
               <h3>{segment.title}</h3>
               <a href={segment.href} className={`school-segment-card__button school-segment-card__button--${segment.kind}`}>
                 Saiba mais <ArrowRight size={17} />
               </a>
             </div>
+            <span className="school-segment-card__ornament" aria-hidden="true" />
           </article>
+        ))}
+      </div>
+      <div className="school-segments-dots mt-5" role="group" aria-label="Selecionar segmento">
+        {["Educação Infantil", "Anos Iniciais", "Anos Finais", "Ensino Integral"].map((name, i) => (
+          <button key={name} type="button" onClick={() => {
+            const container = segmentCarouselRef.current;
+            const card = container?.children[i] as HTMLElement | undefined;
+            if (container && card) container.scrollTo({ left: card.offsetLeft - container.offsetLeft, behavior: "smooth" });
+            setActiveSegment(i);
+          }} className={`school-segments-dot ${activeSegment === i ? "is-active" : ""}`} aria-label={`Ir para ${name}`} aria-current={activeSegment === i ? "true" : undefined} />
         ))}
       </div>
     </section>
