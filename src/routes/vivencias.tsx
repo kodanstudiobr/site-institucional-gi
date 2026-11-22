@@ -10,9 +10,9 @@ import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/vivencias")({
   head: () => pageHead("/vivencias", {
-    title: "Vivências e Projetos | Instituto Educacional G.I.",
-    description: "Conheça as experiências, atividades e projetos pedagógicos do Instituto Educacional G.I.",
-    keywords: "projetos pedagógicos, atividades escolares, vivências educativas, Instituto Educacional G.I.",
+    title: "Galeria de Fotos | Instituto Educacional G.I.",
+    description: "Explore a galeria de fotos com atividades, projetos, celebrações e experiências do Instituto Educacional G.I.",
+    keywords: "galeria de fotos, projetos pedagógicos, atividades escolares, Instituto Educacional G.I.",
   }),
   component: Vivencias,
 });
@@ -75,7 +75,7 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   }, [item.images.length, index]);
   useEffect(() => {
     if (outgoingImageIndex === null) return;
-    const timeout = window.setTimeout(() => setOutgoingImageIndex(null), 1350);
+    const timeout = window.setTimeout(() => setOutgoingImageIndex(null), 1900);
     return () => window.clearTimeout(timeout);
   }, [outgoingImageIndex]);
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
