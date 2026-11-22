@@ -2065,3 +2065,79 @@ html {
     transition:none !important;
   }
 }
+
+
+/* Estrela de O QUE NOS MOVE centralizada no próprio bloco do título em telas pequenas e grandes. */
+.section-spark--move-heading {
+  position:relative !important;
+  top:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  left:auto !important;
+  display:block;
+  width:42px !important;
+  height:42px !important;
+  margin:0 auto 12px;
+  transform-origin:center;
+}
+
+/* Carrossel contínuo e lento para apresentar a estrutura da escola. */
+.structure-carousel {
+  width:100%;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 5%,#000 95%,transparent 100%);
+}
+.structure-carousel__track {
+  display:flex;
+  width:max-content;
+  gap:22px;
+  animation:structureCarouselDrift 58s linear infinite;
+  will-change:transform;
+}
+.structure-carousel:hover .structure-carousel__track {
+  animation-play-state:paused;
+}
+.structure-carousel__slide {
+  position:relative;
+  width:clamp(260px,32vw,440px);
+  height:clamp(210px,25vw,310px);
+  flex:0 0 auto;
+  overflow:hidden;
+  border-radius:24px;
+  background:#e9edf8;
+  box-shadow:0 12px 32px rgba(36,51,111,.12);
+}
+.structure-carousel__slide img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.structure-carousel__slide:hover img {
+  transform:scale(1.045);
+}
+.structure-carousel__slide figcaption {
+  position:absolute;
+  right:0;
+  bottom:0;
+  left:0;
+  padding:30px 20px 18px;
+  background:linear-gradient(transparent,rgba(15,28,72,.78));
+  color:#fff;
+  font-size:.95rem;
+  font-weight:700;
+}
+@keyframes structureCarouselDrift {
+  from { transform:translateX(0); }
+  to { transform:translateX(calc(-50% - 11px)); }
+}
+@media (max-width:767px) {
+  .structure-carousel__track { gap:14px; animation-duration:48s; }
+  .structure-carousel__slide { width:78vw; height:58vw; max-height:270px; border-radius:18px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .structure-carousel__track { animation:none; }
+  .structure-carousel__slide img { transition:none; }
+}
