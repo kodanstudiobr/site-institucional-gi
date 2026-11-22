@@ -32,10 +32,11 @@ type ExperienceItem = (typeof items)[number];
 
 function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const cardRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const card = document.querySelectorAll<HTMLElement>(".experience-card__button")[index];
+    const card = cardRef.current;
     if (!card) return;
 
     let interval: number | undefined;
@@ -65,7 +66,7 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
     return stop;
   }, [item.images.length, index]);
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
-  return <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
+  return <button ref={cardRef} type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
     <img key={item.images[activeImageIndex]} className={`experience-card__background experience-card__background--slideshow is-active ${focusFace ? "experience-card__background--face-focus" : ""}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
     <div className="experience-card__shade" />
     <span className="experience-card__number">0{index + 1}</span>
