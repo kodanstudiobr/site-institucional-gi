@@ -956,7 +956,7 @@ html {
   transform:translate3d(0,22px,0);
   will-change:opacity,transform;
 }
-[data-scroll-reveal].is-visible {
+.site-main [data-scroll-reveal].is-visible {
   animation:giScrollReveal 680ms cubic-bezier(.22,1,.36,1) both!important;
   animation-delay:var(--reveal-delay,0ms)!important;
 }
@@ -968,8 +968,8 @@ html {
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto!important; }
   .page-transition-enter,
-  [data-scroll-reveal],
-  [data-scroll-reveal].is-visible {
+  .site-main [data-scroll-reveal],
+  .site-main [data-scroll-reveal].is-visible {
     animation:none!important;
     opacity:1!important;
     transform:none!important;
