@@ -32,6 +32,8 @@ type ExperienceItem = (typeof items)[number];
 
 function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: number; onOpen: () => void }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [outgoingImageIndex, setOutgoingImageIndex] = useState<number | null>(null);
+  const [crossfadeStarted, setCrossfadeStarted] = useState(true);
   const cardRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -43,7 +45,13 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
     const start = () => {
       if (interval !== undefined) return;
       interval = window.setInterval(() => {
-        setActiveImageIndex((current) => (current + 1) % item.images.length);
+        setActiveImageIndex((current) => {
+          const next = (current + 1) % item.images.length;
+          setOutgoingImageIndex(current);
+          setCrossfadeStarted(false);
+          window.requestAnimationFrame(() => setCrossfadeStarted(true));
+          return next;
+        });
       }, 5000);
     };
     const stop = () => {
@@ -65,9 +73,16 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
     }
     return stop;
   }, [item.images.length, index]);
+  useEffect(() => {
+    if (outgoingImageIndex === null) return;
+    const timeout = window.setTimeout(() => setOutgoingImageIndex(null), 1350);
+    return () => window.clearTimeout(timeout);
+  }, [outgoingImageIndex]);
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
+  const imageFocusClass = focusFace ? "experience-card__background--face-focus" : "";
   return <button ref={cardRef} type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
-    <img key={item.images[activeImageIndex]} className={`experience-card__background experience-card__background--slideshow is-active ${focusFace ? "experience-card__background--face-focus" : ""}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={item.images[outgoingImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />}
+    <img className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
     <div className="experience-card__shade" />
     <span className="experience-card__number">0{index + 1}</span>
     <div className="experience-card__content">
