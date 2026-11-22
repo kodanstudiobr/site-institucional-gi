@@ -2733,13 +2733,11 @@ main .learning-word-stack p.learning-word {
   }
 }
 
-/* Evita exibir a página antes da foto principal do banner estar pronta. */
-.site-main.is-waiting-for-hero {
-  opacity:0 !important;
-  visibility:hidden;
-  pointer-events:none;
+/* Os banners preservam o fundo institucional enquanto as fotografias carregam. */
+.hero-home,
+.school-page-hero {
+  background-color:#263878;
 }
-.site-main.page-transition-enter {
-  visibility:visible;
-  pointer-events:auto;
+.page-hero {
+  background-color:#293d91;
 }
