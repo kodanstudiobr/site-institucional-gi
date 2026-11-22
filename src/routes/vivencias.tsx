@@ -2,7 +2,7 @@ import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ChevronLeft, ChevronRight, X, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ArrowRight, Camera } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper";
 import "swiper/css";
@@ -132,10 +132,10 @@ function Vivencias() {
         <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Momentos que <span className="text-accent">contam nossa história.</span></h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Explore os registros das atividades, projetos, celebrações e experiências vividas pelos estudantes do Instituto Educacional G.I.</p>
       </div>
-      <span className="absolute bottom-4 right-5 z-10 rounded-full bg-black/35 px-3 py-1 text-[10px] font-medium text-white/85">Imagem ilustrativa</span>
     </section>
     <section className="section-wrap py-20">
       <div className="mx-auto mb-12 max-w-2xl text-center">
+        <div className="mobile-section-icon" aria-hidden="true"><Camera size={27} strokeWidth={1.9}/></div>
         <p className="eyebrow">REGISTROS DA NOSSA ESCOLA</p>
         <h2 className="section-title">Uma galeria de <span className="title-highlight">momentos especiais.</span></h2>
         <p className="mt-4 leading-8 text-muted-foreground">Cada fotografia guarda uma experiência, uma descoberta e uma lembrança. Escolha uma galeria para ver todos os registros de cada categoria.</p>
