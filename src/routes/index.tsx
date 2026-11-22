@@ -265,7 +265,7 @@ function Index() {
       <div><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Educação que acredita no potencial de cada criança.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão de conhecimentos. É proporcionar experiências, despertar potencialidades, fortalecer valores e contribuir para a formação de pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa escola <ArrowRight size={18}/></Link></div>
     </section>
 
-    <section className="bg-soft section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><Star className="section-spark section-spark--left" size={48} fill="currentColor" aria-hidden="true"/><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que cresce junto com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text},i)=><div key={title}><article className="feature-card feature-card--glow h-full"><span className="icon-bubble feature-icon"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article></div>)}</div></div></section>
+    <section className="bg-soft section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-2xl text-center"><Star className="section-spark section-spark--move-heading" size={42} fill="currentColor" aria-hidden="true"/><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que cresce junto com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text},i)=><div key={title}><article className="feature-card feature-card--glow h-full"><span className="icon-bubble feature-icon"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article></div>)}</div></div></section>
 
     <ExperienceWords />
 
@@ -275,7 +275,36 @@ function Index() {
 
     <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
 
-    
+    <section className="school-structure-section section-wrap py-20 lg:py-24" aria-labelledby="school-structure-title">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="eyebrow">NOSSA ESTRUTURA</p>
+        <h2 id="school-structure-title" className="section-title">Um ambiente preparado para aprender e crescer.</h2>
+        <p className="mt-5 leading-8 text-muted-foreground">Cada espaço do Instituto Educacional G.I. é pensado para acolher, estimular descobertas e proporcionar experiências que fazem parte da jornada de aprendizagem. Em breve, este espaço apresentará registros dos ambientes da nossa escola.</p>
+      </div>
+      <div className="structure-carousel mt-12" aria-label="Galeria ilustrativa dos ambientes da escola">
+        <div className="structure-carousel__track">
+          {[
+            { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente escolar com estudantes em atividade", title: "Espaços de aprendizagem" },
+            { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=85", alt: "Sala de aula organizada", title: "Salas acolhedoras" },
+            { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente educativo infantil", title: "Ambientes de descoberta" },
+            { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1200&q=85", alt: "Espaço de aprendizagem escolar", title: "Aprender em cada espaço" },
+          ].map((slide) => <figure className="structure-carousel__slide" key={slide.src}>
+            <img src={slide.src} alt={slide.alt} loading="lazy" />
+            <figcaption>{slide.title}</figcaption>
+          </figure>)}
+          {[
+            { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente escolar com estudantes em atividade", title: "Espaços de aprendizagem" },
+            { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=85", alt: "Sala de aula organizada", title: "Salas acolhedoras" },
+            { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente educativo infantil", title: "Ambientes de descoberta" },
+            { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1200&q=85", alt: "Espaço de aprendizagem escolar", title: "Aprender em cada espaço" },
+          ].map((slide) => <figure className="structure-carousel__slide" key={`duplicate-${slide.src}`} aria-hidden="true">
+            <img src={slide.src} alt="" loading="lazy" />
+            <figcaption>{slide.title}</figcaption>
+          </figure>)}
+        </div>
+      </div>
+      <p className="mt-5 text-center text-xs text-muted-foreground">Imagens ilustrativas — serão substituídas por fotografias reais da estrutura da escola.</p>
+    </section>
 
     <section className="history-highlight section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative text-center"><p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p><div className="history-counter mt-4"><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedNumber value={26}/><span className="history-counter__suffix"> anos</span></div><p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p><div className="history-community mt-14"><p className="history-community__eyebrow">QUEM VIVE SABE E FAZ PARTE</p><p className="history-community__copy">Cada história, cada conquista e cada lembrança fazem parte da nossa comunidade.</p><div className="testimonials-grid mt-10 grid gap-5 text-left md:grid-cols-2 xl:grid-cols-3">{["Família da Educação Infantil","Família dos Anos Iniciais","Família G.I."].map((label,i)=><div key={label}><article className="testimonial-card h-full"><div className="testimonial-card__top"><span className="testimonial-card__quote"><Quote size={23}/></span><span className="testimonial-card__stars" aria-label="Espaço visual para avaliação"><Star/><Star/><Star/><Star/><Star/></span></div><p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p><div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div></article></div>)}</div></div><Star className="section-spark section-spark--history" size={58} fill="currentColor" aria-hidden="true"/></div></section>
 
