@@ -2852,3 +2852,54 @@ main .learning-word-stack p.learning-word {
     transform:scale(1.10);
   }
 }
+
+
+/* Depoimentos em cartões empilhados: cada novo relato entra e cobre o anterior durante a rolagem. */
+.testimonials-stack {
+  position:relative;
+  width:min(100%,920px);
+  margin-inline:auto;
+  padding-bottom:5vh;
+}
+.testimonials-stack__step {
+  position:relative;
+  min-height:78vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+.testimonials-stack__card {
+  position:sticky;
+  top:13vh;
+  width:min(100%,780px);
+  min-height:clamp(300px,43vh,410px);
+  margin-inline:auto;
+  border-radius:clamp(1.35rem,3vw,2rem);
+  padding:clamp(1.6rem,4vw,3rem);
+  box-shadow:0 28px 70px rgba(14,28,79,.2),0 5px 16px rgba(14,28,79,.08);
+}
+.testimonials-stack__step:nth-child(1) .testimonials-stack__card { z-index:1; }
+.testimonials-stack__step:nth-child(2) .testimonials-stack__card { z-index:2; }
+.testimonials-stack__step:nth-child(3) .testimonials-stack__card { z-index:3; }
+.testimonials-stack__card .testimonial-card__placeholder {
+  font-size:clamp(1rem,1.5vw,1.16rem);
+  line-height:1.9;
+}
+@media (max-width:767px) {
+  .testimonials-stack { margin-top:2rem; padding-inline:.1rem; }
+  .testimonials-stack__step { min-height:76vh; }
+  .testimonials-stack__card {
+    top:12vh;
+    min-height:clamp(290px,48vh,390px);
+    padding:1.35rem;
+    border-radius:1.35rem;
+  }
+  .testimonials-stack__card .testimonial-card__placeholder {
+    margin-block:1.2rem 1.4rem;
+    font-size:.92rem;
+    line-height:1.8;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .testimonials-stack__card { scroll-behavior:auto; }
+}
