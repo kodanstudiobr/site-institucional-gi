@@ -140,7 +140,7 @@ function Ensino() {
     <section className="section-wrap section-decor-wrap bilingual-layout grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
       <div className="bilingual-heading">
         <p className="eyebrow">APRENDIZAGEM SEM FRONTEIRAS</p>
-        <h2 className="section-title mt-3">O ensino bilíngue faz parte da nossa jornada.</h2>
+        <h2 className="section-title mt-3">O ensino <span className="title-highlight">bilíngue</span> faz parte da nossa jornada.</h2>
       </div>
       <div className="bilingual-image-wrap relative bilingual-image">
         <img src="/imagens/Atividade%20de%20cartas%20ilustradas%20na%20sala%20de%20aula.webp" alt="Atividade de cartas ilustradas na sala de aula" loading="lazy" className="bilingual-classroom-image aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/>
@@ -155,7 +155,7 @@ function Ensino() {
       </div>
     </section>
     <section id="nossos-segmentos" className="section-wrap py-20 lg:py-24">
-      <div className="mx-auto max-w-3xl text-center"><div className="mobile-section-icon" aria-hidden="true"><GraduationCap size={27} strokeWidth={1.9}/></div><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
+      <div className="mx-auto max-w-3xl text-center"><div className="mobile-section-icon" aria-hidden="true"><GraduationCap size={27} strokeWidth={1.9}/></div><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas <span className="title-highlight">descobertas.</span> Cada estudante, seu jeito de <span className="title-highlight">aprender.</span></h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
       <div id="segment-selector-anchor" className="segment-selector-anchor" aria-hidden="true" />
       <div role="tablist" aria-label="Segmentos de ensino" className="school-segment-tabs mx-auto mt-10 flex max-w-3xl flex-wrap gap-2 rounded-2xl border border-primary/10 bg-white p-2 shadow-[0_10px_28px_rgba(36,51,111,0.14)] sm:flex-nowrap sm:gap-1.5 sm:rounded-full sm:bg-soft sm:shadow-sm">
         <button role="tab" aria-selected={active==="infantil"} onClick={()=>selectSegment("infantil")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}>Educação<br className="sm:hidden"/> Infantil</button>
