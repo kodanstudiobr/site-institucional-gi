@@ -2712,9 +2712,14 @@ main .learning-word-stack p.learning-word {
     animation-duration:280ms !important;
   }
 
+  /* Sem animação de entrada no mobile, os elementos precisam ficar visíveis
+     por padrão: o estado inicial do reveal usa opacity:0. */
+  [data-scroll-reveal],
   [data-scroll-reveal].is-visible {
-    animation-duration:420ms !important;
-    animation-delay:0ms !important;
+    opacity:1 !important;
+    transform:none !important;
+    animation:none !important;
+    will-change:auto !important;
   }
 
   .experience-card__background--slideshow {
