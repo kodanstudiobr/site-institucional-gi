@@ -2,7 +2,7 @@ import { pageHead } from "@/lib/seo";
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Blocks, BookOpen, Telescope, Heart, Brain, HandHeart } from "lucide-react";
-import { SiteLayout, PageHeader } from "@/components/SiteLayout";
+import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
   head: () => pageHead("/ensino", {
@@ -128,7 +128,15 @@ function Ensino() {
   }, [active]);
 
   return <SiteLayout>
-    <PageHeader eyebrow="NOSSO ENSINO" title="Aprender, descobrir e evoluir." intro="Conheça nossa proposta de ensino, que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante."/>
+    <section className="page-hero school-page-hero teaching-page-hero">
+      <picture><source media="(max-width: 767px)" srcSet="/imagens/IMG_3987.webp"/><img className="school-page-hero__image" src="/imagens/IMG_3986.webp" alt="" aria-hidden="true" fetchPriority="high"/></picture>
+      <div className="school-page-hero__overlay" aria-hidden="true"/>
+      <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
+        <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">NOSSO ENSINO</p>
+        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Aprender, descobrir e evoluir.</h1>
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Conheça nossa proposta de ensino, que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante.</p>
+      </div>
+    </section>
     <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
       <div className="bilingual-copy">
         <p className="eyebrow">APRENDIZAGEM SEM FRONTEIRAS</p>
