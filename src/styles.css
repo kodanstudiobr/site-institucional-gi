@@ -1506,9 +1506,7 @@ html {
 
 /* Hero da página Nossa Escola com fotografia de fundo, como na homepage. */
 .school-page-hero {
-  min-height:560px;
-  display:flex;
-  align-items:stretch;
+  position:relative;
   background:#263878;
 }
 .school-page-hero__image {
