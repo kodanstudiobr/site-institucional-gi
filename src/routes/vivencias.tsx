@@ -83,7 +83,7 @@ function Vivencias() {
   }, [selectedGallery, galleryImages.length]);
 
   return <SiteLayout>
-    <PageHeader eyebrow="NOSSAS VIVÊNCIAS" title="Aprender também é viver experiências." intro="Projetos, atividades e momentos que tornam a aprendizagem ainda mais significativa em nossa escola." />
+    <PageHeader className="vivencias-page-hero" eyebrow="NOSSAS VIVÊNCIAS" title="Aprender também é viver experiências." intro="Projetos, atividades e momentos que tornam a aprendizagem ainda mais significativa em nossa escola." />
     <section className="section-wrap py-20">
       <div className="mx-auto mb-12 max-w-2xl text-center">
         <p className="eyebrow">VIVÊNCIAS G.I.</p>
