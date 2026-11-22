@@ -99,7 +99,7 @@ function Ensino() {
   const selectSegment = (segment: "infantil" | "iniciais" | "finais") => {
     setActive(segment);
     window.requestAnimationFrame(() => {
-      document.querySelector(".school-segment-tabs")?.scrollIntoView({
+      document.getElementById("segment-selector-anchor")?.scrollIntoView({
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         block: "start",
       });
@@ -140,12 +140,13 @@ function Ensino() {
         </div>
       </div>
       <div className="bilingual-image-wrap relative">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1100&q=85" alt="Estudantes em atividade de aprendizagem — imagem ilustrativa" loading="lazy" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/>
+        <img src="/imagens/Atividade%20de%20cartas%20ilustradas%20na%20sala%20de%20aula.webp" alt="Atividade de cartas ilustradas na sala de aula" loading="lazy" className="aspect-[4/3] w-full rounded-[2rem] object-cover shadow-xl"/>
         <div className="absolute -bottom-5 -right-3 rounded-2xl bg-primary px-6 py-5 font-display text-lg font-bold text-white shadow-lg sm:-right-5">Learning together</div>
       </div>
     </section>
     <section id="nossos-segmentos" className="section-wrap py-20 lg:py-24">
       <div className="mx-auto max-w-3xl text-center"><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
+      <div id="segment-selector-anchor" className="segment-selector-anchor" aria-hidden="true" />
       <div role="tablist" aria-label="Segmentos de ensino" className="school-segment-tabs mx-auto mt-10 flex max-w-3xl flex-wrap gap-2 rounded-2xl border border-primary/10 bg-white p-2 shadow-[0_10px_28px_rgba(36,51,111,0.14)] sm:flex-nowrap sm:gap-1.5 sm:rounded-full sm:bg-soft sm:shadow-sm">
         <button role="tab" aria-selected={active==="infantil"} onClick={()=>selectSegment("infantil")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}>Educação<br className="sm:hidden"/> Infantil</button>
         <button role="tab" aria-selected={active==="iniciais"} onClick={()=>selectSegment("iniciais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="iniciais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Iniciais</span></button>
