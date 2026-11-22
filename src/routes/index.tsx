@@ -219,7 +219,7 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
       cleanupTransition = window.setTimeout(() => {
         if (isMounted) setOutgoingImageIndex(null);
         isTransitioning = false;
-      }, 1450);
+      }, 1900);
     };
 
     const start = () => {
@@ -251,12 +251,6 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
       if (cleanupTransition !== undefined) window.clearTimeout(cleanupTransition);
     };
   }, [cardImages.length, index]);
-
-  useEffect(() => {
-    if (outgoingImageIndex === null) return;
-    const timeout = window.setTimeout(() => setOutgoingImageIndex(null), 1350);
-    return () => window.clearTimeout(timeout);
-  }, [outgoingImageIndex]);
 
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
   const imageFocusClass = focusFace ? "experience-card__background--face-focus" : "";
