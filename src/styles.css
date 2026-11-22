@@ -2775,3 +2775,36 @@ main .learning-word-stack p.learning-word {
   font-weight:inherit;
   text-shadow:0 1px 0 rgba(50,69,148,.08);
 }
+
+
+/* Botão azul de acesso às galerias nos cards de Vivências. */
+.experience-card__gallery-button {
+  display:inline-flex;
+  min-height:44px;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:16px;
+  padding:0 20px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  background:linear-gradient(135deg,#2864c5,#17418f);
+  color:#fff;
+  font-size:.76rem;
+  font-weight:850;
+  letter-spacing:.045em;
+  box-shadow:0 8px 22px rgba(8,25,70,.32),inset 0 1px rgba(255,255,255,.2);
+  transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,filter .3s ease;
+  cursor:pointer;
+}
+.experience-card__gallery-button:hover {
+  transform:translateY(-3px);
+  filter:brightness(1.12);
+  box-shadow:0 13px 28px rgba(8,25,70,.4),inset 0 1px rgba(255,255,255,.25);
+}
+.experience-card__gallery-button:focus-visible { outline:3px solid #fff12c; outline-offset:4px; }
+.experience-card__content { z-index:3; }
+.experience-card__shade { z-index:2 !important; }
+@media (prefers-reduced-motion:reduce) {
+  .experience-card__gallery-button { transition:none; }
+}
