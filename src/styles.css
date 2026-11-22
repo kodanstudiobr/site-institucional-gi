@@ -971,7 +971,8 @@ html {
 }
 
 @keyframes giPageEnter {
-  from { opacity:0; transform:translate3d(0,16px,0); }
+  /* A entrada não pode ocultar o banner enquanto suas imagens carregam. */
+  from { opacity:1; transform:translate3d(0,8px,0); }
   to { opacity:1; transform:translate3d(0,0,0); }
 }
 .page-transition-enter {
@@ -2738,4 +2739,47 @@ main .learning-word-stack p.learning-word {
 }
 .page-hero {
   background-color:#293d91;
+}
+
+
+/* Camadas explícitas dos slides dos cards: crossfade sem depender de z-index negativo. */
+.experience-card {
+  isolation:isolate;
+  background-color:#263878;
+}
+.experience-card__background--slideshow {
+  z-index:0 !important;
+  opacity:0;
+  transition:opacity 1800ms cubic-bezier(.4,0,.2,1) !important;
+}
+.experience-card__background--slideshow.is-outgoing {
+  z-index:0 !important;
+  opacity:1;
+}
+.experience-card__background--slideshow.is-entering {
+  z-index:1 !important;
+  opacity:0;
+}
+.experience-card__background--slideshow.is-active {
+  z-index:1 !important;
+  opacity:1;
+}
+.experience-card__shade {
+  z-index:2 !important;
+}
+.experience-card__number,
+.experience-card__content,
+.experience-card__gallery-hint {
+  z-index:3;
+}
+@media (max-width:767px) {
+  .experience-card__background--slideshow {
+    transition:opacity 1800ms cubic-bezier(.4,0,.2,1) !important;
+  }
+}
+
+/* A transição entre páginas mantém o fundo visível durante a montagem dos banners. */
+.page-transition-enter {
+  animation:giPageEnter 460ms cubic-bezier(.22,1,.36,1) both !important;
+  backface-visibility:visible;
 }
