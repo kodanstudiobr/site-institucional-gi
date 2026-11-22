@@ -2339,3 +2339,35 @@ html {
     min-height:420px;
   }
 }
+
+
+/* Estrelas dos títulos institucionais: cores mais vivas e contraste reforçado. */
+.section-spark {
+  color:#ffdf00;
+  filter:drop-shadow(0 3px 5px rgba(22,38,92,.34)) drop-shadow(0 0 9px rgba(255,223,0,.28));
+}
+.section-spark--move-heading,
+.section-spark--identity-heading {
+  display:block;
+  width:42px !important;
+  height:42px !important;
+  margin:0 auto 12px;
+  position:relative !important;
+  inset:auto !important;
+  transform-origin:center;
+}
+.section-spark--move-heading {
+  color:#ffdf00;
+  filter:drop-shadow(0 3px 5px rgba(22,38,92,.42)) drop-shadow(0 0 10px rgba(255,223,0,.38));
+}
+.section-spark--identity-heading {
+  color:#1855c7;
+  filter:drop-shadow(0 3px 5px rgba(13,35,91,.42)) drop-shadow(0 0 10px rgba(24,85,199,.28));
+}
+@media (max-width:767px) {
+  .section-spark--move-heading,
+  .section-spark--identity-heading {
+    width:42px !important;
+    height:42px !important;
+  }
+}
