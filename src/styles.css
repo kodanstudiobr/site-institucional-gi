@@ -2903,3 +2903,49 @@ main .learning-word-stack p.learning-word {
 @media (prefers-reduced-motion:reduce) {
   .testimonials-stack__card { scroll-behavior:auto; }
 }
+
+
+/* Correção do empilhamento dos depoimentos: o overflow anterior impedia o sticky,
+   e os passos agora se cruzam para que cada novo card cubra o anterior. */
+.history-highlight {
+  overflow:clip;
+}
+.testimonials-stack {
+  position:relative;
+  isolation:isolate;
+  padding-bottom:0;
+}
+.testimonials-stack__step {
+  min-height:100vh;
+  margin-bottom:-55vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  position:relative;
+}
+.testimonials-stack__step:last-child {
+  margin-bottom:0;
+}
+.testimonials-stack__card {
+  position:sticky;
+  top:13vh;
+  width:min(100%,780px);
+  z-index:1;
+  will-change:transform;
+}
+.testimonials-stack__step:nth-child(1) .testimonials-stack__card { z-index:1; }
+.testimonials-stack__step:nth-child(2) .testimonials-stack__card { z-index:2; }
+.testimonials-stack__step:nth-child(3) .testimonials-stack__card { z-index:3; }
+@media (max-width:767px) {
+  .testimonials-stack__step {
+    min-height:100svh;
+    margin-bottom:-55svh;
+  }
+  .testimonials-stack__card {
+    top:12vh;
+    width:100%;
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .testimonials-stack__card { will-change:auto; }
+}
