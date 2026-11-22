@@ -169,35 +169,49 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
   useEffect(() => {
     if (cardImages.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    const card = document.querySelectorAll<HTMLElement>(".experience-card")[index];
+    if (!card) return;
+
     let intervalId: number | undefined;
-    const staggerDelay = index * 650;
-    const startTimeout = window.setTimeout(() => {
-      setActiveImageIndex((current) => (current + 1) % cardImages.length);
+    const start = () => {
+      if (intervalId !== undefined) return;
       intervalId = window.setInterval(() => {
         setActiveImageIndex((current) => (current + 1) % cardImages.length);
-      }, 4000);
-    }, staggerDelay);
-
-    return () => {
-      window.clearTimeout(startTimeout);
-      if (intervalId !== undefined) window.clearInterval(intervalId);
+      }, 5000);
     };
+    const stop = () => {
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+      intervalId = undefined;
+    };
+
+    if (!("IntersectionObserver" in window)) start();
+    else {
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      }, { threshold: 0.15 });
+      observer.observe(card);
+      return () => {
+        observer.disconnect();
+        stop();
+      };
+    }
+    return stop;
   }, [cardImages.length, index]);
 
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
 
   return (
     <div className="experience-card" aria-label={item.title}>
-      {cardImages.map((image, imageIndex) => (
-        <img
-          key={image}
-          className={`experience-card__background experience-card__background--slideshow ${imageIndex === activeImageIndex ? "is-active" : ""} ${focusFace ? "experience-card__background--face-focus" : ""}`}
-          src={image}
-          alt=""
-          loading={imageIndex === 0 ? "eager" : "lazy"}
-          aria-hidden="true"
-        />
-      ))}
+      <img
+        key={cardImages[activeImageIndex]}
+        className={`experience-card__background experience-card__background--slideshow is-active ${focusFace ? "experience-card__background--face-focus" : ""}`}
+        src={cardImages[activeImageIndex]}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+      />
       <div className="experience-card__shade"/>
       <span className="experience-card__number">0{index + 1}</span>
       <div className="experience-card__content">
