@@ -80,6 +80,19 @@ const segmentos = {
 };
 function Ensino() {
   const [active,setActive]=useState<"infantil"|"iniciais"|"finais">("infantil");
+  useEffect(() => {
+    const segmentFromHash: Record<string, "infantil" | "iniciais" | "finais"> = {
+      "#segmento-infantil": "infantil",
+      "#segmento-iniciais": "iniciais",
+      "#segmento-finais": "finais",
+    };
+    const requestedSegment = segmentFromHash[window.location.hash];
+    if (!requestedSegment) return;
+    setActive(requestedSegment);
+    window.requestAnimationFrame(() => {
+      document.getElementById("nossos-segmentos")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, []);
   const current=segmentos[active];
   const integralCardsRef = useRef<HTMLDivElement>(null);
 
@@ -121,7 +134,7 @@ function Ensino() {
         <div className="absolute -bottom-5 -right-3 rounded-2xl bg-primary px-6 py-5 font-display text-lg font-bold text-white shadow-lg sm:-right-5">Learning together</div>
       </div>
     </section>
-    <section className="section-wrap py-20 lg:py-24">
+    <section id="nossos-segmentos" className="section-wrap py-20 lg:py-24">
       <div className="mx-auto max-w-3xl text-center"><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
       <div role="tablist" aria-label="Segmentos de ensino" className="mx-auto mt-10 flex max-w-3xl flex-wrap gap-2 rounded-2xl border border-primary/10 bg-white p-2 shadow-[0_10px_28px_rgba(36,51,111,0.14)] sm:flex-nowrap sm:gap-1.5 sm:rounded-full sm:bg-soft sm:shadow-sm">
         <button role="tab" aria-selected={active==="infantil"} onClick={()=>setActive("infantil")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}>Educação<br className="sm:hidden"/> Infantil</button>
