@@ -2808,3 +2808,15 @@ main .learning-word-stack p.learning-word {
 @media (prefers-reduced-motion:reduce) {
   .experience-card__gallery-button { transition:none; }
 }
+
+/* Ajuste de enquadramento do banner da Galeria. */
+@media (min-width:768px) {
+  .vivencias-page-hero .school-page-hero__image {
+    object-position:center 35%;
+  }
+}
+@media (max-width:767px) {
+  .vivencias-page-hero .school-page-hero__image {
+    object-position:35% center;
+  }
+}
