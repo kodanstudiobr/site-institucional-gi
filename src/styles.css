@@ -116,7 +116,7 @@
   }
   .section-spark--left { left:2%; top:3%; }
   .section-spark--pedagogy { right:2%; top:2%; }
-  /* Os dois trilhos usam a mesma medida e deixam o próximo card à mostra. */
+  /* Carrosseis mobile padronizados: mesmo posicionamento, arraste lateral e prévia do próximo card. */
   .experience-carousel,
   .school-segments-grid {
     display:flex;
