@@ -164,6 +164,8 @@ type ExperienceItem = (typeof vivencias)[number];
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [outgoingImageIndex, setOutgoingImageIndex] = useState<number | null>(null);
+  const [crossfadeStarted, setCrossfadeStarted] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const cardImages = item.images.length > 0 ? item.images : [item.image];
 
@@ -177,7 +179,13 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
     const start = () => {
       if (intervalId !== undefined) return;
       intervalId = window.setInterval(() => {
-        setActiveImageIndex((current) => (current + 1) % cardImages.length);
+        setActiveImageIndex((current) => {
+          const next = (current + 1) % cardImages.length;
+          setOutgoingImageIndex(current);
+          setCrossfadeStarted(false);
+          window.requestAnimationFrame(() => setCrossfadeStarted(true));
+          return next;
+        });
       }, 5000);
     };
     const stop = () => {
@@ -200,13 +208,20 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
     return stop;
   }, [cardImages.length, index]);
 
+  useEffect(() => {
+    if (outgoingImageIndex === null) return;
+    const timeout = window.setTimeout(() => setOutgoingImageIndex(null), 1350);
+    return () => window.clearTimeout(timeout);
+  }, [outgoingImageIndex]);
+
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
+  const imageFocusClass = focusFace ? "experience-card__background--face-focus" : "";
 
   return (
     <div ref={cardRef} className="experience-card" aria-label={item.title}>
+      {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={cardImages[outgoingImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />}
       <img
-        key={cardImages[activeImageIndex]}
-        className={`experience-card__background experience-card__background--slideshow is-active ${focusFace ? "experience-card__background--face-focus" : ""}`}
+        className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`}
         src={cardImages[activeImageIndex]}
         alt=""
         loading="lazy"
