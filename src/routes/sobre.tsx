@@ -42,8 +42,7 @@ function Sobre() {
     </section>
     <section className="school-dream-section py-8 sm:py-10 lg:py-14">
       <div className="section-wrap">
-        <div className="school-dream-heart" aria-hidden="true"><Heart size={34} strokeWidth={2.2} fill="currentColor"/></div>
-        <h2 className="school-dream-heading">Quem faz acontecer</h2>
+        <h2 className="school-dream-heading">Nossa Gestão</h2>
         <div className="school-dream-grid mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-7 md:gap-14">
           <article className="school-dream-card school-dream-card--left">
             <div className="school-dream-card__photo"><img src="/imagens/IMG_3972.webp" alt="Felina Sousa, Diretora Escolar" loading="lazy"/></div>
