@@ -1,6 +1,6 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, GraduationCap, Building2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
@@ -345,6 +345,7 @@ function Index() {
 
     <section className="school-segments-section section-wrap section-decor-wrap py-20 lg:py-24" aria-labelledby="school-segments-title">
       <div className="mx-auto max-w-3xl text-center">
+        <div className="mobile-section-icon" aria-hidden="true"><GraduationCap size={27} strokeWidth={1.9}/></div>
         <p className="eyebrow">NOSSOS SEGMENTOS</p>
         <h2 id="school-segments-title" className="section-title">Uma jornada de aprendizagem para cada etapa.</h2>
         <p className="mt-5 leading-8 text-muted-foreground">Conheça os segmentos do Instituto Educacional G.I. e descubra as experiências preparadas para cada fase do desenvolvimento.</p>
@@ -397,6 +398,7 @@ function Index() {
 
     <section className="school-structure-section section-wrap py-20 lg:py-24" aria-labelledby="school-structure-title">
       <div className="mx-auto max-w-3xl text-center">
+        <div className="mobile-section-icon" aria-hidden="true"><Building2 size={26} strokeWidth={1.9}/></div>
         <p className="eyebrow">NOSSA ESTRUTURA</p>
         <h2 id="school-structure-title" className="section-title">Um ambiente preparado para aprender e crescer.</h2>
         <p className="mt-5 leading-8 text-muted-foreground">Cada espaço do Instituto Educacional G.I. é pensado para acolher, estimular descobertas e proporcionar experiências que fazem parte da jornada de aprendizagem. Em breve, este espaço apresentará registros dos ambientes da nossa escola.</p>
