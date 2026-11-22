@@ -133,7 +133,7 @@ function Ensino() {
       <div className="school-page-hero__overlay" aria-hidden="true"/>
       <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
         <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">NOSSO ENSINO</p>
-        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Aprender, descobrir e evoluir.</h1>
+        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Aprender, <span className="text-accent">descobrir</span> e evoluir.</h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Conheça nossa proposta de ensino, que respeita as etapas do desenvolvimento e valoriza o potencial de cada estudante.</p>
       </div>
     </section>
