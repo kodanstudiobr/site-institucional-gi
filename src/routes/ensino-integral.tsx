@@ -42,7 +42,7 @@ function EnsinoIntegral() {
       <section className="section-wrap section-decor-wrap grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-24">
         <div>
           <p className="eyebrow">ENSINO INTEGRAL</p>
-          <h2 className="section-title mt-3">Uma jornada de aprendizagem que vai além da sala de aula.</h2>
+          <h2 className="section-title mt-3">Uma jornada de <span className="title-highlight">aprendizagem</span> que vai além da sala de aula.</h2>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
             Esta página será dedicada a apresentar como funciona o Ensino Integral na escola, explicando sua proposta, a organização da rotina e as experiências que fazem parte dessa jornada.
           </p>
@@ -66,7 +66,7 @@ function EnsinoIntegral() {
         <div className="section-wrap">
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow">A DINÂMICA DO ENSINO INTEGRAL</p>
-            <h2 className="section-title">Como essa jornada acontece?</h2>
+            <h2 className="section-title">Como essa jornada <span className="title-highlight">acontece?</span></h2>
             <p className="mt-5 leading-8 text-muted-foreground">
               Esta seção será preenchida com a explicação da rotina e dos momentos que compõem o Ensino Integral na instituição.
             </p>
