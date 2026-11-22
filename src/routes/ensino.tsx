@@ -96,6 +96,16 @@ function Ensino() {
   const current=segmentos[active];
   const integralCardsRef = useRef<HTMLDivElement>(null);
 
+  const selectSegment = (segment: "infantil" | "iniciais" | "finais") => {
+    setActive(segment);
+    window.requestAnimationFrame(() => {
+      document.querySelector(".school-segment-tabs")?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  };
+
   useEffect(() => {
     const container = integralCardsRef.current;
     if (!container) return;
@@ -137,9 +147,9 @@ function Ensino() {
     <section id="nossos-segmentos" className="section-wrap py-20 lg:py-24">
       <div className="mx-auto max-w-3xl text-center"><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
       <div role="tablist" aria-label="Segmentos de ensino" className="school-segment-tabs mx-auto mt-10 flex max-w-3xl flex-wrap gap-2 rounded-2xl border border-primary/10 bg-white p-2 shadow-[0_10px_28px_rgba(36,51,111,0.14)] sm:flex-nowrap sm:gap-1.5 sm:rounded-full sm:bg-soft sm:shadow-sm">
-        <button role="tab" aria-selected={active==="infantil"} onClick={()=>setActive("infantil")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}>Educação<br className="sm:hidden"/> Infantil</button>
-        <button role="tab" aria-selected={active==="iniciais"} onClick={()=>setActive("iniciais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="iniciais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Iniciais</span></button>
-        <button role="tab" aria-selected={active==="finais"} onClick={()=>setActive("finais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="finais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Finais</span></button>
+        <button role="tab" aria-selected={active==="infantil"} onClick={()=>selectSegment("infantil")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}>Educação<br className="sm:hidden"/> Infantil</button>
+        <button role="tab" aria-selected={active==="iniciais"} onClick={()=>selectSegment("iniciais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="iniciais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Iniciais</span></button>
+        <button role="tab" aria-selected={active==="finais"} onClick={()=>selectSegment("finais")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="finais"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}><span className="block sm:inline">Anos</span>{" "}<span className="block sm:inline">Finais</span></button>
       </div>
       <div key={active} role="tabpanel" className="segment-content-enter mt-10 grid items-center gap-10 lg:grid-cols-2">
         <div className="segment-feature-image-wrap overflow-hidden rounded-[2rem]"><img key={current.image} src={current.image} alt={current.alt} className="segment-feature-image w-full object-cover shadow-lg"/></div>
