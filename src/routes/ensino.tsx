@@ -60,8 +60,8 @@ const segmentos = {
     bilingualText:"Os estudantes ampliam o vocabulário, interpretam textos e praticam a comunicação em inglês em situações do cotidiano e do mundo atual.",
     eyebrow:"ANOS FINAIS DO ENSINO FUNDAMENTAL",
     title:"Conhecimento, autonomia e novos horizontes.",
-    image:"/imagens/Aluno%20sorridente%20apontando%20no%20corredor%20escolar.webp",
-    alt:"Aluno sorridente apontando no corredor escolar",
+    image:"/imagens/IMG_3939.webp",
+    alt:"Estudantes em atividade escolar",
     paragraphs:[
       "Nos Anos Finais do Ensino Fundamental, do 6º ao 9º ano, ampliamos e aprofundamos os conhecimentos construídos ao longo da trajetória escolar. Os estudantes são incentivados a investigar, argumentar, resolver problemas e desenvolver o pensamento crítico.",
       "Por meio de experiências contextualizadas e propostas interdisciplinares, estimulamos a autonomia, a responsabilidade e o protagonismo, preparando cada estudante para novos desafios acadêmicos e para a continuidade dos estudos."
