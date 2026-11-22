@@ -35,7 +35,7 @@ function EnsinoIntegral() {
     <SiteLayout>
       <PageHeader
         eyebrow="ENSINO INTEGRAL"
-        title="Ensino Integral: aprender em todos os momentos."
+        title={<>Ensino Integral: aprender em <span className="text-accent">todos os momentos.</span></>}
         intro="Um espaço para conhecer a proposta de Ensino Integral do Instituto Educacional G.I., sua organização e a dinâmica das experiências ao longo do dia."
       />
 
