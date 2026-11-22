@@ -2306,6 +2306,17 @@ html {
 }
 
 
+/* Âncora posiciona o seletor logo abaixo do cabeçalho fixo ao trocar de segmento. */
+.segment-selector-anchor {
+  height:1px;
+  scroll-margin-top:120px;
+}
+@media (max-width:767px) {
+  .segment-selector-anchor {
+    scroll-margin-top:104px;
+  }
+}
+
 /* Segmentos do Ensino: seletor acessível durante a leitura do conteúdo. */
 .school-segment-tabs {
   position:sticky;
