@@ -2139,14 +2139,23 @@ html {
   }
 }
 
-/* Crossfade real e independente para os slides dos cards de vivências. */
+/* Crossfade entre duas camadas: a foto anterior sai enquanto a próxima entra. */
 .experience-card__background--slideshow {
-  opacity:0 !important;
-  transition:opacity 1.15s ease-in-out !important;
+  opacity:0;
+  transition:opacity 1.25s cubic-bezier(.22,.61,.36,1);
   will-change:opacity;
 }
+.experience-card__background--slideshow.is-entering,
+.experience-card__background--slideshow.is-outgoing {
+  opacity:0;
+}
 .experience-card__background--slideshow.is-active {
-  opacity:1 !important;
+  opacity:1;
+}
+@media (max-width:767px) {
+  .experience-card__background--slideshow {
+    transition:opacity 1.25s cubic-bezier(.22,.61,.36,1) !important;
+  }
 }
 @media (prefers-reduced-motion:reduce) {
   .experience-card__background--slideshow {
@@ -2728,8 +2737,8 @@ main .learning-word-stack p.learning-word {
   }
 
   .experience-card__background--slideshow {
-    animation-duration:350ms !important;
-    transition:none !important;
+    animation:none !important;
+    transition:opacity 1.25s cubic-bezier(.22,.61,.36,1) !important;
   }
 
   .learning-word-stack .learning-word--current,
