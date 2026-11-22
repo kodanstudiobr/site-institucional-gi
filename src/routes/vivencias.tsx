@@ -2,7 +2,7 @@ import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { ChevronLeft, ChevronRight, X, Images, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper";
 import "swiper/css";
