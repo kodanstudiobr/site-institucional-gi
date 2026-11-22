@@ -22,19 +22,44 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     if (!main) return;
 
     const candidates = Array.from(main.querySelectorAll<HTMLElement>(
-      "section .section-wrap > *, section .section-wrap article, section .integral-cards .integral-card, .page-hero .mx-auto > *"
+      [
+        "section .section-wrap > *",
+        "section article",
+        "section .feature-card",
+        "section .mission-paper-card",
+        "section .mission-vision-card",
+        "section .testimonial-card",
+        "section .integral-card",
+        "section .experience-card",
+        "section .bilingual-segment-note",
+        "section .gallery-button",
+        "section .school-segment-card",
+        ".page-hero__content",
+        ".school-page-hero > .relative",
+      ].join(", ")
     )).filter((element) => !element.closest(".learning-words-section"));
 
-    // Evita animar um contêiner inteiro e, ao mesmo tempo, seus próprios cards.
+    // Evita revelar um wrapper e seus cards simultaneamente: cada bloco visual
+    // e cada card entram individualmente, conforme chegam à área visível.
+    const cardSelector = [
+      "article", ".feature-card", ".mission-paper-card", ".mission-vision-card",
+      ".testimonial-card", ".integral-card", ".experience-card",
+      ".bilingual-segment-note", ".gallery-button", ".school-segment-card",
+    ].join(", ");
     const targets = candidates.filter((element) => {
-      const isContainerOfCards = element.querySelector("article") !== null && !element.matches("article");
-      return !isContainerOfCards;
+      const containsCards = element.querySelector(cardSelector) !== null;
+      const isCard = element.matches(cardSelector);
+      return !containsCards || isCard;
     });
 
-    targets.forEach((element, index) => {
+    const sectionIndexes = new Map<Element, number>();
+    targets.forEach((element) => {
+      const section = element.closest("section") ?? main;
+      const index = sectionIndexes.get(section) ?? 0;
+      sectionIndexes.set(section, index + 1);
       element.setAttribute("data-scroll-reveal", "");
       element.classList.remove("is-visible");
-      element.style.setProperty("--reveal-delay", `${(index % 5) * 100}ms`);
+      element.style.setProperty("--reveal-delay", `${(index % 4) * 85}ms`);
     });
 
     if (!("IntersectionObserver" in window)) {
@@ -49,7 +74,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.08, rootMargin: "0px 0px -35px 0px" });
+    }, { threshold: 0.08, rootMargin: "0px 0px -7% 0px" });
 
     targets.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
