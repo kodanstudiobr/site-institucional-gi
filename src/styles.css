@@ -971,11 +971,12 @@ html {
 }
 
 @keyframes giPageEnter {
-  from { opacity:0; transform:translate3d(0,12px,0); }
+  from { opacity:0; transform:translate3d(0,16px,0); }
   to { opacity:1; transform:translate3d(0,0,0); }
 }
 .page-transition-enter {
-  animation:giPageEnter 560ms cubic-bezier(.22,1,.36,1) both!important;
+  animation:giPageEnter 620ms cubic-bezier(.22,1,.36,1) both!important;
+  backface-visibility:hidden;
 }
 
 [data-scroll-reveal] {
@@ -2712,7 +2713,7 @@ main .learning-word-stack p.learning-word {
   }
 
   .page-transition-enter {
-    animation-duration:280ms !important;
+    animation-duration:460ms !important;
   }
 
   /* No mobile, o reveal também é executado pelo IntersectionObserver.
