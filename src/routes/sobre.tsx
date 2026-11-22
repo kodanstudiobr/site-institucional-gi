@@ -31,7 +31,7 @@ function Sobre() {
       <div className="school-page-hero__overlay" aria-hidden="true"/>
       <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
         <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">NOSSA ESCOLA</p>
-        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl"><span className="school-page-hero__mobile-title">Uma escola<br/>que acredita<br/>no potencial de<br/>cada estudante</span><span className="school-page-hero__desktop-title">Uma escola que acredita no potencial de cada estudante.</span></h1>
+        <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl"><span className="school-page-hero__mobile-title">Uma escola<br/>que acredita<br/>no <span className="text-accent">potencial</span> de<br/>cada estudante</span><span className="school-page-hero__desktop-title">Uma escola que acredita no <span className="text-accent">potencial</span> de cada estudante.</span></h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Um pouco sobre nossa escola: conheça nossa identidade, nossos princípios e o compromisso educativo com cada estudante.</p>
       </div>
     </section>
