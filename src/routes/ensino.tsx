@@ -1,7 +1,7 @@
 import { pageHead } from "@/lib/seo";
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Blocks, BookOpen, Telescope, Heart, Brain, HandHeart } from "lucide-react";
+import { Blocks, BookOpen, Telescope, Heart, Brain, HandHeart, GraduationCap } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino")({
@@ -155,7 +155,7 @@ function Ensino() {
       </div>
     </section>
     <section id="nossos-segmentos" className="section-wrap py-20 lg:py-24">
-      <div className="mx-auto max-w-3xl text-center"><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
+      <div className="mx-auto max-w-3xl text-center"><div className="mobile-section-icon" aria-hidden="true"><GraduationCap size={27} strokeWidth={1.9}/></div><p className="eyebrow">NOSSOS SEGMENTOS</p><h2 className="section-title">Cada fase tem suas descobertas. Cada estudante, seu jeito de aprender.</h2><p className="mt-5 leading-8 text-muted-foreground">Conheça as etapas de ensino oferecidas pelo Instituto Educacional G.I.</p></div>
       <div id="segment-selector-anchor" className="segment-selector-anchor" aria-hidden="true" />
       <div role="tablist" aria-label="Segmentos de ensino" className="school-segment-tabs mx-auto mt-10 flex max-w-3xl flex-wrap gap-2 rounded-2xl border border-primary/10 bg-white p-2 shadow-[0_10px_28px_rgba(36,51,111,0.14)] sm:flex-nowrap sm:gap-1.5 sm:rounded-full sm:bg-soft sm:shadow-sm">
         <button role="tab" aria-selected={active==="infantil"} onClick={()=>selectSegment("infantil")} className={`min-w-0 flex-1 rounded-xl px-2 py-3 text-xs font-bold leading-tight transition sm:rounded-full sm:px-4 sm:text-sm ${active==="infantil"?"bg-primary text-white shadow-[0_5px_14px_rgba(50,69,148,0.28)] ring-2 ring-primary/15":"text-primary hover:bg-soft"}`}>Educação<br className="sm:hidden"/> Infantil</button>
