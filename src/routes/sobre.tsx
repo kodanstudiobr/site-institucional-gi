@@ -35,7 +35,23 @@ function Sobre() {
         <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Um pouco sobre nossa escola: conheça nossa identidade, nossos princípios e o compromisso educativo com cada estudante.</p>
       </div>
     </section>
-    <section id="apresentacao" className="section-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:gap-16"><div><p className="eyebrow">APRESENTAÇÃO</p><h2 className="section-title">Educação que acolhe, transforma e prepara para o futuro.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. acredita que a educação é um processo construído diariamente, por meio do conhecimento, do respeito, do acolhimento e das experiências vividas no ambiente escolar.</p></div><div className="school-about-photo-wrap"><img src="/imagens/Menino%20em%20uniforme%20saudando%20na%20escola.webp" alt="Menino em uniforme saudando na escola" loading="lazy" className="school-about-photo"/></div></section>
+    <section id="apresentacao" className="section-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:gap-16"><div><p className="eyebrow">APRESENTAÇÃO</p><h2 className="section-title">Educação que acolhe, transforma e prepara para o futuro.</h2><p className="mt-6 text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. acredita que a educação é um processo construído diariamente, por meio do conhecimento, do respeito, do acolhimento e das experiências vividas no ambiente escolar.</p></div><div className="school-about-photo-wrap"><img src="/imagens/Crian%C3%A7as%20em%20Fantasias%20diante%20da%20Bandeira%20Brasileira.webp" alt="Crianças em fantasias diante da bandeira brasileira" loading="lazy" className="school-about-photo"/></div></section>
+    <section className="school-dream-section section-wrap py-12 lg:py-16">
+      <div className="mx-auto mb-12 max-w-2xl text-center">
+        <p className="eyebrow">NOSSA HISTÓRIA</p>
+        <h2 className="section-title">Semeadoras do sonho</h2>
+      </div>
+      <div className="school-dream-grid mx-auto grid max-w-5xl gap-10 md:grid-cols-2 md:gap-14">
+        <article className="school-dream-card school-dream-card--left">
+          <div className="school-dream-card__photo"><img src="/imagens/IMG_3972.webp" alt="Felina Sousa, diretora" loading="lazy"/></div>
+          <div className="school-dream-card__caption"><h3>Felina Sousa</h3><p>Diretora</p></div>
+        </article>
+        <article className="school-dream-card school-dream-card--right">
+          <div className="school-dream-card__photo"><img src="/imagens/IMG_3974.webp" alt="Olga Sousa, diretora" loading="lazy"/></div>
+          <div className="school-dream-card__caption"><h3>Olga Sousa</h3><p>Diretora</p></div>
+        </article>
+      </div>
+    </section>
     <section className="bg-soft py-20"><div className="section-wrap"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">NOSSA IDENTIDADE</p><h2 className="section-title">Princípios que orientam nossa caminhada.</h2></div><div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">{pilares.map(({icon:Icon,title,text})=><article key={title} className="mission-paper-card p-8 md:p-10"><span className="icon-bubble"><Icon size={27}/></span><h3 className="mt-6 font-display text-2xl font-bold text-primary">{title}</h3><p className="mt-4 text-base leading-8 text-muted-foreground">{text}</p></article>)}</div></div></section>
     <section className="section-wrap py-20 lg:py-24"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Valores que fazem parte de cada experiência.</h2><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que a formação acontece também nas relações, nas atitudes e na maneira como construímos nossa comunidade escolar.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{valores.map(({icon:Icon,title,text})=><article key={title} className="feature-card feature-card--glow"><span className="icon-bubble feature-icon"><Icon size={24}/></span><h3 className="mt-4 font-display text-lg font-bold text-primary">{title}</h3><p className="mt-2 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article>)}</div></section>
   </SiteLayout>;
