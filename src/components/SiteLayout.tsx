@@ -58,11 +58,16 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       ".integral-card", ".experience-card", ".bilingual-segment-note",
       ".gallery-button",
     ].join(", ");
-    const targets = candidates.filter((element) => {
+    const eligibleCandidates = candidates.filter((element) => {
       const containsCards = element.querySelector(cardSelector) !== null;
       const isCard = element.matches(cardSelector);
       return !containsCards || isCard;
     });
+    // Mantém somente o nível mais externo de cada bloco elegível.
+    // Assim, um mesmo conteúdo nunca recebe dois reveals em elementos aninhados.
+    const targets = eligibleCandidates.filter((element) =>
+      !eligibleCandidates.some((other) => other !== element && other.contains(element))
+    );
 
     const sectionIndexes = new Map<Element, number>();
     targets.forEach((element) => {
