@@ -2392,20 +2392,43 @@ html {
 }
 
 
-/* Cards de homenagem às diretoras — Semeadoras do sonho. */
+/* Seção Nossa Gestão: fundo amarelo com textura e elementos gráficos sutis. */
 .school-dream-section {
+  position:relative;
+  isolation:isolate;
   overflow:hidden;
-  background:linear-gradient(135deg,#ffdf59 0%,#ffeb8a 52%,#ffdc4d 100%);
+  background-color:#ffdf59;
+  background-image:
+    radial-gradient(circle,rgba(41,61,145,.12) 1px,transparent 1.5px),
+    radial-gradient(circle at 82% 24%,rgba(255,255,255,.38) 0 2px,transparent 2.8px),
+    linear-gradient(135deg,#ffdf59 0%,#ffeb8a 52%,#ffdc4d 100%);
+  background-size:25px 25px,38px 38px,100% 100%;
 }
-.school-dream-heart {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin:0 auto 1.35rem;
-  color:#293d91;
-  filter:drop-shadow(0 5px 9px rgba(41,61,145,.16));
-  animation:schoolDreamHeartFloat 3.2s ease-in-out infinite;
+.school-dream-section:before,
+.school-dream-section:after {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  border:1px solid rgba(41,61,145,.16);
+  border-radius:50%;
 }
+.school-dream-section:before {
+  width:clamp(230px,34vw,460px);
+  aspect-ratio:1;
+  top:-42%;
+  left:-8%;
+  box-shadow:0 0 0 24px rgba(41,61,145,.055),0 0 0 50px rgba(41,61,145,.04),0 0 0 76px rgba(41,61,145,.025);
+}
+.school-dream-section:after {
+  width:clamp(180px,25vw,340px);
+  aspect-ratio:1;
+  right:-5%;
+  bottom:-48%;
+  background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);
+  box-shadow:0 0 0 22px rgba(255,255,255,.12),0 0 0 46px rgba(41,61,145,.035);
+}
+.school-dream-section > .section-wrap { position:relative; z-index:1; }
 .school-dream-grid { align-items:center; }
 .school-dream-card {
   position:relative;
@@ -2418,8 +2441,8 @@ html {
   box-shadow:0 20px 48px rgba(35,49,112,.19),0 4px 12px rgba(35,49,112,.08);
   transition:transform .75s cubic-bezier(.2,.7,.2,1),box-shadow .75s cubic-bezier(.2,.7,.2,1);
 }
-.school-dream-card--left { transform:rotate(-3deg); }
-.school-dream-card--right { transform:rotate(3deg); animation-delay:140ms; }
+.school-dream-card--left { transform:rotate(-4.5deg); }
+.school-dream-card--right { transform:rotate(4.5deg); animation-delay:140ms; }
 .school-dream-card:hover {
   transform:translateY(-8px) rotate(0deg) scale(1.025);
   box-shadow:0 28px 62px rgba(35,49,112,.24),0 7px 18px rgba(35,49,112,.1);
@@ -2438,22 +2461,18 @@ html {
   transition:transform 1s cubic-bezier(.2,.7,.2,1);
 }
 .school-dream-card:hover .school-dream-card__photo img { transform:scale(1.055); }
-@keyframes schoolDreamHeartFloat {
-  0%,100% { transform:translateY(0) scale(1); }
-  50% { transform:translateY(-4px) scale(1.06); }
-}
 @media (max-width:767px) {
   .school-dream-section { padding-block:1.5rem; }
   .school-dream-heart { margin-bottom:1rem; }
   .school-dream-heart svg { width:27px; height:27px; }
   .school-dream-grid { gap:.85rem; }
   .school-dream-card { width:100%; padding:5px; border-radius:1rem; }
-  .school-dream-card--left { transform:rotate(-1.5deg); }
-  .school-dream-card--right { transform:rotate(1.5deg); }
+  .school-dream-card--left { transform:rotate(-2.8deg); }
+  .school-dream-card--right { transform:rotate(2.8deg); }
   .school-dream-card__photo { border-radius:.72rem; aspect-ratio:4/5; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .school-dream-card,.school-dream-heart { animation:none; transition:none; }
+  .school-dream-card { animation:none; transition:none; }
   .school-dream-card__photo img { transition:none; }
 }
 @media (prefers-reduced-motion:reduce) {
