@@ -164,12 +164,13 @@ type ExperienceItem = (typeof vivencias)[number];
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const cardRef = useRef<HTMLDivElement>(null);
   const cardImages = item.images.length > 0 ? item.images : [item.image];
 
   useEffect(() => {
     if (cardImages.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const card = document.querySelectorAll<HTMLElement>(".experience-card")[index];
+    const card = cardRef.current;
     if (!card) return;
 
     let intervalId: number | undefined;
@@ -202,7 +203,7 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
 
   return (
-    <div className="experience-card" aria-label={item.title}>
+    <div ref={cardRef} className="experience-card" aria-label={item.title}>
       <img
         key={cardImages[activeImageIndex]}
         className={`experience-card__background experience-card__background--slideshow is-active ${focusFace ? "experience-card__background--face-focus" : ""}`}
