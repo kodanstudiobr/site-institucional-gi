@@ -59,7 +59,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/ensino': typeof EnsinoRoute
-  '/estrutura': typeof EstruturaRoute
   '/ensino-integral': typeof EnsinoIntegralRoute
   '/sobre': typeof SobreRoute
   '/vivencias': typeof VivenciasRoute
@@ -69,7 +68,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/ensino': typeof EnsinoRoute
-  '/estrutura': typeof EstruturaRoute
   '/ensino-integral': typeof EnsinoIntegralRoute
   '/sobre': typeof SobreRoute
   '/vivencias': typeof VivenciasRoute
@@ -80,7 +78,6 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/ensino'
-    | '/estrutura'
     | '/ensino-integral'
     | '/sobre'
     | '/vivencias'
@@ -89,7 +86,6 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/ensino'
-    | '/estrutura'
     | '/ensino-integral'
     | '/sobre'
     | '/vivencias'
@@ -98,7 +94,6 @@ export interface FileRouteTypes {
     | '/'
     | '/contato'
     | '/ensino'
-    | '/estrutura'
     | '/ensino-integral'
     | '/sobre'
     | '/vivencias'
