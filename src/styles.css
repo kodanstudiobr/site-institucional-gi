@@ -2768,3 +2768,15 @@ main .learning-word-stack p.learning-word {
     margin-top:0;
   }
 }
+
+/* Destaque amarelo nas palavras-chave dos grandes títulos das seções. */
+.title-highlight {
+  color:#c9aa00;
+  font-weight:inherit;
+  text-shadow:0 1px 0 rgba(50,69,148,.08);
+}
+.bg-primary .title-highlight,
+.page-hero .title-highlight,
+.school-page-hero .title-highlight {
+  color:#fff12c;
+}
