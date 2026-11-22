@@ -2638,3 +2638,15 @@ main p:not(.eyebrow):not(.history-highlight__eyebrow) {
     line-height:1.7;
   }
 }
+
+/* Frases de destaque da seção inicial: escala ampliada e consistente em todas as telas. */
+.learning-word-stack .learning-word {
+  font-size:clamp(4rem,9vw,8.5rem) !important;
+  line-height:1.02;
+}
+@media (max-width:767px) {
+  .learning-word-stack .learning-word {
+    font-size:clamp(3.25rem,15vw,5.8rem) !important;
+    line-height:1.04;
+  }
+}
