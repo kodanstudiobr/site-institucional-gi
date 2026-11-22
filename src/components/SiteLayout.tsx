@@ -15,7 +15,6 @@ const links = [
 export function SiteLayout({ children, transparentHeader = false }: { children: ReactNode; transparentHeader?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [heroReady, setHeroReady] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
@@ -81,43 +80,10 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     return () => observer.disconnect();
   }, [pathname]);
 
-  // Cada rota começa no topo e só fica visível depois que a foto principal do banner
-  // estiver carregada e decodificada, evitando mostrar o espaço vazio da imagem.
+  // A navegação começa sempre no topo. O banner mantém seu fundo institucional
+  // visível enquanto a imagem é carregada, sem ocultar toda a página.
   useLayoutEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    setHeroReady(false);
-
-    const main = document.querySelector<HTMLElement>(".site-main");
-    const heroImage = main?.querySelector<HTMLImageElement>(
-      ".hero-slides .hero-slide.is-active img, .school-page-hero__image"
-    );
-
-    if (!heroImage) {
-      setHeroReady(true);
-      return;
-    }
-
-    let cancelled = false;
-    const revealWhenReady = async () => {
-      try {
-        if (!heroImage.complete || heroImage.naturalWidth === 0) {
-          await new Promise<void>((resolve) => {
-            heroImage.addEventListener("load", () => resolve(), { once: true });
-            heroImage.addEventListener("error", () => resolve(), { once: true });
-          });
-        }
-        if (heroImage.naturalWidth > 0 && typeof heroImage.decode === "function") {
-          await heroImage.decode().catch(() => undefined);
-        }
-      } finally {
-        if (!cancelled) setHeroReady(true);
-      }
-    };
-
-    void revealWhenReady();
-    return () => {
-      cancelled = true;
-    };
   }, [pathname]);
 
   useEffect(() => {
@@ -148,7 +114,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         </div>
         <nav className={`mobile-menu-panel 2xl:hidden ${menuOpen ? "is-open" : ""}`} aria-label="Menu móvel" aria-hidden={!menuOpen}>{links.map(l => <Link key={l.to} to={l.to} onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, left: 0, behavior: "auto" }); }} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Faça sua matrícula</Link></nav>
       </header>
-      <main key={pathname} className={`site-main flex-1 ${heroReady ? "page-transition-enter" : "is-waiting-for-hero"}`}>{children}</main>
+      <main key={pathname} className="site-main page-transition-enter flex-1">{children}</main>
       <footer className="bg-primary text-primary-foreground">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3 lg:px-8">
           <div><div className="flex items-center gap-3"><img src="/imagens/logo-gi.svg" alt="Logotipo do Instituto Educacional G.I." className="h-14 w-14 object-contain"/><span className="font-display text-xl font-bold">Instituto Educacional G.I.</span></div><p className="mt-4 max-w-sm text-sm leading-7 text-white/80">Educação que acolhe, ensina e transforma vidas. Uma jornada de descobertas, conhecimento e desenvolvimento.</p></div>
