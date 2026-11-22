@@ -2655,3 +2655,33 @@ main .learning-word-stack p.learning-word {
     letter-spacing:-.06em;
   }
 }
+
+
+/* No mobile, os textos dos banners internos ficam alinhados na base,
+   seguindo a composição da hero da página inicial. */
+@media (max-width:767px) {
+  .school-page-hero {
+    min-height:560px;
+  }
+  .school-page-hero > .relative {
+    display:flex;
+    min-height:560px;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-end;
+    padding-top:6rem;
+    padding-bottom:2.5rem;
+  }
+  .vivencias-page-hero {
+    min-height:560px;
+  }
+  .vivencias-page-hero > .page-hero__content {
+    display:flex;
+    min-height:560px;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:flex-end;
+    padding-top:6rem;
+    padding-bottom:2.5rem;
+  }
+}
