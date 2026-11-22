@@ -2685,3 +2685,45 @@ main .learning-word-stack p.learning-word {
     padding-bottom:2.5rem;
   }
 }
+
+
+/* Desempenho mobile: evita timelines de rolagem pesadas e reduz trabalho fora da tela. */
+@media (max-width:767px) {
+  .site-main > section:not(.learning-words-section),
+  .site-main section article,
+  .site-main section .feature-card,
+  .site-main section .mission-paper-card,
+  .site-main section .mission-vision-card,
+  .site-main section .testimonial-card,
+  .site-main section .integral-card,
+  .site-main section .experience-card,
+  .site-main section .bilingual-segment-note,
+  .site-main section .gallery-button,
+  .site-main > section:not(.learning-words-section) > .section-wrap,
+  .site-main > section:not(.learning-words-section) > div,
+  .site-main > section:not(.learning-words-section) .section-title,
+  .site-main > section:not(.learning-words-section) .eyebrow,
+  .site-main .scroll-reveal {
+    animation-timeline:auto !important;
+    animation-name:none !important;
+  }
+
+  .page-transition-enter {
+    animation-duration:280ms !important;
+  }
+
+  [data-scroll-reveal].is-visible {
+    animation-duration:420ms !important;
+    animation-delay:0ms !important;
+  }
+
+  .experience-card__background--slideshow {
+    animation-duration:350ms !important;
+    transition:none !important;
+  }
+
+  .learning-word-stack .learning-word--current,
+  .learning-word-stack .learning-word--outgoing {
+    filter:none !important;
+  }
+}
