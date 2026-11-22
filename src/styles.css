@@ -2832,3 +2832,76 @@ main .learning-word-stack p.learning-word {
     transition:none !important;
   }
 }
+
+/* Nossos Segmentos: carrossel horizontal em todas as telas, com prévia do próximo card. */
+.school-segments-section {
+  overflow:hidden;
+}
+.school-segments-grid {
+  display:flex !important;
+  align-items:stretch;
+  gap:20px;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:8px 0 18px;
+  margin-top:3rem;
+  scrollbar-width:none;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:0;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+  cursor:grab;
+}
+.school-segments-grid:active { cursor:grabbing; }
+.school-segments-grid::-webkit-scrollbar { display:none; }
+.school-segments-grid > .school-segment-card {
+  flex:0 0 clamp(280px,29vw,370px);
+  width:clamp(280px,29vw,370px);
+  scroll-snap-align:start;
+}
+.school-segments-dots {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+}
+.school-segments-dot {
+  width:8px;
+  height:8px;
+  padding:0;
+  border:0;
+  border-radius:999px;
+  background:#cbd1e8;
+  cursor:pointer;
+  transition:width .3s ease,background .3s ease;
+}
+.school-segments-dot.is-active {
+  width:25px;
+  background:#324594;
+}
+@media (max-width:767px) {
+  .school-segments-grid {
+    gap:14px;
+    padding:5px 0 14px;
+    margin-top:2rem;
+  }
+  .school-segments-grid > .school-segment-card {
+    flex:0 0 min(82vw,350px);
+    width:min(82vw,350px);
+    height:410px;
+    min-height:410px;
+  }
+}
+
+/* Evita o flash de composição na troca de rota.
+   A animação premium continua aplicada diretamente às fotografias dos banners. */
+.page-transition-enter {
+  animation:none !important;
+  backface-visibility:visible !important;
+  transform:none !important;
+}
+.school-page-hero__image {
+  background-color:#263878;
+}
