@@ -2949,3 +2949,55 @@ main .learning-word-stack p.learning-word {
 @media (prefers-reduced-motion:reduce) {
   .testimonials-stack__card { will-change:auto; }
 }
+
+/* Depoimentos: cards centralizados no viewport e empilhados durante a rolagem. */
+.history-highlight {
+  overflow:visible;
+}
+.testimonials-stack {
+  position:relative;
+  isolation:auto;
+  padding-bottom:0;
+}
+.testimonials-stack__step {
+  position:relative;
+  display:block;
+  min-height:150vh;
+  margin:0 0 -50vh;
+}
+.testimonials-stack__step:nth-child(1) { z-index:1; }
+.testimonials-stack__step:nth-child(2) { z-index:2; }
+.testimonials-stack__step:nth-child(3) { z-index:3; }
+.testimonials-stack__step:last-child {
+  min-height:100vh;
+  margin-bottom:0;
+}
+.testimonials-stack__card {
+  position:sticky;
+  top:50vh;
+  width:min(100%,780px);
+  margin-inline:auto;
+  transform:translateY(-50%);
+  will-change:transform;
+}
+.testimonials-stack__card:hover {
+  transform:translateY(calc(-50% - 7px));
+}
+@media (max-width:767px) {
+  .testimonials-stack__step {
+    min-height:150svh;
+    margin-bottom:-50svh;
+  }
+  .testimonials-stack__step:last-child {
+    min-height:100svh;
+    margin-bottom:0;
+  }
+  .testimonials-stack__card {
+    top:50svh;
+    width:100%;
+    min-height:clamp(290px,48vh,390px);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .testimonials-stack__card { will-change:auto; }
+}
