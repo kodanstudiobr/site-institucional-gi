@@ -35,10 +35,15 @@ function Sobre() {
         <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Um pouco sobre nossa escola: conheça nossa identidade, nossos princípios e o compromisso educativo com cada estudante.</p>
       </div>
     </section>
-    <section id="apresentacao" className="section-wrap grid items-center gap-10 py-20 lg:grid-cols-2 lg:gap-16"><div><p className="eyebrow">APRESENTAÇÃO</p><h2 className="section-title">Educação que acolhe, transforma e prepara para o futuro.</h2><div className="mt-6 space-y-5 text-lg leading-8 text-muted-foreground"><p>Ao longo de seus 26 anos de história, o Instituto Educacional G.I. acredita que a educação é um processo construído diariamente, por meio do conhecimento, do respeito, do acolhimento e das experiências vividas no ambiente escolar.</p><p>Acreditamos que cada criança é única e que aprender vai muito além da sala de aula. Por isso, incentivamos a criatividade, a autonomia, a empatia, a solidariedade, o pensamento crítico e o respeito às diferenças, valores essenciais para a formação de cidadãos conscientes, responsáveis e preparados para transformar o mundo.</p></div></div><div className="school-about-photo-wrap"><img src="/imagens/Crian%C3%A7as%20em%20Fantasias%20diante%20da%20Bandeira%20Brasileira.webp" alt="Crianças em fantasias diante da bandeira brasileira" loading="lazy" className="school-about-photo"/></div></section>
+    <section id="apresentacao" className="section-wrap school-presentation-layout grid items-center gap-10 py-20 lg:grid-cols-2 lg:gap-16">
+      <div className="school-presentation-heading"><p className="eyebrow">APRESENTAÇÃO</p><h2 className="section-title">Educação que acolhe, transforma e prepara para o futuro.</h2></div>
+      <div className="school-about-photo-wrap school-presentation-image"><img src="/imagens/Crian%C3%A7as%20em%20Fantasias%20diante%20da%20Bandeira%20Brasileira.webp" alt="Crianças em fantasias diante da bandeira brasileira" loading="lazy" className="school-about-photo"/></div>
+      <div className="school-presentation-copy mt-6 space-y-5 text-lg leading-8 text-muted-foreground"><p>Ao longo de seus 26 anos de história, o Instituto Educacional G.I. acredita que a educação é um processo construído diariamente, por meio do conhecimento, do respeito, do acolhimento e das experiências vividas no ambiente escolar.</p><p>Acreditamos que cada criança é única e que aprender vai muito além da sala de aula. Por isso, incentivamos a criatividade, a autonomia, a empatia, a solidariedade, o pensamento crítico e o respeito às diferenças, valores essenciais para a formação de cidadãos conscientes, responsáveis e preparados para transformar o mundo.</p></div>
+    </section>
     <section className="school-dream-section py-8 sm:py-10 lg:py-14">
       <div className="section-wrap">
         <div className="school-dream-heart" aria-hidden="true"><Heart size={34} strokeWidth={2.2} fill="currentColor"/></div>
+        <h2 className="school-dream-heading">Quem faz acontecer</h2>
         <div className="school-dream-grid mx-auto grid max-w-5xl grid-cols-2 gap-4 sm:gap-7 md:gap-14">
           <article className="school-dream-card school-dream-card--left">
             <div className="school-dream-card__photo"><img src="/imagens/IMG_3972.webp" alt="Felina Sousa, Diretora Escolar" loading="lazy"/></div>
