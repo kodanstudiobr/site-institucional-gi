@@ -2046,3 +2046,18 @@ html {
     border-radius:16px;
   }
 }
+
+/* Crossfade real e independente para os slides dos cards de vivências. */
+.experience-card__background--slideshow {
+  opacity:0 !important;
+  transition:opacity 1.15s ease-in-out !important;
+  will-change:opacity;
+}
+.experience-card__background--slideshow.is-active {
+  opacity:1 !important;
+}
+@media (prefers-reduced-motion:reduce) {
+  .experience-card__background--slideshow {
+    transition:none !important;
+  }
+}
