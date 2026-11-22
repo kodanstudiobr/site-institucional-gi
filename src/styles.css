@@ -2626,3 +2626,15 @@ html {
 @media (max-width:767px) {
   .school-dream-heading { margin:-.35rem auto 1.1rem; font-size:1.25rem; }
 }
+
+/* Tipografia institucional: corpo dos textos padronizado e responsivo em todas as páginas. */
+main p:not(.eyebrow):not(.history-highlight__eyebrow) {
+  font-size:clamp(.9375rem,.95vw,1rem) !important;
+  line-height:1.75;
+}
+@media (max-width:767px) {
+  main p:not(.eyebrow):not(.history-highlight__eyebrow) {
+    font-size:.9375rem !important;
+    line-height:1.7;
+  }
+}
