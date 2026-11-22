@@ -1504,6 +1504,47 @@ html {
 }
 
 
+/* Enquadramento das fotografias nas páginas institucionais. */
+.bilingual-classroom-image {
+  object-position:center 34%;
+}
+.school-presentation-hero-media {
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  border-radius:2rem;
+  background:#263878;
+  box-shadow:0 18px 48px rgba(36,51,111,.16);
+}
+.school-presentation-hero-media::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(23,40,105,.02) 48%,rgba(23,40,105,.24) 100%);
+}
+.school-presentation-hero-image {
+  display:block;
+  transform:scale(1.035);
+  animation:schoolHeroImageEnter 1.8s cubic-bezier(.2,.7,.2,1) both;
+  transition:transform 1.8s cubic-bezier(.2,.7,.2,1);
+}
+.school-presentation-hero-media:hover .school-presentation-hero-image {
+  transform:scale(1.075);
+}
+@keyframes schoolHeroImageEnter {
+  from { opacity:.35; transform:scale(1.09); }
+  to { opacity:1; transform:scale(1.035); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .school-presentation-hero-image {
+    animation:none;
+    transform:none;
+    transition:none;
+  }
+}
+
 /* Hero com troca automática e transição suave entre fotografias institucionais. */
 .hero-slides {
   position:absolute;
