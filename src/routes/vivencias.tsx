@@ -1,6 +1,6 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, X, Images, ArrowRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -34,12 +34,15 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   useEffect(() => {
     if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let interval: number | undefined;
     const startTimeout = window.setTimeout(() => {
       setActiveImageIndex((current) => (current + 1) % item.images.length);
-      const interval = window.setInterval(() => setActiveImageIndex((current) => (current + 1) % item.images.length), 4000);
-      (VivenciaCard as any)._intervals?.push(interval);
+      interval = window.setInterval(() => setActiveImageIndex((current) => (current + 1) % item.images.length), 4000);
     }, index * 450);
-    return () => window.clearTimeout(startTimeout);
+    return () => {
+      window.clearTimeout(startTimeout);
+      if (interval !== undefined) window.clearInterval(interval);
+    };
   }, [item.images.length, index]);
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
   return <button type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
@@ -57,8 +60,7 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
 function Vivencias() {
   const [selectedGallery, setSelectedGallery] = useState<number | null>(null);
   const [activeGalleryImage, setActiveGalleryImage] = useState(0);
-  const [activeImage, setActiveImage] = useState(0);
-  const swiperRef = { current: null as SwiperInstance | null };
+  const swiperRef = useRef<SwiperInstance | null>(null);
   const selectedExperience = selectedGallery !== null ? items[selectedGallery] : null;
   const galleryImages = selectedExperience?.images ?? [];
   const showPrevious = () => swiperRef.current?.slidePrev();
