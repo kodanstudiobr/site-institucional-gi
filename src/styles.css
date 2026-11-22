@@ -665,8 +665,6 @@
   padding:1.6rem;
   box-shadow:0 12px 28px rgba(36,51,111,.065),0 2px 7px rgba(36,51,111,.035);
   transition:transform .4s cubic-bezier(.2,.75,.25,1),box-shadow .4s ease,border-color .4s ease;
-  animation:integralCardEnter .65s cubic-bezier(.2,.75,.25,1) both;
-  animation-delay:calc(var(--card-index) * 90ms);
 }
 .integral-card:before {
   content:"";
@@ -738,10 +736,6 @@
   transition:color .35s ease,transform .35s ease;
 }
 .integral-card:hover .integral-card__number { color:rgba(50,69,148,.17); transform:translateY(-3px); }
-@keyframes integralCardEnter {
-  from { opacity:0; transform:translateY(18px); }
-  to { opacity:1; transform:translateY(0); }
-}
 @media (max-width:767px) {
   .integral-card { min-height:215px; padding:1.35rem; }
   .integral-card:after { left:1.35rem; right:1.35rem; }
@@ -808,32 +802,6 @@ article:hover {
 
 
 
-/* Animações de rolagem nativas: seções, conteúdos e cards entram suavemente na viewport. */
-.site-main {
-  animation:animate__fadeIn .7s both;
-}
-@keyframes giRevealUp {
-  from { opacity:0; transform:translate3d(0,34px,0); filter:blur(3px); }
-  to { opacity:1; transform:translate3d(0,0,0); filter:blur(0); }
-}
-@supports (animation-timeline:view()) {
-  .site-main > section:not(.learning-words-section),
-  .site-main section article,
-  .site-main section .feature-card,
-  .site-main section .mission-paper-card,
-  .site-main section .mission-vision-card,
-  .site-main section .testimonial-card,
-  .site-main section .integral-card,
-  .site-main section .experience-card,
-  .site-main section .bilingual-segment-note,
-  .site-main section .gallery-button {
-    animation-name:giRevealUp;
-    animation-timeline:view();
-    animation-range:entry 0% entry 38%;
-    animation-duration:auto;
-    animation-fill-mode:both;
-  }
-}
 /* Microinterações consistentes em todos os cards do site. */
 .site-main article,
 .site-main .feature-card,
@@ -895,66 +863,6 @@ article:hover {
 }
 
 
-/* Correção específica da Home: seus cards usam wrappers .scroll-reveal,
-   enquanto suas seções têm estruturas próprias e carrossel horizontal. */
-.site-main > .hero-home {
-  animation:animate__fadeIn .9s ease both;
-}
-.site-main > section:not(.learning-words-section) {
-  view-timeline-name:--gi-home-section;
-  view-timeline-axis:block;
-}
-.site-main > section:not(.learning-words-section) > .section-wrap,
-.site-main > section:not(.learning-words-section) > div,
-.site-main > section:not(.learning-words-section) .section-title,
-.site-main > section:not(.learning-words-section) .eyebrow {
-  animation:giRevealUp .8s cubic-bezier(.22,1,.36,1) both;
-}
-@supports (animation-timeline:view()) {
-  .site-main > section:not(.learning-words-section) > .section-wrap,
-  .site-main > section:not(.learning-words-section) > div,
-  .site-main > section:not(.learning-words-section) .section-title,
-  .site-main > section:not(.learning-words-section) .eyebrow,
-  .site-main .scroll-reveal {
-    animation-name:giRevealUp;
-    animation-timeline:view(block);
-    animation-range:entry 0% entry 32%;
-    animation-duration:auto;
-    animation-fill-mode:both;
-  }
-}
-/* O wrapper dos destaques e depoimentos da Home agora tem animação visual
-   CSS mesmo sem depender do estado React is-visible. */
-.site-main .scroll-reveal {
-  opacity:1;
-  transform:none;
-  filter:none;
-}
-.site-main .scroll-reveal > * {
-  transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease;
-}
-@media (hover:hover) and (pointer:fine) {
-  .site-main .scroll-reveal:hover > article {
-    transform:translate3d(0,-6px,0);
-    box-shadow:0 18px 38px rgba(36,51,111,.13);
-  }
-}
-@media (prefers-reduced-motion:reduce) {
-  .site-main > .hero-home,
-  .site-main > section:not(.learning-words-section) > .section-wrap,
-  .site-main > section:not(.learning-words-section) > div,
-  .site-main > section:not(.learning-words-section) .section-title,
-  .site-main > section:not(.learning-words-section) .eyebrow,
-  .site-main .scroll-reveal {
-    animation:none!important;
-  }
-}
-
-
-/* Mantém as transições e microinterações dos componentes.
-   As animações de entrada são controladas pelo IntersectionObserver abaixo. */
-
-
 /* Exceção intencional: a troca de frases da seção inicial mantém seu crossfade
    controlado pela rolagem, mesmo com as demais animações globalmente desativadas. */
 .learning-word-stack .learning-word--current {
@@ -968,16 +876,6 @@ article:hover {
 /* Movimento global: entrada de página e elementos revelados durante a rolagem. */
 html {
   scroll-behavior:smooth!important;
-}
-
-@keyframes giPageEnter {
-  /* A entrada não pode ocultar o banner enquanto suas imagens carregam. */
-  from { opacity:1; transform:translate3d(0,8px,0); }
-  to { opacity:1; transform:translate3d(0,0,0); }
-}
-.page-transition-enter {
-  animation:giPageEnter 620ms cubic-bezier(.22,1,.36,1) both!important;
-  backface-visibility:hidden;
 }
 
 [data-scroll-reveal] {
@@ -2519,7 +2417,6 @@ html {
   background:rgba(255,255,255,.92);
   box-shadow:0 20px 48px rgba(35,49,112,.19),0 4px 12px rgba(35,49,112,.08);
   transition:transform .75s cubic-bezier(.2,.7,.2,1),box-shadow .75s cubic-bezier(.2,.7,.2,1);
-  animation:schoolDreamCardEnter .9s cubic-bezier(.2,.7,.2,1) both;
 }
 .school-dream-card--left { transform:rotate(-3deg); }
 .school-dream-card--right { transform:rotate(3deg); animation-delay:140ms; }
@@ -2541,10 +2438,6 @@ html {
   transition:transform 1s cubic-bezier(.2,.7,.2,1);
 }
 .school-dream-card:hover .school-dream-card__photo img { transform:scale(1.055); }
-@keyframes schoolDreamCardEnter {
-  from { opacity:0; translate:0 18px; }
-  to { opacity:1; translate:0 0; }
-}
 @keyframes schoolDreamHeartFloat {
   0%,100% { transform:translateY(0) scale(1); }
   50% { transform:translateY(-4px) scale(1.06); }
@@ -2690,48 +2583,6 @@ main .learning-word-stack p.learning-word {
 }
 
 
-/* Desempenho mobile: evita timelines de rolagem pesadas e reduz trabalho fora da tela. */
-@media (max-width:767px) {
-  .site-main > section:not(.learning-words-section),
-  .site-main section article,
-  .site-main section .feature-card,
-  .site-main section .mission-paper-card,
-  .site-main section .mission-vision-card,
-  .site-main section .testimonial-card,
-  .site-main section .integral-card,
-  .site-main section .experience-card,
-  .site-main section .bilingual-segment-note,
-  .site-main section .gallery-button,
-  .site-main > section:not(.learning-words-section) > .section-wrap,
-  .site-main > section:not(.learning-words-section) > div,
-  .site-main > section:not(.learning-words-section) .section-title,
-  .site-main > section:not(.learning-words-section) .eyebrow,
-  .site-main .scroll-reveal {
-    animation-timeline:auto !important;
-    animation-name:none !important;
-  }
-
-  .page-transition-enter {
-    animation-duration:460ms !important;
-  }
-
-  /* No mobile, o reveal também é executado pelo IntersectionObserver.
-     Mantemos os elementos preparados para a entrada suave ao rolar. */
-  [data-scroll-reveal] {
-    will-change:opacity,transform;
-  }
-
-  .experience-card__background--slideshow {
-    animation:none !important;
-    transition:opacity 1800ms cubic-bezier(.4,0,.2,1) !important;
-  }
-
-  .learning-word-stack .learning-word--current,
-  .learning-word-stack .learning-word--outgoing {
-    filter:none !important;
-  }
-}
-
 /* Os banners preservam o fundo institucional enquanto as fotografias carregam. */
 .hero-home,
 .school-page-hero {
@@ -2777,13 +2628,6 @@ main .learning-word-stack p.learning-word {
     transition:opacity 1800ms cubic-bezier(.4,0,.2,1) !important;
   }
 }
-
-/* A transição entre páginas mantém o fundo visível durante a montagem dos banners. */
-.page-transition-enter {
-  animation:giPageEnter 460ms cubic-bezier(.22,1,.36,1) both !important;
-  backface-visibility:visible;
-}
-
 
 /* Aprender Fazendo: crossfade com a mesma arquitetura de camadas da Hero. */
 .experience-card__slides {
@@ -2895,13 +2739,6 @@ main .learning-word-stack p.learning-word {
   }
 }
 
-/* Evita o flash de composição na troca de rota.
-   A animação premium continua aplicada diretamente às fotografias dos banners. */
-.page-transition-enter {
-  animation:none !important;
-  backface-visibility:visible !important;
-  transform:none !important;
-}
 .school-page-hero__image {
   background-color:#263878;
 }
