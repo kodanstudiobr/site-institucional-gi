@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as EnsinoRouteImport } from './routes/ensino'
-import { Route as EstruturaRouteImport } from './routes/estrutura'
 import { Route as EnsinoIntegralRouteImport } from './routes/ensino-integral'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as VivenciasRouteImport } from './routes/vivencias'
@@ -30,11 +29,6 @@ const ContatoRoute = ContatoRouteImport.update({
 const EnsinoRoute = EnsinoRouteImport.update({
   id: '/ensino',
   path: '/ensino',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EstruturaRoute = EstruturaRouteImport.update({
-  id: '/estrutura',
-  path: '/estrutura',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnsinoIntegralRoute = EnsinoIntegralRouteImport.update({
@@ -57,7 +51,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contato': typeof ContatoRoute
   '/ensino': typeof EnsinoRoute
-  '/estrutura': typeof EstruturaRoute
   '/ensino-integral': typeof EnsinoIntegralRoute
   '/sobre': typeof SobreRoute
   '/vivencias': typeof VivenciasRoute
@@ -115,7 +108,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContatoRoute: typeof ContatoRoute
   EnsinoRoute: typeof EnsinoRoute
-  EstruturaRoute: typeof EstruturaRoute
   EnsinoIntegralRoute: typeof EnsinoIntegralRoute
   SobreRoute: typeof SobreRoute
   VivenciasRoute: typeof VivenciasRoute
@@ -142,13 +134,6 @@ declare module '@tanstack/react-router' {
       path: '/ensino'
       fullPath: '/ensino'
       preLoaderRoute: typeof EnsinoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/estrutura': {
-      id: '/estrutura'
-      path: '/estrutura'
-      fullPath: '/estrutura'
-      preLoaderRoute: typeof EstruturaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ensino-integral': {
@@ -179,7 +164,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContatoRoute: ContatoRoute,
   EnsinoRoute: EnsinoRoute,
-  EstruturaRoute: EstruturaRoute,
   EnsinoIntegralRoute: EnsinoIntegralRoute,
   SobreRoute: SobreRoute,
   VivenciasRoute: VivenciasRoute
