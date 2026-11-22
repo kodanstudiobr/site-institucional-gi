@@ -34,7 +34,7 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [outgoingImageIndex, setOutgoingImageIndex] = useState<number | null>(null);
   const [crossfadeStarted, setCrossfadeStarted] = useState(true);
-  const cardRef = useRef<HTMLButtonElement>(null);
+  const cardRef = useRef<HTMLElement>(null);
   useEffect(() => {
     if (item.images.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -80,17 +80,19 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   }, [outgoingImageIndex]);
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
   const imageFocusClass = focusFace ? "experience-card__background--face-focus" : "";
-  return <button ref={cardRef} type="button" className="experience-card experience-card__button" onClick={onOpen} aria-label={`Abrir galeria: ${item.title}`}>
+  return <article ref={cardRef} className="experience-card experience-card__button">
     {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={item.images[outgoingImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />}
     <img className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
     <div className="experience-card__shade" />
     <span className="experience-card__number">0{index + 1}</span>
     <div className="experience-card__content">
-      <span className="experience-card__gallery-hint"><Images size={15} /> Ver galeria <ArrowRight size={14} /></span>
-      <h2 className="mt-3 font-display text-xl font-bold text-white">{item.title}</h2>
+      <h2 className="font-display text-xl font-bold text-white">{item.title}</h2>
       <p className="mt-2 leading-6 text-white/90">{item.text}</p>
+      <button type="button" className="experience-card__gallery-button" onClick={onOpen} aria-label={`Ver galeria de ${item.title}`}>
+        VER GALERIA <ArrowRight size={17} />
+      </button>
     </div>
-  </button>;
+  </article>;
 }
 
 function Vivencias() {
@@ -119,12 +121,12 @@ function Vivencias() {
   }, [selectedGallery, galleryImages.length]);
 
   return <SiteLayout>
-    <PageHeader className="vivencias-page-hero" eyebrow="NOSSAS VIVÊNCIAS" title="Aprender também é viver experiências." intro="Projetos, atividades e momentos que tornam a aprendizagem ainda mais significativa em nossa escola." />
+    <PageHeader className="vivencias-page-hero" eyebrow="GALERIA DE FOTOS" title={<>Momentos que <span className="text-accent">contam nossa história.</span></>} intro="Explore os registros das atividades, projetos, celebrações e experiências vividas pelos estudantes do Instituto Educacional G.I." />
     <section className="section-wrap py-20">
       <div className="mx-auto mb-12 max-w-2xl text-center">
-        <p className="eyebrow">VIVÊNCIAS G.I.</p>
-        <h2 className="section-title">Experiências que <span className="title-highlight">ampliam horizontes.</span></h2>
-        <p className="mt-4 leading-8 text-muted-foreground">A aprendizagem ganha significado nas descobertas, nas relações e nas experiências compartilhadas. Selecione uma categoria para conhecer os registros da nossa escola.</p>
+        <p className="eyebrow">REGISTROS DA NOSSA ESCOLA</p>
+        <h2 className="section-title">Uma galeria de <span className="title-highlight">momentos especiais.</span></h2>
+        <p className="mt-4 leading-8 text-muted-foreground">Cada fotografia guarda uma experiência, uma descoberta e uma lembrança. Escolha uma galeria para ver todos os registros de cada categoria.</p>
       </div>
       <div className="experience-gallery-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((item, index) => <VivenciaCard key={item.title} item={item} index={index} onOpen={() => { setSelectedGallery(index); setActiveGalleryImage(0); }} />)}
