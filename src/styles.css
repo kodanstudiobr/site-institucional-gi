@@ -2489,3 +2489,69 @@ html {
 @media (prefers-reduced-motion:reduce) {
   .school-about-photo { transition:none; }
 }
+
+
+/* Cards de homenagem às diretoras — Semeadoras do sonho. */
+.school-dream-section { overflow:hidden; }
+.school-dream-card {
+  position:relative;
+  width:min(100%, 390px);
+  margin-inline:auto;
+  padding:14px 14px 20px;
+  border:1px solid rgba(50,69,148,.10);
+  border-radius:1.5rem;
+  background:linear-gradient(145deg,#fff 0%,#f8f9ff 100%);
+  box-shadow:0 22px 55px rgba(36,51,111,.14),0 3px 10px rgba(36,51,111,.06);
+  transition:transform .75s cubic-bezier(.2,.7,.2,1),box-shadow .75s cubic-bezier(.2,.7,.2,1);
+  animation:schoolDreamCardEnter .9s cubic-bezier(.2,.7,.2,1) both;
+}
+.school-dream-card--left { transform:rotate(-3deg); }
+.school-dream-card--right { transform:rotate(3deg); animation-delay:140ms; }
+.school-dream-card:hover {
+  transform:translateY(-9px) rotate(0deg) scale(1.015);
+  box-shadow:0 30px 70px rgba(36,51,111,.20),0 6px 16px rgba(36,51,111,.08);
+}
+.school-dream-card__photo {
+  overflow:hidden;
+  border-radius:1.05rem;
+  background:#e9edf8;
+  aspect-ratio:4/4.3;
+}
+.school-dream-card__photo img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.school-dream-card:hover .school-dream-card__photo img { transform:scale(1.045); }
+.school-dream-card__caption { padding:18px 8px 2px; text-align:center; }
+.school-dream-card__caption h3 {
+  color:#293d91;
+  font-family:var(--font-display,inherit);
+  font-size:1.35rem;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+.school-dream-card__caption p {
+  margin-top:4px;
+  color:#7b83a0;
+  font-size:.9rem;
+  font-weight:650;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+@keyframes schoolDreamCardEnter {
+  from { opacity:0; translate:0 18px; }
+  to { opacity:1; translate:0 0; }
+}
+@media (max-width:767px) {
+  .school-dream-grid { gap:30px; }
+  .school-dream-card { width:min(100%,340px); }
+  .school-dream-card--left { transform:rotate(-1.8deg); }
+  .school-dream-card--right { transform:rotate(1.8deg); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .school-dream-card { animation:none; transition:none; }
+  .school-dream-card__photo img { transition:none; }
+}
