@@ -164,8 +164,6 @@ type ExperienceItem = (typeof vivencias)[number];
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [outgoingImageIndex, setOutgoingImageIndex] = useState<number | null>(null);
-  const [crossfadeStarted, setCrossfadeStarted] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const activeImageIndexRef = useRef(0);
   const cardImages = item.images.length > 0 ? item.images : [item.image];
@@ -177,7 +175,6 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
     if (!card) return;
 
     let intervalId: number | undefined;
-    let cleanupTransition: number | undefined;
     let isMounted = true;
     let isTransitioning = false;
 
@@ -185,41 +182,32 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
       if (isTransitioning) return;
       isTransitioning = true;
 
-      const current = activeImageIndexRef.current;
-      const next = (current + 1) % cardImages.length;
+      const next = (activeImageIndexRef.current + 1) % cardImages.length;
       const preload = new Image();
-      const loaded = new Promise<void>((resolve) => {
-        preload.onload = () => resolve();
-        preload.onerror = () => resolve();
-      });
+      preload.decoding = "async";
       preload.src = cardImages[next];
 
-      // A próxima foto só entra na camada visível depois de carregar e decodificar.
       try {
-        if (typeof preload.decode === "function") await preload.decode();
-        else await loaded;
+        if (typeof preload.decode === "function") {
+          await preload.decode();
+        } else {
+          await new Promise<void>((resolve) => {
+            if (preload.complete) resolve();
+            else {
+              preload.onload = () => resolve();
+              preload.onerror = () => resolve();
+            }
+          });
+        }
       } catch {
-        await loaded;
+        // Mesmo se decode() não estiver disponível, a camada já está no DOM
+        // e o navegador poderá concluir a exibição pela imagem em cache.
       }
-      if (!isMounted) return;
 
-      setOutgoingImageIndex(current);
-      setCrossfadeStarted(false);
+      if (!isMounted) return;
       activeImageIndexRef.current = next;
       setActiveImageIndex(next);
-
-      // Dois frames garantem que o navegador registre a camada nova em opacity 0
-      // antes de iniciar o crossfade, evitando o salto visual entre fotografias.
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          if (isMounted) setCrossfadeStarted(true);
-        });
-      });
-
-      cleanupTransition = window.setTimeout(() => {
-        if (isMounted) setOutgoingImageIndex(null);
-        isTransitioning = false;
-      }, 1900);
+      window.setTimeout(() => { isTransitioning = false; }, 1800);
     };
 
     const start = () => {
@@ -242,13 +230,12 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
         isMounted = false;
         observer.disconnect();
         stop();
-        if (cleanupTransition !== undefined) window.clearTimeout(cleanupTransition);
       };
     }
+
     return () => {
       isMounted = false;
       stop();
-      if (cleanupTransition !== undefined) window.clearTimeout(cleanupTransition);
     };
   }, [cardImages.length, index]);
 
@@ -257,15 +244,18 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
 
   return (
     <div ref={cardRef} className="experience-card" aria-label={item.title}>
-      {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={cardImages[outgoingImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />}
-      <img
-        className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`}
-        src={cardImages[activeImageIndex]}
-        alt=""
-        loading="lazy"
-        decoding="async"
-        aria-hidden="true"
-      />
+      <div className="experience-card__slides" aria-hidden="true">
+        {cardImages.map((src, slideIndex) => (
+          <img
+            key={src}
+            className={`experience-card__slide ${activeImageIndex === slideIndex ? "is-active" : ""} ${imageFocusClass}`}
+            src={src}
+            alt=""
+            loading={slideIndex === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        ))}
+      </div>
       <div className="experience-card__shade"/>
       <span className="experience-card__number">0{index + 1}</span>
       <div className="experience-card__content">
