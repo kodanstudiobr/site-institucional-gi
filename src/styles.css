@@ -74,6 +74,9 @@
 .section-decor-wrap { position:relative; }
 .section-spark { position:absolute; z-index:0; color:#fff12c; opacity:.9; pointer-events:none; filter:drop-shadow(0 2px 5px rgba(50,69,148,.12)); animation:decorFloat 5.5s ease-in-out infinite; }
 .section-spark--left { left:1%; top:9%; }
+@media (max-width:640px) {
+  .bg-soft.section-decor-wrap .section-spark--left { left:50%; top:22px; margin-left:-24px; }
+}
 .section-spark--pedagogy { right:1.5%; top:8%; }
 .section-decor-wrap > .section-wrap,
 .section-decor-wrap > .relative { position:relative; z-index:1; }
