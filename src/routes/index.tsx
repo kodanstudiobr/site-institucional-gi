@@ -211,6 +211,13 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
 function Index() {
   const [faqOpen, setFaqOpen] = useState<number | null>(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const heroTimer = window.setInterval(() => {
+      setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
+    }, 6000);
+    return () => window.clearInterval(heroTimer);
+  }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeExperience, setActiveExperience] = useState(0);
   const moveCarousel = (direction: "prev" | "next") => {
@@ -274,6 +281,34 @@ function Index() {
 
 
     <section className="mission-vision-section section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-3xl text-center"><p className="eyebrow mission-eyebrow">NOSSA IDENTIDADE</p><h2 className="mission-title">Missão e visão que orientam nosso caminho.</h2><p className="mission-intro">Os princípios que inspiram nossas escolhas e nosso compromisso com a educação.</p></div><div className="mission-vision-grid mt-12 grid gap-6 lg:grid-cols-2"><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Target size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa missão</h3><p className="mt-4 leading-8">Promover uma educação de qualidade, oferecendo um ambiente acolhedor e estimulante que favoreça o desenvolvimento integral dos estudantes, valorizando o conhecimento, a formação humana e o respeito às individualidades.</p></article><article className="mission-paper-card mission-vision-card"><span className="mission-vision-icon"><Eye size={32}/></span><h3 className="mt-5 font-display text-2xl font-bold">Nossa visão</h3><p className="mt-4 leading-8">Ser reconhecida como uma instituição de ensino comprometida com a excelência educacional, a inovação nas práticas pedagógicas e a formação de cidadãos conscientes, autônomos e preparados para transformar a sociedade.</p></article></div></div></section>
+
+    <section className="school-segments-section section-wrap section-decor-wrap py-20 lg:py-24" aria-labelledby="school-segments-title">
+      <div className="mx-auto max-w-3xl text-center">
+        <p className="eyebrow">NOSSOS SEGMENTOS</p>
+        <h2 id="school-segments-title" className="section-title">Uma jornada de aprendizagem para cada etapa.</h2>
+        <p className="mt-5 leading-8 text-muted-foreground">Conheça os segmentos do Instituto Educacional G.I. e descubra as experiências preparadas para cada fase do desenvolvimento.</p>
+      </div>
+      <div className="school-segments-grid mt-12 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        {[
+          { title: "Educação Infantil", image: "/imagens/Menino%20sorridente%20no%20brinquedo%20azul.webp", href: "/ensino#segmento-infantil", kind: "blue" },
+          { title: "Anos Iniciais", image: "/imagens/Sorriso%20na%20sala%20de%20aula.webp", href: "/ensino#segmento-iniciais", kind: "blue" },
+          { title: "Anos Finais", image: "/imagens/IMG_3939.webp", href: "/ensino#segmento-finais", kind: "blue" },
+          { title: "Ensino Integral", image: "/imagens/Menina%20sorridente%20no%20escorregador%20roxo.webp", href: "/ensino-integral", kind: "yellow" },
+        ].map((segment, index) => (
+          <article className="school-segment-card" key={segment.title}>
+            <img src={segment.image} alt={segment.title} loading="lazy" />
+            <div className="school-segment-card__shade" />
+            <span className="school-segment-card__number">0{index + 1}</span>
+            <div className="school-segment-card__content">
+              <h3>{segment.title}</h3>
+              <a href={segment.href} className={`school-segment-card__button school-segment-card__button--${segment.kind}`}>
+                Saiba mais <ArrowRight size={17} />
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
 
     <section className="school-structure-section section-wrap py-20 lg:py-24" aria-labelledby="school-structure-title">
       <div className="mx-auto max-w-3xl text-center">
