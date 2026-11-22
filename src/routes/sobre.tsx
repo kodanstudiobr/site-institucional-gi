@@ -27,7 +27,7 @@ const valores=[
 function Sobre() {
   return <SiteLayout>
     <section className="page-hero school-page-hero">
-      <img className="school-page-hero__image" src="/imagens/Momento%20de%20arte%20com%20carinho.webp" alt="" aria-hidden="true" fetchPriority="high"/>
+      <picture><source media="(max-width: 767px)" srcSet="/imagens/Atividade%20Escolar%20com%20Arte%20em%20Fam%C3%ADlia.webp"/><img className="school-page-hero__image" src="/imagens/Momento%20de%20arte%20com%20carinho.webp" alt="" aria-hidden="true" fetchPriority="high"/></picture>
       <div className="school-page-hero__overlay" aria-hidden="true"/>
       <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
         <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">NOSSA ESCOLA</p>
