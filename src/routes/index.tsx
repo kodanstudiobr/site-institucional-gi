@@ -167,6 +167,7 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
   const [outgoingImageIndex, setOutgoingImageIndex] = useState<number | null>(null);
   const [crossfadeStarted, setCrossfadeStarted] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
+  const activeImageIndexRef = useRef(0);
   const cardImages = item.images.length > 0 ? item.images : [item.image];
 
   useEffect(() => {
@@ -176,17 +177,54 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
     if (!card) return;
 
     let intervalId: number | undefined;
+    let cleanupTransition: number | undefined;
+    let isMounted = true;
+    let isTransitioning = false;
+
+    const advanceImage = async () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      const current = activeImageIndexRef.current;
+      const next = (current + 1) % cardImages.length;
+      const preload = new Image();
+      const loaded = new Promise<void>((resolve) => {
+        preload.onload = () => resolve();
+        preload.onerror = () => resolve();
+      });
+      preload.src = cardImages[next];
+
+      // A próxima foto só entra na camada visível depois de carregar e decodificar.
+      try {
+        if (typeof preload.decode === "function") await preload.decode();
+        else await loaded;
+      } catch {
+        await loaded;
+      }
+      if (!isMounted) return;
+
+      setOutgoingImageIndex(current);
+      setCrossfadeStarted(false);
+      activeImageIndexRef.current = next;
+      setActiveImageIndex(next);
+
+      // Dois frames garantem que o navegador registre a camada nova em opacity 0
+      // antes de iniciar o crossfade, evitando o salto visual entre fotografias.
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          if (isMounted) setCrossfadeStarted(true);
+        });
+      });
+
+      cleanupTransition = window.setTimeout(() => {
+        if (isMounted) setOutgoingImageIndex(null);
+        isTransitioning = false;
+      }, 1450);
+    };
+
     const start = () => {
       if (intervalId !== undefined) return;
-      intervalId = window.setInterval(() => {
-        setActiveImageIndex((current) => {
-          const next = (current + 1) % cardImages.length;
-          setOutgoingImageIndex(current);
-          setCrossfadeStarted(false);
-          window.requestAnimationFrame(() => setCrossfadeStarted(true));
-          return next;
-        });
-      }, 5000);
+      intervalId = window.setInterval(() => { void advanceImage(); }, 5000);
     };
     const stop = () => {
       if (intervalId !== undefined) window.clearInterval(intervalId);
@@ -201,11 +239,17 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
       }, { threshold: 0.15 });
       observer.observe(card);
       return () => {
+        isMounted = false;
         observer.disconnect();
         stop();
+        if (cleanupTransition !== undefined) window.clearTimeout(cleanupTransition);
       };
     }
-    return stop;
+    return () => {
+      isMounted = false;
+      stop();
+      if (cleanupTransition !== undefined) window.clearTimeout(cleanupTransition);
+    };
   }, [cardImages.length, index]);
 
   useEffect(() => {
