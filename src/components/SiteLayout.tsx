@@ -59,7 +59,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       sectionIndexes.set(section, index + 1);
       element.setAttribute("data-scroll-reveal", "");
       element.classList.remove("is-visible");
-      element.style.setProperty("--reveal-delay", `${(index % 4) * 85}ms`);
+      element.style.setProperty("--reveal-delay", `${(index % 4) * 95}ms`);
     });
 
     if (!("IntersectionObserver" in window)) {
