@@ -98,10 +98,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     }
 
     let cancelled = false;
-    const fallback = window.setTimeout(() => {
-      if (!cancelled) setHeroReady(true);
-    }, 4000);
-
     const revealWhenReady = async () => {
       try {
         if (!heroImage.complete || heroImage.naturalWidth === 0) {
@@ -114,7 +110,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           await heroImage.decode().catch(() => undefined);
         }
       } finally {
-        window.clearTimeout(fallback);
         if (!cancelled) setHeroReady(true);
       }
     };
@@ -122,7 +117,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     void revealWhenReady();
     return () => {
       cancelled = true;
-      window.clearTimeout(fallback);
     };
   }, [pathname]);
 
