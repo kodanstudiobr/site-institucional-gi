@@ -2757,3 +2757,14 @@ main .learning-word-stack p.learning-word {
   color:#324594;
   box-shadow:0 8px 20px rgba(36,51,111,.08);
 }
+
+/* Aproxima o texto da apresentação ao título no desktop, sem alterar o espaçamento mobile. */
+@media (min-width:1024px) {
+  .school-presentation-layout {
+    column-gap:4rem;
+    row-gap:1.25rem;
+  }
+  .school-presentation-copy {
+    margin-top:0;
+  }
+}
