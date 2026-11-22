@@ -38,6 +38,49 @@ const perguntas = [
   ["Como entrar em contato com a instituição?", "Acesse a página Contato e envie seus dados para solicitar informações à equipe do Instituto Educacional G.I."],
 ];
 
+function AnimatedHistoryYears() {
+  const [value, setValue] = useState(0);
+  const numberRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const element = numberRef.current;
+    if (!element) return;
+    let frame = 0;
+    let observer: IntersectionObserver | undefined;
+    let started = false;
+    const animate = () => {
+      if (started) return;
+      started = true;
+      const startTime = performance.now();
+      const duration = 1800;
+      const tick = (now: number) => {
+        const progress = Math.min(1, (now - startTime) / duration);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        setValue(Math.round(26 * eased));
+        if (progress < 1) frame = requestAnimationFrame(tick);
+        else setValue(26);
+      };
+      frame = requestAnimationFrame(tick);
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setValue(26);
+    else if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          animate();
+          observer?.disconnect();
+        }
+      }, { threshold: 0.2 });
+      observer.observe(element);
+    } else animate();
+    return () => {
+      observer?.disconnect();
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return <span ref={numberRef} className="history-counter__number" aria-label="26">{value}</span>;
+}
+
 function HistoryTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
@@ -65,19 +108,25 @@ function HistoryTestimonials() {
   }, []);
 
   const cards = ["Família da Educação Infantil", "Família dos Anos Iniciais", "Família G.I."];
-  const storyMode = progress < 0.34;
-  const introOpacity = Math.max(0, 1 - Math.max(0, (progress - 0.19) / 0.15));
-  const testimonialsProgress = Math.max(0, Math.min(1, (progress - 0.34) / 0.66));
-  const visibleCards = Math.min(3, Math.floor(testimonialsProgress * 3.35));
+  const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
+  const eyebrowProgress = reveal(0.015, 0.105);
+  const numberProgress = reveal(0.115, 0.225);
+  const captionProgress = reveal(0.235, 0.345);
+  const storyOpacity = 1 - reveal(0.355, 0.405);
+  const storyVisible = progress < 0.405;
+  const testimonialsProgress = reveal(0.405, 0.49);
+  const visibleCards = Math.min(3, Math.floor(reveal(0.49, 0.99) * 3.35));
 
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
-    <div className={`history-scroll-stage ${storyMode ? "is-story" : "is-testimonials"}`}>
-      <div className="history-scroll-story" style={{ opacity: introOpacity, transform: `translateY(${(1 - introOpacity) * -34}px)` }}>
-        <p className="history-highlight__eyebrow">UMA HISTÓRIA QUE CONTINUA CRESCENDO</p>
-        <div className="history-counter"><span className="history-counter__plus" aria-hidden="true">+</span><span className="history-counter__number">26</span><span className="history-counter__suffix"> anos</span></div>
-        <p className="history-highlight__caption">de dedicação à educação, ao acolhimento e à construção de futuros.</p>
+    <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"}`}>
+      <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: storyOpacity, visibility: storyVisible ? "visible" : "hidden" }}>
+        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: eyebrowProgress, transform: `translateY(${(1 - eyebrowProgress) * 24}px)` }}>UMA HISTÓRIA QUE CONTINUA CRESCENDO</p>
+        <div className="history-counter history-story-item" style={{ opacity: numberProgress, transform: `translateY(${(1 - numberProgress) * 28}px) scale(${0.92 + numberProgress * 0.08})` }}>
+          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears/><span className="history-counter__suffix"> anos</span>
+        </div>
+        <p className="history-highlight__caption history-story-item" style={{ opacity: captionProgress, transform: `translateY(${(1 - captionProgress) * 24}px)` }}>de dedicação à educação, ao acolhimento e à construção de futuros.</p>
       </div>
-      <div className="history-scroll-testimonials" aria-hidden={storyMode} style={{ opacity: Math.min(1, Math.max(0, (progress - 0.30) / 0.10)), transform: `translateY(${(1 - Math.min(1, Math.max(0, (progress - 0.30) / 0.10))) * 28}px)` }}>
+      <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.405 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
         <p className="history-scroll-kicker">QUEM VIVE, SABE.</p>
         <h2 className="history-scroll-heading">E faz parte.</h2>
         <div className="history-scroll-cards">
