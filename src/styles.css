@@ -2392,7 +2392,7 @@ html {
 }
 
 
-/* Seção Nossa Gestão: fundo amarelo com textura e elementos gráficos sutis. */
+/* Seção das diretoras: composição inclinada e entrada suave ao entrar na tela. */
 .school-dream-section {
   position:relative;
   isolation:isolate;
@@ -2431,21 +2431,33 @@ html {
 .school-dream-section > .section-wrap { position:relative; z-index:1; }
 .school-dream-grid { align-items:center; }
 .school-dream-card {
+  --card-tilt: -5deg;
   position:relative;
   width:min(100%,390px);
   margin-inline:auto;
   padding:9px;
-  border:1px solid rgba(255,255,255,.78);
+  border:1px solid rgba(255,255,255,.82);
   border-radius:1.45rem;
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.94);
   box-shadow:0 20px 48px rgba(35,49,112,.19),0 4px 12px rgba(35,49,112,.08);
-  transition:transform .75s cubic-bezier(.2,.7,.2,1),box-shadow .75s cubic-bezier(.2,.7,.2,1);
+  opacity:0;
+  transform:translateY(48px) rotate(calc(var(--card-tilt) * 1.7)) scale(.94);
+  transition:transform .65s cubic-bezier(.2,.7,.2,1),box-shadow .65s cubic-bezier(.2,.7,.2,1);
 }
-.school-dream-card--left { transform:rotate(-4.5deg); }
-.school-dream-card--right { transform:rotate(4.5deg); animation-delay:140ms; }
+.school-dream-card--left { --card-tilt:-5deg; }
+.school-dream-card--right { --card-tilt:5deg; }
+.school-dream-grid.is-visible .school-dream-card {
+  animation:directorCardEntrance .95s cubic-bezier(.18,.72,.25,1) forwards;
+}
+.school-dream-grid.is-visible .school-dream-card--right { animation-delay:160ms; }
+@keyframes directorCardEntrance {
+  0% { opacity:0; transform:translateY(48px) rotate(calc(var(--card-tilt) * 1.7)) scale(.94); }
+  68% { opacity:1; transform:translateY(-7px) rotate(calc(var(--card-tilt) * .72)) scale(1.015); }
+  100% { opacity:1; transform:translateY(0) rotate(var(--card-tilt)) scale(1); }
+}
 .school-dream-card:hover {
-  transform:translateY(-8px) rotate(0deg) scale(1.025);
-  box-shadow:0 28px 62px rgba(35,49,112,.24),0 7px 18px rgba(35,49,112,.1);
+  transform:translateY(-9px) rotate(0deg) scale(1.035);
+  box-shadow:0 30px 66px rgba(35,49,112,.25),0 8px 20px rgba(35,49,112,.11);
 }
 .school-dream-card__photo {
   overflow:hidden;
@@ -2460,23 +2472,23 @@ html {
   object-fit:cover;
   transition:transform 1s cubic-bezier(.2,.7,.2,1);
 }
-.school-dream-card:hover .school-dream-card__photo img { transform:scale(1.055); }
+.school-dream-card:hover .school-dream-card__photo img { transform:scale(1.06); }
 @media (max-width:767px) {
   .school-dream-section { padding-block:1.5rem; }
-  .school-dream-heart { margin-bottom:1rem; }
-  .school-dream-heart svg { width:27px; height:27px; }
   .school-dream-grid { gap:.85rem; }
   .school-dream-card { width:100%; padding:5px; border-radius:1rem; }
-  .school-dream-card--left { transform:rotate(-2.8deg); }
-  .school-dream-card--right { transform:rotate(2.8deg); }
+  .school-dream-card--left { --card-tilt:-3.5deg; }
+  .school-dream-card--right { --card-tilt:3.5deg; }
   .school-dream-card__photo { border-radius:.72rem; aspect-ratio:4/5; }
 }
 @media (prefers-reduced-motion:reduce) {
-  .school-dream-card { animation:none; transition:none; }
-  .school-dream-card__photo img { transition:none; }
-}
-@media (prefers-reduced-motion:reduce) {
-  .school-dream-card { animation:none; transition:none; }
+  .school-dream-card,
+  .school-dream-grid.is-visible .school-dream-card {
+    animation:none;
+    opacity:1;
+    transform:rotate(var(--card-tilt));
+    transition:none;
+  }
   .school-dream-card__photo img { transition:none; }
 }
 
