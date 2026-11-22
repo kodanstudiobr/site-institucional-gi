@@ -3125,3 +3125,22 @@ main .learning-word-stack p.learning-word {
 @media (prefers-reduced-motion:reduce) {
   .history-scroll-stage,.history-scroll-story,.history-scroll-card { transition:none!important; }
 }
+
+/* Entrada progressiva dos elementos da história conforme a rolagem. */
+.history-scroll-story {
+  transition:opacity .18s linear;
+}
+.history-story-item {
+  transition:opacity .45s ease,transform .65s cubic-bezier(.2,.75,.2,1);
+}
+.history-scroll-story[aria-hidden="true"] {
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none;
+}
+.history-scroll-testimonials {
+  transition:opacity .4s ease,transform .55s cubic-bezier(.2,.75,.2,1),visibility 0s linear .4s;
+}
+@media (prefers-reduced-motion:reduce) {
+  .history-story-item,.history-scroll-testimonials { transition:none!important; }
+}
