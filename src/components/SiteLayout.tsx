@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, Instagram, Phone, MapPin, ArrowUpRight, Mail } from "lucide-react";
+import { Menu, X, Instagram, Phone, MapPin, ArrowUpRight, Mail, Star } from "lucide-react";
 import { institutionalConfig } from "@/data/institutional";
 
 const links = [
@@ -121,15 +121,15 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           <Link to="/" className={`flex shrink-0 items-center justify-start transition-all duration-300 ${compactHeader ? "h-16 w-20 sm:h-16 sm:w-20 2xl:h-24 2xl:w-24" : "h-32 w-36 sm:h-24 sm:w-28 2xl:h-40 2xl:w-40"}`} onClick={(event) => { setMenuOpen(false); if (pathname === "/") { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } }}>
             <img src="/imagens/logo-gi.svg" alt="Instituto Educacional G.I." className={`object-contain transition-all duration-300 ${compactHeader ? "h-16 w-16 sm:h-16 sm:w-16 2xl:h-24 2xl:w-24" : "h-32 w-32 sm:h-24 sm:w-24 2xl:h-40 2xl:w-40"}`} />
           </Link>
-          <nav className="hidden items-center gap-4 2xl:flex" aria-label="Navegação principal">
-            {links.map(({ to, label }) => <Link key={to} to={to} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{label}</Link>)}
+          <nav className="hidden items-center gap-3 lg:flex" aria-label="Navegação principal">
+            {links.map(({ to, label }) => <Link key={to} to={to} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{label === "Ensino Integral" ? <span className="inline-flex items-center gap-1.5"><Star size={14} fill="currentColor" strokeWidth={1.8} />{label}</span> : label}</Link>)}
           </nav>
           <div className="flex items-center gap-3">
             <Link to="/contato" className="header-cta hidden rounded-full bg-accent px-5 py-3 text-sm font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:inline-flex">Faça sua matrícula</Link>
-            <button className="header-menu rounded-xl border border-border p-2 text-primary 2xl:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
+            <button className="header-menu rounded-xl border border-border p-2 text-primary lg:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
           </div>
         </div>
-        <nav className={`mobile-menu-panel 2xl:hidden ${menuOpen ? "is-open" : ""}`} aria-label="Menu móvel" aria-hidden={!menuOpen}>{links.map(l => <Link key={l.to} to={l.to} onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, left: 0, behavior: "auto" }); }} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Faça sua matrícula</Link></nav>
+        <nav className={`mobile-menu-panel lg:hidden ${menuOpen ? "is-open" : ""}`} aria-label="Menu móvel" aria-hidden={!menuOpen}>{links.map(l => <Link key={l.to} to={l.to} onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, left: 0, behavior: "auto" }); }} className="block rounded-lg px-3 py-3 font-semibold text-primary hover:bg-secondary">{l.label === "Ensino Integral" ? <span className="inline-flex items-center gap-2"><Star size={16} fill="currentColor" strokeWidth={1.8} />{l.label}</span> : l.label}</Link>)}<Link to="/contato" onClick={() => setMenuOpen(false)} className="mt-2 block rounded-full bg-accent px-4 py-3 text-center font-bold text-accent-foreground">Faça sua matrícula</Link></nav>
       </header>
       <main key={pathname} className="site-main page-transition-enter flex-1">{children}</main>
       <footer className="bg-primary text-primary-foreground">
