@@ -31,7 +31,7 @@ const vivencias = [
   { title: "Resultados e Conquistas", text: "O esforço, a dedicação e a aprendizagem que abrem caminhos e transformam sonhos em conquistas.", image: "/imagens/Aprovada em Mecânica no IFPB.webp", images: ["/imagens/Aprovada em Mecânica no IFPB.webp", "/imagens/Aprovado em Eletrônica.webp", "/imagens/Aprovado em Informática.webp"] },
 ];
 const perguntas = [
-  ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende à Educação Infantil e aos Anos Iniciais do Ensino Fundamental."],
+  ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende da Educação Infantil aos Anos Finais do Ensino Fundamental."],
   ["Como funciona o processo de matrícula?", "A relação publicada inclui documentos do estudante e do responsável financeiro, comprovante de endereço e documentação de escolaridade ou transferência. Para a Educação Infantil, também é solicitado o cartão de vacinação. A equipe de matrículas orienta sobre a documentação aplicável a cada caso."],
   ["Como conhecer a escola?", "Entre em contato com a equipe para agendar uma visita, conhecer os ambientes e conversar sobre a proposta pedagógica."],
   ["Como funciona a proposta pedagógica?", "Nossa proposta pedagógica valoriza o desenvolvimento integral dos estudantes, unindo conhecimento, formação humana e experiências significativas."],
