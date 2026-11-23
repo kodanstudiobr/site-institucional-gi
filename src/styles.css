@@ -4564,3 +4564,17 @@ section.history-scroll-section {
     height: 750svh !important;
   }
 }
+
+
+/* Banner exclusivo da página de contato */
+.page-hero.contact-page-hero {
+  background-image: linear-gradient(90deg, rgba(24, 39, 101, .82), rgba(34, 52, 125, .38)), url("/imagens/Homenagem-ao-Professor-com-Sorriso.webp");
+  background-size: cover;
+  background-position: center 38%;
+}
+@media (max-width: 767px) {
+  .page-hero.contact-page-hero {
+    background-image: linear-gradient(180deg, rgba(24, 39, 101, .72), rgba(34, 52, 125, .38)), url("/imagens/Imagem%20do%20ChatGPT%2018%20de%20nov.%20de%202026,%2022_20_29.webp");
+    background-position: center center;
+  }
+}
