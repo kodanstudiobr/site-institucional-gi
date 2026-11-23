@@ -1,6 +1,6 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, GraduationCap, Building2 } from "lucide-react";
+import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, GraduationCap, Building2, CircleHelp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
@@ -468,6 +468,7 @@ function Index() {
     <section className="faq-section section-wrap py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-4xl">
         <div className="mx-auto max-w-2xl text-center">
+          <div className="faq-heading-icon" aria-hidden="true"><CircleHelp size={27} strokeWidth={1.8}/></div>
           <p className="eyebrow">DÚVIDAS FREQUENTES</p>
           <h2 className="section-title">Estamos aqui para <span className="title-highlight">ajudar.</span></h2>
           <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">Encontre respostas para as principais dúvidas sobre o Instituto Educacional G.I.</p>
@@ -478,7 +479,7 @@ function Index() {
               <span className="faq-question__text">{q}</span>
               <span className="faq-question__icon"><ChevronDown className={`transition-transform duration-300 ${faqOpen===i?"rotate-180":""}`} size={19}/></span>
             </button>
-            <div id={`faq-answer-${i}`} className="faq-answer-grid" aria-hidden={faqOpen!==i}>
+            <div id={`faq-answer-${i}`} className={`faq-answer-grid ${faqOpen===i?"is-open":""}`} aria-hidden={faqOpen!==i}>
               <div className="faq-answer-inner"><p>{a}</p></div>
             </div>
           </article>)}
