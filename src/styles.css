@@ -3297,3 +3297,33 @@ main .learning-word-stack p.learning-word {
 @media (prefers-reduced-motion:reduce) {
   .history-scroll-kicker,.history-scroll-heading { transition:none!important; }
 }
+
+
+/* Ajustes finais da seção de história: tipografia realmente ampliada e ritmo de scroll mais contemplativo. */
+.history-scroll-section {
+  height: 700vh !important;
+}
+.history-scroll-story .history-highlight__caption {
+  width: min(100%, 72rem);
+  max-width: min(100%, 72rem) !important;
+  font-size: clamp(2rem, 3.4vw, 2.8rem) !important;
+  line-height: 1.42 !important;
+  font-weight: 600 !important;
+  letter-spacing: -.025em;
+}
+@media (max-width: 767px) {
+  .history-scroll-section {
+    height: 650svh !important;
+  }
+  .history-scroll-story .history-highlight__caption {
+    max-width: 31ch !important;
+    font-size: clamp(1.55rem, 5.8vw, 1.95rem) !important;
+    line-height: 1.45 !important;
+  }
+}
+@media (max-width: 380px) {
+  .history-scroll-story .history-highlight__caption {
+    font-size: 1.48rem !important;
+    line-height: 1.42 !important;
+  }
+}
