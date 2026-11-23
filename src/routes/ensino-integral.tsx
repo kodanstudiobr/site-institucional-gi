@@ -5,7 +5,7 @@ import {
   Gamepad2, Palette, Music2, BookMarked, Popcorn, Bath,
   Utensils, Sun, GraduationCap, CheckCircle2, Footprints,
 } from "lucide-react";
-import { SiteLayout, PageHeader } from "@/components/SiteLayout";
+import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/ensino-integral")({
   head: () => pageHead("/ensino-integral", {
@@ -39,11 +39,19 @@ const atividades = [
 function EnsinoIntegral() {
   return (
     <SiteLayout>
-      <PageHeader
-        eyebrow="ENSINO INTEGRAL"
-        title={<>Um dia cheio de cuidado, <span className="text-accent">aprendizagem e descobertas.</span></>}
-        intro="Uma rotina planejada para unir acolhimento, atividades escolares, brincadeiras, cuidados e experiências especiais ao longo do dia."
-      />
+      <section className="page-hero school-page-hero">
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/imagens/Alegria%20no%20escorregador%20vermelho.webp" />
+          <img className="school-page-hero__image" src="/imagens/Menino-sorridente-no-escorregador-vermelho.webp" alt="" aria-hidden="true" fetchPriority="high" />
+        </picture>
+        <div className="school-page-hero__overlay" aria-hidden="true" />
+        <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
+          <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">ENSINO INTEGRAL</p>
+          <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Um dia cheio de cuidado, <span className="text-accent">aprendizagem e descobertas.</span></h1>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Uma rotina planejada para unir acolhimento, atividades escolares, brincadeiras, cuidados e experiências especiais ao longo do dia.</p>
+        </div>
+        <span className="absolute bottom-4 right-5 z-10 rounded-full bg-black/35 px-3 py-1 text-[10px] font-medium text-white/85">Imagem ilustrativa</span>
+      </section>
 
       <section className="section-wrap section-decor-wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-14 lg:py-24">
         <div>
