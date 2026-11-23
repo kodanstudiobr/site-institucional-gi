@@ -310,6 +310,28 @@ function Index() {
   const [activeExperience, setActiveExperience] = useState(0);
   const segmentCarouselRef = useRef<HTMLDivElement>(null);
   const [activeSegment, setActiveSegment] = useState(0);
+  const [visibleMoveCards, setVisibleMoveCards] = useState<number[]>([]);
+  const moveCardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = moveCardsRef.current;
+    if (!container) return;
+    const cards = Array.from(container.querySelectorAll<HTMLElement>(".home-move-card-item"));
+    if (!("IntersectionObserver" in window)) {
+      setVisibleMoveCards(cards.map((_, index) => index));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = cards.indexOf(entry.target as HTMLElement);
+          if (index >= 0) setVisibleMoveCards((current) => current.includes(index) ? current : [...current, index]);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, []);
   const moveCarousel = (direction: "prev" | "next") => {
     const next = Math.max(0, Math.min(vivencias.length - 1, activeExperience + (direction === "next" ? 1 : -1)));
     goToExperience(next);
@@ -363,7 +385,7 @@ function Index() {
       <div className="home-essence-copy"><p className="text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão do conhecimento: é proporcionar experiências, despertar potencialidades, fortalecer valores e formar pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa escola <ArrowRight size={18}/></Link></div>
     </section>
 
-    <section className="bg-soft section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-2xl text-center"><Star className="section-spark section-spark--move-heading" size={42} fill="currentColor" aria-hidden="true"/><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que <span className="title-highlight">cresce junto</span> com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div className="home-move-cards mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text},i)=><div key={title} className="home-move-card-item" style={{ zIndex: i + 1 }}><article className="feature-card feature-card--glow h-full"><span className="icon-bubble feature-icon"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article></div>)}</div></div></section>
+    <section className="bg-soft section-decor-wrap py-20 lg:py-24"><div className="section-wrap relative"><div className="mx-auto max-w-2xl text-center"><Star className="section-spark section-spark--move-heading" size={42} fill="currentColor" aria-hidden="true"/><p className="eyebrow">O QUE NOS MOVE</p><h2 className="section-title">Uma escola que <span className="title-highlight">cresce junto</span> com cada estudante.</h2><p className="mt-4 leading-7 text-muted-foreground">Uma experiência educativa construída com cuidado, intencionalidade e compromisso.</p></div><div ref={moveCardsRef} className="home-move-cards mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{destaques.map(({icon:Icon,title,text},i)=><div key={title} className={`home-move-card-item ${visibleMoveCards.includes(i) ? "home-move-card-item--visible" : ""}`} style={{ zIndex: i + 1 }}><article className="feature-card feature-card--glow h-full"><span className="icon-bubble feature-icon"><Icon size={25}/></span><h3 className="mt-5 font-display text-xl font-bold text-primary">{title}</h3><p className="mt-3 leading-7 text-muted-foreground">{text}</p><span className="feature-card__spark" aria-hidden="true"><Star size={14}/></span></article></div>)}</div></div></section>
 
     <ExperienceWords />
 
