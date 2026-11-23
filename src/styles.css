@@ -3456,3 +3456,51 @@ section.history-scroll-section {
     height: 1300svh !important;
   }
 }
+
+
+/* Refinos mobile dos depoimentos: cards mais compactos e fundo branco contínuo. */
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    background: #fff !important;
+  }
+  section.history-scroll-section .history-scroll-stage.is-testimonials {
+    background: #fff !important;
+  }
+  section.history-scroll-section .history-scroll-testimonials {
+    background: #fff !important;
+  }
+  section.history-scroll-section .history-scroll-cards {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: clamp(260px, 42svh, 330px) !important;
+    margin-inline: auto !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    width: min( calc(100% - 2.5rem), 390px) !important;
+    min-height: 235px !important;
+    max-width: 390px !important;
+    padding: 1.1rem !important;
+    margin-inline: auto !important;
+    border-radius: 1.25rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+    margin-block: 1rem 1.1rem !important;
+    font-size: .88rem !important;
+    line-height: 1.65 !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person {
+    gap: .65rem !important;
+  }
+  section.history-scroll-section .history-scroll-card--1,
+  section.history-scroll-section .history-scroll-card--2,
+  section.history-scroll-section .history-scroll-card--3 {
+    left: 50% !important;
+  }
+}
+@media (max-width: 380px) {
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 2rem), 340px) !important;
+    min-height: 225px !important;
+    padding: 1rem !important;
+  }
+}
