@@ -32,11 +32,10 @@ const vivencias = [
 ];
 const perguntas = [
   ["Quais etapas de ensino são oferecidas?", "O Instituto Educacional G.I. atende à Educação Infantil e aos Anos Iniciais do Ensino Fundamental."],
-  ["Como funciona o processo de matrícula?", "Entre em contato com a escola pelo formulário desta página para receber orientações sobre o processo de matrícula."],
-  ["Quais documentos são necessários?", "A relação de documentos é informada pela equipe da escola durante o atendimento à família."],
-  ["Como conhecer a escola?", "Entre em contato com a equipe para conversar e consultar a possibilidade de agendar uma visita."],
-  ["Como funciona a proposta pedagógica?", "Nossa comunicação institucional valoriza o acolhimento, a aprendizagem significativa e o desenvolvimento integral dos estudantes."],
-  ["Como entrar em contato com a instituição?", "Acesse a página Contato e envie seus dados para solicitar informações à equipe do Instituto Educacional G.I."],
+  ["Como funciona o processo de matrícula?", "A relação publicada inclui documentos do estudante e do responsável financeiro, comprovante de endereço e documentação de escolaridade ou transferência. Para a Educação Infantil, também é solicitado o cartão de vacinação. A equipe de matrículas orienta sobre a documentação aplicável a cada caso."],
+  ["Como conhecer a escola?", "Entre em contato com a equipe para agendar uma visita, conhecer os ambientes e conversar sobre a proposta pedagógica."],
+  ["Como funciona a proposta pedagógica?", "Nossa proposta pedagógica valoriza o desenvolvimento integral dos estudantes, unindo conhecimento, formação humana e experiências significativas."],
+  ["Como entro em contato com a escola?", "Você pode falar com nosso time pelo WhatsApp e agendar uma visita ou ligar para o número 2182-5088. Estaremos sempre prontos para receber vocês!"],
 ];
 
 function AnimatedHistoryYears({ progress }: { progress: number }) {
