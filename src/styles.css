@@ -3414,3 +3414,34 @@ section.history-scroll-section .history-scroll-cards {
     margin-top: 1rem !important;
   }
 }
+
+
+/* Centraliza a composição na área visível abaixo do header fixo do site. */
+:root {
+  --institutional-header-offset: 88px;
+}
+section.history-scroll-section .history-scroll-stage {
+  top: var(--institutional-header-offset) !important;
+  height: calc(100svh - var(--institutional-header-offset)) !important;
+  min-height: 0 !important;
+}
+section.history-scroll-section .history-scroll-story {
+  min-height: 100% !important;
+  justify-content: center !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+section.history-scroll-section .history-scroll-testimonials {
+  height: 100% !important;
+  justify-content: center !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+@media (max-width: 767px) {
+  :root {
+    --institutional-header-offset: 72px;
+  }
+  section.history-scroll-section .history-scroll-stage {
+    height: calc(100svh - var(--institutional-header-offset)) !important;
+  }
+}
