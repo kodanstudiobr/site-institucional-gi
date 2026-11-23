@@ -4363,3 +4363,29 @@ section.history-scroll-section {
   }
   .activity-card__icon { animation: none; transition: none; }
 }
+
+
+/* Enquadramento reforçado da foto de destaque do Ensino Integral. */
+.integral-feature-image {
+  height: 430px !important;
+  min-height: 430px !important;
+  isolation: isolate;
+}
+.integral-feature-image__photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 14% !important;
+}
+@media (min-width: 640px) {
+  .integral-feature-image {
+    height: 520px !important;
+    min-height: 520px !important;
+  }
+}
+@media (min-width: 1024px) {
+  .integral-feature-image {
+    height: 620px !important;
+    min-height: 620px !important;
+  }
+}
