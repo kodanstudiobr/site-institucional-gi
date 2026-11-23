@@ -57,7 +57,7 @@ function EnsinoIntegral() {
         <div>
           <p className="eyebrow">UMA JORNADA COMPLETA</p>
           <h2 className="section-title mt-3">Mais tempo para <span className="title-highlight">aprender e crescer.</span></h2>
-        <figure className="integral-feature-image relative hidden lg:block h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
+        <figure className="integral-feature-image relative lg:hidden h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
           <picture className="absolute inset-0 block h-full w-full">
             <source
               media="(min-width: 768px)"
@@ -87,7 +87,7 @@ function EnsinoIntegral() {
             <span className="inline-flex items-center gap-2 rounded-full bg-soft px-4 py-2 text-sm font-semibold text-primary"><Users size={16}/> Educação Infantil e Anos Iniciais</span>
           </div>
         </div>
-        <figure className="integral-feature-image relative h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
+        <figure className="integral-feature-image relative hidden lg:block h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
           <picture className="absolute inset-0 block h-full w-full">
             <source
               media="(min-width: 768px)"
