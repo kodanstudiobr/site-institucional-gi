@@ -116,12 +116,15 @@ function HistoryTestimonials() {
   // Mantém a mensagem dos 26 anos em destaque por mais tempo antes da transição.
   const storyOpacity = 1 - reveal(0.555, 0.625);
   const storyVisible = progress < 0.625;
-  const testimonialsProgress = reveal(0.625, 0.88);
-  // Cada mensagem recebe sua própria faixa de rolagem, com pausas perceptíveis entre elas.
-  const testimonialKickerProgress = reveal(0.625, 0.69);
-  const testimonialHeadingProgress = reveal(0.755, 0.825);
-  // Os cards entram um de cada vez, com espaço de rolagem dedicado entre cada entrada.
-  const cardProgress = (index: number) => reveal(0.88 + index * 0.04, 0.92 + index * 0.04);
+  const testimonialsProgress = reveal(0.625, 0.67);
+  // Títulos separados por intervalos longos de rolagem.
+  const testimonialKickerProgress = reveal(0.68, 0.73);
+  const testimonialHeadingProgress = reveal(0.78, 0.83);
+  // Cada depoimento tem uma etapa própria; há uma pausa real antes do próximo card.
+  const cardProgress = (index: number) => {
+    const starts = [0.87, 0.93, 0.985];
+    return reveal(starts[index], Math.min(1, starts[index] + 0.025));
+  };
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
     { x: 20, y: 2, rotation: 4 },
@@ -135,7 +138,7 @@ function HistoryTestimonials() {
         <div className="history-counter history-story-item" style={{ opacity: numberProgress, transform: `translateY(${(1 - numberProgress) * 28}px) scale(${0.92 + numberProgress * 0.08})` }}>
           <span className="history-counter__plus" aria-hidden="true">+</span><span className="history-counter__de">de</span><AnimatedHistoryYears/><span className="history-counter__suffix"> anos</span>
         </div>
-        <p className="history-highlight__caption history-story-item" style={{ opacity: captionProgress, transform: `translateY(${(1 - captionProgress) * 24}px)` }}>de dedicação à educação, ao acolhimento e à construção de futuros.</p>
+        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: captionProgress, transform: `translateY(${(1 - captionProgress) * 24}px)` }}>de dedicação à educação, ao acolhimento e à construção de futuros.</p>
       </div>
       <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.625 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
         <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 22}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
