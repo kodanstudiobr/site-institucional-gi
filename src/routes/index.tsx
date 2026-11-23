@@ -113,10 +113,11 @@ function HistoryTestimonials() {
   const eyebrowProgress = reveal(0.015, 0.105);
   const numberProgress = reveal(0.115, 0.225);
   const captionProgress = reveal(0.235, 0.345);
-  const storyOpacity = 1 - reveal(0.355, 0.405);
-  const storyVisible = progress < 0.405;
-  const testimonialsProgress = reveal(0.405, 0.49);
-  const cardProgress = (index: number) => reveal(0.49 + index * 0.16, 0.66 + index * 0.16);
+  // Mantém a mensagem dos 26 anos em destaque por mais tempo antes da transição.
+  const storyOpacity = 1 - reveal(0.555, 0.625);
+  const storyVisible = progress < 0.625;
+  const testimonialsProgress = reveal(0.625, 0.715);
+  const cardProgress = (index: number) => reveal(0.715 + index * 0.105, 0.855 + index * 0.105);
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
     { x: 20, y: 2, rotation: 4 },
@@ -132,7 +133,7 @@ function HistoryTestimonials() {
         </div>
         <p className="history-highlight__caption history-story-item" style={{ opacity: captionProgress, transform: `translateY(${(1 - captionProgress) * 24}px)` }}>de dedicação à educação, ao acolhimento e à construção de futuros.</p>
       </div>
-      <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.405 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
+      <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.625 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
         <p className="history-scroll-kicker">QUEM VIVE, SABE.</p>
         <h2 className="history-scroll-heading">E faz parte.</h2>
         <div className="history-scroll-cards">
