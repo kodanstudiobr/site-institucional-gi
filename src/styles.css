@@ -4456,3 +4456,18 @@ section.history-scroll-section {
     background: #fff59a !important;
   }
 }
+
+/* Ajustes solicitados para os banners em telas mobile. */
+@media (max-width: 767px) {
+  .page-hero::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Zoom real na fotografia do banner da página Ensino Integral. */
+  .school-page-hero .school-page-hero__image {
+    animation: none !important;
+    transform: scale(1.22) !important;
+    transform-origin: center center;
+  }
+}
