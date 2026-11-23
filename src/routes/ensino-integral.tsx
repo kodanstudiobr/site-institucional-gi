@@ -17,15 +17,15 @@ export const Route = createFileRoute("/ensino-integral")({
 });
 
 const rotina = [
-  { time: "07h15 às 07h30", title: "Chegada e acolhimento", text: "Recepção das crianças em um ambiente acolhedor e seguro.", icon: HeartHandshake, color: "blue" },
-  { time: "07h30 às 08h40", title: "Desenvolvimento e atividades escolares", text: "Momento dedicado às atividades escolares e às tarefas de casa.", icon: BookOpen, color: "yellow" },
-  { time: "08h40 às 09h10", title: "Lanche da manhã", text: "Pausa para alimentação e renovação das energias.", icon: Apple, color: "yellow" },
-  { time: "09h10 às 10h00", title: "Recreação", text: "Tempo para brincar, interagir e aproveitar atividades recreativas.", icon: Gamepad2, color: "green" },
-  { time: "10h00 às 10h45", title: "Atividade especial", text: "Uma proposta diferente a cada dia da semana.", icon: Sparkles, color: "purple" },
-  { time: "10h45 às 11h30", title: "Banho e cuidados pessoais", text: "Momento de higiene e cuidado antes do almoço.", icon: Bath, color: "blue" },
-  { time: "11h30 às 13h00", title: "Almoço, higiene e repouso", text: "Almoço, escovação dos dentes e período de repouso.", icon: Utensils, color: "green" },
-  { time: "13h00", title: "Acolhida para as aulas da tarde", text: "Organização e acolhida para o início das aulas regulares.", icon: Sun, color: "yellow" },
-  { time: "13h00 às 17h00", title: "Período de aulas", text: "Continuidade da jornada escolar no turno da tarde.", icon: GraduationCap, color: "blue" },
+  { time: "07h15 às 07h30", title: "Chegada e acolhimento", text: "Recepção das crianças em um ambiente acolhedor e seguro.", icon: HeartHandshake },
+  { time: "07h30 às 08h40", title: "Desenvolvimento e atividades escolares", text: "Momento dedicado às atividades escolares e às tarefas de casa.", icon: BookOpen },
+  { time: "08h40 às 09h10", title: "Lanche da manhã", text: "Pausa para alimentação e renovação das energias.", icon: Apple },
+  { time: "09h10 às 10h00", title: "Recreação", text: "Tempo para brincar, interagir e aproveitar atividades recreativas.", icon: Gamepad2 },
+  { time: "10h00 às 10h45", title: "Atividade especial", text: "Uma proposta diferente a cada dia da semana.", icon: Sparkles },
+  { time: "10h45 às 11h30", title: "Banho e cuidados pessoais", text: "Momento de higiene e cuidado antes do almoço.", icon: Bath },
+  { time: "11h30 às 13h00", title: "Almoço, higiene e repouso", text: "Almoço, escovação dos dentes e período de repouso.", icon: Utensils },
+  { time: "13h00", title: "Acolhida para as aulas da tarde", text: "Organização e acolhida para o início das aulas regulares.", icon: Sun },
+  { time: "13h00 às 17h00", title: "Período de aulas", text: "Continuidade da jornada escolar no turno da tarde.", icon: GraduationCap },
 ];
 
 const atividades = [
@@ -62,7 +62,7 @@ function EnsinoIntegral() {
         </div>
         <figure className="relative overflow-hidden rounded-[2rem] bg-soft shadow-xl">
           <img
-            src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o.webp"
+            src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
             alt="Menina realizando uma atividade de formação de palavras no chão"
             className="aspect-[4/3] h-full w-full object-cover"
             loading="lazy"
@@ -81,9 +81,10 @@ function EnsinoIntegral() {
             <h2 className="section-title">Como funciona a <span className="title-highlight">rotina?</span></h2>
             <p className="mt-5 leading-7 text-muted-foreground sm:leading-8">Da chegada ao início das aulas da tarde, cada etapa tem um horário e um propósito na jornada das crianças.</p>
           </div>
-          <div className="mx-auto mt-10 grid max-w-4xl gap-3 sm:mt-14 sm:gap-4">
-            {rotina.map(({time,title,text,icon:Icon,color},index)=>(
-              <article key={title} className={`routine-card routine-card--${color} group`}>
+          <div className="routine-timeline mx-auto mt-10 max-w-4xl sm:mt-14">
+            {rotina.map(({time,title,text,icon:Icon},index)=>(
+              <article key={title} className="routine-card group">
+                <span className="routine-card__node" aria-hidden="true"/>
                 <span className="routine-card__progress" aria-hidden="true"/>
                 <div className="routine-card__time"><span className="routine-card__number">{String(index+1).padStart(2,"0")}</span><Clock3 size={15}/>{time}</div>
                 <span className="routine-card__icon"><Icon size={23}/></span>
