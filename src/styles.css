@@ -4472,7 +4472,11 @@ section.history-scroll-section {
   }
 }
 
-/* O que nos move: entrada em fade e empilhamento com respiro abaixo do header no mobile. */
+/* O que nos move: fade real acionado quando cada card entra na tela, com empilhamento mobile. */
+.home-move-card-item {
+  opacity: 1;
+  transform: none;
+}
 @media (max-width: 767px) {
   .home-move-cards {
     display: block !important;
@@ -4482,24 +4486,29 @@ section.history-scroll-section {
   }
   .home-move-card-item {
     position: sticky;
-    top: 104px;
+    top: 136px;
     margin: 0 0 1.25rem;
     border-radius: 1.25rem;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+    will-change: opacity, transform;
   }
-  .home-move-card-item:nth-child(1) { top: 104px; z-index: 1; }
-  .home-move-card-item:nth-child(2) { top: 118px; z-index: 2; }
-  .home-move-card-item:nth-child(3) { top: 132px; z-index: 3; }
-  .home-move-card-item:nth-child(4) { top: 146px; z-index: 4; margin-bottom: 0; }
+  .home-move-card-item--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .home-move-card-item:nth-child(1) { top: 136px; z-index: 1; }
+  .home-move-card-item:nth-child(2) { top: 150px; z-index: 2; }
+  .home-move-card-item:nth-child(3) { top: 164px; z-index: 3; }
+  .home-move-card-item:nth-child(4) { top: 178px; z-index: 4; margin-bottom: 0; }
   .home-move-card-item .feature-card {
     min-height: 245px;
     border-radius: 1.25rem;
     box-shadow: 0 14px 34px rgba(36, 51, 111, .13);
-    animation: move-card-fade-in linear both;
-    animation-timeline: view(block);
-    animation-range: entry 0% entry 48%;
   }
 
-  /* O card que chega por cima assume o mesmo destaque amarelo do hover no desktop. */
+  /* Destaque amarelo progressivo no card que entra por cima. */
   .home-move-card-item .feature-card--glow::before {
     opacity: 0;
     animation: move-card-yellow-glow linear both;
@@ -4517,10 +4526,6 @@ section.history-scroll-section {
     animation-range: entry 18% entry 68%;
   }
 }
-@keyframes move-card-fade-in {
-  from { opacity: 0; transform: translateY(28px); }
-  to { opacity: 1; transform: translateY(0); }
-}
 @keyframes move-card-yellow-glow {
   to { opacity: 1; }
 }
@@ -4536,13 +4541,13 @@ section.history-scroll-section {
   to { opacity: .8; transform: scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .home-move-card-item .feature-card {
-    animation: none !important;
+  .home-move-card-item {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
   }
 }
-
+ 
 /* História mais objetiva; o percurso prolongado fica reservado aos depoimentos. */
 section.history-scroll-section {
   height: 800vh !important;
