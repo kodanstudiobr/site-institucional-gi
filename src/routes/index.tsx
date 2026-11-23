@@ -116,7 +116,12 @@ function HistoryTestimonials() {
   const storyOpacity = 1 - reveal(0.355, 0.405);
   const storyVisible = progress < 0.405;
   const testimonialsProgress = reveal(0.405, 0.49);
-  const visibleCards = Math.min(3, Math.floor(reveal(0.49, 0.99) * 3.35));
+  const cardProgress = (index: number) => reveal(0.49 + index * 0.16, 0.66 + index * 0.16);
+  const cardOffsets = [
+    { x: -34, y: 9, rotation: -5 },
+    { x: 20, y: 2, rotation: 4 },
+    { x: 5, y: -5, rotation: -2 },
+  ];
 
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
     <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"}`}>
@@ -132,8 +137,19 @@ function HistoryTestimonials() {
         <h2 className="history-scroll-heading">E faz parte.</h2>
         <div className="history-scroll-cards">
           {cards.map((label, index) => {
-            const shown = index < visibleCards;
-            return <article key={label} className={`testimonial-card history-scroll-card history-scroll-card--${index + 1} ${shown ? "is-visible" : ""}`}>
+            const cardReveal = cardProgress(index);
+            const offset = cardOffsets[index];
+            return <article
+              key={label}
+              className={`testimonial-card history-scroll-card history-scroll-card--${index + 1}`}
+              aria-hidden={cardReveal < 0.05}
+              style={{
+                opacity: cardReveal,
+                pointerEvents: cardReveal > 0.95 ? "auto" : "none",
+                zIndex: index + 1,
+                transform: `translate(calc(-50% + ${offset.x * cardReveal}px), calc(-50% + ${(1 - cardReveal) * 76 + offset.y * cardReveal}px)) scale(${0.86 + cardReveal * 0.14}) rotate(${offset.rotation * cardReveal}deg)`,
+              }}
+            >
               <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
               <p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p>
               <div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
