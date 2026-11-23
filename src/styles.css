@@ -3144,3 +3144,75 @@ main .learning-word-stack p.learning-word {
 @media (prefers-reduced-motion:reduce) {
   .history-story-item,.history-scroll-testimonials { transition:none!important; }
 }
+
+
+/* História: tipografia ampliada e fluida em todas as telas. */
+.history-scroll-story {
+  width: min(92%, 1080px);
+  padding-inline: clamp(.25rem, 2vw, 1.5rem);
+}
+.history-scroll-story .history-highlight__eyebrow {
+  max-width: 100%;
+  margin-inline: auto;
+  font-size: clamp(1rem, 2.25vw, 1.65rem);
+  line-height: 1.35;
+  letter-spacing: clamp(.07em, .35vw, .16em);
+  text-wrap: balance;
+}
+.history-scroll-story .history-counter {
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+}
+.history-scroll-story .history-counter__number {
+  font-size: clamp(8rem, 22vw, 18rem);
+  line-height: .95;
+  font-variant-numeric: tabular-nums;
+}
+.history-scroll-story .history-counter__plus {
+  font-size: clamp(4rem, 9vw, 7.5rem);
+}
+.history-scroll-story .history-counter__suffix {
+  font-size: clamp(1.8rem, 4.2vw, 3.4rem);
+}
+.history-scroll-story .history-highlight__caption {
+  width: min(100%, 58rem);
+  margin: clamp(1.25rem, 3vh, 2rem) auto 0;
+  font-size: clamp(1.2rem, 2.15vw, 1.75rem);
+  line-height: 1.65;
+  text-wrap: balance;
+}
+@media (max-width: 767px) {
+  .history-scroll-story {
+    width: min(92%, 600px);
+    padding-inline: .25rem;
+  }
+  .history-scroll-story .history-highlight__eyebrow {
+    max-width: 22ch;
+    font-size: clamp(.95rem, 4.2vw, 1.25rem);
+    letter-spacing: .075em;
+  }
+  .history-scroll-story .history-counter {
+    gap: .45rem;
+    margin-top: 1.5rem;
+  }
+  .history-scroll-story .history-counter__number {
+    font-size: clamp(6.5rem, 27vw, 10rem);
+  }
+  .history-scroll-story .history-counter__plus {
+    font-size: clamp(3.3rem, 12vw, 5rem);
+  }
+  .history-scroll-story .history-counter__suffix {
+    font-size: clamp(1.35rem, 5.8vw, 2rem);
+  }
+  .history-scroll-story .history-highlight__caption {
+    max-width: 34ch;
+    margin-top: 1.35rem;
+    font-size: clamp(1.15rem, 4.5vw, 1.4rem);
+    line-height: 1.55;
+  }
+}
+@media (max-width: 380px) {
+  .history-scroll-story .history-counter { gap: .25rem; }
+  .history-scroll-story .history-counter__number { font-size: clamp(5.8rem, 25vw, 6.5rem); }
+  .history-scroll-story .history-counter__plus { font-size: 3rem; }
+  .history-scroll-story .history-counter__suffix { font-size: 1.2rem; }
+}
