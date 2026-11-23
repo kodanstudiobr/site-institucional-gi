@@ -53,7 +53,7 @@ function AnimatedHistoryYears() {
       if (started) return;
       started = true;
       const startTime = performance.now();
-      const duration = 1800;
+      const duration = 2800;
       const tick = (now: number) => {
         const progress = Math.min(1, (now - startTime) / duration);
         const eased = 1 - Math.pow(1 - progress, 4);
@@ -116,11 +116,12 @@ function HistoryTestimonials() {
   // Mantém a mensagem dos 26 anos em destaque por mais tempo antes da transição.
   const storyOpacity = 1 - reveal(0.555, 0.625);
   const storyVisible = progress < 0.625;
-  const testimonialsProgress = reveal(0.625, 0.715);
-  const testimonialKickerProgress = reveal(0.625, 0.70);
-  const testimonialHeadingProgress = reveal(0.70, 0.78);
-  // Os cards avançam em etapas mais longas, exigindo mais rolagem entre as entradas.
-  const cardProgress = (index: number) => reveal(0.78 + index * 0.075, 0.85 + index * 0.075);
+  const testimonialsProgress = reveal(0.625, 0.88);
+  // Cada mensagem recebe sua própria faixa de rolagem, com pausas perceptíveis entre elas.
+  const testimonialKickerProgress = reveal(0.625, 0.69);
+  const testimonialHeadingProgress = reveal(0.755, 0.825);
+  // Os cards entram um de cada vez, com espaço de rolagem dedicado entre cada entrada.
+  const cardProgress = (index: number) => reveal(0.88 + index * 0.04, 0.92 + index * 0.04);
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
     { x: 20, y: 2, rotation: 4 },
