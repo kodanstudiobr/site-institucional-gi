@@ -115,8 +115,6 @@ function HistoryTestimonials() {
 
   const cards = ["Família da Educação Infantil", "Família dos Anos Iniciais", "Família G.I."];
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
-  const storyEyebrowProgress = reveal(0.015, 0.10);
-  const storyCounterProgress = reveal(0.16, 0.27);
   // Mantém a mensagem dos 26 anos em destaque por mais tempo antes da transição.
   const storyOpacity = 1 - reveal(0.555, 0.625);
   const storyVisible = progress < 0.625;
@@ -139,11 +137,11 @@ function HistoryTestimonials() {
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
     <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"}`}>
       <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: storyOpacity, visibility: storyVisible ? "visible" : "hidden" }}>
-        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: storyEyebrowProgress, transform: `translateY(${(1 - storyEyebrowProgress) * 24}px)` }}>Uma história que continua crescendo</p>
-        <div className="history-counter history-story-item" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 28}px)` }}>
+        <p className="history-highlight__eyebrow history-story-item">Uma história que continua crescendo</p>
+        <div className="history-counter history-story-item">
           <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears/>
         </div>
-        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 24}px)` }}>anos de história</p>
+        <p className="history-highlight__caption history-story-item history-scroll-caption">anos de história</p>
       </div>
       <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.625 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
         <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 22}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
@@ -164,8 +162,8 @@ function HistoryTestimonials() {
               }}
             >
               <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
-              <p className="testimonial-card__placeholder">“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p>
-              <div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 12}px)` }}>“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p>
+              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
             </article>;
           })}
         </div>
