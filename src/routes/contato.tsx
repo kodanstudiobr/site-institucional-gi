@@ -1,34 +1,53 @@
 import { pageHead } from "@/lib/seo";
 import { institutionalConfig } from "@/data/institutional";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
-import { MapPin, Phone, Instagram, Send, MessageCircle, Mail } from "lucide-react";
+import { MapPin, Phone, Instagram, MessageCircle, Mail, ArrowUpRight } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/contato")({
   head: () => pageHead("/contato", {
-    title: "Contato e Matrículas | Instituto Educacional G.I.",
-    description: "Entre em contato com o Instituto Educacional G.I. e solicite informações sobre matrículas e segmentos de ensino.",
-    keywords: "contato escola, matrículas, Educação Infantil, Anos Iniciais, Instituto Educacional G.I.",
+    title: "Contato e Localização | Instituto Educacional G.I.",
+    description: "Encontre o Instituto Educacional G.I. em Jaguaribe, João Pessoa. Confira nosso endereço e canais oficiais de contato.",
+    keywords: "contato escola, localização, Instituto Educacional G.I., Jaguaribe, João Pessoa",
   }),
   component: Contato,
 });
 
 function Contato() {
-  const [form,setForm] = useState({responsavel:"",aluno:"",telefone:"",etapa:"Educação Infantil",mensagem:""});
-  const [feedback,setFeedback] = useState("");
-  const update = (field:keyof typeof form,value:string) => setForm(old=>({...old,[field]:value}));
-  const message = encodeURIComponent(`Olá! Gostaria de informações sobre matrículas no Instituto Educacional G.I.\nResponsável: ${form.responsavel}\nAluno: ${form.aluno}\nWhatsApp: ${form.telefone}\nEtapa: ${form.etapa}\nMensagem: ${form.mensagem}`);
-  function submit(e:FormEvent<HTMLFormElement>){
-    e.preventDefault();
-    if(!institutionalConfig.whatsapp){setFeedback("O formulário está pronto. Para enviar, a escola precisa configurar o número oficial de WhatsApp no projeto.");return;}
-    window.open(`https://wa.me/${institutionalConfig.whatsapp}?text=${message}`,"_blank","noopener,noreferrer");
-    setFeedback("O WhatsApp foi aberto para você revisar e enviar a mensagem.");
-  }
+  const mapQuery = encodeURIComponent("Avenida Floriano Peixoto, 230 - Jaguaribe, João Pessoa - PB, Brasil");
+  const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+  const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
+
   return <SiteLayout>
-    <PageHeader eyebrow="FALE CONOSCO" title={<>Vamos <span className="text-accent">conversar?</span></>} intro="Entre em contato com nossa equipe. Será um prazer apresentar a escola e ajudar você a conhecer nossa proposta de ensino."/>
-    <section className="section-wrap grid gap-12 py-20 lg:grid-cols-[.8fr_1.2fr]"><div><p className="eyebrow">FALE COM A GENTE</p><h2 className="section-title">Estamos prontos para <span className="title-highlight">receber você.</span></h2><p className="mt-5 leading-8 text-muted-foreground">Entre em contato para tirar dúvidas, solicitar informações sobre os segmentos de ensino ou conversar sobre matrículas.</p><div className="mt-8 space-y-5"><div className="contact-item"><MapPin/><div><strong>Endereço</strong><p>{institutionalConfig.address || "Informação a ser confirmada pela escola"}</p></div></div><div className="contact-item"><Phone/><div><strong>Telefone e WhatsApp</strong><p>{institutionalConfig.phone || "Contato oficial a ser informado"}</p></div></div><div className="contact-item"><Instagram/><div><strong>Instagram</strong><p>{institutionalConfig.instagram || "Perfil oficial a ser informado"}</p></div></div><div className="contact-item"><Mail/><div><strong>E-mail</strong><p>{institutionalConfig.email || "Endereço eletrônico a ser informado"}</p></div></div></div><div className="mt-8 rounded-2xl bg-soft p-5"><p className="text-sm leading-7 text-muted-foreground">Os dados oficiais de endereço, telefone, e-mail e redes sociais serão adicionados assim que forem disponibilizados pela instituição.</p></div></div>
-      <form className="rounded-3xl border border-border bg-white p-6 shadow-xl md:p-9" onSubmit={submit}><h3 className="font-display text-2xl font-bold text-primary">Solicite informações sobre matrículas</h3><p className="mt-2 text-sm text-muted-foreground">Preencha os campos para preparar sua solicitação.</p><div className="mt-7 grid gap-5 sm:grid-cols-2"><label className="field-label">Nome do responsável<input required value={form.responsavel} onChange={e=>update("responsavel",e.target.value)} placeholder="Seu nome" className="field-input"/></label><label className="field-label">Nome do aluno<input value={form.aluno} onChange={e=>update("aluno",e.target.value)} placeholder="Nome da criança" className="field-input"/></label><label className="field-label">WhatsApp<input required type="tel" value={form.telefone} onChange={e=>update("telefone",e.target.value)} placeholder="(00) 00000-0000" className="field-input"/></label><label className="field-label">Etapa de interesse<select value={form.etapa} onChange={e=>update("etapa",e.target.value)} className="field-input"><option>Educação Infantil</option><option>Anos Iniciais</option></select></label><label className="field-label sm:col-span-2">Mensagem (opcional)<textarea value={form.mensagem} onChange={e=>update("mensagem",e.target.value)} rows={4} placeholder="Como podemos ajudar?" className="field-input"/></label></div><button type="submit" className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 font-extrabold text-accent-foreground transition hover:-translate-y-0.5"><Send size={17}/> Preparar solicitação</button>{feedback&&<p role="status" className="mt-4 rounded-xl bg-soft p-4 text-sm leading-6 text-primary">{feedback}</p>}<p className="mt-3 text-center text-xs text-muted-foreground">A mensagem só será enviada após a configuração do contato oficial da escola.</p></form></section>
-    <section className="bg-soft py-14"><div className="section-wrap flex flex-wrap items-center justify-between gap-5"><div><h2 className="font-display text-2xl font-bold text-primary">Quer conhecer nossa escola?</h2><p className="mt-2 text-muted-foreground">Conheça os segmentos de ensino do Instituto Educacional G.I.</p></div><Link to="/ensino" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-bold text-white"><MessageCircle size={17}/> Conheça nossos segmentos</Link></div></section>
+    <PageHeader eyebrow="FALE CONOSCO" title={<>Estamos aqui para <span className="text-accent">receber você.</span></>} intro="Entre em contato com nossa equipe ou venha conhecer de perto o Instituto Educacional G.I. Será um prazer receber sua família."/>
+    <section className="section-wrap py-16 md:py-20">
+      <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
+        <div>
+          <p className="eyebrow">CANAIS OFICIAIS</p>
+          <h2 className="section-title mt-3">Fale com a <span className="title-highlight">nossa escola.</span></h2>
+          <p className="mt-5 leading-8 text-muted-foreground">Nossa equipe está à disposição para atender você, esclarecer dúvidas e apresentar nossa proposta educacional.</p>
+          <div className="mt-8 space-y-6">
+            <div className="contact-item"><MapPin/><div><strong>Endereço</strong><p>{institutionalConfig.address}</p></div></div>
+            <div className="contact-item"><Phone/><div><strong>Telefone fixo</strong><p><a className="transition hover:text-primary" href="tel:+558321825088">{institutionalConfig.phone}</a></p></div></div>
+            <div className="contact-item"><MessageCircle/><div><strong>WhatsApp</strong><p><a className="transition hover:text-primary" href={`https://wa.me/${institutionalConfig.whatsapp}`} target="_blank" rel="noreferrer">(83) 99420-0019</a></p></div></div>
+            <div className="contact-item"><Mail/><div><strong>E-mail</strong><p><a className="transition hover:text-primary" href={`mailto:${institutionalConfig.email}`}>{institutionalConfig.email}</a></p></div></div>
+            <div className="contact-item"><Instagram/><div><strong>Instagram</strong><p><a className="transition hover:text-primary" href="https://www.instagram.com/institutoeducacionalgi/" target="_blank" rel="noreferrer">{institutionalConfig.instagram}</a></p></div></div>
+          </div>
+          <a href={`https://wa.me/${institutionalConfig.whatsapp}`} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><MessageCircle size={18}/> Fale pelo WhatsApp</a>
+        </div>
+        <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-xl">
+          <div className="flex items-center gap-3 px-5 py-4 md:px-6">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-soft text-primary"><MapPin size={22}/></span>
+            <div className="min-w-0"><h3 className="font-display text-lg font-bold text-primary">Como chegar</h3><p className="text-sm text-muted-foreground">{institutionalConfig.address}</p></div>
+          </div>
+          <iframe title="Localização do Instituto Educacional G.I. no Google Maps" src={mapEmbedUrl} width="100%" height="440" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+          <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-4 md:px-6">
+            <span className="text-sm text-muted-foreground">Jaguaribe · João Pessoa · PB</span>
+            <a href={mapDirectionsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-sm font-bold text-primary transition hover:text-accent-foreground">Abrir rotas no Google Maps <ArrowUpRight size={16}/></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section className="bg-soft py-14"><div className="section-wrap flex flex-wrap items-center justify-between gap-5"><div><h2 className="font-display text-2xl font-bold text-primary">Quer conhecer nossa proposta de ensino?</h2><p className="mt-2 text-muted-foreground">Explore os segmentos e descubra nossa jornada educacional.</p></div><Link to="/ensino" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-bold text-white"><ArrowUpRight size={17}/> Conheça nossos segmentos</Link></div></section>
   </SiteLayout>;
 }
