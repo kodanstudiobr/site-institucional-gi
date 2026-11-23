@@ -39,8 +39,8 @@ const perguntas = [
 ];
 
 function AnimatedHistoryYears({ progress }: { progress: number }) {
-  const value = Math.min(26, Math.max(0, Math.round(26 * (1 - Math.pow(1 - progress, 3)))));
-  return <span className="history-counter__number" aria-label="26">{value}</span>;
+  const value = Math.min(25, Math.max(0, Math.round(25 * (1 - Math.pow(1 - progress, 3)))));
+  return <span className="history-counter__number" aria-label="25">{value}</span>;
 }
 
 function HistoryTestimonials() {
@@ -71,18 +71,18 @@ function HistoryTestimonials() {
 
   const cards = ["Família da Educação Infantil", "Família dos Anos Iniciais", "Família G.I."];
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
-  // A história dos 26 anos aparece rapidamente; a rolagem longa fica concentrada nos depoimentos.
+  // A história dos 25 anos permanece mais tempo em destaque antes da transição para os depoimentos.
   const storyEyebrowProgress = reveal(0.005, 0.045);
   const storyCounterProgress = reveal(0.055, 0.13);
-  const storyOpacity = 1 - reveal(0.14, 0.19);
-  const storyVisible = progress < 0.19;
-  const testimonialsProgress = reveal(0.17, 0.20);
-  // A chamada aparece primeiro; após mais uma rolagem, entra a frase complementar.
-  const testimonialKickerProgress = reveal(0.21, 0.25);
-  const testimonialHeadingProgress = reveal(0.34, 0.38);
+  const storyOpacity = 1 - reveal(0.20, 0.26);
+  const storyVisible = progress < 0.26;
+  const testimonialsProgress = reveal(0.25, 0.31);
+  // A chamada aparece primeiro; depois de mais rolagem, entra a frase complementar.
+  const testimonialKickerProgress = reveal(0.32, 0.37);
+  const testimonialHeadingProgress = reveal(0.43, 0.48);
   // Cada card ganha seu próprio trecho de rolagem, um de cada vez.
   const cardProgress = (index: number) => {
-    const starts = [0.49, 0.66, 0.83];
+    const starts = [0.57, 0.72, 0.87];
     return reveal(starts[index], starts[index] + 0.09);
   };
   const cardOffsets = [
