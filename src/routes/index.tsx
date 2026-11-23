@@ -117,7 +117,10 @@ function HistoryTestimonials() {
   const storyOpacity = 1 - reveal(0.555, 0.625);
   const storyVisible = progress < 0.625;
   const testimonialsProgress = reveal(0.625, 0.715);
-  const cardProgress = (index: number) => reveal(0.715 + index * 0.105, 0.855 + index * 0.105);
+  const testimonialKickerProgress = reveal(0.625, 0.70);
+  const testimonialHeadingProgress = reveal(0.70, 0.78);
+  // Os cards avançam em etapas mais longas, exigindo mais rolagem entre as entradas.
+  const cardProgress = (index: number) => reveal(0.78 + index * 0.07, 0.94 + index * 0.025);
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
     { x: 20, y: 2, rotation: 4 },
@@ -134,8 +137,8 @@ function HistoryTestimonials() {
         <p className="history-highlight__caption history-story-item" style={{ opacity: captionProgress, transform: `translateY(${(1 - captionProgress) * 24}px)` }}>de dedicação à educação, ao acolhimento e à construção de futuros.</p>
       </div>
       <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.625 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
-        <p className="history-scroll-kicker">UMA ESCOLA, MUITAS HISTÓRIAS.</p>
-        <h2 className="history-scroll-heading">E cada família faz parte delas.</h2>
+        <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 22}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
+        <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: `translateY(${(1 - testimonialHeadingProgress) * 24}px)` }}>E cada família faz parte delas.</h2>
         <div className="history-scroll-cards">
           {cards.map((label, index) => {
             const cardReveal = cardProgress(index);
