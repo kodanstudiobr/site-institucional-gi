@@ -3327,3 +3327,39 @@ main .learning-word-stack p.learning-word {
     line-height: 1.42 !important;
   }
 }
+
+
+/* Correção específica e prioritária da frase de dedicação: seletor exclusivo da seção sticky. */
+section.history-scroll-section .history-scroll-story p.history-scroll-caption {
+  display: block !important;
+  width: min(94%, 72rem) !important;
+  max-width: 72rem !important;
+  margin: clamp(1.5rem, 3.5vh, 2.5rem) auto 0 !important;
+  font-size: clamp(2.15rem, 3.8vw, 3rem) !important;
+  line-height: 1.38 !important;
+  font-weight: 600 !important;
+  letter-spacing: -.03em !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section .history-scroll-story p.history-scroll-caption {
+    width: min(92%, 34rem) !important;
+    max-width: 31ch !important;
+    font-size: clamp(1.65rem, 6.2vw, 2.05rem) !important;
+    line-height: 1.42 !important;
+  }
+}
+@media (max-width: 380px) {
+  section.history-scroll-section .history-scroll-story p.history-scroll-caption {
+    font-size: 1.52rem !important;
+  }
+}
+
+/* Mais percurso físico para cada título e depoimento aparecer com calma. */
+section.history-scroll-section {
+  height: 1000vh !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    height: 950svh !important;
+  }
+}
