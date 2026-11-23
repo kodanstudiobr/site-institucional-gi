@@ -1,6 +1,6 @@
 import { pageHead } from "@/lib/seo";
 import { institutionalConfig } from "@/data/institutional";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { MapPin, Phone, Instagram, Mail, ArrowUpRight } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
@@ -32,7 +32,7 @@ function Contato() {
       <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
         <div>
           <p className="eyebrow">CANAIS OFICIAIS</p>
-          <h2 className="section-title mt-3">Fale com a <span className="title-highlight">nossa escola.</span></h2>
+          <h2 className="section-title mt-3">Fale conosco</h2>
           <p className="mt-5 leading-8 text-muted-foreground">Nossa equipe está à disposição para atender você, esclarecer dúvidas e apresentar nossa proposta educacional.</p>
           <div className="mt-8 space-y-6">
             <div className="contact-item"><MapPin/><div><strong>Endereço</strong><p>{institutionalConfig.address}</p></div></div>
@@ -56,6 +56,6 @@ function Contato() {
         </div>
       </div>
     </section>
-    <section className="bg-soft py-14"><div className="section-wrap flex flex-wrap items-center justify-between gap-5"><div><h2 className="font-display text-2xl font-bold text-primary">Quer conhecer nossa proposta de ensino?</h2><p className="mt-2 text-muted-foreground">Explore os segmentos e descubra nossa jornada educacional.</p></div><Link to="/ensino" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 font-bold text-white"><ArrowUpRight size={17}/> Conheça nossos segmentos</Link></div></section>
+    <section className="bg-soft py-16 md:py-20"><div className="section-wrap flex flex-col items-center text-center"><h2 className="font-display text-2xl font-bold text-primary sm:text-3xl md:text-4xl">Quer ficar por dentro de tudo?</h2><p className="mt-3 text-base text-muted-foreground sm:text-lg">Nos siga no Instagram</p><a href="https://www.instagram.com/institutoeducacionalgi/" target="_blank" rel="noreferrer" aria-label="Siga o Instituto Educacional G.I. no Instagram" className="mt-7 inline-flex flex-col items-center gap-3 text-primary transition duration-300 hover:-translate-y-1 hover:text-accent-foreground"><Instagram className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28" strokeWidth={1.6}/><span className="text-xl font-extrabold sm:text-2xl md:text-3xl">{institutionalConfig.instagram}</span></a></div></section>
   </SiteLayout>;
 }
