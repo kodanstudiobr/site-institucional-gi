@@ -86,8 +86,9 @@ function HistoryTestimonials() {
   const testimonialHeadingProgress = reveal(0.78, 0.83);
   // Cada depoimento tem uma etapa própria; há uma pausa real antes do próximo card.
   const cardProgress = (index: number) => {
-    const starts = [0.87, 0.93, 0.985];
-    return reveal(starts[index], Math.min(1, starts[index] + 0.025));
+    // Cada card ocupa uma etapa curta de entrada, com um intervalo amplo de rolagem até o próximo.
+    const starts = [0.80, 0.89, 0.98];
+    return reveal(starts[index], Math.min(1, starts[index] + 0.02));
   };
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
