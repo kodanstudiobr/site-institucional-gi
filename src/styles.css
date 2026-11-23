@@ -3504,3 +3504,33 @@ section.history-scroll-section {
     padding: 1rem !important;
   }
 }
+
+
+/* Depoimentos mais compactos em telas pequenas, mantendo os cards centralizados. */
+@media (max-width: 767px) {
+  section.history-scroll-section .history-scroll-cards {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: clamp(235px, 36svh, 285px) !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 4rem), 320px) !important;
+    max-width: 320px !important;
+    min-height: 205px !important;
+    padding: .95rem !important;
+    margin-inline: auto !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+    margin-block: .8rem .9rem !important;
+    font-size: .82rem !important;
+    line-height: 1.55 !important;
+  }
+}
+@media (max-width: 380px) {
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 3.25rem), 300px) !important;
+    max-width: 300px !important;
+    min-height: 195px !important;
+    padding: .85rem !important;
+  }
+}
