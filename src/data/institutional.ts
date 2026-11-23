@@ -1,8 +1,8 @@
-// Dados oficiais da escola. Preencha somente após confirmação pela instituição.
+// Dados oficiais do Instituto Educacional G.I.
 export const institutionalConfig = {
-  whatsapp: "", // DDI + DDD + número, somente dígitos (ex.: 5583999999999)
-  address: "",
-  phone: "",
-  email: "",
-  instagram: ""
+  whatsapp: "5583994200019",
+  address: "Avenida Floriano Peixoto, 230 - Jaguaribe, João Pessoa - PB",
+  phone: "2182-5088",
+  email: "institutoeducacionalgi@gmail.com",
+  instagram: "@institutoeducacionalgi"
 } as const;
