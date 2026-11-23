@@ -3959,3 +3959,134 @@ section.history-scroll-section {
     height: 1500svh !important;
   }
 }
+
+
+/* Linha de progresso que acompanha a entrada dos cards da rotina na tela. */
+.routine-card {
+  --routine-color: #324594;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .8rem 1rem;
+  overflow: hidden;
+  padding: 1rem 1.1rem 1.1rem;
+  border: 1px solid rgba(50, 69, 148, .11);
+  border-radius: 1.35rem;
+  background: linear-gradient(115deg, #fff 0%, #fff 72%, #f7f8ff 100%);
+  box-shadow: 0 7px 22px rgba(30, 48, 110, .055);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.routine-card--yellow { --routine-color: #e6b91e; }
+.routine-card--blue { --routine-color: #324fbb; }
+.routine-card--green { --routine-color: #279b75; }
+.routine-card--purple { --routine-color: #8562c7; }
+.routine-card__progress {
+  position: absolute;
+  inset: 0 auto auto 0;
+  z-index: 2;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--routine-color), color-mix(in srgb, var(--routine-color) 28%, white));
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.routine-card__time {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--routine-color);
+  font-size: .78rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  grid-column: 1 / -1;
+}
+.routine-card__number {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: .7rem;
+  background: color-mix(in srgb, var(--routine-color) 10%, white);
+  color: var(--routine-color);
+  font-size: .7rem;
+}
+.routine-card__icon {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  grid-column: 2;
+  grid-row: 2;
+  place-items: center;
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--routine-color) 10%, white);
+  color: var(--routine-color);
+}
+.routine-card__content {
+  grid-column: 1;
+  grid-row: 2;
+}
+.routine-card__content h3 {
+  color: #263d86;
+  font-family: var(--font-display, inherit);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+.routine-card__content p {
+  margin-top: .35rem;
+  color: #68728e;
+  font-size: .86rem;
+  line-height: 1.6;
+}
+@supports (animation-timeline: view()) {
+  .routine-card__progress {
+    animation: routine-card-fill linear both;
+    animation-timeline: view(block);
+    animation-range: entry 0% entry 85%;
+  }
+}
+@keyframes routine-card-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .routine-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--routine-color) 30%, white);
+    box-shadow: 0 15px 32px rgba(30, 48, 110, .11);
+  }
+}
+@media (min-width: 640px) {
+  .routine-card {
+    grid-template-columns: 145px 3.25rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.2rem 1.4rem;
+    border-radius: 1.5rem;
+  }
+  .routine-card__time {
+    grid-column: 1;
+    grid-row: 1;
+    flex-wrap: wrap;
+    align-content: center;
+    font-size: .82rem;
+  }
+  .routine-card__number {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+  .routine-card__icon {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .routine-card__content {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .routine-card__content h3 { font-size: 1.08rem; }
+  .routine-card__content p { font-size: .92rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .routine-card { transition: none; }
+  .routine-card__progress { transform: scaleX(1); animation: none; }
+}
