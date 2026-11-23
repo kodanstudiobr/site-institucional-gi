@@ -60,26 +60,18 @@ function EnsinoIntegral() {
             <span className="inline-flex items-center gap-2 rounded-full bg-soft px-4 py-2 text-sm font-semibold text-primary"><Users size={16}/> Educação Infantil e Anos Iniciais</span>
           </div>
         </div>
-        <div className="relative overflow-hidden rounded-[2rem] bg-primary p-6 text-white shadow-xl sm:p-9">
-          <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/20 blur-2xl"/>
-          <div className="relative">
-            <span className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-accent text-primary"><Sparkles size={28}/></span>
-            <p className="text-sm font-bold uppercase tracking-[.16em] text-accent">No tempo integral, seu filho tem</p>
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              {[
-                ["Acolhimento e segurança", HeartHandshake],
-                ["Aprendizagem significativa", BookOpen],
-                ["Brincadeiras e interação", Gamepad2],
-                ["Alimentação e cuidados", Apple],
-                ["Desenvolvimento integral", Sparkles],
-              ].map(([label, Icon]) => {
-                const ItemIcon = Icon as typeof HeartHandshake;
-                return <div key={label as string} className="flex items-center gap-3"><span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-accent"><ItemIcon size={21}/></span><span className="text-sm font-semibold leading-5">{label as string}</span></div>;
-              })}
-            </div>
-            <p className="mt-8 border-t border-white/15 pt-5 font-display text-xl font-bold italic text-white sm:text-2xl">Aprender, brincar e crescer juntos!</p>
-          </div>
-        </div>
+        <figure className="relative overflow-hidden rounded-[2rem] bg-soft shadow-xl">
+          <img
+            src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o.webp"
+            alt="Menina realizando uma atividade de formação de palavras no chão"
+            className="aspect-[4/3] h-full w-full object-cover"
+            loading="lazy"
+          />
+          <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/45 to-transparent px-5 pb-5 pt-16 text-white sm:px-7 sm:pb-7">
+            <p className="font-display text-xl font-bold sm:text-2xl">Aprender, brincar e crescer juntos!</p>
+            <p className="mt-1 text-sm text-white/85">Experiências que fazem parte de cada dia no Ensino Integral.</p>
+          </figcaption>
+        </figure>
       </section>
 
       <section className="bg-soft section-decor-wrap py-16 lg:py-24">
