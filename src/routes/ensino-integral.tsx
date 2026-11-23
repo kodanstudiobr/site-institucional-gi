@@ -1,7 +1,7 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Clock3, BookOpen, Users, HeartHandshake, Apple, Sparkles,
+  Clock3, CalendarDays, BookOpen, Users, HeartHandshake, Apple, Sparkles,
   Gamepad2, Palette, Music2, BookMarked, Popcorn, Bath,
   Utensils, Sun, GraduationCap, CheckCircle2, Footprints,
 } from "lucide-react";
@@ -77,6 +77,7 @@ function EnsinoIntegral() {
       <section className="bg-soft section-decor-wrap py-16 lg:py-24">
         <div className="section-wrap">
           <div className="mx-auto max-w-3xl text-center">
+            <span className="routine-section-icon" aria-hidden="true"><Clock3 size={27}/></span>
             <p className="eyebrow">NOSSO DIA A DIA</p>
             <h2 className="section-title">Como funciona a <span className="title-highlight">rotina?</span></h2>
             <p className="mt-5 leading-7 text-muted-foreground sm:leading-8">Da chegada ao início das aulas da tarde, cada etapa tem um horário e um propósito na jornada das crianças.</p>
@@ -97,14 +98,15 @@ function EnsinoIntegral() {
 
       <section className="section-wrap py-16 lg:py-24">
         <div className="mx-auto max-w-3xl text-center">
+          <span className="routine-section-icon" aria-hidden="true"><CalendarDays size={27}/></span>
           <p className="eyebrow">UM MOMENTO ESPECIAL A CADA DIA</p>
           <h2 className="section-title">Atividades que deixam a semana <span className="title-highlight">mais divertida.</span></h2>
           <p className="mt-5 leading-7 text-muted-foreground sm:leading-8">Além dos momentos que fazem parte da rotina diária, cada dia da semana conta com uma atividade especial.</p>
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-14 lg:grid-cols-5">
           {atividades.map(({day,title,text,icon:Icon},index)=>(
-            <article key={day} className="feature-card flex h-full flex-col rounded-3xl p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-soft text-primary"><Icon size={24}/></span>
+            <article key={day} className="activity-card feature-card flex h-full flex-col rounded-3xl p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <span className="activity-card__icon mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-soft text-primary"><Icon size={24}/></span>
               <p className="text-xs font-extrabold uppercase tracking-wider text-primary/60">{day}</p>
               <h3 className="mt-2 font-display text-lg font-bold text-primary">{title}</h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{text}</p>
