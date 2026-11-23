@@ -27,7 +27,7 @@ function Contato() {
   const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
 
   return <SiteLayout>
-    <PageHeader eyebrow="FALE CONOSCO" title={<><span className="block">Estamos aqui</span><span className="block">para <span className="text-accent">receber você.</span></span></>} intro="Entre em contato com nossa equipe ou venha conhecer de perto o Instituto Educacional G.I. Será um prazer receber sua família." className="contact-page-hero"/>
+    <PageHeader eyebrow="FALE CONOSCO" title={<><span className="block">Estamos aqui</span><span className="block">para receber <span className="contact-title-mobile-break">você.</span></span></>} intro="Entre em contato com nossa equipe ou venha conhecer de perto o Instituto Educacional G.I. Será um prazer receber sua família." className="contact-page-hero"/>
     <section className="section-wrap py-16 md:py-20">
       <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
         <div>
