@@ -3854,3 +3854,38 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     transition: none !important;
   }
 }
+
+
+/* Respostas do FAQ: renderização direta evita colapso/invisibilidade durante a abertura. */
+.faq-answer-grid,
+.faq-answer-grid.is-open,
+.faq-answer-inner {
+  display: none !important;
+}
+.faq-answer-content {
+  display: block;
+  padding: 0 1.25rem 1.3rem;
+  animation: faq-answer-appear .32s cubic-bezier(.2,.75,.25,1) both;
+}
+.faq-answer-content p {
+  margin: 0;
+  color: #68728e;
+  font-size: .94rem;
+  line-height: 1.8;
+}
+@keyframes faq-answer-appear {
+  from { opacity: 0; transform: translateY(-7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 640px) {
+  .faq-answer-content {
+    padding: 0 1rem 1.05rem;
+  }
+  .faq-answer-content p {
+    font-size: .86rem;
+    line-height: 1.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-answer-content { animation: none; }
+}
