@@ -3445,3 +3445,14 @@ section.history-scroll-section .history-scroll-testimonials {
     height: calc(100svh - var(--institutional-header-offset)) !important;
   }
 }
+
+
+/* Mais rolagem real entre a entrada de cada card de depoimento. */
+section.history-scroll-section {
+  height: 1400vh !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    height: 1300svh !important;
+  }
+}
