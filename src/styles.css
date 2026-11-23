@@ -4472,18 +4472,18 @@ section.history-scroll-section {
   }
 }
 
-/* O que nos move: cards empilhados e sobrepostos conforme a rolagem no mobile. */
+/* O que nos move: cada card entra no fluxo, fixa no topo e recebe o próximo durante a rolagem mobile. */
 @media (max-width: 767px) {
   .home-move-cards {
     display: block !important;
     position: relative;
     isolation: isolate;
-    padding-bottom: 1rem;
+    padding-bottom: 65svh;
   }
   .home-move-card-item {
     position: sticky;
     top: 92px;
-    margin-bottom: -168px;
+    margin: 0 0 1.25rem;
     border-radius: 1.25rem;
   }
   .home-move-card-item:nth-child(1) { top: 92px; z-index: 1; }
