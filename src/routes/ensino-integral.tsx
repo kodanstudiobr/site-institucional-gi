@@ -61,12 +61,18 @@ function EnsinoIntegral() {
           </div>
         </div>
         <figure className="integral-feature-image relative h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
-          <img
-            src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
-            alt="Menina realizando uma atividade de formação de palavras no chão"
-            className="integral-feature-image__photo absolute inset-0 h-full w-full object-cover"
-            loading="lazy"
-          />
+          <picture className="absolute inset-0 block h-full w-full">
+            <source
+              media="(min-width: 768px)"
+              srcSet="/imagens/Menino-sorridente-no-escorregador-vermelho.webp"
+            />
+            <img
+              src="/imagens/Alegria%20no%20escorregador%20vermelho.webp"
+              alt="Criança sorridente brincando no escorregador da escola"
+              className="integral-feature-image__photo absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+          </picture>
           <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/45 to-transparent px-5 pb-5 pt-16 text-white sm:px-7 sm:pb-7">
             <p className="font-display text-xl font-bold sm:text-2xl">Aprender, brincar e crescer juntos!</p>
             <p className="mt-1 text-sm text-white/85">Experiências que fazem parte de cada dia no Ensino Integral.</p>
