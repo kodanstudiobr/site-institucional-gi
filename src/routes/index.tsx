@@ -305,7 +305,7 @@ function Index() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const heroTimer = window.setInterval(() => {
       setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 6000);
+    }, 3000);
     return () => window.clearInterval(heroTimer);
   }, []);
   const carouselRef = useRef<HTMLDivElement>(null);
