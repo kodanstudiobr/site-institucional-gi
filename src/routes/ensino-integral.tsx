@@ -57,6 +57,25 @@ function EnsinoIntegral() {
         <div>
           <p className="eyebrow">UMA JORNADA COMPLETA</p>
           <h2 className="section-title mt-3">Mais tempo para <span className="title-highlight">aprender e crescer.</span></h2>
+        <figure className="integral-feature-image relative hidden lg:block h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
+          <picture className="absolute inset-0 block h-full w-full">
+            <source
+              media="(min-width: 768px)"
+              srcSet="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
+            />
+            <img
+              src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
+              alt="Menina montando palavras no chão durante uma atividade escolar"
+              className="integral-feature-image__photo absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: "center 30%" }}
+              loading="lazy"
+            />
+          </picture>
+          <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/45 to-transparent px-5 pb-5 pt-16 text-white sm:px-7 sm:pb-7">
+            <p className="font-display text-xl font-bold sm:text-2xl">Um dia inteiro de aprendizagem e descobertas.</p>
+            <p className="mt-1 text-sm text-white/85">Experiências que fazem parte de cada dia no Ensino Integral.</p>
+          </figcaption>
+        </figure>
           <p className="mt-6 text-base leading-8 text-muted-foreground sm:text-lg">
             O Ensino Integral do Instituto Educacional G.I. é destinado às crianças da <strong className="font-semibold text-primary">Educação Infantil e dos Anos Iniciais</strong>. Ao longo do dia, os estudantes participam de uma rotina que combina atividades escolares, momentos de convivência, recreação, alimentação, higiene e repouso.
           </p>
