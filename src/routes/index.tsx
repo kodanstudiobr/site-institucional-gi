@@ -39,52 +39,9 @@ const perguntas = [
   ["Como entrar em contato com a instituição?", "Acesse a página Contato e envie seus dados para solicitar informações à equipe do Instituto Educacional G.I."],
 ];
 
-function AnimatedHistoryYears() {
-  const [value, setValue] = useState(0);
-  const numberRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const element = numberRef.current;
-    if (!element) return;
-    let frame = 0;
-    let started = false;
-    let observer: IntersectionObserver | undefined;
-
-    const animate = () => {
-      if (started) return;
-      started = true;
-      const startTime = performance.now();
-      const duration = 1800;
-      const tick = (now: number) => {
-        const progress = Math.min(1, (now - startTime) / duration);
-        setValue(Math.round(26 * (1 - Math.pow(1 - progress, 3))));
-        if (progress < 1) frame = requestAnimationFrame(tick);
-        else setValue(26);
-      };
-      frame = requestAnimationFrame(tick);
-    };
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setValue(26);
-    } else if ("IntersectionObserver" in window) {
-      observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          animate();
-          observer?.disconnect();
-        }
-      }, { threshold: 0.35 });
-      observer.observe(element);
-    } else {
-      animate();
-    }
-
-    return () => {
-      observer?.disconnect();
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
-
-  return <span ref={numberRef} className="history-counter__number" aria-label="26">{value}</span>;
+function AnimatedHistoryYears({ progress }: { progress: number }) {
+  const value = Math.min(26, Math.max(0, Math.round(26 * (1 - Math.pow(1 - progress, 3)))));
+  return <span className="history-counter__number" aria-label="26">{value}</span>;
 }
 
 function HistoryTestimonials() {
@@ -115,6 +72,8 @@ function HistoryTestimonials() {
 
   const cards = ["Família da Educação Infantil", "Família dos Anos Iniciais", "Família G.I."];
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
+  const storyEyebrowProgress = reveal(0.015, 0.10);
+  const storyCounterProgress = reveal(0.16, 0.27);
   // Mantém a mensagem dos 26 anos em destaque por mais tempo antes da transição.
   const storyOpacity = 1 - reveal(0.555, 0.625);
   const storyVisible = progress < 0.625;
@@ -137,11 +96,11 @@ function HistoryTestimonials() {
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
     <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"}`}>
       <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: storyOpacity, visibility: storyVisible ? "visible" : "hidden" }}>
-        <p className="history-highlight__eyebrow history-story-item">Uma história que continua crescendo</p>
-        <div className="history-counter history-story-item">
-          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears/>
+        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: storyEyebrowProgress, transform: `translateY(${(1 - storyEyebrowProgress) * 22}px)` }}>Uma história que continua crescendo</p>
+        <div className="history-counter history-story-item" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 24}px)` }}>
+          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={storyCounterProgress}/>
         </div>
-        <p className="history-highlight__caption history-story-item history-scroll-caption">anos de história</p>
+        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 20}px)` }}>anos de história</p>
       </div>
       <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.625 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
         <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 22}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
@@ -506,7 +465,26 @@ function Index() {
 
     <HistoryTestimonials />
 
-    <section className="section-wrap py-20 lg:py-24"><div className="mx-auto max-w-3xl"><div className="text-center"><p className="eyebrow">DÚVIDAS FREQUENTES</p><h2 className="section-title">Estamos aqui para <span className="title-highlight">ajudar.</span></h2></div><div className="mt-10 divide-y divide-border border-y border-border">{perguntas.map(([q,a],i)=><div key={q} className="py-5"><button className="flex w-full items-center justify-between gap-4 text-left font-semibold text-primary" aria-expanded={faqOpen===i} onClick={()=>setFaqOpen(faqOpen===i?null:i)}><span>{q}</span><ChevronDown className={`shrink-0 transition-transform ${faqOpen===i?"rotate-180":""}`}/></button>{faqOpen===i&&<p className="max-w-2xl pt-4 leading-7 text-muted-foreground">{a}</p>}</div>)}</div></div></section>
+    <section className="faq-section section-wrap py-16 sm:py-20 lg:py-24">
+      <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="eyebrow">DÚVIDAS FREQUENTES</p>
+          <h2 className="section-title">Estamos aqui para <span className="title-highlight">ajudar.</span></h2>
+          <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">Encontre respostas para as principais dúvidas sobre o Instituto Educacional G.I.</p>
+        </div>
+        <div className="faq-list mt-8 grid gap-3 sm:mt-10 sm:gap-4">
+          {perguntas.map(([q,a],i)=><article key={q} className={`faq-item ${faqOpen===i?"is-open":""}`}>
+            <button className="faq-question flex w-full items-center justify-between gap-4 text-left" aria-expanded={faqOpen===i} aria-controls={`faq-answer-${i}`} onClick={()=>setFaqOpen(faqOpen===i?null:i)}>
+              <span className="faq-question__text">{q}</span>
+              <span className="faq-question__icon"><ChevronDown className={`transition-transform duration-300 ${faqOpen===i?"rotate-180":""}`} size={19}/></span>
+            </button>
+            <div id={`faq-answer-${i}`} className="faq-answer-grid" aria-hidden={faqOpen!==i}>
+              <div className="faq-answer-inner"><p>{a}</p></div>
+            </div>
+          </article>)}
+        </div>
+      </div>
+    </section>
 
     <section className="bg-primary py-20 text-white"><div className="section-wrap grid items-center gap-8 lg:grid-cols-[1fr_auto]"><div><p className="eyebrow text-accent">VENHA NOS CONHECER</p><h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">O próximo capítulo da história do seu filho começa aqui.</h2><p className="mt-5 max-w-2xl leading-8 text-white/80">Venha conhecer o Instituto Educacional G.I. e descubra um ambiente preparado para ensinar, acolher e acompanhar cada etapa do desenvolvimento dos nossos estudantes.</p></div><Link to="/contato" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-extrabold text-accent-foreground transition hover:-translate-y-1">Quero conhecer a escola <ArrowRight size={18}/></Link></div></section>
   </SiteLayout>;
