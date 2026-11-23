@@ -82,14 +82,12 @@ function EnsinoIntegral() {
             <p className="mt-5 leading-7 text-muted-foreground sm:leading-8">Da chegada ao início das aulas da tarde, cada etapa tem um horário e um propósito na jornada das crianças.</p>
           </div>
           <div className="mx-auto mt-10 grid max-w-4xl gap-3 sm:mt-14 sm:gap-4">
-            {rotina.map(({time,title,text,icon:Icon},index)=>(
-              <article key={title} className="group grid gap-3 rounded-2xl border border-primary/10 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md sm:grid-cols-[150px_52px_1fr] sm:items-center sm:gap-5 sm:p-5">
-                <div className="flex items-center gap-2 text-sm font-extrabold tabular-nums text-primary sm:block"><Clock3 size={15} className="sm:hidden"/>{time}</div>
-                <span className="hidden h-12 w-12 items-center justify-center rounded-2xl bg-soft text-primary sm:flex"><Icon size={23}/></span>
-                <div className="flex items-start gap-3 sm:block">
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-soft text-primary sm:hidden"><Icon size={19}/></span>
-                  <div><h3 className="font-display text-base font-bold text-primary sm:text-lg">{title}</h3><p className="mt-1 text-sm leading-6 text-muted-foreground sm:text-base">{text}</p></div>
-                </div>
+            {rotina.map(({time,title,text,icon:Icon,color},index)=>(
+              <article key={title} className={`routine-card routine-card--${color} group`}>
+                <span className="routine-card__progress" aria-hidden="true"/>
+                <div className="routine-card__time"><span className="routine-card__number">{String(index+1).padStart(2,"0")}</span><Clock3 size={15}/>{time}</div>
+                <span className="routine-card__icon"><Icon size={23}/></span>
+                <div className="routine-card__content"><h3>{title}</h3><p>{text}</p></div>
               </article>
             ))}
           </div>
