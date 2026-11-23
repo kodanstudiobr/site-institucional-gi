@@ -3050,7 +3050,11 @@ main .learning-word-stack p.learning-word {
 }
 .history-scroll-story .history-highlight__eyebrow { color:#fff12c; }
 .history-scroll-story .history-counter { margin-top:1.5rem; }
-.history-scroll-story .history-counter__number { color:#fff12c; font-size:clamp(7rem,19vw,15rem); }
+.history-scroll-story .history-counter__number {
+  color:#fff12c;
+  font-size:clamp(9rem,24vw,20rem);
+  line-height:.88;
+}
 .history-scroll-story .history-counter__plus,
 .history-scroll-story .history-counter__suffix { color:#fff12c; }
 .history-scroll-story .history-highlight__caption { color:rgba(255,255,255,.84); }
@@ -3112,7 +3116,10 @@ main .learning-word-stack p.learning-word {
   .history-scroll-section { height:360svh; }
   .history-scroll-stage { min-height:520px; }
   .history-scroll-story { width:90%; }
-  .history-scroll-story .history-counter__number { font-size:clamp(6.5rem,28vw,9rem); }
+  .history-scroll-story .history-counter__number {
+    font-size:clamp(8.5rem,36vw,12rem);
+    line-height:.88;
+  }
   .history-scroll-story .history-highlight__eyebrow { font-size:.68rem; }
   .history-scroll-testimonials { padding:1rem .85rem; }
   .history-scroll-heading { margin-bottom:1.4rem; font-size:2rem; }
