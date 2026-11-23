@@ -3889,3 +3889,73 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 @media (prefers-reduced-motion: reduce) {
   .faq-answer-content { animation: none; }
 }
+
+
+/* Accordion nativo: mantém a resposta no fluxo do documento e evita o bug de sumiço. */
+.faq-item {
+  display: block;
+}
+.faq-item > summary.faq-question {
+  display: flex;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.faq-item > summary.faq-question::-webkit-details-marker {
+  display: none;
+}
+.faq-item > summary.faq-question::marker {
+  content: "";
+}
+.faq-item[open] {
+  border-color: rgba(50, 69, 148, .28);
+  box-shadow: 0 12px 30px rgba(35, 51, 112, .085);
+}
+.faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item .faq-answer-content {
+  display: block !important;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 1.25rem;
+  opacity: 0;
+  animation: none;
+  transition: max-height .38s ease, opacity .25s ease, padding .3s ease;
+}
+.faq-item[open] .faq-answer-content {
+  max-height: 360px;
+  padding: 0 1.25rem 1.3rem;
+  opacity: 1;
+}
+.faq-item .faq-answer-content p {
+  margin: 0;
+  color: #68728e;
+  font-size: .94rem;
+  line-height: 1.8;
+}
+@media (max-width: 640px) {
+  .faq-item .faq-answer-content {
+    padding-inline: 1rem;
+  }
+  .faq-item[open] .faq-answer-content {
+    padding: 0 1rem 1.05rem;
+  }
+  .faq-item .faq-answer-content p {
+    font-size: .86rem;
+    line-height: 1.7;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-item .faq-answer-content { transition: none; }
+}
+
+/* Mais tempo de permanência após a entrada do terceiro depoimento. */
+section.history-scroll-section {
+  height: 1600vh !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    height: 1500svh !important;
+  }
+}
