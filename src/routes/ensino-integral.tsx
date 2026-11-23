@@ -1,7 +1,7 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Clock3, BookOpen, Users, Sparkles, HeartHandshake, Apple,
+  Clock3, BookOpen, Users, HeartHandshake, Apple,
   Gamepad2, Palette, Music2, BookMarked, Popcorn, Bath,
   Utensils, Sun, GraduationCap, CheckCircle2, Footprints,
 } from "lucide-react";
