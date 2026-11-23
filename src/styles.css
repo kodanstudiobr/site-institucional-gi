@@ -3259,3 +3259,41 @@ main .learning-word-stack p.learning-word {
 @media (max-width: 380px) {
   .history-scroll-story .history-counter__de { font-size: 1.05rem; }
 }
+
+
+/* Mais espaço de rolagem para acompanhar cada etapa dos depoimentos. */
+.history-scroll-section { height:470vh; }
+@media (max-width:767px) {
+  .history-scroll-section { height:430svh; }
+}
+
+/* Frase de dedicação com maior destaque e escala fluida. */
+.history-scroll-story .history-highlight__caption {
+  max-width: min(100%, 68rem);
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  line-height: 1.5;
+  font-weight: 550;
+  letter-spacing: -.02em;
+}
+@media (max-width:767px) {
+  .history-scroll-story .history-highlight__caption {
+    max-width: 32ch;
+    font-size: clamp(1.35rem, 5.1vw, 1.75rem);
+    line-height: 1.5;
+  }
+}
+@media (max-width:380px) {
+  .history-scroll-story .history-highlight__caption {
+    font-size: 1.22rem;
+    line-height: 1.48;
+  }
+}
+
+/* As duas linhas dos depoimentos entram em momentos separados, acompanhando o scroll. */
+.history-scroll-kicker,
+.history-scroll-heading {
+  transition: opacity .45s ease, transform .6s cubic-bezier(.2,.75,.2,1);
+}
+@media (prefers-reduced-motion:reduce) {
+  .history-scroll-kicker,.history-scroll-heading { transition:none!important; }
+}
