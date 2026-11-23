@@ -4599,3 +4599,11 @@ section.history-scroll-section {
     padding-bottom: 2rem;
   }
 }
+
+/* Em todas as páginas internas, posiciona os títulos e textos na parte inferior dos banners no desktop. */
+@media (min-width: 768px) {
+  .page-hero .page-hero__content {
+    padding-top: 16rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
