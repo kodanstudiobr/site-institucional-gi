@@ -4471,11 +4471,11 @@ section.history-scroll-section {
     content: none !important;
   }
 
-  /* Zoom real na fotografia do banner da página Ensino Integral. */
+  /* Mantém as imagens dos banners no enquadramento original em telas mobile. */
   .school-page-hero .school-page-hero__image {
     animation: none !important;
-    transform: scale(1.4) !important;
-    transform-origin: center 38%;
+    transform: none !important;
+    transform-origin: center center;
   }
 }
 
