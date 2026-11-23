@@ -4570,12 +4570,12 @@ section.history-scroll-section {
 .page-hero.contact-page-hero {
   background-image: linear-gradient(90deg, rgba(24, 39, 101, .82), rgba(34, 52, 125, .38)), url("/imagens/Homenagem-ao-Professor-com-Sorriso.webp");
   background-size: cover;
-  background-position: center 55%;
+  background-position: center 64%;
 }
 @media (max-width: 767px) {
   .page-hero.contact-page-hero {
     background-image: linear-gradient(180deg, rgba(24, 39, 101, .72), rgba(34, 52, 125, .38)), url("/imagens/Imagem%20do%20ChatGPT%2018%20de%20nov.%20de%202026,%2022_20_29.webp");
-    background-position: 58% 58%;
+    background-position: 68% 68%;
   }
 }
 @media (max-width: 767px) {
