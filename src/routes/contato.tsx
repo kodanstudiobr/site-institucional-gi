@@ -4,7 +4,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { MapPin, Phone, Instagram, Mail, ArrowUpRight } from "lucide-react";
 import { SiteLayout, PageHeader } from "@/components/SiteLayout";
 
-function WhatsAppIcon({ size = 22 }: { size?: number }) {
+function WhatsAppIcon({ size = 30 }: { size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <circle cx="12" cy="12" r="12" fill="#25D366" />
     <path fill="#fff" d="M17.47 14.38c-.3-.15-1.78-.88-2.06-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.96 1.18-.18.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.68-1.64-.93-2.24-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.53.08-.8.38-.28.3-1.06 1.03-1.06 2.52s1.09 2.92 1.24 3.12c.15.2 2.14 3.27 5.18 4.58.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.78-.73 2.03-1.44.25-.7.25-1.31.18-1.44-.08-.12-.28-.2-.58-.35Z"/>
@@ -41,7 +41,7 @@ function Contato() {
             <div className="contact-item"><Mail/><div><strong>E-mail</strong><p><a className="transition hover:text-primary" href={`mailto:${institutionalConfig.email}`}>{institutionalConfig.email}</a></p></div></div>
             <div className="contact-item"><Instagram/><div><strong>Instagram</strong><p><a className="transition hover:text-primary" href="https://www.instagram.com/institutoeducacionalgi/" target="_blank" rel="noreferrer">{institutionalConfig.instagram}</a></p></div></div>
           </div>
-          <a href={`https://wa.me/${institutionalConfig.whatsapp}`} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><WhatsAppIcon size={20}/> Fale pelo WhatsApp</a>
+          <a href={`https://wa.me/${institutionalConfig.whatsapp}`} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><WhatsAppIcon size={26}/> Fale pelo WhatsApp</a>
         </div>
         <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-xl">
           <div className="flex items-center gap-3 px-5 py-4 md:px-6">
