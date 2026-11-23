@@ -3534,3 +3534,38 @@ section.history-scroll-section {
     padding: .85rem !important;
   }
 }
+
+
+/* Cards de depoimentos ainda mais compactos no mobile. */
+@media (max-width: 767px) {
+  section.history-scroll-section .history-scroll-cards {
+    height: clamp(195px, 29svh, 235px) !important;
+    margin-top: .65rem !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 5.5rem), 260px) !important;
+    max-width: 260px !important;
+    min-height: 165px !important;
+    padding: .75rem !important;
+    border-radius: 1rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+    margin-block: .55rem .65rem !important;
+    font-size: .76rem !important;
+    line-height: 1.45 !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person {
+    gap: .5rem !important;
+  }
+}
+@media (max-width: 380px) {
+  section.history-scroll-section .history-scroll-cards {
+    height: 190px !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 4.5rem), 245px) !important;
+    max-width: 245px !important;
+    min-height: 155px !important;
+    padding: .7rem !important;
+  }
+}
