@@ -74,7 +74,7 @@ function EnsinoIntegral() {
             />
           </picture>
           <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/45 to-transparent px-5 pb-5 pt-16 text-white sm:px-7 sm:pb-7">
-            <p className="font-display text-xl font-bold sm:text-2xl">Aprender, brincar e crescer juntos!</p>
+            <p className="font-display text-xl font-bold sm:text-2xl">Um dia inteiro de aprendizagem e descobertas.</p>
             <p className="mt-1 text-sm text-white/85">Experiências que fazem parte de cada dia no Ensino Integral.</p>
           </figcaption>
         </figure>
