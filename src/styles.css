@@ -4472,29 +4472,61 @@ section.history-scroll-section {
   }
 }
 
-/* O que nos move: cada card entra no fluxo, fixa no topo e recebe o próximo durante a rolagem mobile. */
+/* O que nos move: cards entram um a um, grudam logo abaixo do header e se sobrepõem no mobile. */
 @media (max-width: 767px) {
   .home-move-cards {
     display: block !important;
     position: relative;
     isolation: isolate;
-    padding-bottom: 65svh;
+    padding-bottom: 0 !important;
   }
   .home-move-card-item {
     position: sticky;
-    top: 92px;
+    top: 76px;
     margin: 0 0 1.25rem;
     border-radius: 1.25rem;
   }
-  .home-move-card-item:nth-child(1) { top: 92px; z-index: 1; }
-  .home-move-card-item:nth-child(2) { top: 106px; z-index: 2; }
-  .home-move-card-item:nth-child(3) { top: 120px; z-index: 3; }
-  .home-move-card-item:nth-child(4) { top: 134px; z-index: 4; margin-bottom: 0; }
+  .home-move-card-item:nth-child(1) { top: 76px; z-index: 1; }
+  .home-move-card-item:nth-child(2) { top: 90px; z-index: 2; }
+  .home-move-card-item:nth-child(3) { top: 104px; z-index: 3; }
+  .home-move-card-item:nth-child(4) { top: 118px; z-index: 4; margin-bottom: 0; }
   .home-move-card-item .feature-card {
     min-height: 245px;
     border-radius: 1.25rem;
     box-shadow: 0 14px 34px rgba(36, 51, 111, .13);
   }
+
+  /* O card que chega por cima assume o mesmo destaque amarelo do hover no desktop. */
+  .home-move-card-item .feature-card--glow::before {
+    opacity: 0;
+    animation: move-card-yellow-glow linear both;
+    animation-timeline: view(block);
+    animation-range: entry 12% entry 62%;
+  }
+  .home-move-card-item .feature-card--glow .feature-icon {
+    animation: move-card-yellow-icon linear both;
+    animation-timeline: view(block);
+    animation-range: entry 18% entry 68%;
+  }
+  .home-move-card-item .feature-card__spark {
+    animation: move-card-yellow-spark linear both;
+    animation-timeline: view(block);
+    animation-range: entry 18% entry 68%;
+  }
+}
+@keyframes move-card-yellow-glow {
+  to { opacity: 1; }
+}
+@keyframes move-card-yellow-icon {
+  to {
+    background: #fff12c;
+    color: #324594;
+    transform: translateY(-2px) scale(1.045);
+    box-shadow: 0 8px 20px rgba(255,215,0,.22);
+  }
+}
+@keyframes move-card-yellow-spark {
+  to { opacity: .8; transform: scale(1); }
 }
 
 /* História mais objetiva; o percurso prolongado fica reservado aos depoimentos. */
