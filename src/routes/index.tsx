@@ -479,9 +479,7 @@ function Index() {
               <span className="faq-question__text">{q}</span>
               <span className="faq-question__icon"><ChevronDown className={`transition-transform duration-300 ${faqOpen===i?"rotate-180":""}`} size={19}/></span>
             </button>
-            <div id={`faq-answer-${i}`} className={`faq-answer-grid ${faqOpen===i?"is-open":""}`} aria-hidden={faqOpen!==i}>
-              <div className="faq-answer-inner"><p>{a}</p></div>
-            </div>
+            {faqOpen===i&&<div id={`faq-answer-${i}`} className="faq-answer-content"><p>{a}</p></div>}
           </article>)}
         </div>
       </div>
