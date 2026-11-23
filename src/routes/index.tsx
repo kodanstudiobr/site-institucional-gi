@@ -129,13 +129,13 @@ function HistoryTestimonials() {
       <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: storyOpacity, visibility: storyVisible ? "visible" : "hidden" }}>
         <p className="history-highlight__eyebrow history-story-item" style={{ opacity: eyebrowProgress, transform: `translateY(${(1 - eyebrowProgress) * 24}px)` }}>UMA HISTÓRIA QUE CONTINUA CRESCENDO</p>
         <div className="history-counter history-story-item" style={{ opacity: numberProgress, transform: `translateY(${(1 - numberProgress) * 28}px) scale(${0.92 + numberProgress * 0.08})` }}>
-          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears/><span className="history-counter__suffix"> anos</span>
+          <span className="history-counter__plus" aria-hidden="true">+</span><span className="history-counter__de">de</span><AnimatedHistoryYears/><span className="history-counter__suffix"> anos</span>
         </div>
         <p className="history-highlight__caption history-story-item" style={{ opacity: captionProgress, transform: `translateY(${(1 - captionProgress) * 24}px)` }}>de dedicação à educação, ao acolhimento e à construção de futuros.</p>
       </div>
       <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.625 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
-        <p className="history-scroll-kicker">QUEM VIVE, SABE.</p>
-        <h2 className="history-scroll-heading">E faz parte.</h2>
+        <p className="history-scroll-kicker">UMA ESCOLA, MUITAS HISTÓRIAS.</p>
+        <h2 className="history-scroll-heading">E cada família faz parte delas.</h2>
         <div className="history-scroll-cards">
           {cards.map((label, index) => {
             const cardReveal = cardProgress(index);
