@@ -80,8 +80,8 @@ function HistoryTestimonials() {
   const testimonialKickerProgress = reveal(0.23, 0.29);
   const testimonialHeadingProgress = reveal(0.30, 0.37);
   const cardProgress = (index: number) => {
-    const starts = [0.39, 0.56, 0.73];
-    return reveal(starts[index], starts[index] + 0.035);
+    const starts = [0.40, 0.64, 0.88];
+    return reveal(starts[index], starts[index] + 0.04);
   };
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
