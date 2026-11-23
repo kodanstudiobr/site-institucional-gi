@@ -3363,3 +3363,54 @@ section.history-scroll-section {
     height: 950svh !important;
   }
 }
+
+
+/* Centralização consistente do conteúdo da história e dos depoimentos no viewport. */
+section.history-scroll-section .history-scroll-stage {
+  display: grid !important;
+  place-items: center !important;
+}
+section.history-scroll-section .history-scroll-story {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: min(92%, 1080px) !important;
+  min-height: 100%;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+section.history-scroll-section .history-scroll-story > *,
+section.history-scroll-section .history-scroll-testimonials > * {
+  text-align: center !important;
+}
+section.history-scroll-section .history-scroll-testimonials {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: auto !important;
+  padding: clamp(1rem, 4vh, 3rem) 1.25rem !important;
+  text-align: center !important;
+}
+section.history-scroll-section .history-scroll-cards {
+  flex: 0 0 auto;
+  margin: 1.25rem auto 0 !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section .history-scroll-story {
+    width: min(92%, 600px) !important;
+    padding-inline: .25rem !important;
+  }
+  section.history-scroll-section .history-scroll-testimonials {
+    padding: 1rem .85rem !important;
+  }
+  section.history-scroll-section .history-scroll-cards {
+    margin-top: 1rem !important;
+  }
+}
