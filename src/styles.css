@@ -3170,8 +3170,8 @@ main .learning-word-stack p.learning-word {
   margin-top: clamp(1.25rem, 3vh, 2rem);
 }
 .history-scroll-story .history-counter__number {
-  font-size: clamp(8rem, 22vw, 18rem);
-  line-height: .95;
+  font-size: clamp(10rem, 26vw, 22rem);
+  line-height: .92;
   font-variant-numeric: tabular-nums;
 }
 .history-scroll-story .history-counter__plus {
@@ -3202,7 +3202,7 @@ main .learning-word-stack p.learning-word {
     margin-top: 1.5rem;
   }
   .history-scroll-story .history-counter__number {
-    font-size: clamp(6.5rem, 27vw, 10rem);
+    font-size: clamp(7.5rem, 30vw, 11.5rem);
   }
   .history-scroll-story .history-counter__plus {
     font-size: clamp(3.3rem, 12vw, 5rem);
@@ -3219,7 +3219,7 @@ main .learning-word-stack p.learning-word {
 }
 @media (max-width: 380px) {
   .history-scroll-story .history-counter { gap: .25rem; }
-  .history-scroll-story .history-counter__number { font-size: clamp(5.8rem, 25vw, 6.5rem); }
+  .history-scroll-story .history-counter__number { font-size: clamp(6.5rem, 28vw, 7.5rem); }
   .history-scroll-story .history-counter__plus { font-size: 3rem; }
   .history-scroll-story .history-counter__suffix { font-size: 1.2rem; }
 }
