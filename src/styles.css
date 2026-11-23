@@ -4266,3 +4266,100 @@ section.history-scroll-section {
   .routine-card { transition: none; }
   .routine-timeline::after { transform: scaleY(1); animation: none; }
 }
+
+
+/* Ícones de identificação acima dos títulos das seções do Ensino Integral. */
+.routine-section-icon {
+  display: grid;
+  width: 3.65rem;
+  height: 3.65rem;
+  margin: 0 auto 1rem;
+  place-items: center;
+  border: 1px solid rgba(50, 69, 148, .13);
+  border-radius: 1.2rem;
+  background: #f0f3ff;
+  color: #324594;
+  box-shadow: 0 8px 22px rgba(35, 51, 112, .08);
+}
+.routine-section-icon svg {
+  stroke-width: 1.9;
+}
+
+/* Cards das atividades: preenchimento amarelo suave ao entrarem na área visível. */
+.activity-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(50, 69, 148, .12);
+  background: #fff;
+  transition: border-color .45s ease, box-shadow .45s ease, transform .45s ease;
+}
+.activity-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(145deg, #fff9a8 0%, #fff12c 100%);
+  opacity: 0;
+  transform: scaleY(.08);
+  transform-origin: bottom center;
+  transition: opacity .55s ease, transform .75s cubic-bezier(.2,.75,.25,1);
+}
+.activity-card__icon {
+  position: relative;
+  z-index: 1;
+  color: #324594;
+  background: #f0f3ff;
+  transition: color .45s ease, background .45s ease, box-shadow .45s ease, transform .5s ease;
+}
+.activity-card p,
+.activity-card h3,
+.activity-card span {
+  position: relative;
+  z-index: 1;
+  transition: color .45s ease;
+}
+@supports (animation-timeline: view()) {
+  .activity-card::before {
+    animation: activity-card-yellow-fill linear both;
+    animation-timeline: view(block);
+    animation-range: entry 5% entry 75%;
+  }
+  .activity-card__icon {
+    animation: activity-icon-yellow linear both;
+    animation-timeline: view(block);
+    animation-range: entry 18% entry 78%;
+  }
+}
+@keyframes activity-card-yellow-fill {
+  0% { opacity: 0; transform: scaleY(.08); }
+  100% { opacity: 1; transform: scaleY(1); }
+}
+@keyframes activity-icon-yellow {
+  0% { color: #324594; background: #f0f3ff; box-shadow: none; transform: scale(1); }
+  100% { color: #d5ad00; background: rgba(255,255,255,.72); box-shadow: 0 7px 18px rgba(190,153,0,.13); transform: scale(1.06); }
+}
+@media (hover: hover) and (pointer: fine) {
+  .activity-card:hover {
+    border-color: rgba(220, 184, 0, .55);
+    box-shadow: 0 18px 34px rgba(125, 104, 0, .12);
+  }
+  .activity-card:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  .activity-card:hover .activity-card__icon {
+    color: #d5ad00;
+    background: rgba(255,255,255,.72);
+    transform: scale(1.06);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .activity-card::before {
+    opacity: .25;
+    transform: none;
+    transition: none;
+  }
+  .activity-card__icon { animation: none; transition: none; }
+}
