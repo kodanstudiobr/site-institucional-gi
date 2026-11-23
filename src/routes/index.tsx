@@ -302,7 +302,6 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
 }
 
 function Index() {
-  const [faqOpen, setFaqOpen] = useState<number | null>(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -474,13 +473,13 @@ function Index() {
           <p className="mt-4 text-sm leading-6 text-muted-foreground sm:text-base">Encontre respostas para as principais dúvidas sobre o Instituto Educacional G.I.</p>
         </div>
         <div className="faq-list mt-8 grid gap-3 sm:mt-10 sm:gap-4">
-          {perguntas.map(([q,a],i)=><article key={q} className={`faq-item ${faqOpen===i?"is-open":""}`}>
-            <button className="faq-question flex w-full items-center justify-between gap-4 text-left" aria-expanded={faqOpen===i} aria-controls={`faq-answer-${i}`} onClick={()=>setFaqOpen(faqOpen===i?null:i)}>
+          {perguntas.map(([q,a],i)=><details key={q} className="faq-item" open={i===0}>
+            <summary className="faq-question flex w-full items-center justify-between gap-4 text-left">
               <span className="faq-question__text">{q}</span>
-              <span className="faq-question__icon"><ChevronDown className={`transition-transform duration-300 ${faqOpen===i?"rotate-180":""}`} size={19}/></span>
-            </button>
-            {faqOpen===i&&<div id={`faq-answer-${i}`} className="faq-answer-content"><p>{a}</p></div>}
-          </article>)}
+              <span className="faq-question__icon"><ChevronDown className="faq-chevron transition-transform duration-300" size={19}/></span>
+            </summary>
+            <div id={`faq-answer-${i}`} className="faq-answer-content"><p>{a}</p></div>
+          </details>)}
         </div>
       </div>
     </section>
