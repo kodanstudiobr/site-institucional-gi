@@ -4389,3 +4389,70 @@ section.history-scroll-section {
     min-height: 620px !important;
   }
 }
+
+
+/* Banner do Ensino Integral: fotografia específica para desktop e outra para mobile. */
+.integral-feature-image picture {
+  z-index: 0;
+}
+.integral-feature-image__photo {
+  object-position: center center !important;
+}
+@media (max-width: 767px) {
+  .integral-feature-image__photo {
+    object-position: center 42% !important;
+  }
+}
+
+/* O ícone de cada etapa acende em amarelo quando o traço da rotina alcança seu card. */
+.routine-card__icon {
+  color: var(--timeline-blue) !important;
+  background: #e2e8ff !important;
+  border: 1px solid rgba(50, 69, 148, .08);
+  transition: color .35s ease, background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+}
+.routine-card__icon svg {
+  color: inherit;
+  stroke: currentColor;
+  transition: color .35s ease, stroke .35s ease;
+}
+@supports (animation-timeline: view()) {
+  .routine-card__icon {
+    animation: routine-icon-reached linear both;
+    animation-timeline: view(block);
+    animation-range: entry 38% entry 72%;
+  }
+  .routine-card__node {
+    animation: routine-node-reached linear both;
+    animation-timeline: view(block);
+    animation-range: entry 30% entry 68%;
+  }
+}
+@keyframes routine-icon-reached {
+  0% {
+    color: #324594;
+    background: #e2e8ff;
+    border-color: rgba(50, 69, 148, .08);
+    box-shadow: none;
+    transform: scale(1);
+  }
+  100% {
+    color: #d2ad00;
+    background: #fff59a;
+    border-color: rgba(255, 213, 0, .8);
+    box-shadow: 0 0 0 5px rgba(255, 241, 44, .18), 0 8px 20px rgba(190, 153, 0, .16);
+    transform: scale(1.07);
+  }
+}
+@keyframes routine-node-reached {
+  0% { background: var(--timeline-blue); box-shadow: 0 0 0 4px #fff; }
+  100% { background: var(--timeline-yellow); box-shadow: 0 0 0 5px rgba(255, 241, 44, .22); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .routine-card__icon,
+  .routine-card__node {
+    animation: none !important;
+    color: #d2ad00 !important;
+    background: #fff59a !important;
+  }
+}
