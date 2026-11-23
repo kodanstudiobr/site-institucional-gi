@@ -4472,7 +4472,7 @@ section.history-scroll-section {
   }
 }
 
-/* O que nos move: cards entram um a um, grudam logo abaixo do header e se sobrepõem no mobile. */
+/* O que nos move: entrada em fade e empilhamento com respiro abaixo do header no mobile. */
 @media (max-width: 767px) {
   .home-move-cards {
     display: block !important;
@@ -4482,18 +4482,21 @@ section.history-scroll-section {
   }
   .home-move-card-item {
     position: sticky;
-    top: 76px;
+    top: 104px;
     margin: 0 0 1.25rem;
     border-radius: 1.25rem;
   }
-  .home-move-card-item:nth-child(1) { top: 76px; z-index: 1; }
-  .home-move-card-item:nth-child(2) { top: 90px; z-index: 2; }
-  .home-move-card-item:nth-child(3) { top: 104px; z-index: 3; }
-  .home-move-card-item:nth-child(4) { top: 118px; z-index: 4; margin-bottom: 0; }
+  .home-move-card-item:nth-child(1) { top: 104px; z-index: 1; }
+  .home-move-card-item:nth-child(2) { top: 118px; z-index: 2; }
+  .home-move-card-item:nth-child(3) { top: 132px; z-index: 3; }
+  .home-move-card-item:nth-child(4) { top: 146px; z-index: 4; margin-bottom: 0; }
   .home-move-card-item .feature-card {
     min-height: 245px;
     border-radius: 1.25rem;
     box-shadow: 0 14px 34px rgba(36, 51, 111, .13);
+    animation: move-card-fade-in linear both;
+    animation-timeline: view(block);
+    animation-range: entry 0% entry 48%;
   }
 
   /* O card que chega por cima assume o mesmo destaque amarelo do hover no desktop. */
@@ -4514,6 +4517,10 @@ section.history-scroll-section {
     animation-range: entry 18% entry 68%;
   }
 }
+@keyframes move-card-fade-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @keyframes move-card-yellow-glow {
   to { opacity: 1; }
 }
@@ -4527,6 +4534,13 @@ section.history-scroll-section {
 }
 @keyframes move-card-yellow-spark {
   to { opacity: .8; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-move-card-item .feature-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* História mais objetiva; o percurso prolongado fica reservado aos depoimentos. */
