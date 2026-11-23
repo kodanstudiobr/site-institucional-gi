@@ -72,12 +72,13 @@ function EnsinoIntegral() {
           <picture className="absolute inset-0 block h-full w-full">
             <source
               media="(min-width: 768px)"
-              srcSet="/imagens/Menino-sorridente-no-escorregador-vermelho.webp"
+              srcSet="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
             />
             <img
-              src="/imagens/Alegria%20no%20escorregador%20vermelho.webp"
-              alt="Criança sorridente brincando no escorregador da escola"
+              src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
+              alt="Menina montando palavras no chão durante uma atividade escolar"
               className="integral-feature-image__photo absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: "center 30%" }}
               loading="lazy"
             />
           </picture>
