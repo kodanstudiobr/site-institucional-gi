@@ -120,7 +120,7 @@ function HistoryTestimonials() {
   const testimonialKickerProgress = reveal(0.625, 0.70);
   const testimonialHeadingProgress = reveal(0.70, 0.78);
   // Os cards avançam em etapas mais longas, exigindo mais rolagem entre as entradas.
-  const cardProgress = (index: number) => reveal(0.78 + index * 0.105, 0.92 + index * 0.105);
+  const cardProgress = (index: number) => reveal(0.78 + index * 0.075, 0.85 + index * 0.075);
   const cardOffsets = [
     { x: -34, y: 9, rotation: -5 },
     { x: 20, y: 2, rotation: 4 },
