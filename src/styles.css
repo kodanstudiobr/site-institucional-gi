@@ -3239,3 +3239,23 @@ main .learning-word-stack p.learning-word {
     line-height: 1.5;
   }
 }
+
+
+/* Complemento tipográfico do contador: leitura clara de "+ de 26 anos". */
+.history-scroll-story .history-counter__de {
+  align-self: baseline;
+  margin-inline: -.25rem .05rem;
+  color: #fff12c;
+  font-size: clamp(1.45rem, 3.2vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+}
+@media (max-width: 767px) {
+  .history-scroll-story .history-counter__de {
+    margin-inline: -.2rem 0;
+    font-size: clamp(1.15rem, 4.2vw, 1.65rem);
+  }
+}
+@media (max-width: 380px) {
+  .history-scroll-story .history-counter__de { font-size: 1.05rem; }
+}
