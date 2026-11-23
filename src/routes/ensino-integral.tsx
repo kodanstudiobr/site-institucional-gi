@@ -60,11 +60,11 @@ function EnsinoIntegral() {
             <span className="inline-flex items-center gap-2 rounded-full bg-soft px-4 py-2 text-sm font-semibold text-primary"><Users size={16}/> Educação Infantil e Anos Iniciais</span>
           </div>
         </div>
-        <figure className="relative overflow-hidden rounded-[2rem] bg-soft shadow-xl">
+        <figure className="relative min-h-[390px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:min-h-[460px] lg:min-h-[560px]">
           <img
             src="/imagens/Menina%20monta%20palavras%20no%20ch%C3%A3o%20%E5%B9%BF%E7%9B%8A.webp"
             alt="Menina realizando uma atividade de formação de palavras no chão"
-            className="aspect-[4/3] h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[center_28%]"
             loading="lazy"
           />
           <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 via-primary/45 to-transparent px-5 pb-5 pt-16 text-white sm:px-7 sm:pb-7">
