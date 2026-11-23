@@ -4471,3 +4471,38 @@ section.history-scroll-section {
     transform-origin: center 38%;
   }
 }
+
+/* O que nos move: cards empilhados e sobrepostos conforme a rolagem no mobile. */
+@media (max-width: 767px) {
+  .home-move-cards {
+    display: block !important;
+    position: relative;
+    isolation: isolate;
+    padding-bottom: 1rem;
+  }
+  .home-move-card-item {
+    position: sticky;
+    top: 92px;
+    margin-bottom: -168px;
+    border-radius: 1.25rem;
+  }
+  .home-move-card-item:nth-child(1) { top: 92px; z-index: 1; }
+  .home-move-card-item:nth-child(2) { top: 106px; z-index: 2; }
+  .home-move-card-item:nth-child(3) { top: 120px; z-index: 3; }
+  .home-move-card-item:nth-child(4) { top: 134px; z-index: 4; margin-bottom: 0; }
+  .home-move-card-item .feature-card {
+    min-height: 245px;
+    border-radius: 1.25rem;
+    box-shadow: 0 14px 34px rgba(36, 51, 111, .13);
+  }
+}
+
+/* História mais objetiva; o percurso prolongado fica reservado aos depoimentos. */
+section.history-scroll-section {
+  height: 800vh !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    height: 750svh !important;
+  }
+}
