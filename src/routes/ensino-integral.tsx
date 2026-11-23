@@ -41,16 +41,15 @@ function EnsinoIntegral() {
     <SiteLayout>
       <section className="page-hero school-page-hero">
         <picture>
-          <source media="(max-width: 767px)" srcSet="/imagens/Alegria%20no%20escorregador%20vermelho.webp" />
+          <source media="(max-width: 767px)" srcSet="/imagens/Menino-sorridente-no-escorregador-vermelho-_1_.webp" />
           <img className="school-page-hero__image" src="/imagens/Menino-sorridente-no-escorregador-vermelho.webp" alt="" aria-hidden="true" fetchPriority="high" />
         </picture>
         <div className="school-page-hero__overlay" aria-hidden="true" />
         <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
           <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">ENSINO INTEGRAL</p>
-          <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Um dia cheio de cuidado, <span className="text-accent">aprendizagem e descobertas.</span></h1>
+          <h1 className="max-w-4xl font-display text-4xl font-bold leading-tight text-white md:text-6xl">Um dia inteiro de <span className="text-accent">aprendizagem e descobertas.</span></h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-white/90">Uma rotina planejada para unir acolhimento, atividades escolares, brincadeiras, cuidados e experiências especiais ao longo do dia.</p>
         </div>
-        <span className="absolute bottom-4 right-5 z-10 rounded-full bg-black/35 px-3 py-1 text-[10px] font-medium text-white/85">Imagem ilustrativa</span>
       </section>
 
       <section className="section-wrap section-decor-wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-14 lg:py-24">
@@ -80,14 +79,14 @@ function EnsinoIntegral() {
             O Ensino Integral do Instituto Educacional G.I. é destinado às crianças da <strong className="font-semibold text-primary">Educação Infantil e dos Anos Iniciais</strong>. Ao longo do dia, os estudantes participam de uma rotina que combina atividades escolares, momentos de convivência, recreação, alimentação, higiene e repouso.
           </p>
           <p className="mt-4 leading-8 text-muted-foreground">
-            A proposta é oferecer um dia organizado e acolhedor, no qual cada momento tem seu espaço: aprender, brincar, cuidar de si e compartilhar experiências.
+            A proposta é oferecer um dia organizado e acolhedor, no qual cada momento tem seu espaço: aprender, brincar, cuidar de si e compartilhar experiências. A rotina combina momentos de aprendizagem, convivência e cuidado para acompanhar as crianças ao longo de todo o dia.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <span className="inline-flex items-center gap-2 rounded-full bg-soft px-4 py-2 text-sm font-semibold text-primary"><Clock3 size={16}/> 07h15 às 17h00</span>
             <span className="inline-flex items-center gap-2 rounded-full bg-soft px-4 py-2 text-sm font-semibold text-primary"><Users size={16}/> Educação Infantil e Anos Iniciais</span>
           </div>
         </div>
-        <figure className="integral-feature-image relative hidden lg:block h-[430px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[520px] lg:h-[620px]">
+        <figure className="integral-feature-image relative hidden lg:block h-[360px] overflow-hidden rounded-[2rem] bg-soft shadow-xl sm:h-[440px] lg:h-[500px]">
           <picture className="absolute inset-0 block h-full w-full">
             <source
               media="(min-width: 768px)"
@@ -150,12 +149,6 @@ function EnsinoIntegral() {
         </div>
       </section>
 
-      <section className="bg-primary py-14 text-white sm:py-20">
-        <div className="section-wrap grid items-center gap-6 lg:grid-cols-[1fr_auto]">
-          <div><p className="eyebrow text-accent">INSTITUTO EDUCACIONAL G.I.</p><h2 className="font-display text-2xl font-bold leading-tight sm:text-3xl">Um dia de experiências, cuidado e novas descobertas.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">No Ensino Integral, a rotina combina momentos de aprendizagem, convivência e cuidado para acompanhar as crianças ao longo do dia.</p></div>
-          <div className="flex items-center gap-3 rounded-2xl bg-white/10 p-4"><CheckCircle2 className="shrink-0 text-accent" size={27}/><span className="text-sm font-semibold">Aprender, brincar e crescer juntos!</span></div>
-        </div>
-      </section>
     </SiteLayout>
   );
 }
