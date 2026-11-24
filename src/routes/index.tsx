@@ -46,18 +46,13 @@ function AnimatedHistoryYears({ progress }: { progress: number }) {
 function HistoryTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
-  const [mobileStep, setMobileStep] = useState(0);
-  const mobileStepRef = useRef(0);
-  const touchStartY = useRef<number | null>(null);
-  const touchStartedInside = useRef(false);
-  const snapping = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
     let frame = 0;
     const update = () => {
-      if (window.innerWidth <= 767 || snapping.current) return;
+      if (window.innerWidth <= 767) return;
       if (frame) cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
         const stage = section.querySelector<HTMLElement>(".history-scroll-stage");
@@ -77,75 +72,13 @@ function HistoryTestimonials() {
     };
   }, []);
 
-  useEffect(() => {
-    const getSectionPosition = () => {
-      const section = sectionRef.current;
-      if (!section) return null;
-      const rect = section.getBoundingClientRect();
-      const active = rect.top < window.innerHeight && rect.bottom > 0;
-      return active ? { section, top: rect.top + window.scrollY } : null;
-    };
-    const onTouchStart = (event: TouchEvent) => {
-      if (window.innerWidth > 767) return;
-      touchStartY.current = event.touches[0]?.clientY ?? null;
-      touchStartedInside.current = Boolean(getSectionPosition());
-    };
-    const onTouchEnd = (event: TouchEvent) => {
-      const startY = touchStartY.current;
-      const endY = event.changedTouches[0]?.clientY;
-      touchStartY.current = null;
-      const startedInside = touchStartedInside.current;
-      touchStartedInside.current = false;
-      if (startY === null || endY === undefined || !startedInside || window.innerWidth > 767 || snapping.current) return;
-      const delta = startY - endY;
-      if (Math.abs(delta) < 35) return;
-      const position = getSectionPosition();
-      if (!position) return;
-
-      const direction = delta > 0 ? 1 : -1;
-      const nextStep = Math.min(9, Math.max(-1, mobileStepRef.current + direction));
-      const { section, top } = position;
-      const maxTravel = Math.max(1, section.offsetHeight - window.innerHeight);
-      const targetTop = nextStep < 0
-        ? Math.max(0, top - 2)
-        : nextStep > 8
-          ? top + section.offsetHeight + 2
-          : top + maxTravel * (nextStep / 8);
-
-      if (nextStep >= 0 && nextStep <= 8) {
-        mobileStepRef.current = nextStep;
-        setMobileStep(nextStep);
-      }
-      snapping.current = true;
-      window.scrollTo({ top: targetTop, behavior: "smooth" });
-      window.setTimeout(() => { snapping.current = false; }, 850);
-    };
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchend", onTouchEnd, { passive: true });
-    return () => {
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchend", onTouchEnd);
-    };
-  }, []);
-
   const cards = [
     { name: "Rosany Santos", source: "Via Instagram", quote: "Meu filho começou a estudar tinha 2 anos e esse ano é o último ano dele lá. Já estou com saudades dessa turma, amo todas e agradeço demais por tudo 😍" },
     { name: "Vivianne Aluska", source: "Via Facebook", quote: "Escola maravilhosa, primeiro ano do meu filho lá e eu já posso ver a diferença no crescimento e desenvolvimento dele nas atividades, na fala principalmente, no relacionamento com as outras crianças, na educação como um todo." },
     { name: "Fátima Araújo", source: "Via Facebook", quote: "Uma instituição diferenciada e muito humanizada." },
     { name: "Nazareth Di Maria", source: "Via Instagram", quote: "Escola bem conceituada, equipe bem preparada, enfim, pais e familiares satisfeitos." },
   ];
-  const mobile = typeof window !== "undefined" && window.innerWidth <= 767;
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
-  const storyVisible = mobile ? mobileStep <= 1 : progress < 0.26;
-  const blankStep = mobile && mobileStep === 2;
-  const testimonialsVisible = mobile ? mobileStep >= 3 : progress >= 0.17;
-  const storyEyebrowProgress = mobile ? (mobileStep === 0 ? 1 : 0) : reveal(0.005, 0.045);
-  const storyCounterProgress = mobile ? (mobileStep === 1 ? 1 : 0) : reveal(0.055, 0.13);
-  const testimonialKickerProgress = mobile ? (mobileStep === 3 ? 1 : 0) : reveal(0.32, 0.37);
-  const testimonialHeadingProgress = mobile ? (mobileStep === 4 ? 1 : 0) : reveal(0.43, 0.48);
-  const cardProgress = (index: number) => mobile
-    ? (mobileStep === index + 5 ? 1 : 0)
-    : reveal([0.54, 0.65, 0.76, 0.87][index], [0.54, 0.65, 0.76, 0.87][index] + 0.075);
   const cardOffsets = [
     { x: -28, y: 8, rotation: -4 },
     { x: 18, y: 3, rotation: 3 },
@@ -154,37 +87,51 @@ function HistoryTestimonials() {
   ];
 
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
-    <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"} ${blankStep ? "is-blank" : ""}`}>
-      <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: mobile ? 1 : (storyVisible ? 1 : 0), visibility: storyVisible ? "visible" : "hidden" }}>
-        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: storyEyebrowProgress, transform: mobile ? "none" : `translateY(${(1 - storyEyebrowProgress) * 22}px)`, display: mobile && mobileStep !== 0 ? "none" : undefined }}>Uma história que continua crescendo.</p>
-        <div className="history-counter history-story-item" style={{ opacity: storyCounterProgress, transform: mobile ? "none" : `translateY(${(1 - storyCounterProgress) * 24}px)`, display: mobile && mobileStep !== 1 ? "none" : undefined }}>
-          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={mobile ? 1 : storyCounterProgress}/>
+    <div className="mobile-history-sequence" aria-label="Nossa história e depoimentos">
+      <section className="mobile-history-panel mobile-history-panel--blue">
+        <p className="history-highlight__eyebrow">Uma história que continua crescendo.</p>
+      </section>
+      <section className="mobile-history-panel mobile-history-panel--blue">
+        <div className="history-counter">
+          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={1}/>
         </div>
-        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: storyCounterProgress, transform: mobile ? "none" : `translateY(${(1 - storyCounterProgress) * 20}px)`, display: mobile && mobileStep !== 1 ? "none" : undefined }}>anos de história.</p>
+        <p className="history-highlight__caption">anos de história.</p>
+      </section>
+      <section className="mobile-history-panel mobile-history-panel--blank" aria-label="Transição"/>
+      <section className="mobile-history-panel mobile-history-panel--white">
+        <p className="history-scroll-kicker">UMA ESCOLA, MUITAS HISTÓRIAS.</p>
+      </section>
+      <section className="mobile-history-panel mobile-history-panel--white">
+        <h2 className="history-scroll-heading">E cada família faz parte delas.</h2>
+      </section>
+      {cards.map((testimonial, index) => <section className="mobile-history-panel mobile-history-panel--white mobile-history-panel--card" key={testimonial.name}>
+        <article className={`testimonial-card history-scroll-card history-scroll-card--${index + 1}`}>
+          <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
+          <p className="testimonial-card__placeholder">“{testimonial.quote}”</p>
+          <div className="testimonial-card__person"><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+        </article>
+      </section>)}
+    </div>
+
+    <div className="history-scroll-stage">
+      <div className="history-scroll-story" style={{ opacity: 1 - reveal(0.20, 0.26), visibility: progress < 0.26 ? "visible" : "hidden" }}>
+        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: reveal(0.005, 0.045), transform: `translateY(${(1 - reveal(0.005, 0.045)) * 22}px)` }}>Uma história que continua crescendo</p>
+        <div className="history-counter history-story-item" style={{ opacity: reveal(0.055, 0.13), transform: `translateY(${(1 - reveal(0.055, 0.13)) * 24}px)`}>
+          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={reveal(0.055, 0.13)}/>
+        </div>
+        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: reveal(0.055, 0.13), transform: `translateY(${(1 - reveal(0.055, 0.13)) * 20}px)` }}>anos de história</p>
       </div>
-      <div className="history-scroll-testimonials" aria-hidden={!testimonialsVisible} style={{ opacity: mobile ? 1 : (testimonialsVisible ? 1 : 0), visibility: testimonialsVisible ? "visible" : "hidden", transform: mobile ? "none" : `translateY(${(1 - reveal(0.25, 0.31)) * 28}px)` }}>
-        <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: mobile ? "none" : `translateY(${(1 - testimonialKickerProgress) * 18}px)`, display: mobile && mobileStep !== 3 ? "none" : undefined }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
-        <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: mobile ? "none" : `translateY(${(1 - testimonialHeadingProgress) * 20}px)`, display: mobile && mobileStep !== 4 ? "none" : undefined }}>E cada família faz parte delas.</h2>
-        <div className="history-scroll-cards" style={{ display: mobile && mobileStep < 5 ? "none" : undefined }}>
+      <div className="history-scroll-testimonials" style={{ opacity: reveal(0.25, 0.31), visibility: progress >= 0.17 ? "visible" : "hidden", transform: `translateY(${(1 - reveal(0.25, 0.31)) * 28}px)` }}>
+        <p className="history-scroll-kicker" style={{ opacity: reveal(0.32, 0.37), transform: `translateY(${(1 - reveal(0.32, 0.37)) * 18}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
+        <h2 className="history-scroll-heading" style={{ opacity: reveal(0.43, 0.48), transform: `translateY(${(1 - reveal(0.43, 0.48)) * 20}px)` }}>E cada família faz parte delas.</h2>
+        <div className="history-scroll-cards">
           {cards.map((testimonial, index) => {
-            const cardReveal = cardProgress(index);
+            const cardReveal = reveal([0.54, 0.65, 0.76, 0.87][index], [0.54, 0.65, 0.76, 0.87][index] + 0.075);
             const offset = cardOffsets[index];
-            return <article
-              key={testimonial.name}
-              className={`testimonial-card history-scroll-card history-scroll-card--${index + 1}`}
-              aria-hidden={cardReveal < 0.05}
-              style={{
-                opacity: cardReveal,
-                pointerEvents: cardReveal > 0.95 ? "auto" : "none",
-                zIndex: index + 1,
-                transform: mobile
-                  ? `translate(-50%, -50%) scale(1)`
-                  : `translate(calc(-50% + ${offset.x * cardReveal}px), calc(-50% + ${(1 - cardReveal) * 76 + offset.y * cardReveal}px)) scale(${0.86 + cardReveal * 0.14}) rotate(${offset.rotation * cardReveal}deg)`,
-              }}
-            >
+            return <article key={testimonial.name} className={`testimonial-card history-scroll-card history-scroll-card--${index + 1}`} aria-hidden={cardReveal < 0.05} style={{ opacity: cardReveal, pointerEvents: cardReveal > 0.95 ? "auto" : "none", zIndex: index + 1, transform: `translate(calc(-50% + ${offset.x * cardReveal}px), calc(-50% + ${(1 - cardReveal) * 76 + offset.y * cardReveal}px)) scale(${0.86 + cardReveal * 0.14}) rotate(${offset.rotation * cardReveal}deg)` }}>
               <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
-              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: mobile ? "none" : `translateY(${(1 - cardReveal) * 12}px)` }}>“{testimonial.quote}”</p>
-              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: mobile ? "none" : `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 12}px)` }}>“{testimonial.quote}”</p>
+              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
             </article>;
           })}
         </div>
