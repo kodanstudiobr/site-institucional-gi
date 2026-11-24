@@ -5581,3 +5581,34 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
   .gi-cookie-banner { animation:none; }
   .gi-footer__primary-cta,.gi-footer__secondary-cta,.gi-cookie-banner__accept,.gi-cookie-banner__necessary { transition:none; }
 }
+
+
+/* Desktop: rodapé dividido em três colunas equivalentes, com alinhamento
+   consistente à esquerda, centro e direita. */
+@media (min-width: 1024px) {
+  .gi-footer__main {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: 2.5rem !important;
+    align-items: center !important;
+  }
+  .gi-footer__contact {
+    justify-self: start !important;
+    width: 100%;
+    text-align: left;
+  }
+  .gi-footer__brand {
+    justify-self: center !important;
+    width: 100%;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .gi-footer__brand > div:last-child {
+    justify-content: center !important;
+  }
+  .gi-footer__quick-links {
+    justify-self: end !important;
+    width: max-content;
+    max-width: 100%;
+    text-align: left;
+  }
+}
