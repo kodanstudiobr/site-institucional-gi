@@ -4673,12 +4673,20 @@ section.history-scroll-section {
 }
 
 
-/* Contato: centraliza verticalmente o conteúdo do banner apenas no desktop.
-   O enquadramento e o posicionamento mobile permanecem como estavam. */
-@media (min-width: 768px) {
+/* Contato desktop: centraliza o bloco de texto no espaço do banner,
+   abaixo da área do logotipo e acima da borda inferior. */
+@media (min-width: 1024px) {
+  .page-hero.contact-page-hero {
+    min-height: 680px;
+    background-position: center 120px;
+  }
   .page-hero.contact-page-hero .page-hero__content {
-    padding-top: 10rem !important;
-    padding-bottom: 10rem !important;
+    display: flex;
+    min-height: 680px;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem !important;
+    padding-bottom: 4rem !important;
   }
 }
 
