@@ -47,27 +47,22 @@ function HistoryTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
   const [mobileStep, setMobileStep] = useState(0);
+  const mobileStepRef = useRef(0);
   const touchStartY = useRef<number | null>(null);
-  const progressRef = useRef(0);
-  const isSnapping = useRef(false);
+  const snapping = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
     let frame = 0;
     const update = () => {
+      if (window.innerWidth <= 767 || snapping.current) return;
       if (frame) cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
         const stage = section.querySelector<HTMLElement>(".history-scroll-stage");
         const sectionTop = section.getBoundingClientRect().top + window.scrollY;
         const travel = Math.max(1, section.offsetHeight - (stage?.offsetHeight ?? window.innerHeight));
-        const nextProgress = (window.scrollY - sectionTop) / travel;
-        const clampedProgress = Math.min(1, Math.max(0, nextProgress));
-        progressRef.current = clampedProgress;
-        setProgress(clampedProgress);
-        if (window.innerWidth <= 767) {
-          setMobileStep(Math.min(8, Math.max(0, Math.round(clampedProgress * 8))));
-        }
+        setProgress(Math.min(1, Math.max(0, (window.scrollY - sectionTop) / travel)));
         frame = 0;
       });
     };
@@ -82,46 +77,55 @@ function HistoryTestimonials() {
   }, []);
 
   useEffect(() => {
+    const getSectionPosition = () => {
+      const section = sectionRef.current;
+      if (!section) return null;
+      const rect = section.getBoundingClientRect();
+      const active = rect.top <= 1 && rect.bottom > window.innerHeight * .5;
+      return active ? { section, top: rect.top + window.scrollY } : null;
+    };
     const onTouchStart = (event: TouchEvent) => {
       if (window.innerWidth > 767) return;
       touchStartY.current = event.touches[0]?.clientY ?? null;
+    };
+    const onTouchMove = (event: TouchEvent) => {
+      if (window.innerWidth > 767 || touchStartY.current === null || !getSectionPosition()) return;
+      event.preventDefault();
     };
     const onTouchEnd = (event: TouchEvent) => {
       const startY = touchStartY.current;
       const endY = event.changedTouches[0]?.clientY;
       touchStartY.current = null;
-      const section = sectionRef.current;
-      if (startY === null || endY === undefined || !section || window.innerWidth > 767 || isSnapping.current) return;
+      if (startY === null || endY === undefined || window.innerWidth > 767 || snapping.current) return;
       const delta = startY - endY;
       if (Math.abs(delta) < 35) return;
-      const rect = section.getBoundingClientRect();
-      const active = rect.top < window.innerHeight * .7 && rect.bottom > window.innerHeight * .3;
-      if (!active) return;
+      const position = getSectionPosition();
+      if (!position) return;
 
       const direction = delta > 0 ? 1 : -1;
-      const currentStep = Math.min(8, Math.max(0, Math.round(progressRef.current * 8)));
-      const nextStep = Math.min(9, Math.max(-1, currentStep + direction));
-      const sectionTop = rect.top + window.scrollY;
+      const nextStep = Math.min(9, Math.max(-1, mobileStepRef.current + direction));
+      const { section, top } = position;
       const maxTravel = Math.max(1, section.offsetHeight - window.innerHeight);
-      let targetTop: number;
+      const targetTop = nextStep < 0
+        ? Math.max(0, top - 2)
+        : nextStep > 8
+          ? top + section.offsetHeight + 2
+          : top + maxTravel * (nextStep / 8);
 
-      if (nextStep < 0) {
-        targetTop = Math.max(0, sectionTop - 2);
-      } else if (nextStep > 8) {
-        targetTop = sectionTop + section.offsetHeight + 2;
-      } else {
-        targetTop = sectionTop + maxTravel * (nextStep / 8);
+      if (nextStep >= 0 && nextStep <= 8) {
+        mobileStepRef.current = nextStep;
         setMobileStep(nextStep);
       }
-
-      isSnapping.current = true;
+      snapping.current = true;
       window.scrollTo({ top: targetTop, behavior: "smooth" });
-      window.setTimeout(() => { isSnapping.current = false; }, 1100);
+      window.setTimeout(() => { snapping.current = false; }, 850);
     };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
     return () => {
       window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
@@ -132,14 +136,13 @@ function HistoryTestimonials() {
     { name: "Fátima Araújo", source: "Via Facebook", quote: "Uma instituição diferenciada e muito humanizada." },
     { name: "Nazareth Di Maria", source: "Via Instagram", quote: "Escola bem conceituada, equipe bem preparada, enfim, pais e familiares satisfeitos." },
   ];
-  const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
   const mobile = typeof window !== "undefined" && window.innerWidth <= 767;
-  // No mobile, cada gesto apresenta uma única etapa, sem transição contínua entre os conteúdos.
+  const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
+  const storyVisible = mobile ? mobileStep <= 1 : progress < 0.26;
+  const blankStep = mobile && mobileStep === 2;
+  const testimonialsVisible = mobile ? mobileStep >= 3 : progress >= 0.17;
   const storyEyebrowProgress = mobile ? (mobileStep === 0 ? 1 : 0) : reveal(0.005, 0.045);
   const storyCounterProgress = mobile ? (mobileStep === 1 ? 1 : 0) : reveal(0.055, 0.13);
-  const storyOpacity = mobile ? (mobileStep <= 1 ? 1 : 0) : 1 - reveal(0.20, 0.26);
-  const storyVisible = mobile ? mobileStep <= 1 : progress < 0.26;
-  const testimonialsProgress = mobile ? (mobileStep >= 3 ? 1 : 0) : reveal(0.25, 0.31);
   const testimonialKickerProgress = mobile ? (mobileStep === 3 ? 1 : 0) : reveal(0.32, 0.37);
   const testimonialHeadingProgress = mobile ? (mobileStep === 4 ? 1 : 0) : reveal(0.43, 0.48);
   const cardProgress = (index: number) => mobile
@@ -153,18 +156,18 @@ function HistoryTestimonials() {
   ];
 
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
-    <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"}`}>
-      <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: storyOpacity, visibility: storyVisible ? "visible" : "hidden" }}>
-        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: storyEyebrowProgress, transform: `translateY(${(1 - storyEyebrowProgress) * 22}px)` }}>Uma história que continua crescendo</p>
-        <div className="history-counter history-story-item" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 24}px)` }}>
-          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={storyCounterProgress}/>
+    <div className={`history-scroll-stage ${storyVisible ? "is-story" : "is-testimonials"} ${blankStep ? "is-blank" : ""}`}>
+      <div className="history-scroll-story" aria-hidden={!storyVisible} style={{ opacity: mobile ? 1 : (storyVisible ? 1 : 0), visibility: storyVisible ? "visible" : "hidden" }}>
+        <p className="history-highlight__eyebrow history-story-item" style={{ opacity: storyEyebrowProgress, transform: mobile ? "none" : `translateY(${(1 - storyEyebrowProgress) * 22}px)`, display: mobile && mobileStep !== 0 ? "none" : undefined }}>Uma história que continua crescendo.</p>
+        <div className="history-counter history-story-item" style={{ opacity: storyCounterProgress, transform: mobile ? "none" : `translateY(${(1 - storyCounterProgress) * 24}px)`, display: mobile && mobileStep !== 1 ? "none" : undefined }}>
+          <span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={mobile ? 1 : storyCounterProgress}/>
         </div>
-        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 20}px)` }}>anos de história</p>
+        <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: storyCounterProgress, transform: mobile ? "none" : `translateY(${(1 - storyCounterProgress) * 20}px)`, display: mobile && mobileStep !== 1 ? "none" : undefined }}>anos de história.</p>
       </div>
-      <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: (mobile ? mobileStep >= 3 : progress >= 0.17) ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
-        <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 18}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
-        <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: `translateY(${(1 - testimonialHeadingProgress) * 20}px)` }}>E cada família faz parte delas.</h2>
-        <div className="history-scroll-cards">
+      <div className="history-scroll-testimonials" aria-hidden={!testimonialsVisible} style={{ opacity: mobile ? 1 : (testimonialsVisible ? 1 : 0), visibility: testimonialsVisible ? "visible" : "hidden", transform: mobile ? "none" : `translateY(${(1 - reveal(0.25, 0.31)) * 28}px)` }}>
+        <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: mobile ? "none" : `translateY(${(1 - testimonialKickerProgress) * 18}px)`, display: mobile && mobileStep !== 3 ? "none" : undefined }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
+        <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: mobile ? "none" : `translateY(${(1 - testimonialHeadingProgress) * 20}px)`, display: mobile && mobileStep !== 4 ? "none" : undefined }}>E cada família faz parte delas.</h2>
+        <div className="history-scroll-cards" style={{ display: mobile && mobileStep < 5 ? "none" : undefined }}>
           {cards.map((testimonial, index) => {
             const cardReveal = cardProgress(index);
             const offset = cardOffsets[index];
@@ -176,12 +179,14 @@ function HistoryTestimonials() {
                 opacity: cardReveal,
                 pointerEvents: cardReveal > 0.95 ? "auto" : "none",
                 zIndex: index + 1,
-                transform: `translate(calc(-50% + ${offset.x * cardReveal}px), calc(-50% + ${(1 - cardReveal) * 76 + offset.y * cardReveal}px)) scale(${0.86 + cardReveal * 0.14}) rotate(${offset.rotation * cardReveal}deg)`,
+                transform: mobile
+                  ? `translate(-50%, -50%) scale(1)`
+                  : `translate(calc(-50% + ${offset.x * cardReveal}px), calc(-50% + ${(1 - cardReveal) * 76 + offset.y * cardReveal}px)) scale(${0.86 + cardReveal * 0.14}) rotate(${offset.rotation * cardReveal}deg)`,
               }}
             >
               <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
-              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 12}px)` }}>“{testimonial.quote}”</p>
-              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: mobile ? "none" : `translateY(${(1 - cardReveal) * 12}px)` }}>“{testimonial.quote}”</p>
+              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: mobile ? "none" : `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
             </article>;
           })}
         </div>
