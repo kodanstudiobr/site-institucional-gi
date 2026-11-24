@@ -5281,3 +5281,18 @@ section.history-scroll-section {
     transform: none !important;
   }
 }
+
+
+/* Seção "Crescer, Aprender, Criar, Vivenciar":
+   mantém no mobile a mesma família tipográfica usada no desktop e amplia a leitura. */
+main .learning-word-stack p.learning-word {
+  font-family: "Satisfy", "Segoe Script", cursive !important;
+}
+@media (max-width: 767px) {
+  main .learning-word-stack p.learning-word {
+    font-family: "Satisfy", "Segoe Script", cursive !important;
+    font-size: clamp(4.5rem, 17vw, 7rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -.055em !important;
+  }
+}
