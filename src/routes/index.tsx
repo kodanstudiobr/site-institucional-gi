@@ -46,8 +46,10 @@ function AnimatedHistoryYears({ progress }: { progress: number }) {
 function HistoryTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
-  const [mobileCardIndex, setMobileCardIndex] = useState(0);
+  const [mobileStep, setMobileStep] = useState(0);
   const touchStartY = useRef<number | null>(null);
+  const progressRef = useRef(0);
+  const isSnapping = useRef(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -60,7 +62,9 @@ function HistoryTestimonials() {
         const sectionTop = section.getBoundingClientRect().top + window.scrollY;
         const travel = Math.max(1, section.offsetHeight - (stage?.offsetHeight ?? window.innerHeight));
         const nextProgress = (window.scrollY - sectionTop) / travel;
-        setProgress(Math.min(1, Math.max(0, nextProgress)));
+        const clampedProgress = Math.min(1, Math.max(0, nextProgress));
+        progressRef.current = clampedProgress;
+        setProgress(clampedProgress);
         frame = 0;
       });
     };
@@ -76,6 +80,7 @@ function HistoryTestimonials() {
 
   useEffect(() => {
     const onTouchStart = (event: TouchEvent) => {
+      if (window.innerWidth > 767) return;
       touchStartY.current = event.touches[0]?.clientY ?? null;
     };
     const onTouchEnd = (event: TouchEvent) => {
@@ -83,12 +88,30 @@ function HistoryTestimonials() {
       const endY = event.changedTouches[0]?.clientY;
       touchStartY.current = null;
       const section = sectionRef.current;
-      if (startY === null || endY === undefined || !section || window.innerWidth > 767) return;
-      if (Math.abs(startY - endY) < 28) return;
+      if (startY === null || endY === undefined || !section || window.innerWidth > 767 || isSnapping.current) return;
+      const delta = startY - endY;
+      if (Math.abs(delta) < 35) return;
       const rect = section.getBoundingClientRect();
-      const sectionIsActive = rect.top < window.innerHeight * .65 && rect.bottom > window.innerHeight * .35;
-      if (!sectionIsActive || progress < .48) return;
-      setMobileCardIndex((current) => Math.min(3, Math.max(0, current + (startY > endY ? 1 : -1))));
+      const active = rect.top < window.innerHeight * .7 && rect.bottom > window.innerHeight * .3;
+      if (!active) return;
+
+      const direction = delta > 0 ? 1 : -1;
+      const currentStep = Math.min(8, Math.max(0, Math.round(progressRef.current * 8)));
+      const nextStep = currentStep + direction;
+      const sectionTop = rect.top + window.scrollY;
+      const maxTravel = Math.max(1, section.offsetHeight - window.innerHeight);
+      let targetTop: number;
+
+      if (nextStep < 0) targetTop = Math.max(0, sectionTop - 1);
+      else if (nextStep > 8) targetTop = sectionTop + section.offsetHeight + 1;
+      else {
+        targetTop = sectionTop + maxTravel * (nextStep / 8);
+        setMobileStep(nextStep);
+      }
+
+      isSnapping.current = true;
+      window.scrollTo({ top: targetTop, behavior: "smooth" });
+      window.setTimeout(() => { isSnapping.current = false; }, 720);
     };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
@@ -96,7 +119,7 @@ function HistoryTestimonials() {
       window.removeEventListener("touchstart", onTouchStart);
       window.removeEventListener("touchend", onTouchEnd);
     };
-  }, [progress]);
+  }, []);
 
   const cards = [
     { name: "Rosany Santos", source: "Via Instagram", quote: "Meu filho começou a estudar tinha 2 anos e esse ano é o último ano dele lá. Já estou com saudades dessa turma, amo todas e agradeço demais por tudo 😍" },
@@ -105,20 +128,18 @@ function HistoryTestimonials() {
     { name: "Nazareth Di Maria", source: "Via Instagram", quote: "Escola bem conceituada, equipe bem preparada, enfim, pais e familiares satisfeitos." },
   ];
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
-  // A história dos 25 anos permanece mais tempo em destaque antes da transição para os depoimentos.
-  const storyEyebrowProgress = reveal(0.005, 0.045);
-  const storyCounterProgress = reveal(0.055, 0.13);
-  const storyOpacity = 1 - reveal(0.20, 0.26);
-  const storyVisible = progress < 0.26;
-  const testimonialsProgress = reveal(0.25, 0.31);
-  // A chamada aparece primeiro; depois de mais rolagem, entra a frase complementar.
-  const testimonialKickerProgress = reveal(0.32, 0.37);
-  const testimonialHeadingProgress = reveal(0.43, 0.48);
-  // Cada card ganha seu próprio trecho de rolagem, um de cada vez.
-  const cardProgress = (index: number) => {
-    const starts = [0.54, 0.65, 0.76, 0.87];
-    return reveal(starts[index], starts[index] + 0.075);
-  };
+  const mobile = typeof window !== "undefined" && window.innerWidth <= 767;
+  // No mobile, cada gesto apresenta uma única etapa, sem transição contínua entre os conteúdos.
+  const storyEyebrowProgress = mobile ? (mobileStep === 0 ? 1 : 0) : reveal(0.005, 0.045);
+  const storyCounterProgress = mobile ? (mobileStep === 1 ? 1 : 0) : reveal(0.055, 0.13);
+  const storyOpacity = mobile ? (mobileStep <= 1 ? 1 : 0) : 1 - reveal(0.20, 0.26);
+  const storyVisible = mobile ? mobileStep <= 1 : progress < 0.26;
+  const testimonialsProgress = mobile ? (mobileStep >= 3 ? 1 : 0) : reveal(0.25, 0.31);
+  const testimonialKickerProgress = mobile ? (mobileStep === 3 ? 1 : 0) : reveal(0.32, 0.37);
+  const testimonialHeadingProgress = mobile ? (mobileStep === 4 ? 1 : 0) : reveal(0.43, 0.48);
+  const cardProgress = (index: number) => mobile
+    ? (mobileStep === index + 5 ? 1 : 0)
+    : reveal([0.54, 0.65, 0.76, 0.87][index], [0.54, 0.65, 0.76, 0.87][index] + 0.075);
   const cardOffsets = [
     { x: -28, y: 8, rotation: -4 },
     { x: 18, y: 3, rotation: 3 },
@@ -135,14 +156,12 @@ function HistoryTestimonials() {
         </div>
         <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: storyCounterProgress, transform: `translateY(${(1 - storyCounterProgress) * 20}px)` }}>anos de história</p>
       </div>
-      <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: progress >= 0.17 ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
+      <div className="history-scroll-testimonials" aria-hidden={testimonialsProgress === 0} style={{ opacity: testimonialsProgress, visibility: (mobile ? mobileStep >= 3 : progress >= 0.17) ? "visible" : "hidden", transform: `translateY(${(1 - testimonialsProgress) * 28}px)` }}>
         <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 18}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
         <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: `translateY(${(1 - testimonialHeadingProgress) * 20}px)` }}>E cada família faz parte delas.</h2>
         <div className="history-scroll-cards">
           {cards.map((testimonial, index) => {
-            const cardReveal = typeof window !== "undefined" && window.innerWidth <= 767
-              ? (mobileCardIndex === index ? 1 : 0)
-              : cardProgress(index);
+            const cardReveal = cardProgress(index);
             const offset = cardOffsets[index];
             return <article
               key={testimonial.name}
