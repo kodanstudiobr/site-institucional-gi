@@ -5015,3 +5015,78 @@ section.history-scroll-section {
     margin-right: auto !important;
   }
 }
+
+
+/* Menu mobile: logotipo centralizado no limite superior, links em uma linha
+   e indicação amarela da página atualmente aberta. */
+@media (max-width: 1023px) {
+  .site-header--overlay.is-menu-open > div {
+    height: 6.5rem !important;
+    overflow: visible !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    position: absolute !important;
+    top: -1.15rem !important;
+    left: 50% !important;
+    z-index: 5 !important;
+    width: 13rem !important;
+    height: 9rem !important;
+    margin: 0 !important;
+    transform: translateX(-50%) !important;
+    justify-content: center !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 12.5rem !important;
+    height: 8.5rem !important;
+    object-position: center top !important;
+  }
+  .site-header--overlay.is-menu-open .header-menu {
+    position: absolute !important;
+    top: .65rem !important;
+    right: 1.25rem !important;
+    z-index: 6 !important;
+  }
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    padding-top: 7.1rem !important;
+  }
+  .mobile-menu-panel__divider {
+    margin-top: .15rem !important;
+    margin-bottom: .8rem !important;
+  }
+  .mobile-menu-panel__links {
+    align-items: center !important;
+    gap: clamp(.45rem, 1.35vh, .8rem) !important;
+    padding: .35rem 0 .8rem !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    width: max-content !important;
+    max-width: 100% !important;
+    white-space: nowrap !important;
+    font-size: clamp(1.65rem, 6.2vw, 2.55rem) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -.035em !important;
+    text-align: center !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link-active {
+    color: #fff12c !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link-active .mobile-menu-panel__integral,
+  .mobile-menu-panel .mobile-menu-panel__link-active svg {
+    color: #fff12c !important;
+    fill: #fff12c !important;
+  }
+}
+@media (max-width: 420px) {
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 11.5rem !important;
+    height: 8.3rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 11rem !important;
+    height: 8rem !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(1.55rem, 6vw, 2.15rem) !important;
+  }
+}
