@@ -473,26 +473,23 @@ function Index() {
       </div>
       <div className="structure-carousel mt-12" aria-label="Galeria ilustrativa dos ambientes da escola">
         <div className="structure-carousel__track">
-          {[
-            { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente escolar com estudantes em atividade", title: "Espaços de aprendizagem" },
-            { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=85", alt: "Sala de aula organizada", title: "Salas acolhedoras" },
-            { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente educativo infantil", title: "Ambientes de descoberta" },
-            { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1200&q=85", alt: "Espaço de aprendizagem escolar", title: "Aprender em cada espaço" },
-          ].map((slide) => <figure className="structure-carousel__slide" key={slide.src}>
-            <img src={slide.src} alt={slide.alt} loading="lazy" />
-            <figcaption>{slide.title}</figcaption>
-          </figure>)}
-          {[
-            { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente escolar com estudantes em atividade", title: "Espaços de aprendizagem" },
-            { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=85", alt: "Sala de aula organizada", title: "Salas acolhedoras" },
-            { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=85", alt: "Ambiente educativo infantil", title: "Ambientes de descoberta" },
-            { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=1200&q=85", alt: "Espaço de aprendizagem escolar", title: "Aprender em cada espaço" },
-          ].map((slide) => <figure className="structure-carousel__slide" key={`duplicate-${slide.src}`} aria-hidden="true">
-            <img src={slide.src} alt="" loading="lazy" />
-            <figcaption>{slide.title}</figcaption>
-          </figure>)}
-        </div>
-      </div>
+        {[
+          { src: "/imagens/IMG_4025.webp", alt: "Fotografia real da estrutura do Instituto Educacional G.I.", title: "Nossa estrutura" },
+          { src: "/imagens/IMG_4024.webp", alt: "Fotografia real da estrutura do Instituto Educacional G.I.", title: "Ambientes da escola" },
+          { src: "/imagens/IMG_4023.webp", alt: "Fotografia real da estrutura do Instituto Educacional G.I.", title: "Espaços de aprendizagem" },
+        ].map((slide) => <figure className="structure-carousel__slide" key={slide.src}>
+          <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" />
+          <figcaption>{slide.title}</figcaption>
+        </figure>)}
+        {[
+          { src: "/imagens/IMG_4025.webp", alt: "", title: "Nossa estrutura" },
+          { src: "/imagens/IMG_4024.webp", alt: "", title: "Ambientes da escola" },
+          { src: "/imagens/IMG_4023.webp", alt: "", title: "Espaços de aprendizagem" },
+        ].map((slide) => <figure className="structure-carousel__slide" key={`duplicate-${slide.src}`} aria-hidden="true">
+          <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" />
+          <figcaption>{slide.title}</figcaption>
+        </figure>)}
+      </div>/div>
       <p className="mt-5 text-center text-xs text-muted-foreground">Imagens ilustrativas — serão substituídas por fotografias reais da estrutura da escola.</p>
     </section>
 
