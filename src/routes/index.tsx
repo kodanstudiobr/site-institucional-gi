@@ -493,7 +493,7 @@ function Index() {
           </figure>)}
         </div>
       </div>
-      <p className="mt-5 text-center text-xs text-muted-foreground">Conheça alguns dos espaços da nossa escola.</p>
+      <p className="mt-5 text-center text-xs text-muted-foreground">Imagens ilustrativas — serão substituídas por fotografias reais da estrutura da escola.</p>
     </section>
 
     <HistoryTestimonials />
