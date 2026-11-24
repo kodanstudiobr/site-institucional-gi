@@ -82,17 +82,13 @@ function HistoryTestimonials() {
       const section = sectionRef.current;
       if (!section) return null;
       const rect = section.getBoundingClientRect();
-      const active = rect.top <= 1 && rect.bottom > window.innerHeight * .5;
+      const active = rect.top < window.innerHeight && rect.bottom > 0;
       return active ? { section, top: rect.top + window.scrollY } : null;
     };
     const onTouchStart = (event: TouchEvent) => {
       if (window.innerWidth > 767) return;
       touchStartY.current = event.touches[0]?.clientY ?? null;
       touchStartedInside.current = Boolean(getSectionPosition());
-    };
-    const onTouchMove = (event: TouchEvent) => {
-      if (window.innerWidth > 767 || touchStartY.current === null || !touchStartedInside.current || !getSectionPosition()) return;
-      event.preventDefault();
     };
     const onTouchEnd = (event: TouchEvent) => {
       const startY = touchStartY.current;
@@ -125,11 +121,9 @@ function HistoryTestimonials() {
       window.setTimeout(() => { snapping.current = false; }, 850);
     };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
     return () => {
       window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
