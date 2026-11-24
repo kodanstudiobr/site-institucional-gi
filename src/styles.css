@@ -5635,3 +5635,11 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 .gi-footer--contact .gi-footer__primary-cta {
   display: none !important;
 }
+
+
+/* O CTA do header fica restrito ao desktop; no mobile, matrícula apenas no menu. */
+@media (max-width: 1023px) {
+  .site-header .header-cta {
+    display: none !important;
+  }
+}
