@@ -46,6 +46,8 @@ function AnimatedHistoryYears({ progress }: { progress: number }) {
 function HistoryTestimonials() {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
+  const [mobileCardIndex, setMobileCardIndex] = useState(0);
+  const touchStartY = useRef<number | null>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -71,6 +73,30 @@ function HistoryTestimonials() {
       window.removeEventListener("resize", update);
     };
   }, []);
+
+  useEffect(() => {
+    const onTouchStart = (event: TouchEvent) => {
+      touchStartY.current = event.touches[0]?.clientY ?? null;
+    };
+    const onTouchEnd = (event: TouchEvent) => {
+      const startY = touchStartY.current;
+      const endY = event.changedTouches[0]?.clientY;
+      touchStartY.current = null;
+      const section = sectionRef.current;
+      if (startY === null || endY === undefined || !section || window.innerWidth > 767) return;
+      if (Math.abs(startY - endY) < 28) return;
+      const rect = section.getBoundingClientRect();
+      const sectionIsActive = rect.top < window.innerHeight * .65 && rect.bottom > window.innerHeight * .35;
+      if (!sectionIsActive || progress < .48) return;
+      setMobileCardIndex((current) => Math.min(3, Math.max(0, current + (startY > endY ? 1 : -1))));
+    };
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [progress]);
 
   const cards = [
     { name: "Rosany Santos", source: "Via Instagram", quote: "Meu filho começou a estudar tinha 2 anos e esse ano é o último ano dele lá. Já estou com saudades dessa turma, amo todas e agradeço demais por tudo 😍" },
@@ -114,7 +140,9 @@ function HistoryTestimonials() {
         <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: `translateY(${(1 - testimonialHeadingProgress) * 20}px)` }}>E cada família faz parte delas.</h2>
         <div className="history-scroll-cards">
           {cards.map((testimonial, index) => {
-            const cardReveal = cardProgress(index);
+            const cardReveal = typeof window !== "undefined" && window.innerWidth <= 767
+              ? (mobileCardIndex === index ? 1 : 0)
+              : cardProgress(index);
             const offset = cardOffsets[index];
             return <article
               key={testimonial.name}
