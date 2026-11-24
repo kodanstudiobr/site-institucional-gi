@@ -10,8 +10,8 @@
   --font-display: "Poppins", sans-serif; --font-sans: "Poppins", sans-serif;
   --color-background: var(--background); --color-foreground: var(--foreground); --color-card: var(--card); --color-card-foreground: var(--card-foreground); --color-popover: var(--popover); --color-popover-foreground: var(--popover-foreground); --color-primary: var(--primary); --color-primary-foreground: var(--primary-foreground); --color-secondary: var(--secondary); --color-secondary-foreground: var(--secondary-foreground); --color-muted: var(--muted); --color-muted-foreground: var(--muted-foreground); --color-accent: var(--accent); --color-accent-foreground: var(--accent-foreground); --color-destructive: var(--destructive); --color-destructive-foreground: var(--destructive-foreground); --color-border: var(--border); --color-input: var(--input); --color-ring: var(--ring);
 }
-:root { --radius:.8rem; --background:#fff; --foreground:#242b45; --card:#fff; --card-foreground:#242b45; --popover:#fff; --popover-foreground:#242b45; --primary:#324594; --primary-foreground:#fff; --secondary:#eef0fa; --secondary-foreground:#324594; --muted:#f5f6fc; --muted-foreground:#687087; --accent:#fff12c; --accent-foreground:#263878; --destructive:#dc2626; --destructive-foreground:#fff; --border:#e4e7f1; --input:#e4e7f1; --ring:#6678c2; }
-.dark { --background:#171d37; --foreground:#f8f9ff; --card:#202847; --card-foreground:#f8f9ff; --popover:#202847; --popover-foreground:#f8f9ff; --primary:#8292df; --primary-foreground:#171d37; --secondary:#293354; --secondary-foreground:#f8f9ff; --muted:#293354; --muted-foreground:#bdc4df; --accent:#fff12c; --accent-foreground:#263878; --destructive:#f87171; --destructive-foreground:#fff; --border:#394363; --input:#394363; --ring:#8292df; }
+:root { --radius:.8rem; --background:#fff; --foreground:#242b45; --card:#fff; --card-foreground:#242b45; --popover:#fff; --popover-foreground:#242b45; --primary:#324594; --primary-foreground:#fff; --secondary:#eef0fa; --secondary-foreground:#324594; --muted:#f5f6fc; --muted-foreground:#687087; --accent:#fff12c; --accent-foreground:#324594; --destructive:#dc2626; --destructive-foreground:#fff; --border:#e4e7f1; --input:#e4e7f1; --ring:#6678c2; }
+.dark { --background:#171d37; --foreground:#f8f9ff; --card:#202847; --card-foreground:#f8f9ff; --popover:#202847; --popover-foreground:#f8f9ff; --primary:#8292df; --primary-foreground:#171d37; --secondary:#293354; --secondary-foreground:#f8f9ff; --muted:#293354; --muted-foreground:#bdc4df; --accent:#fff12c; --accent-foreground:#324594; --destructive:#f87171; --destructive-foreground:#fff; --border:#394363; --input:#394363; --ring:#8292df; }
 @layer base {
   * { border-color:var(--color-border); }
   html { scroll-behavior:smooth; }
@@ -22,10 +22,10 @@
 }
 @layer components {
   .site-header { background:rgba(255,255,255,.97); border-bottom:1px solid #e8eaf3; backdrop-filter:blur(16px); }
-  .nav-link { color:#344477; font-size:.8rem; font-weight:650; transition:color .2s; white-space:nowrap; }
+  .nav-link { color:#324594; font-size:.8rem; font-weight:650; transition:color .2s; white-space:nowrap; }
   .nav-link:hover,.nav-link-active { color:#324594; }
-  .hero-home { position:relative; overflow:hidden; background-color:#263878; }
-  .hero-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(23,40,105,.95) 0%,rgba(43,62,143,.84) 53%,rgba(31,48,111,.42) 100%); }
+  .hero-home { position:relative; overflow:hidden; background-color:#324594; }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(50,69,148,.95) 0%,rgba(50,69,148,.84) 53%,rgba(50,69,148,.42) 100%); }
   .hero-copy { animation:heroEnter .85s ease-out both; }
   .hero-bottom { position:absolute; bottom:-1px; left:0; right:0; height:12px; background:#fff12c; clip-path:polygon(0 70%,100% 0,100% 100%,0 100%); }
   .section-wrap { width:100%; max-width:1280px; margin-inline:auto; padding-inline:1.25rem; }
@@ -37,7 +37,7 @@
   .icon-bubble { display:inline-flex; align-items:center; justify-content:center; width:3.2rem; height:3.2rem; border-radius:1rem; background:#f0f1fc; color:#324594; }
   .link-arrow { display:inline-flex; align-items:center; gap:.55rem; color:#324594; font-weight:750; }
   .link-arrow:hover { color:#6375c4; }
-  .page-hero { background:linear-gradient(115deg,#293d91,#4055a7); position:relative; overflow:hidden; }
+  .page-hero { background:linear-gradient(115deg,#324594,#324594); position:relative; overflow:hidden; }
   .page-hero:after { content:""; position:absolute; width:24rem; height:24rem; border:1px solid rgba(255,241,44,.28); border-radius:50%; right:-6rem; top:-12rem; box-shadow:0 0 0 40px rgba(255,241,44,.04),0 0 0 80px rgba(255,241,44,.035); pointer-events:none; }
   .tag { display:inline-flex; align-items:center; gap:.45rem; border-radius:999px; background:#f2f3fc; padding:.6rem .9rem; }
   .contact-item { display:flex; align-items:flex-start; gap:.9rem; color:#324594; }
@@ -66,7 +66,7 @@
 .site-header--overlay.is-scrolled { background:rgba(255,255,255,.97); border-bottom-color:#e8eaf3; backdrop-filter:blur(16px); box-shadow:0 8px 28px rgba(24,38,91,.08); }
 .site-header--overlay.is-scrolled .header-brand,
 .site-header--overlay.is-scrolled .header-brand span { color:#324594; }
-.site-header--overlay.is-scrolled .nav-link { color:#344477; text-shadow:none; }
+.site-header--overlay.is-scrolled .nav-link { color:#324594; text-shadow:none; }
 .site-header--overlay.is-scrolled .nav-link:hover,
 .site-header--overlay.is-scrolled .nav-link-active { color:#324594; }
 .site-header--overlay.is-scrolled .header-menu { color:#324594; border-color:#e4e7f1; background:#fff; }
@@ -100,7 +100,7 @@
 .experience-carousel { display:flex; gap:1.25rem; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; padding:4px 2px 12px; -webkit-overflow-scrolling:touch; touch-action:pan-x pan-y; }
 .experience-carousel::-webkit-scrollbar { display:none; }
 .experience-gallery-grid .experience-card { width:100%; min-width:0; height:390px; flex:none; }
-.experience-card { position:relative; flex:0 0 min(84vw,350px); height:390px; overflow:hidden; isolation:isolate; scroll-snap-align:center; border-radius:1.4rem; background:#263878; box-shadow:0 10px 28px rgba(36,51,111,.12); }
+.experience-card { position:relative; flex:0 0 min(84vw,350px); height:390px; overflow:hidden; isolation:isolate; scroll-snap-align:center; border-radius:1.4rem; background:#324594; box-shadow:0 10px 28px rgba(36,51,111,.12); }
 .experience-card__background { position:absolute; inset:0; z-index:-2; width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1); }
 .experience-card:hover .experience-card__background { transform:scale(1.045); }
 .experience-card__shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,rgba(13,25,65,.04) 25%,rgba(13,25,65,.22) 48%,rgba(13,25,65,.9) 100%); }
@@ -113,7 +113,7 @@
 .carousel-arrow:hover { transform:translateY(-2px); border-color:#fff12c; background:#fff12c; }
 @media (max-width:767px) {
   .hero-overlay {
-    background:linear-gradient(0deg,rgba(23,40,105,.86) 0%,rgba(43,62,143,.70) 53%,rgba(31,48,111,.34) 100%);
+    background:linear-gradient(0deg,rgba(50,69,148,.86) 0%,rgba(50,69,148,.70) 53%,rgba(50,69,148,.34) 100%);
   }
   .section-spark--left { left:2%; top:3%; }
   .section-spark--pedagogy { right:2%; top:2%; }
@@ -168,9 +168,9 @@
 .section-decor-wrap > .section-wrap { position:relative; z-index:1; }
 
 /* Faixa institucional amarela com missão e visão oficiais da página Nossa Escola. */
-.mission-vision-section { position:relative; overflow:hidden; background:#fff12c; color:#263878; }
+.mission-vision-section { position:relative; overflow:hidden; background:#fff12c; color:#324594; }
 .mission-eyebrow { color:#5265ad; }
-.mission-title { color:#263878; font-family:"Poppins",sans-serif; font-size:clamp(2rem,4vw,3.1rem); font-weight:800; line-height:1.12; letter-spacing:-.04em; }
+.mission-title { color:#324594; font-family:"Poppins",sans-serif; font-size:clamp(2rem,4vw,3.1rem); font-weight:800; line-height:1.12; letter-spacing:-.04em; }
 .mission-intro { margin-top:1rem; color:rgba(38,56,120,.78); line-height:1.75; }
 .mission-vision-card { position:relative; padding:clamp(1.5rem,3vw,2.5rem); border:1px solid rgba(50,69,148,.16); border-radius:1.5rem; background:rgba(255,255,255,.88); color:#324594; box-shadow:0 12px 30px rgba(50,69,148,.09); transition:transform .35s ease,box-shadow .35s ease; }
 .mission-vision-card:hover { transform:translateY(-5px); box-shadow:0 18px 36px rgba(50,69,148,.15); }
@@ -451,7 +451,7 @@
   background:
     radial-gradient(circle at 15% 18%,rgba(255,241,44,.10) 0 1.2px,transparent 1.8px),
     radial-gradient(circle at 85% 78%,rgba(255,255,255,.08) 0 1px,transparent 1.7px),
-    linear-gradient(135deg,#263a8b 0%,#324594 55%,#263878 100%);
+    linear-gradient(135deg,#324594 0%,#324594 55%,#324594 100%);
   background-size:24px 24px,30px 30px,100% 100%;
   color:#fff;
 }
@@ -1102,7 +1102,7 @@ html {
   box-shadow:0 4px 12px rgba(36,51,111,.18);
 }
 .site-header--overlay.is-scrolled .header-cta:hover {
-  background:#263878;
+  background:#324594;
   color:#fff12c;
 }
 .site-header--overlay.is-scrolled .header-menu {
@@ -1347,7 +1347,7 @@ html {
 
 /* Cabeçalhos internos preparados para receber a fotografia institucional de fundo. */
 .page-hero {
-  background-color:#293d91;
+  background-color:#324594;
   background-image:
     linear-gradient(112deg,rgba(35,53,130,.86) 0%,rgba(50,69,148,.76) 55%,rgba(50,69,148,.58) 100%),
     url('/imagens/fundo-paginas.jpg');
@@ -1424,7 +1424,7 @@ html {
 /* Hero da página Nossa Escola com fotografia de fundo, como na homepage. */
 .school-page-hero {
   position:relative;
-  background:#263878;
+  background:#324594;
 }
 .school-page-hero__mobile-title { display:none; }
 .school-page-hero__desktop-title { display:inline; }
@@ -1443,7 +1443,7 @@ html {
   position:absolute;
   inset:0;
   z-index:1;
-  background:linear-gradient(90deg,rgba(23,40,105,.94) 0%,rgba(43,62,143,.78) 52%,rgba(31,48,111,.35) 100%);
+  background:linear-gradient(90deg,rgba(50,69,148,.94) 0%,rgba(50,69,148,.78) 52%,rgba(50,69,148,.35) 100%);
 }
 @keyframes schoolPageHeroReveal {
   from { opacity:.45; transform:scale(1.09); }
@@ -1455,7 +1455,7 @@ html {
   .school-page-hero__mobile-title { display:inline; }
   .school-page-hero__desktop-title { display:none; }
   .school-page-hero__overlay {
-    background:linear-gradient(180deg,rgba(23,40,105,.58) 0%,rgba(23,40,105,.78) 48%,rgba(23,40,105,.94) 100%);
+    background:linear-gradient(180deg,rgba(50,69,148,.58) 0%,rgba(50,69,148,.78) 48%,rgba(50,69,148,.94) 100%);
   }
 }
 @media (prefers-reduced-motion:reduce) {
@@ -1471,7 +1471,7 @@ html {
   overflow:hidden;
   isolation:isolate;
   border-radius:2rem;
-  background:#263878;
+  background:#324594;
   box-shadow:0 18px 48px rgba(36,51,111,.16);
 }
 .school-presentation-hero-media::after {
@@ -1480,7 +1480,7 @@ html {
   inset:0;
   z-index:1;
   pointer-events:none;
-  background:linear-gradient(180deg,rgba(23,40,105,.02) 48%,rgba(23,40,105,.24) 100%);
+  background:linear-gradient(180deg,rgba(50,69,148,.02) 48%,rgba(50,69,148,.24) 100%);
 }
 .school-presentation-hero-image {
   display:block;
@@ -1706,7 +1706,7 @@ html {
 }
 .experience-lightbox__header h2 {
   margin:0;
-  color:#202d61;
+  color:#324594;
   font-family:Poppins,sans-serif;
   font-size:clamp(1.35rem,3vw,2rem);
   font-weight:800;
@@ -1730,7 +1730,7 @@ html {
   width:44px;
   height:44px;
   background:#f0f2f8;
-  color:#263878;
+  color:#324594;
 }
 .experience-lightbox__close:hover { transform:rotate(90deg); background:#e4e8f3; }
 .experience-lightbox__stage {
@@ -1755,7 +1755,7 @@ html {
   height:48px;
   transform:translateY(-50%);
   background:rgba(255,255,255,.92);
-  color:#263878;
+  color:#324594;
   box-shadow:0 6px 22px rgba(0,0,0,.18);
 }
 .experience-lightbox__arrow:hover { transform:translateY(-50%) scale(1.08); background:#fff12c; }
@@ -1847,7 +1847,7 @@ html {
 }
 .experience-lightbox__empty h3 {
   margin:8px 0 0;
-  color:#202d61;
+  color:#324594;
   font-family:Poppins,sans-serif;
   font-size:1.12rem;
   font-weight:800;
@@ -2162,7 +2162,7 @@ html {
   isolation:isolate;
   border:1px solid rgba(255,255,255,.72);
   border-radius:28px;
-  background:#233875;
+  background:#324594;
   box-shadow:0 18px 42px rgba(30,48,112,.16),0 3px 10px rgba(30,48,112,.08);
   transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease;
 }
@@ -2244,14 +2244,14 @@ html {
   transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
 }
 .school-segment-card__button--blue {
-  background:linear-gradient(135deg,#2864c5,#17418f);
+  background:linear-gradient(135deg,#324594,#324594);
   color:#fff;
   box-shadow:0 9px 24px rgba(8,25,70,.3),inset 0 1px rgba(255,255,255,.22);
 }
 .school-segment-card__button--yellow {
   border-color:rgba(255,241,44,.75);
   background:linear-gradient(135deg,#fff76a,#ffe91a);
-  color:#172b69;
+  color:#324594;
   box-shadow:0 9px 24px rgba(8,25,70,.3),inset 0 1px rgba(255,255,255,.5);
 }
 .school-segment-card__button:hover { transform:translateY(-3px); filter:brightness(1.06); box-shadow:0 14px 28px rgba(8,25,70,.36); }
@@ -2356,7 +2356,7 @@ html {
   filter:drop-shadow(0 3px 5px rgba(22,38,92,.42)) drop-shadow(0 0 10px rgba(255,223,0,.38));
 }
 .section-spark--identity-heading {
-  color:#1855c7;
+  color:#324594;
   filter:drop-shadow(0 3px 5px rgba(13,35,91,.42)) drop-shadow(0 0 10px rgba(24,85,199,.28));
 }
 @media (max-width:767px) {
@@ -2543,7 +2543,7 @@ html {
 }
 .school-dream-heading {
   margin:-.55rem auto 1.5rem;
-  color:#293d91;
+  color:#324594;
   font-family:var(--font-display,inherit);
   font-size:clamp(1.35rem,2.5vw,1.9rem);
   font-weight:850;
@@ -2624,17 +2624,17 @@ main .learning-word-stack p.learning-word {
 /* Os banners preservam o fundo institucional enquanto as fotografias carregam. */
 .hero-home,
 .school-page-hero {
-  background-color:#263878;
+  background-color:#324594;
 }
 .page-hero {
-  background-color:#293d91;
+  background-color:#324594;
 }
 
 
 /* Camadas explícitas dos slides dos cards: crossfade sem depender de z-index negativo. */
 .experience-card {
   isolation:isolate;
-  background-color:#263878;
+  background-color:#324594;
 }
 .experience-card__background--slideshow {
   z-index:0 !important;
@@ -2778,7 +2778,7 @@ main .learning-word-stack p.learning-word {
 }
 
 .school-page-hero__image {
-  background-color:#263878;
+  background-color:#324594;
 }
 
 
@@ -2826,7 +2826,7 @@ main .learning-word-stack p.learning-word {
   padding:0 20px;
   border:1px solid rgba(255,255,255,.28);
   border-radius:999px;
-  background:linear-gradient(135deg,#2864c5,#17418f);
+  background:linear-gradient(135deg,#324594,#324594);
   color:#fff;
   font-size:.76rem;
   font-weight:850;
@@ -3044,7 +3044,7 @@ main .learning-word-stack p.learning-word {
 .history-scroll-stage:after { bottom:-45%; left:-12%; border-color:rgba(255,255,255,.13); box-shadow:0 0 0 34px rgba(255,255,255,.025); }
 .history-scroll-stage.is-testimonials {
   background:#f8f9fd;
-  color:#17336f;
+  color:#324594;
 }
 .history-scroll-stage.is-testimonials:before,
 .history-scroll-stage.is-testimonials:after { border-color:rgba(50,69,148,.10); box-shadow:0 0 0 32px rgba(50,69,148,.025); }
@@ -3084,7 +3084,7 @@ main .learning-word-stack p.learning-word {
 }
 .history-scroll-heading {
   margin:.25rem 0 1.25rem;
-  color:#17336f;
+  color:#324594;
   font-family:"Poppins",sans-serif;
   font-size:clamp(2rem,4vw,3.1rem);
   font-weight:850;
@@ -3992,7 +3992,7 @@ section.history-scroll-section {
   transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 .routine-card--yellow { --routine-color: #e6b91e; }
-.routine-card--blue { --routine-color: #324fbb; }
+.routine-card--blue { --routine-color: #324594; }
 .routine-card--green { --routine-color: #279b75; }
 .routine-card--purple { --routine-color: #8562c7; }
 .routine-card__progress {
@@ -4575,13 +4575,13 @@ section.history-scroll-section {
 
 /* Banner exclusivo da página de contato */
 .page-hero.contact-page-hero {
-  background-image: linear-gradient(90deg, rgba(24, 39, 101, .82), rgba(34, 52, 125, .38)), url("/imagens/Homenagem-ao-Professor-com-Sorriso.webp");
+  background-image: linear-gradient(90deg, rgba(50, 69, 148, .82), rgba(50, 69, 148, .38)), url("/imagens/Homenagem-ao-Professor-com-Sorriso.webp");
   background-size: cover;
   background-position: center 70px;
 }
 @media (max-width: 767px) {
   .page-hero.contact-page-hero {
-    background-image: linear-gradient(180deg, rgba(24, 39, 101, .72), rgba(34, 52, 125, .38)), url("/imagens/Professor-Sorridente-com-Cartão-Colorido.webp");
+    background-image: linear-gradient(180deg, rgba(50, 69, 148, .72), rgba(50, 69, 148, .38)), url("/imagens/Professor-Sorridente-com-Cartão-Colorido.webp");
     background-position: 76% 15%;
   }
 }
@@ -4636,7 +4636,7 @@ section.history-scroll-section {
   background:
     radial-gradient(ellipse at 8% 12%, rgba(255,241,44,.18), transparent 30%),
     radial-gradient(ellipse at 88% 82%, rgba(124,151,255,.28), transparent 34%),
-    linear-gradient(118deg, #243879 0%, #324594 48%, #263b83 100%);
+    linear-gradient(118deg, #324594 0%, #324594 48%, #324594 100%);
 }
 .home-final-cta::before,
 .home-final-cta::after {
@@ -4696,7 +4696,7 @@ section.history-scroll-section {
   .site-header--overlay.is-menu-open {
     height: 100dvh;
     min-height: 100vh;
-    background: #0d3d73 !important;
+    background: #324594 !important;
     box-shadow: none !important;
     overflow: hidden;
   }
@@ -4747,7 +4747,7 @@ section.history-scroll-section {
     opacity: 0;
     visibility: hidden;
     transform: translate3d(0,12px,0);
-    background: #0d3d73 !important;
+    background: #324594 !important;
     box-shadow: none !important;
     transition: opacity .32s ease, transform .42s cubic-bezier(.22,1,.36,1), visibility .32s !important;
   }
