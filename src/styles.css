@@ -5628,3 +5628,26 @@ main .learning-word-stack .learning-word {
     line-height: 1.55 !important;
   }
 }
+
+
+/* Mobile: uma etapa por gesto nas duas sequências da página inicial. */
+.mobile-learning-sequence { display: none; }
+@media (max-width: 767px) {
+  html { scroll-snap-type: y mandatory; scroll-padding-top: 0; }
+  section.history-scroll-section .mobile-history-panel,
+  section.learning-words-section .mobile-learning-panel { scroll-snap-align: start; scroll-snap-stop: always; }
+  section.learning-words-section { height: auto !important; min-height: 0 !important; overflow: visible !important; }
+  section.learning-words-section .mobile-learning-sequence { display: block !important; width: 100%; }
+  section.learning-words-section .mobile-learning-panel {
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    width: 100% !important; min-height: 100svh !important; height: 100svh !important;
+    padding: 5rem 1.5rem 3rem !important; box-sizing: border-box !important;
+    background: #012969 !important; color: #fff12c !important; text-align: center !important;
+  }
+  section.learning-words-section .mobile-learning-panel .learning-word {
+    margin: 0 !important; color: #fff12c !important; font-family: "Satisfy", "Segoe Script", cursive !important;
+    font-size: clamp(4.5rem, 17vw, 7rem) !important; line-height: 1.04 !important; letter-spacing: -.055em !important;
+  }
+  section.learning-words-section .learning-words-sticky { display: none !important; }
+}
+@media (min-width: 768px) { html { scroll-snap-type: none; } }
