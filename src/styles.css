@@ -2576,6 +2576,12 @@ main .learning-word-stack p.learning-word {
   line-height:1;
   letter-spacing:-.065em;
 }
+
+/* Fonte cursiva aplicada somente às palavras Crescer, Aprender, Criar e Vivenciar.
+   O tamanho e as demais proporções originais permanecem preservados. */
+main .learning-word-stack p.learning-word {
+  font-family: "Caveat", "Segoe Script", cursive;
+}
 @media (max-width:767px) {
   main .learning-word-stack p.learning-word {
     font-size:clamp(3.8rem,14vw,6rem) !important;
@@ -4609,15 +4615,6 @@ section.history-scroll-section {
   }
 }
 
-
-/* Tipografia cursiva legível para a chamada da história, sem alterar seu tamanho. */
-.history-scroll-story .history-highlight__eyebrow {
-  font-family: "Caveat", "Segoe Script", cursive !important;
-  font-size: .78rem;
-  font-weight: 700;
-  letter-spacing: .02em;
-  text-transform: none;
-}
 
 /* Navegação desktop com texto ligeiramente maior e mais respiro entre páginas. */
 @media (min-width: 1024px) {
