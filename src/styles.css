@@ -5090,3 +5090,79 @@ section.history-scroll-section {
     font-size: clamp(1.55rem, 6vw, 2.15rem) !important;
   }
 }
+
+
+/* Menu mobile: logotipo maior, navegação mais destacada e transições suaves. */
+@media (max-width: 1023px) {
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 15.5rem !important;
+    height: 10.5rem !important;
+    top: -1.35rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 15rem !important;
+    height: 10rem !important;
+    object-fit: contain !important;
+    object-position: center top !important;
+  }
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    scroll-behavior: smooth;
+    transition:
+      opacity .38s ease,
+      transform .52s cubic-bezier(.22,1,.36,1),
+      visibility .38s !important;
+  }
+  .mobile-menu-panel__links {
+    gap: clamp(.8rem, 2.2vh, 1.25rem) !important;
+    padding-top: .65rem !important;
+    padding-bottom: 1rem !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(1.9rem, 6.8vw, 2.85rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -.04em !important;
+    transition:
+      opacity .34s ease,
+      transform .48s cubic-bezier(.22,1,.36,1),
+      color .28s ease !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link-active {
+    color: #fff12c !important;
+  }
+  .mobile-menu-panel__integral {
+    gap: .6rem !important;
+  }
+  .mobile-menu-panel__integral svg {
+    width: 1.2rem !important;
+    height: 1.2rem !important;
+  }
+  .site-main.page-transition-enter {
+    animation: giMobilePageEnter .58s cubic-bezier(.22,1,.36,1) both;
+  }
+}
+@media (max-width: 420px) {
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 14rem !important;
+    height: 9.7rem !important;
+    top: -1.2rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 13.5rem !important;
+    height: 9.2rem !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(1.8rem, 6.6vw, 2.35rem) !important;
+  }
+}
+@keyframes giMobilePageEnter {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-main.page-transition-enter {
+    animation: none !important;
+  }
+}
