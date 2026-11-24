@@ -5423,3 +5423,29 @@ main .learning-word-stack .learning-word {
     transition: opacity .28s ease, transform .38s cubic-bezier(.22,1,.36,1) !important;
   }
 }
+
+
+/* Acabamento final dos depoimentos e do contador de história. */
+section.history-scroll-section .history-scroll-card .testimonial-card__person small.testimonial-card__source {
+  display:inline-flex !important;
+  align-items:center;
+  gap:.35rem;
+  margin-top:.2rem;
+  color:#7180b5 !important;
+  font-size:.7rem !important;
+  font-weight:650;
+}
+.testimonial-card__source svg {
+  flex:0 0 auto;
+  color:#5369b4;
+  stroke-width:2.1;
+}
+.history-counter__plus {
+  font-size:clamp(5.4rem,15vw,10.8rem) !important;
+  line-height:.88;
+}
+@media (max-width:767px) {
+  .history-counter__plus {
+    font-size:clamp(5.2rem,24vw,7.8rem) !important;
+  }
+}
