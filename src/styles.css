@@ -3209,7 +3209,7 @@ main .learning-word-stack p.learning-word {
     margin-top: 1.5rem;
   }
   .history-scroll-story .history-counter__number {
-    font-size: clamp(7.5rem, 30vw, 11.5rem);
+    font-size: clamp(9rem, 34vw, 13rem);
   }
   .history-scroll-story .history-counter__plus {
     font-size: clamp(3.3rem, 12vw, 5rem);
@@ -3226,7 +3226,7 @@ main .learning-word-stack p.learning-word {
 }
 @media (max-width: 380px) {
   .history-scroll-story .history-counter { gap: .25rem; }
-  .history-scroll-story .history-counter__number { font-size: clamp(6.5rem, 28vw, 7.5rem); }
+  .history-scroll-story .history-counter__number { font-size: clamp(8rem, 32vw, 9.5rem); }
   .history-scroll-story .history-counter__plus { font-size: 3rem; }
   .history-scroll-story .history-counter__suffix { font-size: 1.2rem; }
 }
@@ -4670,4 +4670,14 @@ section.history-scroll-section {
 }
 .home-final-cta a {
   box-shadow: 0 12px 28px rgba(8,18,56,.22);
+}
+
+
+/* Contato: centraliza verticalmente o conteúdo do banner apenas no desktop.
+   O enquadramento e o posicionamento mobile permanecem como estavam. */
+@media (min-width: 768px) {
+  .page-hero.contact-page-hero .page-hero__content {
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+  }
 }
