@@ -5209,3 +5209,75 @@ section.history-scroll-section {
     max-width: calc(100% - 25rem) !important;
   }
 }
+
+
+/* Contato mobile: sombra azul mais intensa na base, subindo suavemente
+   para transparente, no mesmo sentido visual dos demais banners. */
+@media (max-width: 767px) {
+  .page-hero.contact-page-hero {
+    background-image:
+      linear-gradient(0deg, rgba(1, 41, 105, .76) 0%, rgba(1, 41, 105, .42) 48%, rgba(1, 41, 105, .12) 100%),
+      url("/imagens/Professor-Sorridente-com-Cartão-Colorido.webp") !important;
+  }
+}
+
+/* Refinamento premium do menu mobile: abertura/fechamento com movimento contínuo,
+   links escalonados e botão de menu com resposta suave. */
+@media (max-width: 1023px) {
+  .site-header--overlay {
+    transition: background-color .42s ease, box-shadow .42s ease !important;
+  }
+  .site-header--overlay.is-menu-open {
+    background: #012969 !important;
+    transition: background-color .42s ease, box-shadow .42s ease !important;
+  }
+  .site-header--overlay .header-menu {
+    transition: color .28s ease, background-color .28s ease, border-color .28s ease,
+      transform .38s cubic-bezier(.22,1,.36,1) !important;
+  }
+  .site-header--overlay .header-menu:active {
+    transform: scale(.92);
+  }
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, 1.25rem, 0) scale(.985);
+    transform-origin: top center;
+    transition:
+      opacity .38s ease,
+      transform .52s cubic-bezier(.22,1,.36,1),
+      visibility 0s linear .52s !important;
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+  }
+  .mobile-menu-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0) scale(1);
+    transition:
+      opacity .38s ease,
+      transform .52s cubic-bezier(.22,1,.36,1),
+      visibility 0s linear 0s !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    will-change: opacity, transform;
+    transition:
+      opacity .32s ease,
+      transform .46s cubic-bezier(.22,1,.36,1),
+      color .25s ease !important;
+  }
+  .site-main.page-transition-enter {
+    animation: giMobilePageEnter .62s cubic-bezier(.22,1,.36,1) both !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open,
+  .mobile-menu-panel .mobile-menu-panel__link,
+  .site-header--overlay,
+  .site-header--overlay .header-menu {
+    transition: none !important;
+    transform: none !important;
+  }
+}
