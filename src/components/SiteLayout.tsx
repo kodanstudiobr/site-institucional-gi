@@ -164,7 +164,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             <img src="/imagens/logo-gi.svg" alt="Logotipo do Instituto Educacional G.I." className="h-24 w-24 object-contain"/>
             <h2 className="mt-3 font-display text-xl font-bold text-white">Instituto Educacional G.I.</h2>
             <p className="mt-2 max-w-sm text-sm leading-6 text-white/80">Educação que acolhe, ensina e transforma vidas.<br/>Uma jornada de descobertas, conhecimento e desenvolvimento.</p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <div className="mt-6 hidden flex-wrap justify-center gap-3 lg:flex">
               <a href={whatsappUrl} target="_blank" rel="noreferrer" className="gi-footer__primary-cta">FAÇA SUA MATRÍCULA</a>
               <a href={`mailto:${institutionalConfig.email}`} className="gi-footer__secondary-cta">FALE COM A NOSSA EQUIPE</a>
             </div>
