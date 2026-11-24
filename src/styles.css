@@ -4907,3 +4907,32 @@ section.history-scroll-section {
     height: 8rem !important;
   }
 }
+
+
+/* Ajustes finos do cabeçalho e do banner de contato — desktop. */
+@media (min-width: 1024px) {
+  /* Sobe levemente os links e o botão de matrícula sem mover o logotipo. */
+  .site-header nav[aria-label="Navegação principal"],
+  .site-header .header-cta {
+    transform: translateY(-7px);
+  }
+
+  /* Remove apenas o círculo decorativo do banner de contato. */
+  .page-hero.contact-page-hero::after {
+    display: none !important;
+  }
+
+  /* Centraliza o conjunto de textos na área útil do banner, abaixo do header. */
+  .page-hero.contact-page-hero {
+    min-height: 620px;
+    background-position: center top !important;
+  }
+  .page-hero.contact-page-hero .page-hero__content {
+    display: flex;
+    min-height: 620px;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
