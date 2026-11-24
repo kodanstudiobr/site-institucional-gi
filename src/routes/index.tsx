@@ -117,7 +117,7 @@ function HistoryTestimonials() {
       <div className="history-scroll-story" style={{ opacity: 1 - reveal(0.20, 0.26), visibility: progress < 0.26 ? "visible" : "hidden" }}>
         <p className="history-highlight__eyebrow history-story-item" style={{ opacity: reveal(0.005, 0.045), transform: `translateY(${(1 - reveal(0.005, 0.045)) * 22}px)` }}>Uma história que continua crescendo</p>
         <div className="history-counter history-story-item" style={{ opacity: reveal(0.055, 0.13), transform: `translateY(${(1 - reveal(0.055, 0.13)) * 24}px)`}>
-          <span className="history-counter__value"><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={reveal(0.055, 0.13)}/></span>
+          <span className="history-counter__value"><><span className="history-counter__plus" aria-hidden="true">+</span><AnimatedHistoryYears progress={reveal(0.055, 0.13)}/></></span>
         </div>
         <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: reveal(0.055, 0.13), transform: `translateY(${(1 - reveal(0.055, 0.13)) * 20}px)` }}>anos de história</p>
       </div>
