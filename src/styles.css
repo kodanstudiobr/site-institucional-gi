@@ -5376,3 +5376,48 @@ main .learning-word-stack .learning-word {
     letter-spacing: -.055em !important;
   }
 }
+
+
+/* Mobile: depoimentos avançam um cartão por gesto, sem progressão contínua.
+   Cards menores para manter o conteúdo equilibrado na tela. */
+@media (max-width: 767px) {
+  section.history-scroll-section .history-scroll-cards {
+    height: 245px !important;
+    max-height: 245px !important;
+    margin-top: .45rem !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 3.25rem), 300px) !important;
+    max-width: 300px !important;
+    min-height: 205px !important;
+    padding: .85rem !important;
+    border-radius: 1.1rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+    margin-block: .65rem .75rem !important;
+    font-size: .78rem !important;
+    line-height: 1.48 !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person {
+    gap: .5rem !important;
+    padding-top: .6rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__avatar {
+    width: 32px !important;
+    height: 32px !important;
+    flex-basis: 32px !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__avatar svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person strong {
+    font-size: .76rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person small {
+    font-size: .62rem !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    transition: opacity .28s ease, transform .38s cubic-bezier(.22,1,.36,1) !important;
+  }
+}
