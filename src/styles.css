@@ -5296,3 +5296,83 @@ main .learning-word-stack p.learning-word {
     letter-spacing: -.055em !important;
   }
 }
+
+
+/* Depoimentos reais: quatro cartões com leitura confortável e revelação progressiva
+   calibrada para o percurso de rolagem, inclusive em telas mobile. */
+section.history-scroll-section .history-scroll-card {
+  width: min(100%, 690px) !important;
+  min-height: 250px !important;
+}
+section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+  font-size: .96rem !important;
+  line-height: 1.72 !important;
+}
+section.history-scroll-section .history-scroll-card .testimonial-card__person small {
+  text-transform: none !important;
+}
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    height: 1450svh !important;
+  }
+  section.history-scroll-section .history-scroll-testimonials {
+    padding: 1rem .8rem !important;
+  }
+  section.history-scroll-section .history-scroll-heading {
+    max-width: 18ch;
+    margin-bottom: .9rem !important;
+    font-size: clamp(1.65rem, 6.4vw, 2.05rem) !important;
+  }
+  section.history-scroll-section .history-scroll-cards {
+    width: 100% !important;
+    height: clamp(285px, 43svh, 350px) !important;
+    margin-top: .7rem !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    width: min(calc(100% - 1.5rem), 350px) !important;
+    max-width: 350px !important;
+    min-height: 265px !important;
+    padding: 1.1rem !important;
+    border-radius: 1.25rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+    margin-block: .85rem 1rem !important;
+    font-size: .86rem !important;
+    line-height: 1.58 !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person {
+    gap: .6rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person strong {
+    font-size: .82rem !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__person small {
+    font-size: .68rem !important;
+  }
+  section.history-scroll-section .history-scroll-card--1,
+  section.history-scroll-section .history-scroll-card--2,
+  section.history-scroll-section .history-scroll-card--3,
+  section.history-scroll-section .history-scroll-card--4 {
+    left: 50% !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  section.history-scroll-section .history-scroll-card,
+  section.history-scroll-section .history-scroll-testimonials {
+    transition: none !important;
+  }
+}
+
+/* Palavras da aprendizagem: mesma fonte em desktop e mobile, sem substituição tipográfica. */
+main .learning-word-stack .learning-word {
+  font-family: "Satisfy", "Segoe Script", cursive !important;
+  font-synthesis: none;
+}
+@media (max-width: 767px) {
+  main .learning-word-stack .learning-word {
+    font-family: "Satisfy", "Segoe Script", cursive !important;
+    font-size: clamp(4.5rem, 17vw, 7rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -.055em !important;
+  }
+}
