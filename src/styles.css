@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -2580,7 +2580,7 @@ main .learning-word-stack p.learning-word {
 /* Fonte cursiva aplicada somente às palavras Crescer, Aprender, Criar e Vivenciar.
    O tamanho e as demais proporções originais permanecem preservados. */
 main .learning-word-stack p.learning-word {
-  font-family: "Caveat", "Segoe Script", cursive;
+  font-family: "Satisfy", "Segoe Script", cursive;
 }
 @media (max-width:767px) {
   main .learning-word-stack p.learning-word {
@@ -4621,4 +4621,49 @@ section.history-scroll-section {
   .site-header .nav-link {
     font-size: .9rem;
   }
+}
+
+
+/* Seção final da página inicial: fundo azul com profundidade e elementos gráficos suaves. */
+.home-final-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 8% 12%, rgba(255,241,44,.18), transparent 30%),
+    radial-gradient(ellipse at 88% 82%, rgba(124,151,255,.28), transparent 34%),
+    linear-gradient(118deg, #243879 0%, #324594 48%, #263b83 100%);
+}
+.home-final-cta::before,
+.home-final-cta::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+.home-final-cta::before {
+  width: 420px;
+  height: 420px;
+  right: -100px;
+  top: -210px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 50%;
+  box-shadow: 0 0 0 34px rgba(255,255,255,.035), 0 0 0 72px rgba(255,255,255,.025);
+}
+.home-final-cta::after {
+  inset: 0;
+  opacity: .18;
+  background-image: radial-gradient(rgba(255,255,255,.55) .8px, transparent .8px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 75%);
+}
+.home-final-cta__content {
+  position: relative;
+  z-index: 1;
+}
+.home-final-cta .eyebrow {
+  text-shadow: 0 2px 12px rgba(0,0,0,.16);
+}
+.home-final-cta a {
+  box-shadow: 0 12px 28px rgba(8,18,56,.22);
 }
