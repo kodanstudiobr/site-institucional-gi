@@ -5002,3 +5002,16 @@ section.history-scroll-section {
     height: 9rem !important;
   }
 }
+
+
+/* Página Contato: centraliza horizontalmente o botão amarelo do WhatsApp no mobile,
+   preservando sua posição vertical e sem afetar o desktop. */
+@media (max-width: 767px) {
+  body:has(.contact-page-hero) a[href*="wa.me"],
+  body:has(.contact-page-hero) a[href*="whatsapp"] {
+    display: flex !important;
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
