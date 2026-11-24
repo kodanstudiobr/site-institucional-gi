@@ -52,24 +52,32 @@ function HistoryTestimonials() {
     if (!section) return;
     let frame = 0;
     const update = () => {
-      cancelAnimationFrame(frame);
+      if (frame) cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const rect = section.getBoundingClientRect();
-        const distance = Math.max(1, rect.height - window.innerHeight);
-        setProgress(Math.min(1, Math.max(0, -rect.top / distance)));
+        const stage = section.querySelector<HTMLElement>(".history-scroll-stage");
+        const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+        const travel = Math.max(1, section.offsetHeight - (stage?.offsetHeight ?? window.innerHeight));
+        const nextProgress = (window.scrollY - sectionTop) / travel;
+        setProgress(Math.min(1, Math.max(0, nextProgress)));
+        frame = 0;
       });
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
     return () => {
-      cancelAnimationFrame(frame);
+      if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
   }, []);
 
-  const cards = ["Família da Educação Infantil", "Família dos Anos Iniciais", "Família G.I."];
+  const cards = [
+    { name: "Rosany Santos", source: "Via Instagram", quote: "Meu filho começou a estudar tinha 2 anos e esse ano é o último ano dele lá. Já estou com saudades dessa turma, amo todas e agradeço demais por tudo 😍" },
+    { name: "Vivianne Aluska", source: "Via Facebook", quote: "Escola maravilhosa, primeiro ano do meu filho lá e eu já posso ver a diferença no crescimento e desenvolvimento dele nas atividades, na fala principalmente, no relacionamento com as outras crianças, na educação como um todo." },
+    { name: "Fátima Araújo", source: "Via Facebook", quote: "Uma instituição diferenciada e muito humanizada." },
+    { name: "Nazareth Di Maria", source: "Via Instagram", quote: "Escola bem conceituada, equipe bem preparada, enfim, pais e familiares satisfeitos." },
+  ];
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
   // A história dos 25 anos permanece mais tempo em destaque antes da transição para os depoimentos.
   const storyEyebrowProgress = reveal(0.005, 0.045);
@@ -82,13 +90,14 @@ function HistoryTestimonials() {
   const testimonialHeadingProgress = reveal(0.43, 0.48);
   // Cada card ganha seu próprio trecho de rolagem, um de cada vez.
   const cardProgress = (index: number) => {
-    const starts = [0.57, 0.72, 0.87];
-    return reveal(starts[index], starts[index] + 0.09);
+    const starts = [0.54, 0.65, 0.76, 0.87];
+    return reveal(starts[index], starts[index] + 0.075);
   };
   const cardOffsets = [
-    { x: -34, y: 9, rotation: -5 },
-    { x: 20, y: 2, rotation: 4 },
-    { x: 5, y: -5, rotation: -2 },
+    { x: -28, y: 8, rotation: -4 },
+    { x: 18, y: 3, rotation: 3 },
+    { x: -12, y: -4, rotation: -2 },
+    { x: 8, y: -7, rotation: 2 },
   ];
 
   return <section ref={sectionRef} className="history-scroll-section" aria-label="Nossa história e depoimentos">
@@ -104,11 +113,11 @@ function HistoryTestimonials() {
         <p className="history-scroll-kicker" style={{ opacity: testimonialKickerProgress, transform: `translateY(${(1 - testimonialKickerProgress) * 18}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
         <h2 className="history-scroll-heading" style={{ opacity: testimonialHeadingProgress, transform: `translateY(${(1 - testimonialHeadingProgress) * 20}px)` }}>E cada família faz parte delas.</h2>
         <div className="history-scroll-cards">
-          {cards.map((label, index) => {
+          {cards.map((testimonial, index) => {
             const cardReveal = cardProgress(index);
             const offset = cardOffsets[index];
             return <article
-              key={label}
+              key={testimonial.name}
               className={`testimonial-card history-scroll-card history-scroll-card--${index + 1}`}
               aria-hidden={cardReveal < 0.05}
               style={{
@@ -119,8 +128,8 @@ function HistoryTestimonials() {
               }}
             >
               <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
-              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 12}px)` }}>“Aqui será inserido o depoimento real de uma família, contando sua experiência com o Instituto Educacional G.I.”</p>
-              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{label}</strong><small>Nome do responsável será adicionado</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+              <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 12}px)` }}>“{testimonial.quote}”</p>
+              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
             </article>;
           })}
         </div>
