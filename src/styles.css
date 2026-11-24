@@ -4616,10 +4616,14 @@ section.history-scroll-section {
 }
 
 
-/* Navegação desktop com texto ligeiramente maior e mais respiro entre páginas. */
+/* Navegação desktop: itens mais espaçados e tipografia maior, sem alterar o menu mobile. */
 @media (min-width: 1024px) {
+  .site-header nav[aria-label="Navegação principal"] {
+    gap: 1.65rem !important;
+  }
   .site-header .nav-link {
-    font-size: .9rem;
+    font-size: 1rem !important;
+    letter-spacing: .005em;
   }
 }
 
