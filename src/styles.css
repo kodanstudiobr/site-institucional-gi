@@ -5629,3 +5629,9 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     justify-self: end !important;
   }
 }
+
+
+/* Na página Contato, não exibir a chamada de matrícula no rodapé. */
+.gi-footer--contact .gi-footer__primary-cta {
+  display: none !important;
+}
