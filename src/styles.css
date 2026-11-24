@@ -5166,3 +5166,28 @@ section.history-scroll-section {
     animation: none !important;
   }
 }
+
+
+/* Menu mobile: posiciona o divisor logo abaixo da marca e destaca um pouco mais os links. */
+@media (max-width: 1023px) {
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    padding-top: 9.55rem !important;
+  }
+  .mobile-menu-panel__divider {
+    margin-top: .1rem !important;
+    margin-bottom: .9rem !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(2rem, 7vw, 3rem) !important;
+  }
+}
+@media (max-width: 420px) {
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    padding-top: 9.1rem !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(1.9rem, 6.8vw, 2.45rem) !important;
+  }
+}
