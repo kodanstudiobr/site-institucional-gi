@@ -17,8 +17,46 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const [scrolled, setScrolled] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [cookieVisible, setCookieVisible] = useState(false);
+  const [preloaderVisible, setPreloaderVisible] = useState(true);
+  const [preloaderLeaving, setPreloaderLeaving] = useState(false);
+  const [gigiWinking, setGigiWinking] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
+
+  useEffect(() => {
+    const visitKey = "gi-preloader-seen";
+    try {
+      if (window.sessionStorage.getItem(visitKey)) {
+        setPreloaderVisible(false);
+        return;
+      }
+      window.sessionStorage.setItem(visitKey, "1");
+    } catch { /* Se o armazenamento estiver indisponível, o preloader funciona nesta visita. */ }
+
+    let active = true;
+    const startedAt = Date.now();
+    const imagePaths = ["/imagens/gigi-mascote-normal.PNG", "/imagens/gigi-mascote-piscando.png"];
+    const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
+      const image = new Image();
+      image.onload = () => resolve();
+      image.onerror = () => resolve();
+      image.src = src;
+      if (image.complete) resolve();
+    })));
+    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 1900));
+    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 3200));
+    Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
+      if (!active) return;
+      setPreloaderLeaving(true);
+      window.setTimeout(() => { if (active) setPreloaderVisible(false); }, 550);
+    });
+    const blink = window.setInterval(() => {
+      if (!active) return;
+      setGigiWinking(true);
+      window.setTimeout(() => { if (active) setGigiWinking(false); }, 230);
+    }, 2850);
+    return () => { active = false; window.clearInterval(blink); };
+  }, []);
 
   useEffect(() => {
     try {
@@ -132,6 +170,14 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
+      {preloaderVisible && <div className={`gi-preloader ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
+        <div className="gi-preloader__content">
+          <img className={`gi-preloader__mascot ${gigiWinking ? "is-winking" : ""}`} src={gigiWinking ? "/imagens/gigi-mascote-piscando.png" : "/imagens/gigi-mascote-normal.PNG"} alt="Gigi, mascote do Instituto Educacional G.I." fetchPriority="high" />
+          <p className="gi-preloader__title">Olá! Eu sou a Gigi!</p>
+          <p className="gi-preloader__message">Estamos preparando tudo para você...</p>
+          <div className="gi-preloader__track"><span /></div>
+        </div>
+      </div>}
       <header className={headerClass}>
         <div className={`mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 transition-all duration-300 lg:px-8 ${compactHeader ? "py-1.5" : "py-3"}`}>
           <Link to="/" className={`flex shrink-0 items-center justify-start transition-all duration-300 ${compactHeader ? "h-16 w-20 sm:h-16 sm:w-20 2xl:h-24 2xl:w-24" : "h-32 w-36 sm:h-24 sm:w-28 2xl:h-40 2xl:w-40"}`} onClick={(event) => { setMenuOpen(false); if (pathname === "/") { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } }}>
