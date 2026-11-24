@@ -446,17 +446,17 @@ function Index() {
       <div className="structure-carousel mt-12" aria-label="Galeria da estrutura da escola">
         <div className="structure-carousel__track">
           {[
-            { src: "/imagens/IMG_4025.webp", alt: "Sala climatizada do Instituto Educacional G.I.", title: "Salas climatizadas" },
-            { src: "/imagens/IMG_4024.webp", alt: "Parquinho do Instituto Educacional G.I.", title: "Parquinho" },
-            { src: "/imagens/IMG_4023.webp", alt: "Quadra esportiva do Instituto Educacional G.I.", title: "Quadra Esportiva" },
+            { src: "/imagens/IMG_4025.webp", alt: "Quadra esportiva do Instituto Educacional G.I.", title: "Quadra Esportiva" },
+            { src: "/imagens/IMG_4024.webp", alt: "Sala climatizada do Instituto Educacional G.I.", title: "Salas climatizadas" },
+            { src: "/imagens/IMG_4023.webp", alt: "Parquinho do Instituto Educacional G.I.", title: "Parquinho" },
           ].map((slide) => <figure className="structure-carousel__slide" key={slide.src}>
             <img src={slide.src} alt={slide.alt} loading="lazy" decoding="async" />
             <figcaption>{slide.title}</figcaption>
           </figure>)}
           {[
-            { src: "/imagens/IMG_4025.webp", title: "Salas climatizadas" },
-            { src: "/imagens/IMG_4024.webp", title: "Parquinho" },
-            { src: "/imagens/IMG_4023.webp", title: "Quadra Esportiva" },
+            { src: "/imagens/IMG_4025.webp", title: "Quadra Esportiva" },
+            { src: "/imagens/IMG_4024.webp", title: "Salas climatizadas" },
+            { src: "/imagens/IMG_4023.webp", title: "Parquinho" },
           ].map((slide) => <figure className="structure-carousel__slide" key={`duplicate-${slide.src}`} aria-hidden="true">
             <img src={slide.src} alt="" loading="lazy" decoding="async" />
             <figcaption>{slide.title}</figcaption>
