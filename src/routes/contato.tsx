@@ -22,6 +22,7 @@ export const Route = createFileRoute("/contato")({
 });
 
 function Contato() {
+  const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
   const mapQuery = encodeURIComponent("Avenida Floriano Peixoto, 230 - Jaguaribe, João Pessoa - PB, Brasil");
   const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
   const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${mapQuery}`;
@@ -37,11 +38,11 @@ function Contato() {
           <div className="mt-8 space-y-6">
             <div className="contact-item"><MapPin/><div><strong>Endereço</strong><p>{institutionalConfig.address}</p></div></div>
             <div className="contact-item"><Phone/><div><strong>Telefone fixo</strong><p><a className="transition hover:text-primary" href="tel:+558321825088">{institutionalConfig.phone}</a></p></div></div>
-            <div className="contact-item"><WhatsAppIcon/><div><strong>WhatsApp</strong><p><a className="transition hover:text-primary" href={`https://wa.me/${institutionalConfig.whatsapp}`} target="_blank" rel="noreferrer">(83) 99420-0019</a></p></div></div>
+            <div className="contact-item"><WhatsAppIcon/><div><strong>WhatsApp</strong><p><a className="transition hover:text-primary" href={whatsappUrl} target="_blank" rel="noreferrer">(83) 99420-0019</a></p></div></div>
             <div className="contact-item"><Mail/><div><strong>E-mail</strong><p><a className="transition hover:text-primary" href={`mailto:${institutionalConfig.email}`}>{institutionalConfig.email}</a></p></div></div>
             <div className="contact-item"><Instagram/><div><strong>Instagram</strong><p><a className="transition hover:text-primary" href="https://www.instagram.com/institutoeducacionalgi/" target="_blank" rel="noreferrer">{institutionalConfig.instagram}</a></p></div></div>
           </div>
-          <a href={`https://wa.me/${institutionalConfig.whatsapp}`} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><WhatsAppIcon size={26}/> Fale pelo WhatsApp</a>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"><WhatsAppIcon size={26}/> Fale pelo WhatsApp</a>
         </div>
         <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-xl">
           <div className="flex items-center gap-3 px-5 py-4 md:px-6">
