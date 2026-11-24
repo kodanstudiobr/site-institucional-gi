@@ -5421,3 +5421,101 @@ main .learning-word-stack .learning-word {
     transition: opacity .28s ease, transform .38s cubic-bezier(.22,1,.36,1) !important;
   }
 }
+
+
+/* Sequência mobile da história e dos depoimentos: uma tela inteira por gesto.
+   Sem revelação progressiva, sobreposição ou transição contínua de elementos. */
+@media (max-width: 767px) {
+  section.history-scroll-section {
+    height: 900svh !important;
+    min-height: 900svh !important;
+    background: #012969 !important;
+  }
+  section.history-scroll-section .history-scroll-stage {
+    height: 100svh !important;
+    min-height: 100svh !important;
+    background: #012969 !important;
+    color: #fff !important;
+    transition: none !important;
+  }
+  section.history-scroll-section .history-scroll-stage::before,
+  section.history-scroll-section .history-scroll-stage::after {
+    display: none !important;
+  }
+  section.history-scroll-section .history-scroll-stage.is-testimonials {
+    background: #fff !important;
+    color: #012969 !important;
+  }
+  section.history-scroll-section .history-scroll-stage.is-blank {
+    background: #fff !important;
+  }
+  section.history-scroll-section .history-scroll-story,
+  section.history-scroll-section .history-scroll-testimonials,
+  section.history-scroll-section .history-story-item,
+  section.history-scroll-section .history-scroll-kicker,
+  section.history-scroll-section .history-scroll-heading,
+  section.history-scroll-section .history-scroll-card,
+  section.history-scroll-section .history-scroll-card * {
+    transition: none !important;
+    animation: none !important;
+  }
+  section.history-scroll-section .history-scroll-story {
+    width: calc(100% - 2.5rem) !important;
+    padding: 0 !important;
+  }
+  section.history-scroll-section .history-scroll-story .history-highlight__eyebrow {
+    font-size: clamp(1.4rem, 6vw, 2rem) !important;
+    line-height: 1.3 !important;
+    letter-spacing: -.025em !important;
+  }
+  section.history-scroll-section .history-scroll-story .history-counter {
+    margin-top: 0 !important;
+  }
+  section.history-scroll-section .history-scroll-story .history-counter__number {
+    font-size: clamp(10rem, 43vw, 15rem) !important;
+    line-height: .9 !important;
+  }
+  section.history-scroll-section .history-scroll-story .history-counter__plus {
+    font-size: clamp(4rem, 17vw, 6rem) !important;
+  }
+  section.history-scroll-section .history-scroll-story .history-highlight__caption {
+    margin-top: 1rem !important;
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 1.3 !important;
+  }
+  section.history-scroll-section .history-scroll-testimonials {
+    padding: 1.5rem 1rem !important;
+    justify-content: center !important;
+  }
+  section.history-scroll-section .history-scroll-kicker {
+    font-size: clamp(1rem, 4.5vw, 1.35rem) !important;
+    line-height: 1.35 !important;
+    letter-spacing: .09em !important;
+  }
+  section.history-scroll-section .history-scroll-heading {
+    max-width: 18ch !important;
+    margin: 0 !important;
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    line-height: 1.15 !important;
+  }
+  section.history-scroll-section .history-scroll-cards {
+    width: 100% !important;
+    height: min(58svh, 430px) !important;
+    max-height: 430px !important;
+    margin: 0 !important;
+  }
+  section.history-scroll-section .history-scroll-card {
+    top: 50% !important;
+    left: 50% !important;
+    width: min(calc(100% - 1.5rem), 340px) !important;
+    min-height: 0 !important;
+    padding: 1.15rem !important;
+    border-radius: 1.2rem !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  section.history-scroll-section .history-scroll-card .testimonial-card__placeholder {
+    margin: .85rem 0 1rem !important;
+    font-size: .88rem !important;
+    line-height: 1.55 !important;
+  }
+}
