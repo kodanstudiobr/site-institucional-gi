@@ -65,6 +65,9 @@ function HistoryTestimonials() {
         const clampedProgress = Math.min(1, Math.max(0, nextProgress));
         progressRef.current = clampedProgress;
         setProgress(clampedProgress);
+        if (window.innerWidth <= 767) {
+          setMobileStep(Math.min(8, Math.max(0, Math.round(clampedProgress * 8))));
+        }
         frame = 0;
       });
     };
@@ -97,21 +100,23 @@ function HistoryTestimonials() {
 
       const direction = delta > 0 ? 1 : -1;
       const currentStep = Math.min(8, Math.max(0, Math.round(progressRef.current * 8)));
-      const nextStep = currentStep + direction;
+      const nextStep = Math.min(9, Math.max(-1, currentStep + direction));
       const sectionTop = rect.top + window.scrollY;
       const maxTravel = Math.max(1, section.offsetHeight - window.innerHeight);
       let targetTop: number;
 
-      if (nextStep < 0) targetTop = Math.max(0, sectionTop - 1);
-      else if (nextStep > 8) targetTop = sectionTop + section.offsetHeight + 1;
-      else {
+      if (nextStep < 0) {
+        targetTop = Math.max(0, sectionTop - 2);
+      } else if (nextStep > 8) {
+        targetTop = sectionTop + section.offsetHeight + 2;
+      } else {
         targetTop = sectionTop + maxTravel * (nextStep / 8);
         setMobileStep(nextStep);
       }
 
       isSnapping.current = true;
       window.scrollTo({ top: targetTop, behavior: "smooth" });
-      window.setTimeout(() => { isSnapping.current = false; }, 720);
+      window.setTimeout(() => { isSnapping.current = false; }, 1100);
     };
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     window.addEventListener("touchend", onTouchEnd, { passive: true });
