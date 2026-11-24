@@ -4673,20 +4673,20 @@ section.history-scroll-section {
 }
 
 
-/* Contato desktop: centraliza o bloco de texto no espaço do banner,
-   abaixo da área do logotipo e acima da borda inferior. */
+/* Contato desktop: restaura o enquadramento original da fotografia.
+   O conteúdo continua centralizado verticalmente no banner. */
 @media (min-width: 1024px) {
   .page-hero.contact-page-hero {
-    min-height: 680px;
-    background-position: center 120px;
+    min-height: 0;
+    background-position: center top;
   }
   .page-hero.contact-page-hero .page-hero__content {
     display: flex;
-    min-height: 680px;
+    min-height: 0;
     flex-direction: column;
     justify-content: center;
-    padding-top: 8rem !important;
-    padding-bottom: 4rem !important;
+    padding-top: 16rem !important;
+    padding-bottom: 2rem !important;
   }
 }
 
@@ -4831,4 +4831,34 @@ section.history-scroll-section {
 }
 @media (min-width: 768px) {
   .page-hero.contact-page-hero { background-position: center 70px; }
+}
+
+
+/* Menu mobile: usa exatamente o azul do header quando a página está rolada. */
+@media (max-width: 1023px) {
+  .site-header--overlay.is-menu-open {
+    background: #324594 !important;
+  }
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    background: #324594 !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 10.5rem !important;
+    height: 8rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 10rem !important;
+    height: 8rem !important;
+  }
+}
+@media (max-width: 420px) {
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 9.5rem !important;
+    height: 7.5rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 9rem !important;
+    height: 7.5rem !important;
+  }
 }
