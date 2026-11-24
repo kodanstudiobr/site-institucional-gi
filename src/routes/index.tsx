@@ -195,6 +195,9 @@ function ExperienceWords() {
   }, [outgoingWord]);
 
   return <section ref={sectionRef} className="learning-words-section" aria-label="Crescer, aprender, criar e vivenciar">
+    <div className="mobile-learning-sequence" aria-label="Etapas da aprendizagem">
+      {palavrasDaAprendizagem.map((word) => <div className="mobile-learning-panel" key={word}><p className="learning-word">{word}</p></div>)}
+    </div>
     <div className="learning-words-sticky">
       <div className="learning-word-stack" aria-live="polite" aria-atomic="true">
         {outgoingWord !== null && <p className="learning-word learning-word--outgoing" aria-hidden="true">{palavrasDaAprendizagem[outgoingWord]}</p>}
@@ -490,7 +493,7 @@ function Index() {
           </figure>)}
         </div>
       </div>
-      <p className="mt-5 text-center text-xs text-muted-foreground">Imagens ilustrativas — serão substituídas por fotografias reais da estrutura da escola.</p>
+      <p className="mt-5 text-center text-xs text-muted-foreground">Conheça alguns dos espaços da nossa escola.</p>
     </section>
 
     <HistoryTestimonials />
