@@ -141,7 +141,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             {links.map(({ to, label }) => <Link key={to} to={to} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{label === "Ensino Integral" ? <span className="inline-flex items-center gap-1.5"><Star size={14} fill="currentColor" strokeWidth={1.8} />{label}</span> : label}</Link>)}
           </nav>
           <div className="flex items-center gap-3">
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="header-cta hidden rounded-full bg-accent px-5 py-3 text-sm font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md md:inline-flex">Faça sua matrícula</a>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="header-cta hidden rounded-full bg-accent px-5 py-3 text-sm font-extrabold text-accent-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md lg:inline-flex">Faça sua matrícula</a>
             <button className="header-menu rounded-xl border border-border p-2 text-primary lg:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X/> : <Menu/>}</button>
           </div>
         </div>
