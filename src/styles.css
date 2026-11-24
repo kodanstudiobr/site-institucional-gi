@@ -880,8 +880,9 @@ html {
 }
 
 [data-scroll-reveal] {
-  opacity:0;
-  transform:translate3d(0,22px,0);
+  /* O conteúdo permanece visível mesmo se o IntersectionObserver falhar no mobile. */
+  opacity:1;
+  transform:none;
   will-change:opacity,transform;
 }
 .site-main [data-scroll-reveal].is-visible {
