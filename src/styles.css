@@ -5612,3 +5612,20 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     text-align: left;
   }
 }
+
+
+/* Desktop: ampliar a distribuição do rodapé e aproximar as laterais das bordas. */
+@media (min-width: 1024px) {
+  .gi-footer__main {
+    max-width: 100% !important;
+    padding-left: clamp(2rem, 4vw, 4.5rem) !important;
+    padding-right: clamp(2rem, 4vw, 4.5rem) !important;
+    column-gap: clamp(3rem, 6vw, 7rem) !important;
+  }
+  .gi-footer__contact {
+    justify-self: start !important;
+  }
+  .gi-footer__quick-links {
+    justify-self: end !important;
+  }
+}
