@@ -441,7 +441,7 @@ function Index() {
         <div className="mobile-section-icon" aria-hidden="true"><Building2 size={26} strokeWidth={1.9}/></div>
         <p className="eyebrow">NOSSA ESTRUTURA</p>
         <h2 id="school-structure-title" className="section-title">Um ambiente preparado para <span className="title-highlight">aprender e crescer.</span></h2>
-        <p className="mt-5 leading-8 text-muted-foreground">Cada espaço do Instituto Educacional G.I. é pensado para acolher, estimular descobertas e proporcionar experiências que fazem parte da jornada de aprendizagem. Em breve, este espaço apresentará registros dos ambientes da nossa escola.</p>
+        <p className="mt-5 leading-8 text-muted-foreground">Cada espaço do Instituto Educacional G.I. é pensado para acolher, estimular descobertas e proporcionar experiências que fazem parte da jornada de aprendizagem. Conheça nossas salas climatizadas, o parquinho e a quadra esportiva.</p>
       </div>
       <div className="structure-carousel mt-12" aria-label="Galeria da estrutura da escola">
         <div className="structure-carousel__track">
