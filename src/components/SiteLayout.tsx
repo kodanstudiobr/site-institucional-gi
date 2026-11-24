@@ -184,7 +184,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       </footer>
       {cookieVisible && <div className="gi-cookie-banner" role="dialog" aria-modal="true" aria-labelledby="gi-cookie-title">
         <div className="gi-cookie-banner__icon"><Cookie size={22}/></div>
-        <div className="min-w-0 flex-1"><h2 id="gi-cookie-title" className="font-display text-base font-bold text-primary">Um cuidado com a sua privacidade 💛</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">Utilizamos armazenamento local essencial para lembrar suas preferências e melhorar sua experiência. Ao continuar, você pode escolher aceitar ou manter apenas o necessário. <button type="button" className="font-semibold text-primary underline underline-offset-2" onClick={() => setPrivacyOpen(true)}>Leia nossa Política de Privacidade.</button></p>
+        <div className="min-w-0 flex-1"><h2 id="gi-cookie-title" className="font-display text-base font-bold text-primary">Um cuidado com a sua privacidade 💛</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">Usamos armazenamento local para lembrar sua escolha e manter o site funcionando. <button type="button" className="font-semibold text-primary underline underline-offset-2" onClick={() => setPrivacyOpen(true)}>Leia nossa Política de Privacidade.</button></p>
           <div className="mt-4 flex flex-wrap gap-2"><button type="button" className="gi-cookie-banner__accept" onClick={() => saveCookieChoice("all")}>Aceitar</button><button type="button" className="gi-cookie-banner__necessary" onClick={() => saveCookieChoice("necessary")}>Somente necessários</button></div>
         </div>
       </div>}
