@@ -121,7 +121,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           <Link to="/" className={`flex shrink-0 items-center justify-start transition-all duration-300 ${compactHeader ? "h-16 w-20 sm:h-16 sm:w-20 2xl:h-24 2xl:w-24" : "h-32 w-36 sm:h-24 sm:w-28 2xl:h-40 2xl:w-40"}`} onClick={(event) => { setMenuOpen(false); if (pathname === "/") { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } }}>
             <img src="/imagens/logo-gi.svg" alt="Instituto Educacional G.I." className={`object-contain transition-all duration-300 ${compactHeader ? "h-16 w-16 sm:h-16 sm:w-16 2xl:h-24 2xl:w-24" : "h-32 w-32 sm:h-24 sm:w-24 2xl:h-40 2xl:w-40"}`} />
           </Link>
-          <nav className="hidden items-center gap-3 lg:flex" aria-label="Navegação principal">
+          <nav className="hidden items-center gap-5 lg:flex" aria-label="Navegação principal">
             {links.map(({ to, label }) => <Link key={to} to={to} onClick={() => window.scrollTo({ top: 0, left: 0, behavior: "auto" })} className="nav-link" activeProps={{ className: "nav-link nav-link-active" }} activeOptions={{ exact: true }}>{label === "Ensino Integral" ? <span className="inline-flex items-center gap-1.5"><Star size={14} fill="currentColor" strokeWidth={1.8} />{label}</span> : label}</Link>)}
           </nav>
           <div className="flex items-center gap-3">
