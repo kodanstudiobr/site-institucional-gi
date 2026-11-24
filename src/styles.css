@@ -2128,10 +2128,12 @@ html {
   bottom:0;
   left:0;
   padding:30px 20px 18px;
-  background:linear-gradient(transparent,rgba(15,28,72,.78));
+  background:linear-gradient(to top,rgba(1,17,49,.76) 0%,rgba(1,17,49,.42) 48%,rgba(1,17,49,0) 100%);
   color:#fff;
   font-size:.95rem;
   font-weight:700;
+  text-shadow:0 2px 8px rgba(0,0,0,.38);
+  z-index:1;
 }
 @keyframes structureCarouselDrift {
   from { transform:translateX(0); }
