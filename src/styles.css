@@ -4577,7 +4577,7 @@ section.history-scroll-section {
 .page-hero.contact-page-hero {
   background-image: linear-gradient(90deg, rgba(24, 39, 101, .82), rgba(34, 52, 125, .38)), url("/imagens/Homenagem-ao-Professor-com-Sorriso.webp");
   background-size: cover;
-  background-position: center top;
+  background-position: center 70px;
 }
 @media (max-width: 767px) {
   .page-hero.contact-page-hero {
@@ -4680,4 +4680,147 @@ section.history-scroll-section {
     padding-top: 10rem !important;
     padding-bottom: 10rem !important;
   }
+}
+
+
+/* Menu mobile em tela cheia, inspirado na referência enviada. */
+@media (max-width: 1023px) {
+  .site-header--overlay.is-menu-open {
+    height: 100dvh;
+    min-height: 100vh;
+    background: #0d3d73 !important;
+    box-shadow: none !important;
+    overflow: hidden;
+  }
+  .site-header--overlay.is-menu-open > div {
+    position: relative;
+    z-index: 3;
+    max-width: none;
+    height: 7.5rem;
+    padding: 1rem 1.5rem !important;
+    align-items: flex-start;
+    background: transparent !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 8.5rem !important;
+    height: 7rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 8rem !important;
+    height: 7rem !important;
+  }
+  .site-header--overlay.is-menu-open .header-menu {
+    margin-top: .5rem;
+    border: 1px solid rgba(255,255,255,.28) !important;
+    border-radius: 9999px;
+    padding: .65rem !important;
+    color: #fff !important;
+    background: rgba(255,255,255,.12) !important;
+  }
+  .site-header--overlay.is-menu-open .header-menu svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100dvh;
+    max-height: none !important;
+    padding: 8.5rem 1.5rem 2rem !important;
+    overflow-y: auto;
+    border: 0 !important;
+    border-radius: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0,12px,0);
+    background: #0d3d73 !important;
+    box-shadow: none !important;
+    transition: opacity .32s ease, transform .42s cubic-bezier(.22,1,.36,1), visibility .32s !important;
+  }
+  .mobile-menu-panel.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0,0,0);
+  }
+  .mobile-menu-panel__links {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(.2rem, 1.2vh, .8rem);
+    padding: .5rem 0 1.5rem;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    display: block;
+    width: fit-content;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    color: #fff !important;
+    background: transparent !important;
+    font-size: clamp(2.25rem, 8.3vw, 4.2rem);
+    font-weight: 850;
+    line-height: 1.05;
+    letter-spacing: -.045em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translate3d(0,12px,0);
+    transition: opacity .3s ease, transform .4s cubic-bezier(.22,1,.36,1) !important;
+  }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link {
+    opacity: 1;
+    transform: translate3d(0,0,0);
+  }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link:nth-child(1) { transition-delay: .05s !important; }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link:nth-child(2) { transition-delay: .09s !important; }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link:nth-child(3) { transition-delay: .13s !important; }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link:nth-child(4) { transition-delay: .17s !important; }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link:nth-child(5) { transition-delay: .21s !important; }
+  .mobile-menu-panel.is-open .mobile-menu-panel__link:nth-child(6) { transition-delay: .25s !important; }
+  .mobile-menu-panel .mobile-menu-panel__link span { gap: .45rem; }
+  .mobile-menu-panel .mobile-menu-panel__link svg { width: 1.1rem; height: 1.1rem; }
+  .mobile-menu-panel__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+  .mobile-menu-panel__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3.35rem;
+    padding: .9rem 1.5rem;
+    border-radius: 9999px;
+    color: #101b36;
+    background: #ffc515;
+    font-size: .9rem;
+    font-weight: 850;
+    text-transform: uppercase;
+  }
+  .mobile-menu-panel__instagram {
+    padding: .8rem 0;
+    color: rgba(255,255,255,.85);
+    font-size: .85rem;
+    font-weight: 500;
+  }
+}
+@media (max-width: 420px) {
+  .site-header--overlay.is-menu-open > div { padding-inline: 1.25rem !important; }
+  .mobile-menu-panel,
+  .mobile-menu-panel.is-open { padding-inline: 1.25rem !important; }
+  .mobile-menu-panel .mobile-menu-panel__link { font-size: clamp(2rem, 8.1vw, 3rem); }
+  .mobile-menu-panel__cta { padding-inline: 1.1rem; font-size: .78rem; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mobile-menu-panel .mobile-menu-panel__link { font-size: clamp(3rem, 7vw, 4.5rem); }
+}
+@media (min-width: 768px) {
+  .page-hero.contact-page-hero { background-position: center 70px; }
 }
