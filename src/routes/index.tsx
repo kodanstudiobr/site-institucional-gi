@@ -270,7 +270,7 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
             className={`experience-card__slide ${activeImageIndex === slideIndex ? "is-active" : ""} ${imageFocusClass}`}
             src={src}
             alt=""
-            loading={slideIndex === 0 ? "eager" : "lazy"}
+            loading="lazy"
             decoding="async"
           />
         ))}
@@ -351,7 +351,7 @@ function Index() {
         {heroSlides.map((slide, index) => (
           <picture key={slide.desktop} className={`hero-slide ${activeHeroSlide === index ? "is-active" : ""}`}>
             <source media="(max-width: 767px)" srcSet={slide.mobile} />
-            <img src={slide.desktop} alt="" loading="eager" decoding="async" />
+            <img src={slide.desktop} alt="" loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} decoding="async" />
           </picture>
         ))}
       </div>
