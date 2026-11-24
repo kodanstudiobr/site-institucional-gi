@@ -1,6 +1,6 @@
 import { pageHead } from "@/lib/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, GraduationCap, Building2, CircleHelp } from "lucide-react";
+import { ArrowRight, BookOpen, HeartHandshake, Lightbulb, Users, Palette, Brain, HandHeart, ChevronDown, Star, ChevronLeft, ChevronRight, Target, Eye, Quote, UserRound, Sparkles, GraduationCap, Building2, CircleHelp, Instagram, Facebook } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
@@ -72,10 +72,10 @@ function HistoryTestimonials() {
   }, []);
 
   const cards = [
-    { name: "Rosany Santos", source: "Via Instagram", quote: "Meu filho começou a estudar tinha 2 anos e esse ano é o último ano dele lá. Já estou com saudades dessa turma, amo todas e agradeço demais por tudo 😍" },
-    { name: "Vivianne Aluska", source: "Via Facebook", quote: "Escola maravilhosa, primeiro ano do meu filho lá e eu já posso ver a diferença no crescimento e desenvolvimento dele nas atividades, na fala principalmente, no relacionamento com as outras crianças, na educação como um todo." },
-    { name: "Fátima Araújo", source: "Via Facebook", quote: "Uma instituição diferenciada e muito humanizada." },
-    { name: "Nazareth Di Maria", source: "Via Instagram", quote: "Escola bem conceituada, equipe bem preparada, enfim, pais e familiares satisfeitos." },
+    { name: "Rosany Santos", source: "Instagram", quote: "Meu filho começou a estudar tinha 2 anos e esse ano é o último ano dele lá. Já estou com saudades dessa turma, amo todas e agradeço demais por tudo 😍" },
+    { name: "Vivianne Aluska", source: "Facebook", quote: "Escola maravilhosa, primeiro ano do meu filho lá e eu já posso ver a diferença no crescimento e desenvolvimento dele nas atividades, na fala principalmente, no relacionamento com as outras crianças, na educação como um todo." },
+    { name: "Fátima Araújo", source: "Facebook", quote: "Uma instituição diferenciada e muito humanizada." },
+    { name: "Nazareth Di Maria", source: "Instagram", quote: "Escola bem conceituada, equipe bem preparada, enfim, pais e familiares satisfeitos." },
   ];
   const reveal = (from: number, to: number) => Math.min(1, Math.max(0, (progress - from) / (to - from)));
   const storyVisible = progress < 0.26;
@@ -106,7 +106,7 @@ function HistoryTestimonials() {
             return <article key={testimonial.name} className={`testimonial-card history-scroll-card history-scroll-card--${index + 1}`} aria-hidden={cardReveal < 0.05} style={{ opacity: cardReveal, pointerEvents: cardReveal > 0.95 ? "auto" : "none", zIndex: index + 1, transform: `translate(calc(-50% + ${offset.x * cardReveal}px), calc(-50% + ${(1 - cardReveal) * 76 + offset.y * cardReveal}px)) scale(${0.86 + cardReveal * 0.14}) rotate(${offset.rotation * cardReveal}deg)` }}>
               <div className="testimonial-card__top"><span className="testimonial-card__stars" aria-label="Cinco estrelas"><Star/><Star/><Star/><Star/><Star/></span></div>
               <p className="testimonial-card__placeholder" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 12}px)` }}>“{testimonial.quote}”</p>
-              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small>{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
+              <div className="testimonial-card__person" style={{ opacity: cardReveal, transform: `translateY(${(1 - cardReveal) * 10}px)` }}><span className="testimonial-card__avatar"><UserRound size={23}/></span><span><strong>{testimonial.name}</strong><small className="testimonial-card__source">{testimonial.source === "Instagram" ? <Instagram size={13} aria-hidden="true"/> : <Facebook size={13} aria-hidden="true"/>}{testimonial.source}</small></span><Sparkles className="testimonial-card__spark" size={19}/></div>
             </article>;
           })}
         </div>
@@ -487,6 +487,6 @@ function Index() {
       </div>
     </section>
 
-    <section className="home-final-cta bg-primary py-20 text-white"><div className="section-wrap home-final-cta__content grid items-center gap-8 lg:grid-cols-[1fr_auto]"><div><p className="eyebrow text-accent">VENHA NOS CONHECER</p><h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">O próximo capítulo da história do seu filho começa aqui.</h2><p className="mt-5 max-w-2xl leading-8 text-white/80">Venha conhecer o Instituto Educacional G.I. e descubra um ambiente preparado para ensinar, acolher e acompanhar cada etapa do desenvolvimento dos nossos estudantes.</p></div><Link to="/contato" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-extrabold text-accent-foreground transition hover:-translate-y-1">Marcar Visita agora <ArrowRight size={18}/></Link></div></section>
+    <section className="home-final-cta bg-primary py-20 text-white"><div className="section-wrap home-final-cta__content grid items-center gap-8 lg:grid-cols-[1fr_auto]"><div><p className="eyebrow text-accent">VENHA NOS CONHECER</p><h2 className="font-display text-3xl font-bold leading-tight md:text-5xl">O próximo capítulo da história do seu filho começa aqui.</h2><p className="mt-5 max-w-2xl leading-8 text-white/80">Venha conhecer o Instituto Educacional G.I. e descubra um ambiente preparado para ensinar, acolher e acompanhar cada etapa do desenvolvimento dos nossos estudantes.</p></div><a href="tel:+558321825088" className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-4 font-extrabold text-accent-foreground transition hover:-translate-y-1">Marcar Visita agora <ArrowRight size={18}/></a></div></section>
   </SiteLayout>;
 }
