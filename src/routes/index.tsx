@@ -49,6 +49,7 @@ function HistoryTestimonials() {
   const [mobileStep, setMobileStep] = useState(0);
   const mobileStepRef = useRef(0);
   const touchStartY = useRef<number | null>(null);
+  const touchStartedInside = useRef(false);
   const snapping = useRef(false);
 
   useEffect(() => {
@@ -87,16 +88,19 @@ function HistoryTestimonials() {
     const onTouchStart = (event: TouchEvent) => {
       if (window.innerWidth > 767) return;
       touchStartY.current = event.touches[0]?.clientY ?? null;
+      touchStartedInside.current = Boolean(getSectionPosition());
     };
     const onTouchMove = (event: TouchEvent) => {
-      if (window.innerWidth > 767 || touchStartY.current === null || !getSectionPosition()) return;
+      if (window.innerWidth > 767 || touchStartY.current === null || !touchStartedInside.current || !getSectionPosition()) return;
       event.preventDefault();
     };
     const onTouchEnd = (event: TouchEvent) => {
       const startY = touchStartY.current;
       const endY = event.changedTouches[0]?.clientY;
       touchStartY.current = null;
-      if (startY === null || endY === undefined || window.innerWidth > 767 || snapping.current) return;
+      const startedInside = touchStartedInside.current;
+      touchStartedInside.current = false;
+      if (startY === null || endY === undefined || !startedInside || window.innerWidth > 767 || snapping.current) return;
       const delta = startY - endY;
       if (Math.abs(delta) < 35) return;
       const position = getSectionPosition();
