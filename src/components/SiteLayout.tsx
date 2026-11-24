@@ -148,7 +148,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         <nav className={`mobile-menu-panel lg:hidden ${menuOpen ? "is-open" : ""}`} aria-label="Menu móvel" aria-hidden={!menuOpen}><div className="mobile-menu-panel__divider" /><div className="mobile-menu-panel__links">{links.map(l => <Link key={l.to} to={l.to} onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, left: 0, behavior: "auto" }); }} className="mobile-menu-panel__link" activeProps={{ className: "mobile-menu-panel__link mobile-menu-panel__link-active" }} activeOptions={{ exact: true }}>{l.label === "Ensino Integral" ? <span className="mobile-menu-panel__integral"><Star size={18} fill="#fff12c" color="#fff12c" strokeWidth={1.8} />{l.label}</span> : l.label}</Link>)}</div><div className="mobile-menu-panel__footer"><a href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)} className="mobile-menu-panel__cta">Faça sua matrícula</a></div></nav>
       </header>
       <main key={pathname} className="site-main page-transition-enter flex-1">{children}</main>
-      <footer className="gi-footer bg-primary text-primary-foreground">
+      <footer className={`gi-footer bg-primary text-primary-foreground ${pathname === "/contato" ? "gi-footer--contact" : ""}`}>
         <div className="gi-footer__main mx-auto grid max-w-7xl gap-12 px-5 py-14 lg:grid-cols-[1.15fr_1.2fr_.75fr] lg:items-center lg:px-8">
           <section className="gi-footer__contact" aria-labelledby="footer-contact-title">
             <h2 id="footer-contact-title" className="font-display text-2xl font-bold text-white">Contato</h2>
