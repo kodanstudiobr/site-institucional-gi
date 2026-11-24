@@ -4862,3 +4862,48 @@ section.history-scroll-section {
     height: 7.5rem !important;
   }
 }
+
+
+/* Ajuste final do banner de contato no desktop: elimina a faixa azul
+   causada pelo deslocamento vertical do background. O mobile não é afetado. */
+@media (min-width: 1024px) {
+  .page-hero.contact-page-hero {
+    background-position: center top !important;
+    background-size: cover !important;
+  }
+}
+
+/* Menu mobile: links maiores e com mais respiro, além de logotipo ampliado. */
+@media (max-width: 1023px) {
+  .mobile-menu-panel__links {
+    gap: clamp(.65rem, 2.1vh, 1.25rem) !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(2.6rem, 9.2vw, 4.8rem) !important;
+    line-height: 1.02 !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 12rem !important;
+    height: 9rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 11.5rem !important;
+    height: 9rem !important;
+  }
+}
+@media (max-width: 420px) {
+  .mobile-menu-panel__links {
+    gap: clamp(.55rem, 1.8vh, .95rem) !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(2.35rem, 9vw, 3.5rem) !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 10.5rem !important;
+    height: 8rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 10rem !important;
+    height: 8rem !important;
+  }
+}
