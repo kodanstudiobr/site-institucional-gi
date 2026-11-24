@@ -4936,3 +4936,69 @@ section.history-scroll-section {
     padding-bottom: 3rem !important;
   }
 }
+
+
+/* Refinos solicitados para o header desktop e menu mobile. */
+@media (min-width: 1024px) {
+  .site-header nav[aria-label="Navegação principal"],
+  .site-header .header-cta {
+    transform: translateY(-13px) !important;
+  }
+}
+@media (max-width: 1023px) {
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 13.5rem !important;
+    height: 10rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 13rem !important;
+    height: 10rem !important;
+  }
+  .mobile-menu-panel__divider {
+    display: block;
+    flex: 0 0 1px;
+    width: 100%;
+    margin: .2rem 0 1.2rem;
+    background: rgba(255,255,255,.72);
+  }
+  .mobile-menu-panel__links {
+    gap: clamp(.65rem, 2.1vh, 1.25rem) !important;
+  }
+  .mobile-menu-panel .mobile-menu-panel__link {
+    font-size: clamp(2.6rem, 9.2vw, 4.8rem) !important;
+  }
+  .mobile-menu-panel__integral {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+  }
+  .mobile-menu-panel__integral svg {
+    color: #fff12c !important;
+    fill: #fff12c !important;
+    flex-shrink: 0;
+  }
+  .mobile-menu-panel__footer {
+    justify-content: center !important;
+    padding-top: 1.2rem !important;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
+  }
+  .mobile-menu-panel__cta {
+    width: 100%;
+    max-width: 22rem;
+    min-height: 3.6rem;
+    background: #fff12c !important;
+    color: #324594 !important;
+    text-align: center;
+    font-weight: 900;
+  }
+}
+@media (max-width: 420px) {
+  .site-header--overlay.is-menu-open > div > a:first-child {
+    width: 12rem !important;
+    height: 9rem !important;
+  }
+  .site-header--overlay.is-menu-open > div > a:first-child img {
+    width: 11.5rem !important;
+    height: 9rem !important;
+  }
+}
