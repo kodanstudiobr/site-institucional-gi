@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, Instagram, Phone, MapPin, ArrowUpRight, Mail, Star } from "lucide-react";
+import { Menu, X, Instagram, Phone, ArrowUpRight, Mail, Star, ShieldCheck, Cookie } from "lucide-react";
 import { institutionalConfig } from "@/data/institutional";
 
 const links = [
@@ -15,8 +15,23 @@ const links = [
 export function SiteLayout({ children, transparentHeader = false }: { children: ReactNode; transparentHeader?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [cookieVisible, setCookieVisible] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
+
+  useEffect(() => {
+    try {
+      setCookieVisible(!window.localStorage.getItem("gi-cookie-preferences"));
+    } catch {
+      setCookieVisible(false);
+    }
+  }, []);
+
+  const saveCookieChoice = (choice: "all" | "necessary") => {
+    try { window.localStorage.setItem("gi-cookie-preferences", JSON.stringify({ choice, savedAt: new Date().toISOString() })); } catch { /* Preferência permanece válida nesta visita. */ }
+    setCookieVisible(false);
+  };
 
   useEffect(() => {
     const main = document.querySelector(".site-main");
@@ -133,14 +148,67 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         <nav className={`mobile-menu-panel lg:hidden ${menuOpen ? "is-open" : ""}`} aria-label="Menu móvel" aria-hidden={!menuOpen}><div className="mobile-menu-panel__divider" /><div className="mobile-menu-panel__links">{links.map(l => <Link key={l.to} to={l.to} onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, left: 0, behavior: "auto" }); }} className="mobile-menu-panel__link" activeProps={{ className: "mobile-menu-panel__link mobile-menu-panel__link-active" }} activeOptions={{ exact: true }}>{l.label === "Ensino Integral" ? <span className="mobile-menu-panel__integral"><Star size={18} fill="#fff12c" color="#fff12c" strokeWidth={1.8} />{l.label}</span> : l.label}</Link>)}</div><div className="mobile-menu-panel__footer"><a href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)} className="mobile-menu-panel__cta">Faça sua matrícula</a></div></nav>
       </header>
       <main key={pathname} className="site-main page-transition-enter flex-1">{children}</main>
-      <footer className="bg-primary text-primary-foreground">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-3 lg:px-8">
-          <div><div className="flex items-center gap-3"><img src="/imagens/logo-gi.svg" alt="Logotipo do Instituto Educacional G.I." className="h-14 w-14 object-contain"/><span className="font-display text-xl font-bold">Instituto Educacional G.I.</span></div><p className="mt-4 max-w-sm text-sm leading-7 text-white/80">Educação que acolhe, ensina e transforma vidas. Uma jornada de descobertas, conhecimento e desenvolvimento.</p></div>
-          <div><h2 className="font-display text-lg font-bold text-accent">Navegue</h2><div className="mt-4 grid grid-cols-2 gap-3 text-sm text-white/85">{links.map(l=><Link key={l.to} to={l.to} className="hover:text-accent">{l.label}</Link>)}</div></div>
-          <div><h2 className="font-display text-lg font-bold text-accent">Fale com a escola</h2><p className="mt-4 flex items-center gap-2 text-sm text-white/85"><Phone size={16}/> Telefone fixo: 2182-5088</p><p className="mt-3 flex items-center gap-2 text-sm text-white/85"><Phone size={16}/> WhatsApp: (83) 99420-0019</p><p className="mt-3 flex items-center gap-2 text-sm text-white/85"><Mail size={16}/> institutoeducacionalgi@gmail.com</p><a href="https://www.instagram.com/institutoeducacionalgi/" target="_blank" rel="noreferrer" className="mt-3 flex items-center gap-2 text-sm text-white/85 hover:text-accent"><Instagram size={16}/> @institutoeducacionalgi</a><Link to="/contato" className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-accent hover:underline">Entre em contato <ArrowUpRight size={15}/></Link></div>
+      <footer className="gi-footer bg-primary text-primary-foreground">
+        <div className="gi-footer__main mx-auto grid max-w-7xl gap-12 px-5 py-14 lg:grid-cols-[1.15fr_1.2fr_.75fr] lg:items-center lg:px-8">
+          <section className="gi-footer__contact" aria-labelledby="footer-contact-title">
+            <h2 id="footer-contact-title" className="font-display text-2xl font-bold text-white">Contato</h2>
+            <div className="mt-5 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
+              <div><h3 className="gi-footer__label">ENDEREÇO</h3><p className="mt-2 text-sm leading-6 text-white/90">{institutionalConfig.address}</p></div>
+              <div><h3 className="gi-footer__label">TELEFONES</h3><a href="tel:+558321825088" className="mt-2 block text-sm leading-6 text-white/90 hover:text-accent">Fixo: (83) 2182-5088</a><a href="https://wa.me/5583994200019" target="_blank" rel="noreferrer" className="block text-sm leading-6 text-white/90 hover:text-accent">WhatsApp: (83) 99420-0019</a></div>
+              <div><h3 className="gi-footer__label">E-MAIL</h3><a href={`mailto:${institutionalConfig.email}`} className="mt-2 block break-all text-sm text-white/90 underline underline-offset-4 hover:text-accent">{institutionalConfig.email}</a></div>
+              <div><h3 className="gi-footer__label">ATENDIMENTO</h3><p className="mt-2 text-sm text-white/90">Entre em contato para informações e visitas</p></div>
+            </div>
+            <a href="https://www.instagram.com/institutoeducacionalgi/" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-3 text-sm font-medium text-white hover:text-accent"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/35"><Instagram size={18}/></span>Instagram <ArrowUpRight size={14} className="text-accent"/></a>
+          </section>
+          <section className="gi-footer__brand flex flex-col items-center text-center">
+            <img src="/imagens/logo-gi.svg" alt="Logotipo do Instituto Educacional G.I." className="h-24 w-24 object-contain"/>
+            <h2 className="mt-3 font-display text-xl font-bold text-white">Instituto Educacional G.I.</h2>
+            <p className="mt-2 max-w-sm text-sm leading-6 text-white/80">Educação que acolhe, ensina e transforma vidas.<br/>Uma jornada de descobertas, conhecimento e desenvolvimento.</p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="gi-footer__primary-cta">FAÇA SUA MATRÍCULA</a>
+              <a href={`mailto:${institutionalConfig.email}`} className="gi-footer__secondary-cta">FALE COM A NOSSA EQUIPE</a>
+            </div>
+          </section>
+          <nav className="gi-footer__quick-links" aria-label="Links rápidos">
+            <h2 className="font-display text-2xl font-bold text-white">Links rápidos</h2>
+            <div className="mt-5 grid grid-cols-2 gap-x-7 gap-y-4 text-sm text-white/85">
+              {links.filter(link => link.to !== "/").map(l=><Link key={l.to} to={l.to} className="transition-colors hover:text-accent">{l.label}</Link>)}
+              <Link to="/contato" className="transition-colors hover:text-accent">Fale conosco</Link>
+            </div>
+          </nav>
         </div>
-        <div className="border-t border-white/15 px-5 py-4 text-center text-xs text-white/65">© {new Date().getFullYear()} Instituto Educacional G.I. — Todos os direitos reservados.</div>
+        <div className="gi-footer__bottom border-t border-white/15 px-5 py-5 text-center text-xs text-white/65">
+          <span>© {new Date().getFullYear()} Instituto Educacional G.I. Todos os direitos reservados.</span>
+          <button type="button" onClick={() => setPrivacyOpen(true)} className="gi-footer__privacy-link">Política de Privacidade</button>
+        </div>
       </footer>
+      {cookieVisible && <div className="gi-cookie-banner" role="dialog" aria-modal="true" aria-labelledby="gi-cookie-title">
+        <div className="gi-cookie-banner__icon"><Cookie size={22}/></div>
+        <div className="min-w-0 flex-1"><h2 id="gi-cookie-title" className="font-display text-base font-bold text-primary">Um cuidado com a sua privacidade 💛</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">Utilizamos armazenamento local essencial para lembrar suas preferências e melhorar sua experiência. Ao continuar, você pode escolher aceitar ou manter apenas o necessário. <button type="button" className="font-semibold text-primary underline underline-offset-2" onClick={() => setPrivacyOpen(true)}>Leia nossa Política de Privacidade.</button></p>
+          <div className="mt-4 flex flex-wrap gap-2"><button type="button" className="gi-cookie-banner__accept" onClick={() => saveCookieChoice("all")}>Aceitar</button><button type="button" className="gi-cookie-banner__necessary" onClick={() => saveCookieChoice("necessary")}>Somente necessários</button></div>
+        </div>
+      </div>}
+      {privacyOpen && <div className="gi-privacy-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setPrivacyOpen(false); }}>
+        <section className="gi-privacy-modal" role="dialog" aria-modal="true" aria-labelledby="gi-privacy-title">
+          <button type="button" className="gi-privacy-modal__close" aria-label="Fechar política de privacidade" onClick={() => setPrivacyOpen(false)}><X size={22}/></button>
+          <div className="gi-privacy-modal__heading"><ShieldCheck size={25}/><span>INSTITUTO EDUCACIONAL G.I.</span></div>
+          <h2 id="gi-privacy-title" className="mt-3 font-display text-2xl font-bold text-primary sm:text-3xl">Política de Privacidade</h2>
+          <p className="mt-2 text-xs text-muted-foreground">Última atualização: 24 de novembro de 2026</p>
+          <div className="gi-privacy-modal__body">
+            <p>O Instituto Educacional G.I. respeita a privacidade das famílias, estudantes, responsáveis e visitantes do nosso site. Esta política explica, de forma transparente, quais informações podem ser tratadas durante a navegação e como cuidamos delas, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD).</p>
+            <h3>1. Quem somos</h3><p>O responsável pelas informações relacionadas a este site é o Instituto Educacional G.I., localizado na Avenida Floriano Peixoto, 230 — Jaguaribe, João Pessoa — PB. Para dúvidas sobre privacidade, entre em contato pelo e-mail <a href={`mailto:${institutionalConfig.email}`}>{institutionalConfig.email}</a>.</p>
+            <h3>2. Quais informações podem ser tratadas</h3><p>Este site é institucional e não possui formulário de cadastro ou matrícula. Podemos tratar dados técnicos básicos gerados durante a navegação, como endereço IP, tipo de navegador, dispositivo, páginas acessadas e data e horário de acesso, quando disponibilizados pela infraestrutura de hospedagem e segurança. Se você entrar em contato por telefone, e-mail ou WhatsApp, os dados que decidir compartilhar serão tratados para responder à sua solicitação.</p>
+            <h3>3. Para quais finalidades</h3><p>As informações podem ser utilizadas para disponibilizar o site, manter sua segurança e estabilidade, compreender eventuais falhas técnicas e responder aos contatos iniciados por famílias e visitantes. Não utilizamos os dados enviados em conversas para finalidades incompatíveis com o atendimento solicitado.</p>
+            <h3>4. Cookies e armazenamento local</h3><p>O site utiliza armazenamento local do navegador para guardar sua escolha sobre o aviso de privacidade. Essa preferência evita que a janela de cookies seja exibida novamente a cada visita. Não utilizamos, por meio deste aviso, cookies publicitários ou de rastreamento. Recursos de terceiros eventualmente acessados por links externos, como WhatsApp e Instagram, possuem suas próprias políticas e controles.</p>
+            <h3>5. Compartilhamento e serviços de terceiros</h3><p>Dados técnicos podem ser processados pela infraestrutura de hospedagem e segurança necessária para manter o site disponível. Não comercializamos dados pessoais. Ao acessar serviços externos por links do site, o tratamento passa a seguir também as regras dos respectivos fornecedores.</p>
+            <h3>6. Proteção e armazenamento</h3><p>Adotamos cuidados técnicos e organizacionais razoáveis para proteger as informações contra acessos não autorizados, perda ou uso indevido. O prazo de retenção depende da finalidade, das necessidades operacionais e das obrigações legais aplicáveis.</p>
+            <h3>7. Direitos dos titulares</h3><p>Nos termos da LGPD, você pode solicitar confirmação do tratamento, acesso, correção, anonimização, bloqueio ou eliminação de dados, quando aplicável, além de informações sobre compartilhamento e demais direitos previstos em lei. Para exercer seus direitos ou esclarecer dúvidas, escreva para <a href={`mailto:${institutionalConfig.email}`}>{institutionalConfig.email}</a>.</p>
+            <h3>8. Privacidade de crianças e adolescentes</h3><p>Por sermos uma instituição de ensino, tratamos a privacidade de crianças e adolescentes com atenção especial. Este site institucional não solicita dados de estudantes por formulários. Pedimos às famílias que não enviem informações pessoais sensíveis de crianças por canais públicos ou comentários em redes sociais.</p>
+            <h3>9. Atualizações desta política</h3><p>Esta política poderá ser atualizada para refletir mudanças no site, nos serviços utilizados ou na legislação. A versão vigente estará disponível neste painel, acessível pelo rodapé.</p>
+          </div>
+          <div className="mt-5 flex justify-end"><button type="button" className="gi-cookie-banner__accept" onClick={() => setPrivacyOpen(false)}>Entendi</button></div>
+        </section>
+      </div>}
     </div>
   );
 }
