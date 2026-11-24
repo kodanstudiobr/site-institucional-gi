@@ -57,7 +57,7 @@ function HistoryTestimonials() {
         const stage = section.querySelector<HTMLElement>(".history-scroll-stage");
         const sectionTop = section.getBoundingClientRect().top + window.scrollY;
         const travel = Math.max(1, section.offsetHeight - (stage?.offsetHeight ?? window.innerHeight));
-        setProgress(Math.min(1, Math.max(0, (window.scrollY - sectionTop) / travel)));
+        setProgress(Math.round(Math.min(1, Math.max(0, (window.scrollY - sectionTop) / travel)) * 100) / 100);
         frame = 0;
       });
     };
