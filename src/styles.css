@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -4605,5 +4606,22 @@ section.history-scroll-section {
   .page-hero .page-hero__content {
     padding-top: 16rem !important;
     padding-bottom: 2rem !important;
+  }
+}
+
+
+/* Tipografia cursiva legível para a chamada da história, sem alterar seu tamanho. */
+.history-scroll-story .history-highlight__eyebrow {
+  font-family: "Caveat", "Segoe Script", cursive !important;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+
+/* Navegação desktop com texto ligeiramente maior e mais respiro entre páginas. */
+@media (min-width: 1024px) {
+  .site-header .nav-link {
+    font-size: .9rem;
   }
 }
