@@ -6131,3 +6131,25 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 @media (prefers-reduced-motion: reduce) {
   .gi-preloader__mascot-stage { transition: none !important; }
 }
+
+
+/* Saída premium do preloader: a cortina azul sobe e revela o site de baixo
+   para cima, em um único movimento contínuo. */
+.gi-preloader {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition: transform 1s cubic-bezier(.76, 0, .24, 1), visibility 0s linear 1s !important;
+}
+.gi-preloader.is-leaving {
+  opacity: 1 !important;
+  visibility: hidden !important;
+  transform: translate3d(0, -100%, 0) !important;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader,
+  .gi-preloader.is-leaving {
+    transition: none !important;
+    transform: none !important;
+  }
+}
