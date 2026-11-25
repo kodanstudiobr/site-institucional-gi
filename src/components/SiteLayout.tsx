@@ -24,15 +24,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
   useEffect(() => {
-    const visitKey = "gi-preloader-seen";
-    try {
-      if (window.sessionStorage.getItem(visitKey)) {
-        setPreloaderVisible(false);
-        return;
-      }
-      window.sessionStorage.setItem(visitKey, "1");
-    } catch { /* Se o armazenamento estiver indisponível, o preloader funciona nesta visita. */ }
-
     let active = true;
     let sequenceTimer: number | undefined;
     const imagePaths = [
@@ -52,15 +43,15 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     const playSequence = (frame: 0 | 1 | 2) => {
       if (!active) return;
       setGigiFrame(frame);
-      const duration = frame === 0 ? 1050 : frame === 1 ? 240 : 1350;
+      const duration = frame === 0 ? 1450 : frame === 1 ? 320 : 1650;
       sequenceTimer = window.setTimeout(() => {
         playSequence(frame === 0 ? 1 : frame === 1 ? 2 : 0);
       }, duration);
     };
     playSequence(0);
 
-    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 3900));
-    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 5200));
+    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 5000));
+    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 6500));
     Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
       if (!active) return;
       setPreloaderLeaving(true);
