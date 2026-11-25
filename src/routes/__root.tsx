@@ -7,11 +7,57 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const SITE_URL = (import.meta.env["VITE_SITE_URL"]?.trim() || "https://site-institucional-gi.vercel.app").replace(/\\/+$/, "");
+
 const organizationSchema = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "EducationalOrganization",
-  name: "Instituto Educacional G.I.",
-  description: "Educação que acolhe, ensina e transforma vidas."
+  "@graph": [
+    {
+      "@type": ["School", "EducationalOrganization"],
+      "@id": `${SITE_URL}/#school`,
+      name: "Instituto Educacional G.I.",
+      alternateName: "Instituto G.I.",
+      description: "Educação que acolhe, ensina e transforma vidas. Educação Infantil, Ensino Fundamental e Ensino Integral em João Pessoa, Paraíba.",
+      url: SITE_URL,
+      logo: `${SITE_URL}/imagens/logo-gi.svg`,
+      image: `${SITE_URL}/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp`,
+      telephone: "+55-83-2182-5088",
+      email: "institutoeducacionalgi@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Avenida Floriano Peixoto, 230 - Jaguaribe",
+        addressLocality: "João Pessoa",
+        addressRegion: "PB",
+        addressCountry: "BR"
+      },
+      areaServed: {
+        "@type": "City",
+        name: "João Pessoa"
+      },
+      sameAs: [
+        "https://www.instagram.com/institutoeducacionalgi/"
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+55-83-99420-0019",
+          contactType: "Atendimento ao público",
+          email: "institutoeducacionalgi@gmail.com",
+          availableLanguage: "Portuguese"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Instituto Educacional G.I.",
+      inLanguage: "pt-BR",
+      publisher: {
+        "@id": `${SITE_URL}/#school`
+      }
+    }
+  ]
 });
 
 function NotFoundComponent() {
