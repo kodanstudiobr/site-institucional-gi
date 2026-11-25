@@ -27,9 +27,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let active = true;
     let sequenceTimer: number | undefined;
     const imagePaths = [
-      "/imagens/gigi-normal.png",
-      "/imagens/gigi-piscando.png",
-      "/imagens/gigi-acenando.png",
+      "/imagens/gigi-normal.webp",
+      "/imagens/gigi-piscando.webp",
+      "/imagens/gigi-acenando.webp",
     ];
     const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
       const image = new Image();
@@ -178,9 +178,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         <div className="gi-preloader__content gi-preloader__content--enter">
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             {[
-              "/imagens/gigi-normal.png",
-              "/imagens/gigi-piscando.png",
-              "/imagens/gigi-acenando.png",
+              "/imagens/gigi-normal.webp",
+              "/imagens/gigi-piscando.webp",
+              "/imagens/gigi-acenando.webp",
             ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
           </div>
           <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
