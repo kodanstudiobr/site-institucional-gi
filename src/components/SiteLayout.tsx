@@ -28,8 +28,8 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let sequenceTimer: number | undefined;
     const imagePaths = [
       "/imagens/gigi-normal.png",
-      "/imagens/gigi-acenando.png",
       "/imagens/gigi-piscando.png",
+      "/imagens/gigi-acenando.png",
     ];
     const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
       const image = new Image();
@@ -39,7 +39,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       if (image.complete) resolve();
     })));
 
-    // Cada pose permanece 2 segundos: normal, aceno e piscadinha.
+    // Cada pose permanece 2 segundos: normal, piscadinha e aceno.
     const playSequence = (frame: 0 | 1 | 2) => {
       if (!active) return;
       setGigiFrame(frame);
@@ -176,9 +176,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {preloaderVisible && <div className={`gi-preloader ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
         <div className="gi-preloader__content gi-preloader__content--enter">
-          <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
-          <p className="gi-preloader__message gi-preloader__foreground">Estamos preparando tudo para você...</p>
-          <div className="gi-preloader__track gi-preloader__foreground"><span /></div>
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             {[
               "/imagens/gigi-normal.png",
@@ -186,6 +183,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
               "/imagens/gigi-acenando.png",
             ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
           </div>
+          <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
+          <p className="gi-preloader__message gi-preloader__foreground">Estamos preparando tudo para você...</p>
+          <div className="gi-preloader__track gi-preloader__foreground"><span /></div>
         </div>
       </div>}
       <header className={headerClass}>
