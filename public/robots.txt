@@ -1,3 +1,5 @@
 # Regras de rastreamento do Instituto Educacional G.I.
 User-agent: *
 Allow: /
+
+Sitemap: https://institutogi.vercel.app/sitemap.xml
