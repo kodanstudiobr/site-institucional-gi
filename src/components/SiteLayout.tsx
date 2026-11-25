@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, Instagram, Phone, ArrowUpRight, Mail, Star, ShieldCheck, Cookie } from "lucide-react";
+import { Menu, X, Instagram, Phone, ArrowUpRight, Mail, Star, ShieldCheck, Cookie, MessageCircle } from "lucide-react";
 import { institutionalConfig } from "@/data/institutional";
 
 const links = [
@@ -233,6 +233,17 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           </div>
         </div>
       </div>
+      <a
+        className="gi-whatsapp-float"
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Fale com o Instituto Educacional G.I. pelo WhatsApp"
+      >
+        <span className="gi-whatsapp-float__icon"><MessageCircle size={25} strokeWidth={2.2} /></span>
+        <span className="gi-whatsapp-float__label">Fale conosco</span>
+        <span className="gi-whatsapp-float__hint">Estamos no WhatsApp</span>
+      </a>
       <header className={headerClass}>
         <div className={`mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 transition-all duration-300 lg:px-8 ${compactHeader ? "py-1.5" : "py-3"}`}>
           <Link to="/" className={`flex shrink-0 items-center justify-start transition-all duration-300 ${compactHeader ? "h-16 w-20 sm:h-16 sm:w-20 2xl:h-24 2xl:w-24" : "h-32 w-36 sm:h-24 sm:w-28 2xl:h-40 2xl:w-40"}`} onClick={(event) => { setMenuOpen(false); if (pathname === "/") { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } }}>
