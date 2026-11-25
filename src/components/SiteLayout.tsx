@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, Instagram, Phone, ArrowUpRight, Mail, Star, ShieldCheck, Cookie, MessageCircle } from "lucide-react";
+import { Menu, X, Instagram, Phone, ArrowUpRight, Mail, Star, ShieldCheck, Cookie } from "lucide-react";
 import { institutionalConfig } from "@/data/institutional";
 
 const links = [
@@ -238,11 +238,12 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
-        aria-label="Fale com o Instituto Educacional G.I. pelo WhatsApp"
+        aria-label="Abrir conversa com o Instituto Educacional G.I. pelo WhatsApp"
+        title="WhatsApp"
       >
-        <span className="gi-whatsapp-float__icon"><MessageCircle size={25} strokeWidth={2.2} /></span>
-        <span className="gi-whatsapp-float__label">Fale conosco</span>
-        <span className="gi-whatsapp-float__hint">Estamos no WhatsApp</span>
+        <svg className="gi-whatsapp-float__icon" viewBox="0 0 32 32" role="img" aria-hidden="true">
+          <path fill="currentColor" d="M16.02 3.2A12.7 12.7 0 0 0 5.08 22.35L3.3 28.8l6.6-1.73A12.7 12.7 0 1 0 16.02 3.2Zm0 23.1c-1.9 0-3.76-.5-5.38-1.45l-.39-.23-3.92 1.03 1.05-3.82-.25-.4a10.03 10.03 0 1 1 8.9 4.87Zm5.5-7.52c-.3-.15-1.8-.89-2.08-.99-.28-.1-.48-.15-.68.15-.2.3-.78.99-.96 1.19-.18.2-.35.23-.65.08-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.8-1.68-2.1-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.03-.53-.08-.15-.68-1.64-.93-2.24-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.53.08-.81.38-.28.3-1.06 1.04-1.06 2.53s1.09 2.94 1.24 3.14c.15.2 2.14 3.27 5.18 4.58.72.31 1.28.5 1.72.64.72.23 1.37.2 1.89.12.58-.09 1.8-.74 2.05-1.45.25-.71.25-1.32.18-1.45-.08-.13-.28-.2-.58-.35Z"/>
+        </svg>
       </a>
       <header className={headerClass}>
         <div className={`mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 transition-all duration-300 lg:px-8 ${compactHeader ? "py-1.5" : "py-3"}`}>
