@@ -5800,3 +5800,20 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     animation: none !important;
   }
 }
+
+
+/* Poses estáticas da Gigi: somente crossfade, sem quicar ou deslocar. */
+.gi-preloader__mascot-stage .gi-preloader__mascot,
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(3).is-active {
+  transform: none !important;
+  margin: 0 !important;
+  animation: none !important;
+  transition: opacity .55s ease-in-out !important;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot {
+  opacity: 0;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active {
+  opacity: 1;
+}
