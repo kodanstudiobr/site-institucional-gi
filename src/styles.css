@@ -6191,3 +6191,23 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     transform: none !important;
   }
 }
+
+
+/* Correção da entrada lateral: usar a propriedade translate independente
+   de transform, que é fixada por !important nas regras de centralização. */
+.gi-preloader__copy {
+  opacity: 0;
+  translate: -58px 0;
+  animation: giPreloaderCopySlideIn .82s cubic-bezier(.22,.75,.25,1) .22s both !important;
+}
+@keyframes giPreloaderCopySlideIn {
+  from { opacity: 0; translate: -58px 0; }
+  to { opacity: 1; translate: 0 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__copy {
+    opacity: 1 !important;
+    translate: none !important;
+    animation: none !important;
+  }
+}
