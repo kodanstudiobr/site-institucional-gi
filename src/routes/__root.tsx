@@ -51,7 +51,7 @@ const organizationSchema = JSON.stringify({
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: "Instituto Educacional G.I.",
+      name: "Instituto Educacional G.I. | Educação Infantil aos Anos Finais",
       inLanguage: "pt-BR",
       publisher: {
         "@id": `${SITE_URL}/#school`
@@ -69,7 +69,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   return <div className="flex min-h-screen items-center justify-center bg-background px-4"><div className="max-w-md text-center"><h1 className="text-xl font-semibold text-primary">Não foi possível carregar esta página.</h1><p className="mt-2 text-sm text-muted-foreground">Tente novamente ou volte para a página inicial.</p><div className="mt-6 flex justify-center gap-2"><button onClick={()=>{router.invalidate();reset();}} className="rounded-full bg-primary px-5 py-2 text-sm font-bold text-white">Tentar novamente</button><a href="/" className="rounded-full border px-5 py-2 text-sm font-bold text-primary">Início</a></div></div></div>;
 }
 export const Route=createRootRouteWithContext<{queryClient:QueryClient}>()({
-  head:()=>({meta:[{charSet:"utf-8"},{name:"viewport",content:"width=device-width, initial-scale=1"},{title:"Instituto Educacional G.I. | Educação Infantil aos Anos Finais"},{name:"description",content:"Conheça o Instituto Educacional G.I., da Educação Infantil aos Anos Finais do Ensino Fundamental, em João Pessoa/PB."},{name:"theme-color",content:"#012969"},],links:[{rel:"stylesheet",href:appCss},{rel:"preconnect",href:"https://fonts.googleapis.com"},{rel:"preconnect",href:"https://fonts.gstatic.com",crossOrigin:"anonymous"},{rel:"stylesheet",href:"https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&display=swap"},{rel:"icon",href:"/imagens/logo-gi.svg?v=4",type:"image/svg+xml"},{rel:"shortcut icon",href:"/imagens/logo-gi.svg?v=4",type:"image/svg+xml"},{rel:"apple-touch-icon",href:"/imagens/logo-gi.svg?v=4"}]}),
+  head:()=>({meta:[{charSet:"utf-8"},{name:"viewport",content:"width=device-width, initial-scale=1"},{title:"Instituto Educacional G.I."},{name:"description",content:"Conheça o Instituto Educacional G.I., da Educação Infantil aos Anos Finais do Ensino Fundamental. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes."},{name:"theme-color",content:"#012969"},],links:[{rel:"stylesheet",href:appCss},{rel:"preconnect",href:"https://fonts.googleapis.com"},{rel:"preconnect",href:"https://fonts.gstatic.com",crossOrigin:"anonymous"},{rel:"stylesheet",href:"https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&display=swap"},{rel:"icon",href:"/imagens/logo-gi.svg?v=4",type:"image/svg+xml"},{rel:"shortcut icon",href:"/imagens/logo-gi.svg?v=4",type:"image/svg+xml"},{rel:"apple-touch-icon",href:"/imagens/logo-gi.svg?v=4"}]}),
   shellComponent:RootShell,component:RootComponent,notFoundComponent:NotFoundComponent,errorComponent:ErrorComponent,
 });
 function RootShell({children}:{children:ReactNode}){return <html lang="pt-BR"><head><script dangerouslySetInnerHTML={{ __html: `document.documentElement.classList.add("gi-first-visit");` }}/><HeadContent/><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: organizationSchema }}/></head><body>{children}<Scripts/></body></html>;}
