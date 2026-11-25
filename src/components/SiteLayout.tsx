@@ -19,6 +19,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const [cookieVisible, setCookieVisible] = useState(false);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
+  const [gigiVisible, setGigiVisible] = useState(false);
   const [gigiFrame, setGigiFrame] = useState<0 | 1 | 2>(0);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
@@ -26,6 +27,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   useEffect(() => {
     let active = true;
     let sequenceTimer: number | undefined;
+    const mascotEntryTimer = window.setTimeout(() => {
+      if (active) setGigiVisible(true);
+    }, 1700);
     const imagePaths = [
       "/imagens/gigi-normal.webp",
       "/imagens/gigi-piscando.webp",
@@ -59,6 +63,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     return () => {
       active = false;
       if (sequenceTimer !== undefined) window.clearTimeout(sequenceTimer);
+      window.clearTimeout(mascotEntryTimer);
     };
   }, []);
 
@@ -175,7 +180,12 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {preloaderVisible && <div className={`gi-preloader ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
-        <div className="gi-preloader__content gi-preloader__content--enter">
+        <div className={`gi-preloader__content gi-preloader__content--enter ${gigiVisible ? "has-mascot" : ""}`}>
+          <div className="gi-preloader__copy">
+            <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
+            <p className="gi-preloader__message gi-preloader__foreground">Estamos preparando tudo para você...</p>
+            <div className="gi-preloader__track gi-preloader__foreground"><span /></div>
+          </div>
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             {[
               "/imagens/gigi-normal.webp",
@@ -183,9 +193,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
               "/imagens/gigi-acenando.webp",
             ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
           </div>
-          <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
-          <p className="gi-preloader__message gi-preloader__foreground">Estamos preparando tudo para você...</p>
-          <div className="gi-preloader__track gi-preloader__foreground"><span /></div>
         </div>
       </div>}
       <header className={headerClass}>
