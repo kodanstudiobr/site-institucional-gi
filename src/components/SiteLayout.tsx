@@ -58,17 +58,17 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 
     const finishPreloader = () => {
       if (!active) return;
+      // Inicia a entrada da Hero no mesmo instante em que a cortina azul
+      // começa a subir, mantendo os dois movimentos sincronizados.
+      document.documentElement.classList.remove("gi-first-visit");
+      document.documentElement.classList.add("gi-hero-intro");
+      window.setTimeout(() => {
+        document.documentElement.classList.remove("gi-hero-intro");
+      }, 1500);
       setPreloaderLeaving(true);
       leaveTimer = window.setTimeout(() => {
         if (!active) return;
         setPreloaderVisible(false);
-        // Libera a primeira pintura da Hero somente depois que a Gigi termina
-        // sua apresentação. A animação acontece uma única vez nesta aba.
-        document.documentElement.classList.remove("gi-first-visit");
-        document.documentElement.classList.add("gi-hero-intro");
-        window.setTimeout(() => {
-          document.documentElement.classList.remove("gi-hero-intro");
-        }, 1500);
       }, 1000);
     };
 
