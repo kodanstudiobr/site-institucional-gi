@@ -82,7 +82,7 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   const focusFace = item.title === "Arte e cultura" || item.title === "Criatividade em ação";
   const imageFocusClass = focusFace ? "experience-card__background--face-focus" : "";
   return <article ref={cardRef} className="experience-card experience-card__button">
-    {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={item.images[outgoingImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />}
+    {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={item.images[outgoingImageIndex]} alt={`Registro de ${item.title.toLowerCase()} no Instituto Educacional G.I.`} loading="lazy" decoding="async" />}
     <img className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
     <div className="experience-card__shade" />
     <span className="experience-card__number">0{index + 1}</span>
@@ -125,7 +125,7 @@ function Vivencias() {
     <section className="page-hero school-page-hero vivencias-page-hero">
       <picture>
         <source media="(max-width: 767px)" srcSet="/imagens/IMG_4001.webp" />
-        <img className="school-page-hero__image" src="/imagens/IMG_4002.webp" alt="" aria-hidden="true" fetchPriority="high" />
+        <img className="school-page-hero__image" src="/imagens/IMG_4002.webp" alt="Estudantes do Instituto Educacional G.I. em uma vivência escolar." fetchPriority="high" />
       </picture>
       <div className="school-page-hero__overlay" aria-hidden="true" />
       <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
