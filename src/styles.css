@@ -6392,3 +6392,15 @@ html.gi-hero-intro .hero-bottom {
     flex: 0 0 58px !important;
   }
 }
+
+
+/* Contato mobile: alinhar o WhatsApp à esquerda, logo abaixo do telefone fixo no rodapé. */
+@media (max-width: 767px) {
+  body:has(.contact-page-hero) .gi-footer__contact > div.grid > div:nth-child(2) a[href*="wa.me"] {
+    display: inline !important;
+    width: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+  }
+}
