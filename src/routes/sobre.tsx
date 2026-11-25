@@ -42,7 +42,7 @@ function Sobre() {
 
   return <SiteLayout>
     <section className="page-hero school-page-hero">
-      <picture><source media="(max-width: 767px)" srcSet="/imagens/Atividade%20escolar%20com%20ovo%20de%20papel.webp"/><img className="school-page-hero__image" src="/imagens/Momento%20de%20arte%20com%20carinho.webp" alt="" aria-hidden="true" fetchPriority="high"/></picture>
+      <picture><source media="(max-width: 767px)" srcSet="/imagens/Atividade%20escolar%20com%20ovo%20de%20papel.webp"/><img className="school-page-hero__image" src="/imagens/Momento%20de%20arte%20com%20carinho.webp" alt="Estudantes participando de uma atividade artística no Instituto Educacional G.I." fetchPriority="high"/></picture>
       <div className="school-page-hero__overlay" aria-hidden="true"/>
       <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
         <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">NOSSA ESCOLA</p>
