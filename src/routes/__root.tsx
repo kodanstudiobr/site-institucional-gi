@@ -7,7 +7,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-const SITE_URL = (import.meta.env["VITE_SITE_URL"]?.trim() || "https://institutogi.vercel.app").replace(/\\/+$/, "");
+const SITE_URL = (import.meta.env["VITE_SITE_URL"]?.trim() || "https://institutogi.vercel.app").replace(/\/+$/, "");
 
 const organizationSchema = JSON.stringify({
   "@context": "https://schema.org",
