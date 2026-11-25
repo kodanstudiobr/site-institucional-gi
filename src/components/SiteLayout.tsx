@@ -27,9 +27,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let active = true;
     let sequenceTimer: number | undefined;
     const imagePaths = [
-      "/imagens/gigi-normal.png",
-      "/imagens/gigi-piscando.png",
       "/imagens/gigi-acenando.png",
+      "/imagens/gigi-piscando.png",
+      "/imagens/gigi-normal.png",
     ];
     const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
       const image = new Image();
@@ -39,19 +39,18 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       if (image.complete) resolve();
     })));
 
-    // Sequência contínua: expressão normal, piscadinha rápida e aceno.
+    // Cada pose permanece 2 segundos: aceno, piscadinha e pose parada.
     const playSequence = (frame: 0 | 1 | 2) => {
       if (!active) return;
       setGigiFrame(frame);
-      const duration = frame === 0 ? 1450 : frame === 1 ? 320 : 1650;
       sequenceTimer = window.setTimeout(() => {
         playSequence(frame === 0 ? 1 : frame === 1 ? 2 : 0);
-      }, duration);
+      }, 2000);
     };
     playSequence(0);
 
-    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 5000));
-    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 6500));
+    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 6000));
+    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 7500));
     Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
       if (!active) return;
       setPreloaderLeaving(true);
@@ -179,9 +178,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         <div className="gi-preloader__content">
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             {[
-              "/imagens/gigi-normal.png",
-              "/imagens/gigi-piscando.png",
               "/imagens/gigi-acenando.png",
+              "/imagens/gigi-piscando.png",
+              "/imagens/gigi-normal.png",
             ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
           </div>
           <p className="gi-preloader__title">Olá! Eu sou a Gigi!</p>
