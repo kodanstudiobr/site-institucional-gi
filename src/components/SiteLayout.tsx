@@ -17,21 +17,29 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const [scrolled, setScrolled] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [cookieVisible, setCookieVisible] = useState(false);
-  const [preloaderVisible, setPreloaderVisible] = useState(() => {
-    if (typeof window === "undefined") return false;
-    try {
-      const alreadyEntered = window.sessionStorage.getItem("gi-site-entered") === "1";
-      window.sessionStorage.setItem("gi-site-entered", "1");
-      return !alreadyEntered;
-    } catch {
-      return true;
-    }
-  });
+  const [preloaderVisible, setPreloaderVisible] = useState(false);
+  const preloaderCheckRef = useRef(false);
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
   const [gigiVisible, setGigiVisible] = useState(false);
   const [gigiFrame, setGigiFrame] = useState<0 | 1 | 2>(0);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
+
+  useEffect(() => {
+    // Verifica somente no navegador, após a hidratação do React.
+    // O ref evita uma segunda leitura no ciclo de efeitos do Strict Mode.
+    if (preloaderCheckRef.current) return;
+    preloaderCheckRef.current = true;
+    try {
+      const alreadyEntered = window.sessionStorage.getItem("gi-site-entered") === "1";
+      if (!alreadyEntered) {
+        window.sessionStorage.setItem("gi-site-entered", "1");
+        setPreloaderVisible(true);
+      }
+    } catch {
+      setPreloaderVisible(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (!preloaderVisible) return;
