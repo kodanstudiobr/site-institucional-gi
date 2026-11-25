@@ -36,7 +36,7 @@ export function pageHead(path: string, {
       { name: "robots", content: "index, follow, max-image-preview:large" },
       ...(keywords ? [{ name: "keywords", content: keywords }] : []),
       { property: "og:locale", content: "pt_BR" },
-      { property: "og:site_name", content: "Instituto Educacional G.I." },
+      { property: "og:site_name", content: "Instituto Educacional G.I. | Educação Infantil aos Anos Finais" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: type },
