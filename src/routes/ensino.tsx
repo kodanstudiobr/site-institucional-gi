@@ -129,7 +129,7 @@ function Ensino() {
 
   return <SiteLayout>
     <section className="page-hero school-page-hero teaching-page-hero">
-      <picture><source media="(max-width: 767px)" srcSet="/imagens/IMG_3987.webp"/><img className="school-page-hero__image" src="/imagens/IMG_3986.webp" alt="" aria-hidden="true" fetchPriority="high"/></picture>
+      <picture><source media="(max-width: 767px)" srcSet="/imagens/IMG_3987.webp"/><img className="school-page-hero__image" src="/imagens/IMG_3986.webp" alt="Estudantes do Instituto Educacional G.I. em atividade de aprendizagem." fetchPriority="high"/></picture>
       <div className="school-page-hero__overlay" aria-hidden="true"/>
       <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
         <p className="mb-4 text-xs font-extrabold tracking-[.22em] text-accent">NOSSO ENSINO</p>
