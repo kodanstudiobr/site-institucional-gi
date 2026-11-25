@@ -42,7 +42,7 @@ function EnsinoIntegral() {
       <section className="page-hero school-page-hero">
         <picture>
           <source media="(max-width: 767px)" srcSet="/imagens/Menino-sorridente-no-escorregador-vermelho-_1_.webp" />
-          <img className="school-page-hero__image" src="/imagens/Menino-sorridente-no-escorregador-vermelho.webp" alt="" aria-hidden="true" fetchPriority="high" style={{ objectPosition: "center 38%" }} />
+          <img className="school-page-hero__image" src="/imagens/Menino-sorridente-no-escorregador-vermelho.webp" alt="Criança sorridente brincando no escorregador durante o Ensino Integral." fetchPriority="high" style={{ objectPosition: "center 38%" }} />
         </picture>
         <div className="school-page-hero__overlay" aria-hidden="true" />
         <div className="relative z-[2] mx-auto max-w-7xl px-5 pt-36 pb-16 lg:px-8 lg:pt-44 lg:pb-20">
