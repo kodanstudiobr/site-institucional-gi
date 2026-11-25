@@ -19,7 +19,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const [cookieVisible, setCookieVisible] = useState(false);
   const [preloaderVisible, setPreloaderVisible] = useState(true);
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
-  const [gigiWinking, setGigiWinking] = useState(false);
+  const [gigiFrame, setGigiFrame] = useState<0 | 1 | 2>(0);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
@@ -34,8 +34,12 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     } catch { /* Se o armazenamento estiver indisponível, o preloader funciona nesta visita. */ }
 
     let active = true;
-    const startedAt = Date.now();
-    const imagePaths = ["/imagens/gigi-mascote-normal.PNG", "/imagens/gigi-mascote-piscando.png"];
+    let sequenceTimer: number | undefined;
+    const imagePaths = [
+      "/imagens/gigi-normal.png",
+      "/imagens/gigi-piscando.png",
+      "/imagens/gigi-acenando.png",
+    ];
     const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
       const image = new Image();
       image.onload = () => resolve();
@@ -43,19 +47,29 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       image.src = src;
       if (image.complete) resolve();
     })));
-    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 1900));
-    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 3200));
+
+    // Sequência contínua: expressão normal, piscadinha rápida e aceno.
+    const playSequence = (frame: 0 | 1 | 2) => {
+      if (!active) return;
+      setGigiFrame(frame);
+      const duration = frame === 0 ? 1050 : frame === 1 ? 240 : 1350;
+      sequenceTimer = window.setTimeout(() => {
+        playSequence(frame === 0 ? 1 : frame === 1 ? 2 : 0);
+      }, duration);
+    };
+    playSequence(0);
+
+    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 3900));
+    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 5200));
     Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
       if (!active) return;
       setPreloaderLeaving(true);
       window.setTimeout(() => { if (active) setPreloaderVisible(false); }, 550);
     });
-    const blink = window.setInterval(() => {
-      if (!active) return;
-      setGigiWinking(true);
-      window.setTimeout(() => { if (active) setGigiWinking(false); }, 230);
-    }, 2850);
-    return () => { active = false; window.clearInterval(blink); };
+    return () => {
+      active = false;
+      if (sequenceTimer !== undefined) window.clearTimeout(sequenceTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -172,7 +186,13 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {preloaderVisible && <div className={`gi-preloader ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
         <div className="gi-preloader__content">
-          <img className={`gi-preloader__mascot ${gigiWinking ? "is-winking" : ""}`} src={gigiWinking ? "/imagens/gigi-mascote-piscando.png" : "/imagens/gigi-mascote-normal.PNG"} alt="Gigi, mascote do Instituto Educacional G.I." fetchPriority="high" />
+          <div className="gi-preloader__mascot-stage" aria-hidden="true">
+            {[
+              "/imagens/gigi-normal.png",
+              "/imagens/gigi-piscando.png",
+              "/imagens/gigi-acenando.png",
+            ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
+          </div>
           <p className="gi-preloader__title">Olá! Eu sou a Gigi!</p>
           <p className="gi-preloader__message">Estamos preparando tudo para você...</p>
           <div className="gi-preloader__track"><span /></div>
