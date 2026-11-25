@@ -26,7 +26,7 @@
   .nav-link:hover,.nav-link-active { color:#012969; }
   .hero-home { position:relative; overflow:hidden; background-color:#012969; }
   .hero-overlay { position:absolute; inset:0; background:linear-gradient(90deg,rgba(1,41,105,.95) 0%,rgba(1,41,105,.84) 53%,rgba(1,41,105,.42) 100%); }
-  .hero-copy { animation:heroEnter .85s ease-out both; }
+  .hero-copy { animation:none; }
   .hero-bottom { position:absolute; bottom:-1px; left:0; right:0; height:12px; background:#fff12c; clip-path:polygon(0 70%,100% 0,100% 100%,0 100%); }
   .section-wrap { width:100%; max-width:1280px; margin-inline:auto; padding-inline:1.25rem; }
   .section-title { color:#012969; font-family:"Poppins",sans-serif; font-size:clamp(2rem,4vw,3.25rem); font-weight:750; line-height:1.15; letter-spacing:-.04em; }
@@ -6221,4 +6221,34 @@ html.gi-first-visit .gi-preloader.is-inactive {
   opacity: 1 !important;
   visibility: visible !important;
   pointer-events: auto !important;
+}
+
+
+/* Entrada especial da Hero: executada apenas na primeira abertura desta aba,
+   depois da apresentação da mascote Gigi. Nas demais navegações fica estática. */
+@keyframes giHeroRise {
+  from { opacity:0; transform:translate3d(0,34px,0); }
+  to { opacity:1; transform:translate3d(0,0,0); }
+}
+html.gi-hero-intro .hero-kicker,
+html.gi-hero-intro .hero-heading,
+html.gi-hero-intro .hero-copy > p,
+html.gi-hero-intro .hero-copy > div {
+  opacity:0;
+  animation:giHeroRise .82s cubic-bezier(.2,.75,.25,1) both;
+  will-change:transform,opacity;
+}
+html.gi-hero-intro .hero-kicker { animation-delay:.08s; }
+html.gi-hero-intro .hero-heading { animation-delay:.24s; }
+html.gi-hero-intro .hero-copy > p { animation-delay:.42s; }
+html.gi-hero-intro .hero-copy > div { animation-delay:.60s; }
+@media (prefers-reduced-motion:reduce) {
+  html.gi-hero-intro .hero-kicker,
+  html.gi-hero-intro .hero-heading,
+  html.gi-hero-intro .hero-copy > p,
+  html.gi-hero-intro .hero-copy > div {
+    animation:none;
+    opacity:1;
+    transform:none;
+  }
 }
