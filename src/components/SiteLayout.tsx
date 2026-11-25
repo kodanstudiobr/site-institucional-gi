@@ -29,7 +29,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let sequenceTimer: number | undefined;
     const mascotEntryTimer = window.setTimeout(() => {
       if (active) setGigiVisible(true);
-    }, 1700);
+    }, 2300);
     const imagePaths = [
       "/imagens/gigi-normal.webp",
       "/imagens/gigi-piscando.webp",
