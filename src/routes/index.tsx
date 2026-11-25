@@ -7,7 +7,7 @@ import { SiteLayout } from "@/components/SiteLayout";
 export const Route = createFileRoute("/")({
   head: () => {
     const head = pageHead("/", {
-      title: "Instituto Educacional G.I. | Educação Infantil aos Anos Finais",
+      title: "Instituto Educacional G.I.",
       description: "Conheça o Instituto Educacional G.I., da Educação Infantil aos Anos Finais do Ensino Fundamental. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes.",
       keywords: "Instituto Educacional G.I., Educação Infantil, Anos Iniciais, Anos Finais, Ensino Fundamental, escola em João Pessoa, educação de qualidade, matrículas escolares",
     });
