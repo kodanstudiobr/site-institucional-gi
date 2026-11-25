@@ -6405,31 +6405,3 @@ html.gi-hero-intro .hero-bottom {
   }
 }
 
-
-/* Header mobile ao rolar: logo centralizada, mantendo dimensões e toggle à direita. */
-@media (max-width: 1023px) {
-  .site-header--overlay.is-scrolled:not(.is-menu-open) > div {
-    position: relative !important;
-    min-height: 96px !important;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-    box-sizing: border-box !important;
-  }
-  .site-header--overlay.is-scrolled:not(.is-menu-open) > div > a:first-child {
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    width: 5.25rem !important;
-    height: 5rem !important;
-    margin: 0 !important;
-    transform: translate(-50%, -50%) !important;
-    justify-content: center !important;
-  }
-  .site-header--overlay.is-scrolled:not(.is-menu-open) > div > a:first-child img {
-    width: 4.75rem !important;
-    height: 4.75rem !important;
-  }
-  .site-header--overlay.is-scrolled:not(.is-menu-open) > div > div:last-child {
-    margin-left: auto !important;
-  }
-}
