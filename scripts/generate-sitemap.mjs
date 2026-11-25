@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 
 const siteUrl = (process.env.SITE_URL?.trim() || "https://institutogi.vercel.app").replace(/\/+$/, "");
 
-const routes = ["/", "/sobre", "/ensino", "/estrutura", "/vivencias", "/noticias", "/contato"];
+const routes = ["/", "/sobre", "/ensino", "/ensino-integral", "/vivencias", "/contato"];
 const urls = routes.map((route) => "  <url><loc>" + siteUrl + route + "</loc></url>").join("\n");
 const xml = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "\n</urlset>\n";
 const robots = "User-agent: *\nAllow: /\n\nSitemap: " + siteUrl + "/sitemap.xml\n";
