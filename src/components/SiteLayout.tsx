@@ -17,7 +17,19 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const [scrolled, setScrolled] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [cookieVisible, setCookieVisible] = useState(false);
-  const [preloaderVisible, setPreloaderVisible] = useState(true);
+  const [preloaderVisible, setPreloaderVisible] = useState(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      const alreadyEntered = window.sessionStorage.getItem("gi-site-entered") === "1";
+      const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
+      const isHomeReload = window.location.pathname === "/" && navigation?.type === "reload";
+      const shouldShow = !alreadyEntered || isHomeReload;
+      window.sessionStorage.setItem("gi-site-entered", "1");
+      return shouldShow;
+    } catch {
+      return window.location.pathname === "/";
+    }
+  });
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
   const [gigiVisible, setGigiVisible] = useState(false);
   const [gigiFrame, setGigiFrame] = useState<0 | 1 | 2>(0);
@@ -25,6 +37,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
   useEffect(() => {
+    if (!preloaderVisible) return;
     let active = true;
     let sequenceTimer: number | undefined;
     let sequenceStartTimer: number | undefined;
@@ -69,7 +82,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       if (sequenceStartTimer !== undefined) window.clearTimeout(sequenceStartTimer);
       window.clearTimeout(mascotEntryTimer);
     };
-  }, []);
+  }, [preloaderVisible]);
 
   useEffect(() => {
     try {
