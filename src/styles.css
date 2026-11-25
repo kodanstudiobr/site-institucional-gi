@@ -5933,17 +5933,18 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
   left: auto !important;
   flex: 0 0 auto;
   width: min(76vw, 390px) !important;
-  height: 0 !important;
+  height: min(42vh, 340px) !important;
   margin: 0 !important;
   overflow: hidden;
   opacity: 0;
+  clip-path: inset(100% 0 0 0);
   transform: none !important;
   animation: giMascotDropIn 1s cubic-bezier(.22,.72,.25,1) .9s forwards !important;
   pointer-events: none;
 }
 @keyframes giMascotDropIn {
-  from { height: 0; opacity: 0; }
-  to { height: min(42vh, 340px); opacity: 1; }
+  from { clip-path: inset(100% 0 0 0); opacity: 0; }
+  to { clip-path: inset(0 0 0 0); opacity: 1; }
 }
 .gi-preloader__foreground {
   position: relative;
@@ -5961,6 +5962,7 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
   .gi-preloader__mascot-stage {
     animation: none !important;
     height: min(42vh, 340px) !important;
+    clip-path: none;
     opacity: 1;
   }
 }
