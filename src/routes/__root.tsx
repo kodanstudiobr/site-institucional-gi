@@ -17,10 +17,10 @@ const organizationSchema = JSON.stringify({
       "@id": `${SITE_URL}/#school`,
       name: "Instituto Educacional G.I.",
       alternateName: "Instituto G.I.",
-      description: "Educação Infantil aos Anos Finais do Ensino Fundamental. Educação que acolhe, ensina e transforma vidas em João Pessoa, Paraíba.",
+      description: "Instituto Educacional G.I.: Educação Infantil, Anos Iniciais e Anos Finais do Ensino Fundamental em João Pessoa, PB. Acolhimento, aprendizagem e desenvolvimento integral.",
       url: SITE_URL,
       logo: `${SITE_URL}/logo-gi.svg`,
-      image: `${SITE_URL}/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp`,
+      image: `${SITE_URL}/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp?v=3`,
       telephone: "+55-83-2182-5088",
       email: "institutoeducacionalgi@gmail.com",
       address: {
