@@ -40,6 +40,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let sequenceStartTimer: number | undefined;
     let mascotEntryTimer: number | undefined;
     let leaveTimer: number | undefined;
+    let introTimer: number | undefined;
 
     const imagePaths = [
       "/imagens/gigi-normal.webp",
@@ -58,13 +59,16 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 
     const finishPreloader = () => {
       if (!active) return;
-      // Inicia a entrada da Hero no mesmo instante em que a cortina azul
-      // começa a subir, mantendo os dois movimentos sincronizados.
+      // A cortina começa a subir imediatamente; a entrada da Hero começa
+      // meio segundo depois, conforme solicitado.
       document.documentElement.classList.remove("gi-first-visit");
-      document.documentElement.classList.add("gi-hero-intro");
-      window.setTimeout(() => {
-        document.documentElement.classList.remove("gi-hero-intro");
-      }, 1500);
+      introTimer = window.setTimeout(() => {
+        if (!active) return;
+        document.documentElement.classList.add("gi-hero-intro");
+        window.setTimeout(() => {
+          document.documentElement.classList.remove("gi-hero-intro");
+        }, 1500);
+      }, 500);
       setPreloaderLeaving(true);
       leaveTimer = window.setTimeout(() => {
         if (!active) return;
@@ -97,6 +101,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       if (sequenceStartTimer !== undefined) window.clearTimeout(sequenceStartTimer);
       if (mascotEntryTimer !== undefined) window.clearTimeout(mascotEntryTimer);
       if (leaveTimer !== undefined) window.clearTimeout(leaveTimer);
+      if (introTimer !== undefined) window.clearTimeout(introTimer);
     };
   }, [preloaderVisible]);
 
