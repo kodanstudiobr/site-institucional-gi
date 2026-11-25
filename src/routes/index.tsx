@@ -5,11 +5,21 @@ import { useEffect, useRef, useState } from "react";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/")({
-  head: () => pageHead("/", {
-    title: "Instituto Educacional G.I. | Educação Infantil e Anos Iniciais",
-    description: "Conheça o Instituto Educacional G.I. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes.",
-    keywords: "Instituto Educacional G.I., Educação Infantil, Anos Iniciais, escola, educação de qualidade, matrículas escolares",
-  }),
+  head: () => {
+    const head = pageHead("/", {
+      title: "Instituto Educacional G.I. | Educação Infantil e Anos Iniciais",
+      description: "Conheça o Instituto Educacional G.I. Uma escola comprometida com o acolhimento, a aprendizagem e o desenvolvimento integral dos estudantes.",
+      keywords: "Instituto Educacional G.I., Educação Infantil, Anos Iniciais, escola, educação de qualidade, matrículas escolares",
+    });
+    return {
+      ...head,
+      links: [
+        ...head.links,
+        { rel: "preload", as: "image", href: "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp", media: "(min-width: 768px)", fetchPriority: "high" },
+        { rel: "preload", as: "image", href: "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela%20-%20mobile.webp", media: "(max-width: 767px)", fetchPriority: "high" },
+      ],
+    };
+  },
   component: Index,
 });
 
@@ -368,7 +378,7 @@ function Index() {
     </section>
 
     <section className="section-wrap section-decor-wrap home-essence-layout grid items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
-      <div className="home-essence-image relative"><img src="/imagens/Menina%20sorridente%20no%20escorregador%20roxo.webp" alt="Menina sorridente no escorregador roxo" className="essence-image w-full rounded-[2rem] object-cover shadow-xl"/><div className="absolute -bottom-5 -right-3 rounded-2xl bg-accent px-6 py-5 font-display text-lg font-bold text-accent-foreground shadow-lg sm:-right-5">Aprender para a vida</div></div>
+      <div className="home-essence-image relative"><img src="/imagens/Menina%20sorridente%20no%20escorregador%20roxo.webp" alt="Menina sorridente no escorregador roxo" className="essence-image w-full rounded-[2rem] object-cover shadow-xl" loading="lazy" decoding="async"/><div className="absolute -bottom-5 -right-3 rounded-2xl bg-accent px-6 py-5 font-display text-lg font-bold text-accent-foreground shadow-lg sm:-right-5">Aprender para a vida</div></div>
       <div className="home-essence-heading"><p className="eyebrow">NOSSA ESSÊNCIA</p><h2 className="section-title">Educação que acredita no potencial de <span className="title-highlight">cada criança.</span></h2></div>
       <div className="home-essence-copy"><p className="text-lg leading-8 text-muted-foreground">O Instituto Educacional G.I. é uma instituição comprometida com uma educação de qualidade, pautada no acolhimento, no respeito às individualidades e no desenvolvimento integral dos estudantes.</p><p className="mt-4 leading-8 text-muted-foreground">Acreditamos que educar vai além da transmissão do conhecimento: é proporcionar experiências, despertar potencialidades, fortalecer valores e formar pessoas preparadas para os desafios da vida.</p><Link to="/sobre" className="link-arrow mt-7">Conheça nossa escola <ArrowRight size={18}/></Link></div>
     </section>
