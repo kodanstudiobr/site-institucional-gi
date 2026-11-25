@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Satisfy&display=swap");
+
 
 @custom-variant dark (&:is(.dark *));
 
@@ -6405,3 +6405,11 @@ html.gi-hero-intro .hero-bottom {
   }
 }
 
+
+
+/* Satisfy carregada no head: mesma fonte real em iOS, Android e desktop. */
+main .learning-word-stack .learning-word {
+  font-family: "Satisfy", cursive !important;
+  font-weight: 400 !important;
+  font-synthesis: none;
+}
