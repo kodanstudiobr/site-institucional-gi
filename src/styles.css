@@ -6224,72 +6224,7 @@ html.gi-first-visit .gi-preloader.is-inactive {
 }
 
 
-/* Revelação coordenada e imediata da primeira tela ao terminar a cortina do preloader. */
-@keyframes giFirstScreenRise {
-  from { opacity:0; transform:translate3d(0,22px,0); }
-  to { opacity:1; transform:translate3d(0,0,0); }
-}
-@keyframes giFirstScreenFade {
-  from { opacity:0; }
-  to { opacity:1; }
-}
-html.gi-hero-intro .hero-slide.is-active {
-  animation:giFirstScreenFade .62s ease-out both;
-}
-html.gi-hero-intro .hero-overlay {
-  animation:giFirstScreenFade .55s ease-out both;
-}
-html.gi-hero-intro .site-header > div > a:first-child {
-  animation:giFirstScreenRise .55s cubic-bezier(.2,.75,.25,1) both;
-}
-html.gi-hero-intro .site-header .nav-link {
-  opacity:0;
-  animation:giFirstScreenRise .48s cubic-bezier(.2,.75,.25,1) both;
-}
-html.gi-hero-intro .site-header .nav-link:nth-child(1) { animation-delay:0s; }
-html.gi-hero-intro .site-header .nav-link:nth-child(2) { animation-delay:.035s; }
-html.gi-hero-intro .site-header .nav-link:nth-child(3) { animation-delay:.07s; }
-html.gi-hero-intro .site-header .nav-link:nth-child(4) { animation-delay:.105s; }
-html.gi-hero-intro .site-header .nav-link:nth-child(5) { animation-delay:.14s; }
-html.gi-hero-intro .site-header .nav-link:nth-child(6) { animation-delay:.175s; }
-html.gi-hero-intro .site-header .header-cta,
-html.gi-hero-intro .site-header .header-menu {
-  animation:giFirstScreenRise .52s cubic-bezier(.2,.75,.25,1) .16s both;
-}
-html.gi-hero-intro .hero-kicker,
-html.gi-hero-intro .hero-heading,
-html.gi-hero-intro .hero-copy > p,
-html.gi-hero-intro .hero-copy > div {
-  opacity:0;
-  animation:giFirstScreenRise .58s cubic-bezier(.2,.75,.25,1) both;
-  will-change:transform,opacity;
-}
-html.gi-hero-intro .hero-kicker { animation-delay:0s; }
-html.gi-hero-intro .hero-heading { animation-delay:.06s; }
-html.gi-hero-intro .hero-copy > p { animation-delay:.12s; }
-html.gi-hero-intro .hero-copy > div { animation-delay:.18s; }
-html.gi-hero-intro .hero-bottom {
-  animation:giFirstScreenFade .5s ease-out both;
-}
-@media (prefers-reduced-motion:reduce) {
-  html.gi-hero-intro .hero-slide.is-active,
-  html.gi-hero-intro .hero-overlay,
-  html.gi-hero-intro .site-header > div > a:first-child,
-  html.gi-hero-intro .site-header .nav-link,
-  html.gi-hero-intro .site-header .header-cta,
-  html.gi-hero-intro .site-header .header-menu,
-  html.gi-hero-intro .hero-kicker,
-  html.gi-hero-intro .hero-heading,
-  html.gi-hero-intro .hero-copy > p,
-  html.gi-hero-intro .hero-copy > div,
-  html.gi-hero-intro .hero-bottom {
-    animation:none;
-    opacity:1;
-    transform:none;
-  }
-}
 
- 
 /* Botão flutuante somente com a marca oficial do WhatsApp. */
 .gi-whatsapp-float {
   position: fixed;
