@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
     return {
       ...head,
       links: [
-        ...head.links,
+        { rel: "canonical", href: "https://institutogi.vercel.app/" },
         { rel: "preload", as: "image", href: "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp", media: "(min-width: 768px)", fetchPriority: "high" },
         { rel: "preload", as: "image", href: "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela%20-%20mobile.webp", media: "(max-width: 767px)", fetchPriority: "high" },
       ],
