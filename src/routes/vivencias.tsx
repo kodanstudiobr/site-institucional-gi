@@ -83,7 +83,7 @@ function VivenciaCard({ item, index, onOpen }: { item: ExperienceItem; index: nu
   const imageFocusClass = focusFace ? "experience-card__background--face-focus" : "";
   return <article ref={cardRef} className="experience-card experience-card__button">
     {outgoingImageIndex !== null && <img className={`experience-card__background experience-card__background--slideshow is-outgoing ${imageFocusClass}`} src={item.images[outgoingImageIndex]} alt={`Registro de ${item.title.toLowerCase()} no Instituto Educacional G.I.`} loading="lazy" decoding="async" />}
-    <img className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`} src={item.images[activeImageIndex]} alt="" loading="lazy" decoding="async" aria-hidden="true" />
+    <img className={`experience-card__background experience-card__background--slideshow ${crossfadeStarted ? "is-active" : "is-entering"} ${imageFocusClass}`} src={item.images[activeImageIndex]} alt={`Registro de ${item.title.toLowerCase()} no Instituto Educacional G.I.`} loading="lazy" decoding="async" />
     <div className="experience-card__shade" />
     <span className="experience-card__number">0{index + 1}</span>
     <div className="experience-card__content">
