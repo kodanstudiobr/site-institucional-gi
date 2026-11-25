@@ -6371,3 +6371,24 @@ html.gi-hero-intro .hero-bottom {
     white-space: nowrap;
   }
 }
+
+
+/* Contato mobile: preservar o formato circular do botão flutuante do WhatsApp. */
+@media (max-width: 767px) {
+  body:has(.contact-page-hero) a.gi-whatsapp-float {
+    position: fixed !important;
+    right: 15px !important;
+    bottom: 18px !important;
+    display: grid !important;
+    width: 58px !important;
+    min-width: 58px !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    aspect-ratio: 1 / 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    place-items: center !important;
+    flex: 0 0 58px !important;
+  }
+}
