@@ -6363,3 +6363,11 @@ html.gi-hero-intro .hero-bottom {
     transform: translate3d(0, -14px, 0) scale(.99) !important;
   }
 }
+
+
+/* Rodapé desktop: manter telefone fixo e WhatsApp em uma única linha. */
+@media (min-width: 1024px) {
+  .gi-footer__contact > div.grid > div:nth-child(2) a {
+    white-space: nowrap;
+  }
+}
