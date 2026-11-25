@@ -1,7 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Satisfy&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -2583,7 +2583,7 @@ main .learning-word-stack p.learning-word {
 /* Mesma família tipográfica em desktop e mobile para as palavras da seção:
    Crescer, Aprender, Criar e Vivenciar. Apenas o tamanho responde à tela. */
 main .learning-word-stack p.learning-word {
-  font-family: "Dancing Script", "Segoe Script", cursive !important;
+  font-family: "Satisfy", "Dancing Script", cursive !important;
 }
 @media (max-width:767px) {
   main .learning-word-stack p.learning-word {
@@ -5289,11 +5289,11 @@ section.history-scroll-section {
 /* Seção "Crescer, Aprender, Criar, Vivenciar":
    mantém no mobile a mesma família tipográfica usada no desktop e amplia a leitura. */
 main .learning-word-stack p.learning-word {
-  font-family: "Dancing Script", "Segoe Script", cursive !important;
+  font-family: "Satisfy", "Dancing Script", cursive !important;
 }
 @media (max-width: 767px) {
   main .learning-word-stack p.learning-word {
-    font-family: "Dancing Script", "Segoe Script", cursive !important;
+    font-family: "Satisfy", "Dancing Script", cursive !important;
     font-size: clamp(4.5rem, 17vw, 7rem) !important;
     line-height: 1.04 !important;
     letter-spacing: -.055em !important;
@@ -5368,12 +5368,12 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 
 /* Palavras da aprendizagem: mesma fonte em desktop e mobile, sem substituição tipográfica. */
 main .learning-word-stack .learning-word {
-  font-family: "Dancing Script", "Segoe Script", cursive !important;
+  font-family: "Satisfy", "Dancing Script", cursive !important;
   font-synthesis: none;
 }
 @media (max-width: 767px) {
   main .learning-word-stack .learning-word {
-    font-family: "Dancing Script", "Segoe Script", cursive !important;
+    font-family: "Satisfy", "Dancing Script", cursive !important;
     font-size: clamp(4.5rem, 17vw, 7rem) !important;
     line-height: 1.04 !important;
     letter-spacing: -.055em !important;
