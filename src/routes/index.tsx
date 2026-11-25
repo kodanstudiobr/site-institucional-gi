@@ -273,13 +273,13 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
 
   return (
     <div ref={cardRef} className="experience-card" aria-label={item.title}>
-      <div className="experience-card__slides" aria-hidden="true">
+      <div className="experience-card__slides">
         {cardImages.map((src, slideIndex) => (
           <img
             key={src}
             className={`experience-card__slide ${activeImageIndex === slideIndex ? "is-active" : ""} ${imageFocusClass}`}
             src={src}
-            alt=""
+            alt={`${item.title}: registro de atividade escolar no Instituto Educacional G.I.`}
             loading="lazy"
             decoding="async"
           />
@@ -357,13 +357,13 @@ function Index() {
   };
   return <SiteLayout transparentHeader>
     <section className="hero-home">
-      <div className="hero-slides" aria-hidden="true">
+      <div className="hero-slides">
         {heroSlides.map((slide, index) => (
           <picture key={slide.desktop} className={`hero-slide ${activeHeroSlide === index ? "is-active" : ""}`}>
             {index === activeHeroSlide && <source media="(max-width: 767px)" srcSet={slide.mobile} />}
             <img
               src={index === activeHeroSlide ? slide.desktop : undefined}
-              alt=""
+              alt={slide.alt}
               loading={index === 0 ? "eager" : "lazy"}
               fetchPriority={index === activeHeroSlide ? "high" : "auto"}
               decoding="async"
