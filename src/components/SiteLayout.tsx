@@ -25,8 +25,8 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
-  useEffect(() => {
-    // Verifica somente no navegador, após a hidratação do React.
+  useLayoutEffect(() => {
+    // Verifica antes da primeira pintura do navegador para evitar o flash da página.
     // O ref evita uma segunda leitura no ciclo de efeitos do Strict Mode.
     if (preloaderCheckRef.current) return;
     preloaderCheckRef.current = true;
@@ -81,7 +81,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           return;
         }
         playSequence(frame === 0 ? 1 : 2);
-      }, 1500);
+      }, 1200);
     };
 
     mascotEntryTimer = window.setTimeout(() => {
