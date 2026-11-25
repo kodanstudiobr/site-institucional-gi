@@ -1,7 +1,7 @@
 const SITE_URL = (import.meta.env["VITE_SITE_URL"]?.trim() || "https://institutogi.vercel.app").replace(/\/+$/, "");
 
-const DEFAULT_SHARE_IMAGE = "/imagens/Fachada%20Escolar%20Azul%20e%20Amarela.webp";
-const DEFAULT_SHARE_IMAGE_ALT = "Fachada do Instituto Educacional G.I.";
+const DEFAULT_SHARE_IMAGE = "/imagens/Menino-sorridente-brincando-com-massinha-verde-desktop.webp";
+const DEFAULT_SHARE_IMAGE_ALT = "Estudante do Instituto Educacional G.I. em uma experiência de aprendizagem";
 
 export function canonicalLink(path: string) {
   return [{ rel: "canonical", href: `${SITE_URL}${path}` }];
