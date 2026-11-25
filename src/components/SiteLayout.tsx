@@ -33,6 +33,23 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     }
   }, []);
 
+  // Navegadores móveis podem restaurar a página da memória (BFCache) ao reabrir
+  // uma aba, sem executar novamente o script inicial do <head> nem remontar o React.
+  // Nesse retorno, reinicia o preloader explicitamente.
+  useEffect(() => {
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      document.documentElement.classList.add("gi-first-visit");
+      setGigiFrame(0);
+      setGigiVisible(false);
+      setPreloaderLeaving(false);
+      setPreloaderVisible(true);
+    };
+
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   useEffect(() => {
     if (!preloaderVisible) return;
     let active = true;
