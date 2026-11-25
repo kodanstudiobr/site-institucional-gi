@@ -6346,3 +6346,20 @@ html.gi-hero-intro .hero-bottom {
 @media (prefers-reduced-motion: reduce) {
   .gi-whatsapp-float, .gi-whatsapp-float::before { animation: none !important; transition: none !important; }
 }
+
+
+/* CTA de matrícula do header: mantém a posição elevada e sobe ainda mais no hover desktop. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .site-header .header-cta {
+    transform: translate3d(0, -13px, 0) !important;
+    transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s cubic-bezier(.22,1,.36,1), filter .32s ease !important;
+  }
+  .site-header .header-cta:hover {
+    transform: translate3d(0, -18px, 0) scale(1.015) !important;
+    box-shadow: 0 10px 24px rgba(28,43,105,.18), 0 3px 8px rgba(28,43,105,.10) !important;
+    filter: brightness(1.035);
+  }
+  .site-header .header-cta:active {
+    transform: translate3d(0, -14px, 0) scale(.99) !important;
+  }
+}
