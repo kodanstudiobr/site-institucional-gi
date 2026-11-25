@@ -1,10 +1,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
-const siteUrl = process.env.SITE_URL?.trim().replace(/\/+$/, "");
-if (!siteUrl) {
-  console.warn("SITE_URL não configurada: sitemap.xml não foi gerado. Configure a URL pública do site no ambiente de deploy.");
-  process.exit(0);
-}
+const siteUrl = (process.env.SITE_URL?.trim() || "https://institutogi.vercel.app").replace(/\/+$/, "");
 
 const routes = ["/", "/sobre", "/ensino", "/estrutura", "/vivencias", "/noticias", "/contato"];
 const urls = routes.map((route) => "  <url><loc>" + siteUrl + route + "</loc></url>").join("\n");
