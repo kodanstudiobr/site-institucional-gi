@@ -63,16 +63,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       "/imagens/gigi-piscando.webp",
       "/imagens/gigi-acenando.webp",
     ];
-    // As três imagens são preparadas antes da sequência para evitar atrasos
-    // entre a troca das poses.
-    Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
-      const image = new Image();
-      image.onload = () => resolve();
-      image.onerror = () => resolve();
-      image.src = src;
-      if (image.complete) resolve();
-    })));
-
     const finishPreloader = () => {
       if (!active) return;
       // Finaliza o preloader e revela a Hero com o comportamento padrão.
@@ -87,6 +77,12 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     const playSequence = (frame: 0 | 1 | 2) => {
       if (!active) return;
       setGigiFrame(frame);
+      const nextFrame = frame < 2 ? frame + 1 : null;
+      if (nextFrame !== null) {
+        const nextImage = new Image();
+        nextImage.decoding = "async";
+        nextImage.src = imagePaths[nextFrame];
+      }
       sequenceTimer = window.setTimeout(() => {
         if (frame === 2) {
           finishPreloader();
@@ -232,11 +228,18 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             <div className="gi-preloader__track gi-preloader__foreground"><span /></div>
           </div>
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
-            {[
-              "/imagens/gigi-normal.webp",
-              "/imagens/gigi-piscando.webp",
-              "/imagens/gigi-acenando.webp",
-            ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
+            <img
+              key={gigiFrame}
+              className="gi-preloader__mascot is-active"
+              src={[
+                "/imagens/gigi-normal.webp",
+                "/imagens/gigi-piscando.webp",
+                "/imagens/gigi-acenando.webp",
+              ][gigiFrame]}
+              alt=""
+              fetchPriority="high"
+              decoding="async"
+            />
           </div>
         </div>
       </div>
