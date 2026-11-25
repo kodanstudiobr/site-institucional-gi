@@ -6166,3 +6166,28 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 .gi-preloader__mascot-stage .gi-preloader__mascot.is-active {
   transition: opacity .42s ease-in-out !important;
 }
+
+
+/* Entrada lateral elegante somente para o bloco de texto e carregamento. */
+.gi-preloader__copy {
+  opacity: 0;
+  animation: giPreloaderCopyFromLeft .82s cubic-bezier(.22,.75,.25,1) .22s both !important;
+  will-change: opacity, transform;
+}
+@keyframes giPreloaderCopyFromLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-58px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__copy {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
