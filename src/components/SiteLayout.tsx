@@ -26,17 +26,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
   useLayoutEffect(() => {
-    // Verifica antes da primeira pintura do navegador para evitar o flash da página.
-    // O ref evita uma segunda leitura no ciclo de efeitos do Strict Mode.
     if (preloaderCheckRef.current) return;
     preloaderCheckRef.current = true;
-    try {
-      const alreadyEntered = window.sessionStorage.getItem("gi-site-entered") === "1";
-      if (!alreadyEntered) {
-        window.sessionStorage.setItem("gi-site-entered", "1");
-        setPreloaderVisible(true);
-      }
-    } catch {
+    if (document.documentElement.classList.contains("gi-first-visit")) {
       setPreloaderVisible(true);
     }
   }, []);
@@ -212,7 +204,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      {preloaderVisible && <div className={`gi-preloader ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
+      <div className={`gi-preloader ${!preloaderVisible ? "is-inactive" : ""} ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
         <div className={`gi-preloader__content gi-preloader__content--enter ${gigiVisible ? "has-mascot" : ""}`}>
           <div className="gi-preloader__copy">
             <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
@@ -227,7 +219,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
           </div>
         </div>
-      </div>}
+      </div>
       <header className={headerClass}>
         <div className={`mx-auto flex max-w-7xl items-center justify-between gap-5 px-5 transition-all duration-300 lg:px-8 ${compactHeader ? "py-1.5" : "py-3"}`}>
           <Link to="/" className={`flex shrink-0 items-center justify-start transition-all duration-300 ${compactHeader ? "h-16 w-20 sm:h-16 sm:w-20 2xl:h-24 2xl:w-24" : "h-32 w-36 sm:h-24 sm:w-28 2xl:h-40 2xl:w-40"}`} onClick={(event) => { setMenuOpen(false); if (pathname === "/") { event.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } }}>
