@@ -6153,3 +6153,16 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     transform: none !important;
   }
 }
+
+
+/* Entrada mais ágil da Gigi e crossfade mais rápido entre as três poses. */
+.gi-preloader__mascot-stage {
+  transition:
+    height .68s cubic-bezier(.22,.75,.25,1),
+    margin-bottom .68s cubic-bezier(.22,.75,.25,1),
+    opacity .48s ease !important;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot,
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active {
+  transition: opacity .42s ease-in-out !important;
+}
