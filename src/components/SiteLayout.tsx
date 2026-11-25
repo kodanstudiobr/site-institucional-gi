@@ -21,13 +21,10 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     if (typeof window === "undefined") return false;
     try {
       const alreadyEntered = window.sessionStorage.getItem("gi-site-entered") === "1";
-      const navigation = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-      const isHomeReload = window.location.pathname === "/" && navigation?.type === "reload";
-      const shouldShow = !alreadyEntered || isHomeReload;
       window.sessionStorage.setItem("gi-site-entered", "1");
-      return shouldShow;
+      return !alreadyEntered;
     } catch {
-      return window.location.pathname === "/";
+      return true;
     }
   });
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
@@ -41,19 +38,17 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let active = true;
     let sequenceTimer: number | undefined;
     let sequenceStartTimer: number | undefined;
-    const mascotEntryTimer = window.setTimeout(() => {
-      if (!active) return;
-      setGigiVisible(true);
-      // Aguarda a expansão da área da mascote terminar antes de iniciar
-      // a contagem de 2 segundos da primeira pose.
-      sequenceStartTimer = window.setTimeout(() => playSequence(0), 680);
-    }, 1400);
+    let mascotEntryTimer: number | undefined;
+    let leaveTimer: number | undefined;
+
     const imagePaths = [
       "/imagens/gigi-normal.webp",
       "/imagens/gigi-piscando.webp",
       "/imagens/gigi-acenando.webp",
     ];
-    const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
+    // As três imagens são preparadas antes da sequência para evitar atrasos
+    // entre a troca das poses.
+    Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
       const image = new Image();
       image.onload = () => resolve();
       image.onerror = () => resolve();
@@ -61,26 +56,39 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       if (image.complete) resolve();
     })));
 
-    // Cada pose permanece 2 segundos: normal, piscadinha e aceno.
+    const finishPreloader = () => {
+      if (!active) return;
+      setPreloaderLeaving(true);
+      leaveTimer = window.setTimeout(() => {
+        if (active) setPreloaderVisible(false);
+      }, 1050);
+    };
+
     const playSequence = (frame: 0 | 1 | 2) => {
       if (!active) return;
       setGigiFrame(frame);
       sequenceTimer = window.setTimeout(() => {
-        playSequence(frame === 0 ? 1 : frame === 1 ? 2 : 0);
-      }, 2000);
+        if (frame === 2) {
+          finishPreloader();
+          return;
+        }
+        playSequence(frame === 0 ? 1 : 2);
+      }, 1500);
     };
-    const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 6000));
-    const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 7500));
-    Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
+
+    mascotEntryTimer = window.setTimeout(() => {
       if (!active) return;
-      setPreloaderLeaving(true);
-      window.setTimeout(() => { if (active) setPreloaderVisible(false); }, 1050);
-    });
+      setGigiVisible(true);
+      // A primeira pose só começa a contar após a mascote concluir a entrada.
+      sequenceStartTimer = window.setTimeout(() => playSequence(0), 680);
+    }, 1400);
+
     return () => {
       active = false;
       if (sequenceTimer !== undefined) window.clearTimeout(sequenceTimer);
       if (sequenceStartTimer !== undefined) window.clearTimeout(sequenceStartTimer);
-      window.clearTimeout(mascotEntryTimer);
+      if (mascotEntryTimer !== undefined) window.clearTimeout(mascotEntryTimer);
+      if (leaveTimer !== undefined) window.clearTimeout(leaveTimer);
     };
   }, [preloaderVisible]);
 
