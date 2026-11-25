@@ -58,7 +58,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
       if (!active) return;
       setPreloaderLeaving(true);
-      window.setTimeout(() => { if (active) setPreloaderVisible(false); }, 550);
+      window.setTimeout(() => { if (active) setPreloaderVisible(false); }, 1050);
     });
     return () => {
       active = false;
