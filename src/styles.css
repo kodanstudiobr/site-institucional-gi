@@ -6404,3 +6404,24 @@ html.gi-hero-intro .hero-bottom {
     text-align: left !important;
   }
 }
+
+
+/* Header mobile ao rolar: centraliza a logo e mantém o toggle ancorado à direita. */
+@media (max-width: 1023px) {
+  .site-header--overlay.is-scrolled:not(.is-menu-open) > div {
+    position: relative !important;
+  }
+  .site-header--overlay.is-scrolled:not(.is-menu-open) > div > a:first-child {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    justify-content: center !important;
+  }
+  .site-header--overlay.is-scrolled:not(.is-menu-open) .header-menu {
+    position: relative !important;
+    z-index: 2 !important;
+    margin-left: auto !important;
+  }
+}
