@@ -5732,3 +5732,46 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 @media (prefers-reduced-motion: reduce) {
   .gi-preloader, .gi-preloader__mascot, .gi-preloader__track span { animation: none !important; transition: none !important; }
 }
+
+
+/* Sequência visual da Gigi: três poses com sobreposição e crossfade suave. */
+.gi-preloader__mascot-stage {
+  position: relative;
+  width: min(66vw, 310px);
+  height: min(48vh, 390px);
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(7px) scale(.985);
+  transition: opacity .28s ease-in-out, transform .42s cubic-bezier(.2,.75,.25,1);
+  pointer-events: none;
+  animation: none;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(3).is-active {
+  transform: translateY(-3px) scale(1.015) rotate(-1deg);
+}
+@media (max-width: 640px) {
+  .gi-preloader__mascot-stage {
+    width: min(76vw, 290px);
+    height: min(43vh, 350px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__mascot-stage .gi-preloader__mascot {
+    transition: none !important;
+    transform: none !important;
+  }
+}
