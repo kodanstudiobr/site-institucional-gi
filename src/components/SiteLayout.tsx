@@ -68,8 +68,8 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         document.documentElement.classList.add("gi-hero-intro");
         window.setTimeout(() => {
           document.documentElement.classList.remove("gi-hero-intro");
-        }, 2200);
-      }, 1050);
+        }, 1500);
+      }, 1000);
     };
 
     const playSequence = (frame: 0 | 1 | 2) => {
