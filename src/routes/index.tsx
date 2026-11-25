@@ -360,8 +360,14 @@ function Index() {
       <div className="hero-slides" aria-hidden="true">
         {heroSlides.map((slide, index) => (
           <picture key={slide.desktop} className={`hero-slide ${activeHeroSlide === index ? "is-active" : ""}`}>
-            <source media="(max-width: 767px)" srcSet={slide.mobile} />
-            <img src={slide.desktop} alt="" loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"} decoding="async" />
+            {index === activeHeroSlide && <source media="(max-width: 767px)" srcSet={slide.mobile} />}
+            <img
+              src={index === activeHeroSlide ? slide.desktop : undefined}
+              alt=""
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === activeHeroSlide ? "high" : "auto"}
+              decoding="async"
+            />
           </picture>
         ))}
       </div>
