@@ -93,7 +93,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       setGigiVisible(true);
       // A primeira pose só começa a contar após a mascote concluir a entrada.
       sequenceStartTimer = window.setTimeout(() => playSequence(0), 680);
-    }, 1400);
+    }, 1000);
 
     return () => {
       active = false;
