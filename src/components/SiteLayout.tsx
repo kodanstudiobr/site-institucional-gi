@@ -27,8 +27,13 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   useEffect(() => {
     let active = true;
     let sequenceTimer: number | undefined;
+    let sequenceStartTimer: number | undefined;
     const mascotEntryTimer = window.setTimeout(() => {
-      if (active) setGigiVisible(true);
+      if (!active) return;
+      setGigiVisible(true);
+      // Aguarda a expansão da área da mascote terminar antes de iniciar
+      // a contagem de 2 segundos da primeira pose.
+      sequenceStartTimer = window.setTimeout(() => playSequence(0), 680);
     }, 1400);
     const imagePaths = [
       "/imagens/gigi-normal.webp",
@@ -51,8 +56,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         playSequence(frame === 0 ? 1 : frame === 1 ? 2 : 0);
       }, 2000);
     };
-    playSequence(0);
-
     const minimumTime = new Promise<void>((resolve) => window.setTimeout(resolve, 6000));
     const safetyTimeout = new Promise<void>((resolve) => window.setTimeout(resolve, 7500));
     Promise.race([Promise.all([preloadImages, minimumTime]).then(() => undefined), safetyTimeout]).then(() => {
@@ -63,6 +66,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     return () => {
       active = false;
       if (sequenceTimer !== undefined) window.clearTimeout(sequenceTimer);
+      if (sequenceStartTimer !== undefined) window.clearTimeout(sequenceStartTimer);
       window.clearTimeout(mascotEntryTimer);
     };
   }, []);
