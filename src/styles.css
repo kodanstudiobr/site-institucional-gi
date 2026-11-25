@@ -6211,3 +6211,14 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     animation: none !important;
   }
 }
+
+
+/* O preloader já vem no HTML inicial: a classe é definida por um script no <head>,
+   antes da primeira pintura, evitando qualquer flash do conteúdo do site. */
+.gi-preloader.is-inactive { display: none !important; }
+html.gi-first-visit .gi-preloader.is-inactive {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
