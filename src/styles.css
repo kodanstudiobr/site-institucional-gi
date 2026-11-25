@@ -5857,3 +5857,64 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     transform: none;
   }
 }
+
+
+/* Frase e barra aparecem primeiro; a mascote entra depois, atrás delas. */
+.gi-preloader__content {
+  position: relative;
+  isolation: isolate;
+  min-height: min(72vh, 610px);
+  justify-content: center;
+  padding-top: 1rem;
+}
+.gi-preloader__foreground {
+  position: relative;
+  z-index: 2;
+}
+.gi-preloader__mascot-stage {
+  position: absolute !important;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: min(76vw, 390px) !important;
+  height: min(62vh, 500px) !important;
+  margin: 0 !important;
+  transform: translate(-50%, -50%) !important;
+  opacity: 0;
+  animation: giMascotReveal .95s ease-out .9s forwards;
+  pointer-events: none;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot,
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(2).is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(3).is-active {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  margin: 0 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: opacity .7s ease-in-out !important;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot { opacity: 0; }
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active { opacity: 1; }
+@keyframes giMascotReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (max-width: 640px) {
+  .gi-preloader__content { min-height: 68vh; }
+  .gi-preloader__mascot-stage {
+    width: min(88vw, 350px) !important;
+    height: min(54vh, 420px) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__mascot-stage {
+    animation: none;
+    opacity: 1;
+  }
+}
