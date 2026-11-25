@@ -6054,3 +6054,80 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     transform: none;
   }
 }
+
+
+/* Preloader corrigido: a mensagem começa centralizada; a Gigi entra acima
+   e o conjunto completo permanece centralizado verticalmente. */
+.gi-preloader__content {
+  display: flex !important;
+  min-height: min(78vh, 720px) !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+.gi-preloader__copy {
+  order: 2 !important;
+  width: 100%;
+  transform: none !important;
+  transition: none !important;
+}
+.gi-preloader__mascot-stage {
+  order: 1 !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+  width: min(76vw, 390px) !important;
+  height: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  clip-path: none !important;
+  transform: none !important;
+  animation: none !important;
+  transition: height .95s cubic-bezier(.22,.75,.25,1), margin-bottom .95s cubic-bezier(.22,.75,.25,1), opacity .7s ease !important;
+  pointer-events: none;
+}
+.gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+  height: min(37vh, 300px) !important;
+  margin-bottom: .35rem !important;
+  opacity: 1 !important;
+}
+.gi-preloader__content.has-mascot .gi-preloader__copy {
+  transform: none !important;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot,
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(2).is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(3).is-active {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: opacity .55s ease-in-out !important;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot { opacity: 0 !important; }
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active { opacity: 1 !important; }
+
+@media (max-width: 640px) {
+  .gi-preloader__content { min-height: 76vh !important; }
+  .gi-preloader__mascot-stage { width: min(88vw, 350px) !important; }
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    height: min(31vh, 235px) !important;
+  }
+}
+@media (max-height: 650px) {
+  .gi-preloader__content { min-height: 82vh !important; }
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    height: min(27vh, 185px) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__mascot-stage { transition: none !important; }
+}
