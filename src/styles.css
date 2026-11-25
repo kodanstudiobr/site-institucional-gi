@@ -5966,3 +5966,91 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
     opacity: 1;
   }
 }
+
+
+/* Sequência do preloader: mensagem primeiro, Gigi entra em seguida. */
+.gi-preloader__content {
+  width: min(100%, 390px);
+  gap: 0;
+  overflow: visible;
+}
+.gi-preloader__copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform .95s cubic-bezier(.22,.75,.25,1);
+}
+.gi-preloader__mascot-stage {
+  position: relative;
+  display: block;
+  width: min(66vw, 310px);
+  height: 0;
+  margin-top: 0;
+  overflow: visible;
+  opacity: 0;
+  transform: translateY(72px);
+  transition:
+    height .95s cubic-bezier(.22,.75,.25,1),
+    margin-top .95s cubic-bezier(.22,.75,.25,1),
+    opacity .65s ease,
+    transform .95s cubic-bezier(.22,.75,.25,1);
+}
+.gi-preloader__content.has-mascot .gi-preloader__copy {
+  transform: translateY(205px);
+}
+.gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+  height: min(37vh, 300px);
+  margin-top: .35rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot,
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(2).is-active,
+.gi-preloader__mascot-stage .gi-preloader__mascot:nth-child(3).is-active {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: 0 !important;
+  transform: none !important;
+  animation: none !important;
+  transition: opacity .55s ease-in-out !important;
+}
+.gi-preloader__mascot-stage .gi-preloader__mascot { opacity: 0; }
+.gi-preloader__mascot-stage .gi-preloader__mascot.is-active { opacity: 1; }
+
+@media (max-width: 640px) {
+  .gi-preloader__content.has-mascot .gi-preloader__copy {
+    transform: translateY(175px);
+  }
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    height: min(33vh, 245px);
+  }
+}
+@media (max-height: 650px) {
+  .gi-preloader__content.has-mascot .gi-preloader__copy {
+    transform: translateY(145px);
+  }
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    height: min(30vh, 205px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__copy,
+  .gi-preloader__mascot-stage {
+    transition: none !important;
+  }
+  .gi-preloader__content.has-mascot .gi-preloader__copy {
+    transform: translateY(0);
+  }
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    transform: none;
+  }
+}
