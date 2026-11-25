@@ -29,11 +29,11 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     let sequenceTimer: number | undefined;
     const mascotEntryTimer = window.setTimeout(() => {
       if (active) setGigiVisible(true);
-    }, 2300);
+    }, 1400);
     const imagePaths = [
       "/imagens/gigi-normal.webp",
-      "/imagens/gigi-piscando.webp",
       "/imagens/gigi-acenando.webp",
+      "/imagens/gigi-piscando.webp",
     ];
     const preloadImages = Promise.all(imagePaths.map((src) => new Promise<void>((resolve) => {
       const image = new Image();
@@ -189,8 +189,8 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             {[
               "/imagens/gigi-normal.webp",
-              "/imagens/gigi-piscando.webp",
               "/imagens/gigi-acenando.webp",
+              "/imagens/gigi-piscando.webp",
             ].map((src, index) => <img key={src} className={`gi-preloader__mascot ${gigiFrame === index ? "is-active" : ""}`} src={src} alt="" fetchPriority={index === 0 ? "high" : "auto"} />)}
           </div>
         </div>
