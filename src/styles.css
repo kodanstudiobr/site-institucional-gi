@@ -6596,3 +6596,42 @@ main .learning-word-stack .learning-word {
     animation: none !important;
   }
 }
+
+
+/* Revelação suave e escalonada das frases, sem alterar o espaço reservado
+   nem deslocar a Gigi quando o texto aparece. */
+.gi-preloader__content.has-copy .gi-preloader__copy {
+  animation: giPreloaderTextEntrance .9s cubic-bezier(.2,.7,.25,1) both !important;
+}
+.gi-preloader__content.has-copy .gi-preloader__title {
+  animation: giPreloaderTextEntrance .82s cubic-bezier(.2,.7,.25,1) .08s both !important;
+}
+.gi-preloader__content.has-copy .gi-preloader__message {
+  animation: giPreloaderTextEntrance .82s cubic-bezier(.2,.7,.25,1) .22s both !important;
+}
+.gi-preloader__content.has-copy .gi-preloader__track {
+  animation: giPreloaderTextEntrance .82s cubic-bezier(.2,.7,.25,1) .36s both !important;
+}
+@keyframes giPreloaderTextEntrance {
+  from {
+    opacity: 0;
+    translate: 0 9px;
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__content.has-copy .gi-preloader__copy,
+  .gi-preloader__content.has-copy .gi-preloader__title,
+  .gi-preloader__content.has-copy .gi-preloader__message,
+  .gi-preloader__content.has-copy .gi-preloader__track {
+    animation: none !important;
+    opacity: 1 !important;
+    translate: none !important;
+    filter: none !important;
+  }
+}
