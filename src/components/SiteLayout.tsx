@@ -187,7 +187,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             <video
               className="gi-preloader__mascot is-active"
-              src="/imagens/IMG_4068.webm"
+              src="/imagens/IMG_4068-transparente.webm"
               autoPlay
               muted
               loop
