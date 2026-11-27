@@ -1,6 +1,6 @@
 const SITE_URL = (import.meta.env["VITE_SITE_URL"]?.trim() || "https://institutogi.vercel.app").replace(/\/+$/, "");
 
-const DEFAULT_SHARE_IMAGE = "/imagens/Educação%20que%20Acolhe%20e%20Transforma.png?v=1";
+const DEFAULT_SHARE_IMAGE = "/imagens/Educação%20que%20Acolhe%20e%20Transforma.png?v=2";
 const DEFAULT_SHARE_IMAGE_ALT = "Educação que acolhe e transforma — Instituto Educacional G.I.";
 
 export function canonicalLink(path: string) {
