@@ -6636,3 +6636,12 @@ main .learning-word-stack .learning-word {
   }
 }
 
+
+
+/* Títulos dos depoimentos: a opacidade e o deslocamento são controlados diretamente
+   pelo progresso da rolagem, evitando atraso/engasgo das transições no mobile. */
+section.history-scroll-section .history-scroll-kicker,
+section.history-scroll-section .history-scroll-heading {
+  transition: none !important;
+  will-change: opacity, transform;
+}
