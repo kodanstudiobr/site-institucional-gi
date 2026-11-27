@@ -193,6 +193,7 @@ type ExperienceItem = (typeof vivencias)[number];
 
 function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [previousImageIndex, setPreviousImageIndex] = useState<number | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const activeImageIndexRef = useRef(0);
   const cardImages = item.images.length > 0 ? item.images : [item.image];
@@ -234,9 +235,13 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
       }
 
       if (!isMounted) return;
+      setPreviousImageIndex(activeImageIndexRef.current);
       activeImageIndexRef.current = next;
       setActiveImageIndex(next);
-      window.setTimeout(() => { isTransitioning = false; }, 1800);
+      window.setTimeout(() => {
+        setPreviousImageIndex(null);
+        isTransitioning = false;
+      }, 1800);
     };
 
     const start = () => {
@@ -274,11 +279,11 @@ function ExperienceCard({ item, index }: { item: ExperienceItem; index: number }
   return (
     <div ref={cardRef} className="experience-card" aria-label={item.title}>
       <div className="experience-card__slides">
-        {cardImages.map((src, slideIndex) => (
+        {Array.from(new Set([previousImageIndex, activeImageIndex].filter((value): value is number => value !== null))).map((slideIndex) => (
           <img
-            key={src}
+            key={cardImages[slideIndex]}
             className={`experience-card__slide ${activeImageIndex === slideIndex ? "is-active" : ""} ${imageFocusClass}`}
-            src={src}
+            src={cardImages[slideIndex]}
             alt={`${item.title}: registro de atividade escolar no Instituto Educacional G.I.`}
             loading="lazy"
             decoding="async"
