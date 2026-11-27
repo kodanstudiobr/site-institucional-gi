@@ -107,8 +107,8 @@ function HistoryTestimonials() {
         <p className="history-highlight__caption history-story-item history-scroll-caption" style={{ opacity: reveal(0.055, 0.13), transform: `translateY(${(1 - reveal(0.055, 0.13)) * 20}px)` }}>anos de história.</p>
       </div>
       <div className="history-scroll-testimonials" aria-hidden={!testimonialsVisible} style={{ opacity: reveal(0.25, 0.31), visibility: testimonialsVisible ? "visible" : "hidden", transform: `translateY(${(1 - reveal(0.25, 0.31)) * 28}px)` }}>
-        <p className="history-scroll-kicker" style={{ opacity: reveal(0.32, 0.37), transform: `translateY(${(1 - reveal(0.32, 0.37)) * 18}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
-        <h2 className="history-scroll-heading" style={{ opacity: reveal(0.43, 0.48), transform: `translateY(${(1 - reveal(0.43, 0.48)) * 20}px)` }}>E cada família faz parte delas.</h2>
+        <p className="history-scroll-kicker" style={{ opacity: reveal(0.29, 0.41), transform: `translateY(${(1 - reveal(0.29, 0.41)) * 24}px)` }}>UMA ESCOLA, MUITAS HISTÓRIAS.</p>
+        <h2 className="history-scroll-heading" style={{ opacity: reveal(0.39, 0.54), transform: `translateY(${(1 - reveal(0.39, 0.54)) * 26}px)` }}>E cada família faz parte delas.</h2>
         <div className="history-scroll-cards">
           {cards.map((testimonial, index) => {
             const cardReveal = reveal([0.54, 0.65, 0.76, 0.87][index], [0.54, 0.65, 0.76, 0.87][index] + 0.075);
