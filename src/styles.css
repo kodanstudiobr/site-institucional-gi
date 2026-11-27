@@ -5952,7 +5952,10 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
 }
 @media (max-width: 640px) {
   .gi-preloader__content { min-height: 76vh !important; }
-  .gi-preloader__mascot-stage { width: min(88vw, 350px) !important; }
+  .gi-preloader__mascot-stage {
+    width: min(88vw, 350px) !important;
+    height: min(30vh, 220px) !important;
+  }
   @keyframes giMascotDropIn {
     from { height: 0; opacity: 0; }
     to { height: min(34vh, 270px); opacity: 1; }
@@ -6090,8 +6093,8 @@ section.history-scroll-section .history-scroll-card .testimonial-card__person sm
   pointer-events: none;
 }
 .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
-  height: min(37vh, 300px) !important;
-  margin-bottom: .35rem !important;
+  height: min(32vh, 260px) !important;
+  margin-bottom: .05rem !important;
   opacity: 1 !important;
 }
 .gi-preloader__content.has-mascot .gi-preloader__copy {
