@@ -6438,32 +6438,60 @@ main .learning-word-stack .learning-word {
   }
 }
 
-/* Mobile: força a mesma sequência e o mesmo fade do preloader desktop,
-   neutralizando animações antigas que ainda existem no CSS legado. */
+/* Mobile: restaura a mascote visível e revela as frases somente com has-copy. */
 @media (max-width: 767px) {
+  .gi-preloader {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+  }
   .gi-preloader__content {
     display: flex !important;
+    width: min(100%, 390px) !important;
+    min-height: 76vh !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 0 !important;
+    overflow: visible !important;
   }
   .gi-preloader__mascot-stage {
     order: 1 !important;
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: min(88vw, 350px) !important;
+    height: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    opacity: 0 !important;
+  }
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    height: min(31vh, 235px) !important;
+    margin-bottom: .35rem !important;
+    opacity: 1 !important;
+  }
+  .gi-preloader__mascot-stage video.gi-preloader__mascot {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 1 !important;
+    object-fit: contain !important;
   }
   .gi-preloader__copy {
     order: 2 !important;
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    width: 100% !important;
     height: auto !important;
     overflow: visible !important;
-    animation: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
     translate: 0 10px;
     filter: blur(2px);
+    animation: none !important;
   }
   .gi-preloader__content.has-copy .gi-preloader__copy {
-    display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
     animation: giPreloaderSoftFade 1.35s cubic-bezier(.2,.65,.25,1) both !important;
