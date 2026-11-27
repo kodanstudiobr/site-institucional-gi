@@ -6506,3 +6506,93 @@ main .learning-word-stack .learning-word {
     animation: giPreloaderSoftFade 1.05s cubic-bezier(.2,.65,.25,1) .4s both !important;
   }
 }
+
+
+/* Preloader: a Gigi ocupa desde o início sua posição final.
+   O espaço das frases fica reservado e só ganha opacidade, sem deslocar a mascote. */
+.gi-preloader__content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+.gi-preloader__mascot-stage {
+  order: 1 !important;
+  flex: 0 0 auto !important;
+  height: min(32vh, 260px) !important;
+  margin: 0 0 .35rem !important;
+  opacity: 0 !important;
+  transform: none !important;
+  clip-path: none !important;
+  animation: none !important;
+  transition: opacity .48s ease !important;
+}
+.gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+  height: min(32vh, 260px) !important;
+  margin: 0 0 .35rem !important;
+  opacity: 1 !important;
+}
+.gi-preloader__copy {
+  order: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 104px !important;
+  overflow: visible !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: none !important;
+  translate: none !important;
+  filter: none !important;
+  animation: none !important;
+  transition: opacity .5s ease, visibility 0s linear .5s !important;
+}
+.gi-preloader__content.has-copy .gi-preloader__copy {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  animation: giPreloaderCopyReveal .75s ease both !important;
+  transition-delay: 0s !important;
+}
+@keyframes giPreloaderCopyReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.gi-preloader__content.has-copy .gi-preloader__title,
+.gi-preloader__content.has-copy .gi-preloader__message,
+.gi-preloader__content.has-copy .gi-preloader__track {
+  animation: none !important;
+}
+.gi-preloader__content.has-copy .gi-preloader__mascot-stage {
+  margin-bottom: .35rem !important;
+}
+@media (max-width: 767px) {
+  .gi-preloader__content {
+    min-height: 76vh !important;
+  }
+  .gi-preloader__mascot-stage,
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    width: min(88vw, 350px) !important;
+    height: min(31vh, 235px) !important;
+    margin: 0 0 .35rem !important;
+  }
+  .gi-preloader__copy {
+    min-height: 104px !important;
+  }
+}
+@media (max-height: 650px) {
+  .gi-preloader__mascot-stage,
+  .gi-preloader__content.has-mascot .gi-preloader__mascot-stage {
+    height: min(27vh, 185px) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__copy,
+  .gi-preloader__mascot-stage {
+    transition: none !important;
+    animation: none !important;
+  }
+}
