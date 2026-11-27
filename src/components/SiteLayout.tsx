@@ -37,26 +37,23 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   useEffect(() => {
     if (!preloaderVisible) return;
     let active = true;
-    let copyEntryTimer: number | undefined;
-    let finishTimer: number | undefined;
+    let copyFallbackTimer: number | undefined;
+    let finishFallbackTimer: number | undefined;
     let leaveTimer: number | undefined;
+    let hasFinished = false;
 
     setGigiVisible(true);
     setPreloaderCopyVisible(false);
+    setPreloaderLeaving(false);
+
     const video = gigiVideoRef.current;
-    if (video) {
-      video.currentTime = 0;
-      void video.play().catch(() => undefined);
-    }
-
-    // No vídeo, a Gigi termina a corrida e fica de frente por volta de 1,5 s.
-    // A mensagem começa a surgir nesse momento, com fade suave via CSS.
-    copyEntryTimer = window.setTimeout(() => {
+    const revealCopy = () => {
       if (active) setPreloaderCopyVisible(true);
-    }, 1550);
-
+    };
     const finishPreloader = () => {
-      if (!active) return;
+      if (!active || hasFinished) return;
+      hasFinished = true;
+      if (finishFallbackTimer !== undefined) window.clearTimeout(finishFallbackTimer);
       document.documentElement.classList.remove("gi-first-visit");
       setPreloaderLeaving(true);
       leaveTimer = window.setTimeout(() => {
@@ -64,15 +61,39 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
         setPreloaderVisible(false);
       }, 700);
     };
+    const syncVideoProgress = () => {
+      if (video && video.currentTime >= 1.55) revealCopy();
+    };
 
-    finishTimer = window.setTimeout(finishPreloader, 5033);
+    if (video) {
+      video.addEventListener("timeupdate", syncVideoProgress);
+      video.addEventListener("ended", finishPreloader);
+      video.currentTime = 0;
+      // O Safari pode levar mais tempo para iniciar a decodificação do WebM.
+      // A cópia tem um fallback, mas o encerramento acompanha o evento ended.
+      copyFallbackTimer = window.setTimeout(revealCopy, 2600);
+      finishFallbackTimer = window.setTimeout(finishPreloader, 8500);
+      void video.play().catch(() => {
+        revealCopy();
+        // Se o navegador bloquear ou não suportar a reprodução, não deixa
+        // a tela de carregamento presa indefinidamente.
+        finishFallbackTimer = window.setTimeout(finishPreloader, 5200);
+      });
+    } else {
+      revealCopy();
+      finishFallbackTimer = window.setTimeout(finishPreloader, 5200);
+    }
 
     return () => {
       active = false;
-      if (copyEntryTimer !== undefined) window.clearTimeout(copyEntryTimer);
-      if (finishTimer !== undefined) window.clearTimeout(finishTimer);
+      if (copyFallbackTimer !== undefined) window.clearTimeout(copyFallbackTimer);
+      if (finishFallbackTimer !== undefined) window.clearTimeout(finishFallbackTimer);
       if (leaveTimer !== undefined) window.clearTimeout(leaveTimer);
-      gigiVideoRef.current?.pause();
+      if (video) {
+        video.removeEventListener("timeupdate", syncVideoProgress);
+        video.removeEventListener("ended", finishPreloader);
+        video.pause();
+      }
     };
   }, [preloaderVisible]);
   useEffect(() => {
