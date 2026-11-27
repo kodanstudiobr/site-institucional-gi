@@ -21,6 +21,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const preloaderCheckRef = useRef(false);
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
   const [gigiVisible, setGigiVisible] = useState(false);
+  const gigiVideoRef = useRef<HTMLVideoElement | null>(null);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
@@ -35,6 +36,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   useEffect(() => {
     if (!preloaderVisible) return;
     let active = true;
+    gigiVideoRef.current?.pause();
     let mascotEntryTimer: number | undefined;
     let finishTimer: number | undefined;
     let leaveTimer: number | undefined;
@@ -53,8 +55,13 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
     mascotEntryTimer = window.setTimeout(() => {
       if (!active) return;
       setGigiVisible(true);
-      // Mantém o tempo de exibição da mascote próximo ao da sequência anterior.
-      finishTimer = window.setTimeout(finishPreloader, 4280);
+      const video = gigiVideoRef.current;
+      if (video) {
+        video.currentTime = 0;
+        void video.play().catch(() => undefined);
+      }
+      // A animação completa: corrida no início e aceno de despedida no final.
+      finishTimer = window.setTimeout(finishPreloader, 5033);
     }, 1000);
 
     return () => {
@@ -186,9 +193,9 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           </div>
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             <video
+              ref={gigiVideoRef}
               className="gi-preloader__mascot is-active"
               src="/imagens/IMG_4068-transparente.webm"
-              autoPlay
               muted
               loop
               playsInline
