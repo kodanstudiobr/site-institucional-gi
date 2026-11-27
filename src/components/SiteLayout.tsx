@@ -49,9 +49,11 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       void video.play().catch(() => undefined);
     }
 
+    // No vídeo, a Gigi termina a corrida e fica de frente por volta de 1,5 s.
+    // A mensagem começa a surgir nesse momento, com fade suave via CSS.
     copyEntryTimer = window.setTimeout(() => {
       if (active) setPreloaderCopyVisible(true);
-    }, 700);
+    }, 1550);
 
     const finishPreloader = () => {
       if (!active) return;
