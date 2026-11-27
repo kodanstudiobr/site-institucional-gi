@@ -6351,3 +6351,42 @@ main .learning-word-stack .learning-word {
   font-weight: 400 !important;
   font-synthesis: none;
 }
+
+
+/* Sequência final do preloader: Gigi centralizada primeiro; mensagem depois. */
+.gi-preloader__content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+}
+.gi-preloader__mascot-stage {
+  order: 1 !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+.gi-preloader__copy {
+  order: 2 !important;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .45s ease, transform .45s ease, height .45s ease;
+}
+.gi-preloader__content.has-copy .gi-preloader__copy {
+  visibility: visible;
+  height: auto;
+  overflow: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+.gi-preloader__content.has-copy .gi-preloader__mascot-stage {
+  margin-bottom: .35rem !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gi-preloader__copy {
+    transition: none !important;
+  }
+}
