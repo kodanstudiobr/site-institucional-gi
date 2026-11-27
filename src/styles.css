@@ -6635,3 +6635,20 @@ main .learning-word-stack .learning-word {
     filter: none !important;
   }
 }
+
+
+/* Em celulares, usar a versão WebP transparente da Gigi: alguns navegadores
+   móveis não compõem corretamente o canal alfa do vídeo WebM e exibem verde. */
+.gi-preloader__mascot-mobile {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .gi-preloader__mascot-stage .gi-preloader__mascot-video {
+    display: none !important;
+  }
+  .gi-preloader__mascot-stage .gi-preloader__mascot-mobile {
+    display: block !important;
+    opacity: 1 !important;
+    object-fit: contain !important;
+  }
+}
