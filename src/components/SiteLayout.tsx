@@ -218,12 +218,17 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
             <video
               ref={gigiVideoRef}
-              className="gi-preloader__mascot is-active"
+              className="gi-preloader__mascot gi-preloader__mascot-video is-active"
               src="/imagens/IMG_4068-transparente.webm"
               muted
               playsInline
               preload="auto"
               aria-label="Animação da mascote Gigi"
+            />
+            <img
+              className="gi-preloader__mascot gi-preloader__mascot-mobile"
+              src="/imagens/gigi-normal.webp"
+              alt=""
             />
           </div>
         </div>
