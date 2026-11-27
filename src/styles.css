@@ -6391,24 +6391,32 @@ main .learning-word-stack .learning-word {
   }
 }
 
-/* Entrada suave das frases após a Gigi ficar de frente. */
+/* Exibição robusta das frases: ficam ocultas até a Gigi estar de frente. */
 .gi-preloader__copy {
+  display: none !important;
+  visibility: hidden !important;
+  height: auto !important;
+  overflow: visible !important;
   opacity: 0 !important;
-  translate: 0 18px !important;
+  translate: 0 18px;
   animation: none !important;
   will-change: opacity, translate;
 }
 .gi-preloader__content.has-copy .gi-preloader__copy {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  translate: 0 0;
   animation: giPreloaderCopyReveal .9s cubic-bezier(.16, 1, .3, 1) both !important;
 }
 .gi-preloader__content.has-copy .gi-preloader__title {
-  animation: giPreloaderLineReveal .72s cubic-bezier(.16, 1, .3, 1) .08s both;
+  animation: giPreloaderLineReveal .72s cubic-bezier(.16, 1, .3, 1) .08s both !important;
 }
 .gi-preloader__content.has-copy .gi-preloader__message {
-  animation: giPreloaderLineReveal .72s cubic-bezier(.16, 1, .3, 1) .2s both;
+  animation: giPreloaderLineReveal .72s cubic-bezier(.16, 1, .3, 1) .2s both !important;
 }
 .gi-preloader__content.has-copy .gi-preloader__track {
-  animation: giPreloaderLineReveal .72s cubic-bezier(.16, 1, .3, 1) .32s both;
+  animation: giPreloaderLineReveal .72s cubic-bezier(.16, 1, .3, 1) .32s both !important;
 }
 @keyframes giPreloaderCopyReveal {
   from { opacity: 0; translate: 0 18px; }
@@ -6427,5 +6435,8 @@ main .learning-word-stack .learning-word {
     opacity: 1 !important;
     translate: none !important;
   }
+  .gi-preloader__content.has-copy .gi-preloader__copy {
+    display: flex !important;
+    visibility: visible !important;
+  }
 }
-
