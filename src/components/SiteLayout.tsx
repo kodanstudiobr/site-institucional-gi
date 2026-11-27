@@ -21,6 +21,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const preloaderCheckRef = useRef(false);
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
   const [gigiVisible, setGigiVisible] = useState(false);
+  const [preloaderCopyVisible, setPreloaderCopyVisible] = useState(false);
   const gigiVideoRef = useRef<HTMLVideoElement | null>(null);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
@@ -36,42 +37,42 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   useEffect(() => {
     if (!preloaderVisible) return;
     let active = true;
-    gigiVideoRef.current?.pause();
-    let mascotEntryTimer: number | undefined;
+    let copyEntryTimer: number | undefined;
     let finishTimer: number | undefined;
     let leaveTimer: number | undefined;
 
+    setGigiVisible(true);
+    setPreloaderCopyVisible(false);
+    const video = gigiVideoRef.current;
+    if (video) {
+      video.currentTime = 0;
+      void video.play().catch(() => undefined);
+    }
+
+    copyEntryTimer = window.setTimeout(() => {
+      if (active) setPreloaderCopyVisible(true);
+    }, 700);
+
     const finishPreloader = () => {
       if (!active) return;
-      // Finaliza o preloader e revela a Hero com o comportamento padrão.
       document.documentElement.classList.remove("gi-first-visit");
       setPreloaderLeaving(true);
       leaveTimer = window.setTimeout(() => {
         if (!active) return;
         setPreloaderVisible(false);
-      }, 1000);
+      }, 700);
     };
 
-    mascotEntryTimer = window.setTimeout(() => {
-      if (!active) return;
-      setGigiVisible(true);
-      const video = gigiVideoRef.current;
-      if (video) {
-        video.currentTime = 0;
-        void video.play().catch(() => undefined);
-      }
-      // A animação completa: corrida no início e aceno de despedida no final.
-      finishTimer = window.setTimeout(finishPreloader, 5033);
-    }, 1000);
+    finishTimer = window.setTimeout(finishPreloader, 5033);
 
     return () => {
       active = false;
-      if (mascotEntryTimer !== undefined) window.clearTimeout(mascotEntryTimer);
+      if (copyEntryTimer !== undefined) window.clearTimeout(copyEntryTimer);
       if (finishTimer !== undefined) window.clearTimeout(finishTimer);
       if (leaveTimer !== undefined) window.clearTimeout(leaveTimer);
+      gigiVideoRef.current?.pause();
     };
   }, [preloaderVisible]);
-
   useEffect(() => {
     try {
       setCookieVisible(!window.localStorage.getItem("gi-cookie-preferences"));
@@ -185,7 +186,7 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <div className={`gi-preloader ${!preloaderVisible ? "is-inactive" : ""} ${preloaderLeaving ? "is-leaving" : ""}`} role="status" aria-label="Carregando o site do Instituto Educacional G.I.">
-        <div className={`gi-preloader__content gi-preloader__content--enter ${gigiVisible ? "has-mascot" : ""}`}>
+        <div className={`gi-preloader__content gi-preloader__content--enter ${gigiVisible ? "has-mascot" : ""} ${preloaderCopyVisible ? "has-copy" : ""}`}>
           <div className="gi-preloader__copy">
             <p className="gi-preloader__title gi-preloader__foreground">Olá! Eu sou a Gigi!</p>
             <p className="gi-preloader__message gi-preloader__foreground">Estamos preparando tudo para você...</p>
@@ -197,7 +198,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
               className="gi-preloader__mascot is-active"
               src="/imagens/IMG_4068-transparente.webm"
               muted
-              loop
               playsInline
               preload="auto"
               aria-label="Animação da mascote Gigi"
