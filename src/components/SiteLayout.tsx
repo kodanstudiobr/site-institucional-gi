@@ -21,7 +21,6 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   const preloaderCheckRef = useRef(false);
   const [preloaderLeaving, setPreloaderLeaving] = useState(false);
   const [gigiVisible, setGigiVisible] = useState(false);
-  const [gigiFrame, setGigiFrame] = useState<0 | 1 | 2>(0);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const whatsappUrl = `https://wa.me/${institutionalConfig.whatsapp}?text=${encodeURIComponent("Olá, gostaria de conhecer mais sobre a escola e fazer parte da família G.I.! 😊")}`;
 
@@ -36,16 +35,10 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
   useEffect(() => {
     if (!preloaderVisible) return;
     let active = true;
-    let sequenceTimer: number | undefined;
-    let sequenceStartTimer: number | undefined;
     let mascotEntryTimer: number | undefined;
+    let finishTimer: number | undefined;
     let leaveTimer: number | undefined;
 
-    const imagePaths = [
-      "/imagens/gigi-normal.webp",
-      "/imagens/gigi-piscando.webp",
-      "/imagens/gigi-acenando.webp",
-    ];
     const finishPreloader = () => {
       if (!active) return;
       // Finaliza o preloader e revela a Hero com o comportamento padrão.
@@ -57,36 +50,17 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
       }, 1000);
     };
 
-    const playSequence = (frame: 0 | 1 | 2) => {
-      if (!active) return;
-      setGigiFrame(frame);
-      const nextFrame = frame < 2 ? frame + 1 : null;
-      if (nextFrame !== null) {
-        const nextImage = new Image();
-        nextImage.decoding = "async";
-        nextImage.src = imagePaths[nextFrame];
-      }
-      sequenceTimer = window.setTimeout(() => {
-        if (frame === 2) {
-          finishPreloader();
-          return;
-        }
-        playSequence(frame === 0 ? 1 : 2);
-      }, 1200);
-    };
-
     mascotEntryTimer = window.setTimeout(() => {
       if (!active) return;
       setGigiVisible(true);
-      // A primeira pose só começa a contar após a mascote concluir a entrada.
-      sequenceStartTimer = window.setTimeout(() => playSequence(0), 680);
+      // Mantém o tempo de exibição da mascote próximo ao da sequência anterior.
+      finishTimer = window.setTimeout(finishPreloader, 4280);
     }, 1000);
 
     return () => {
       active = false;
-      if (sequenceTimer !== undefined) window.clearTimeout(sequenceTimer);
-      if (sequenceStartTimer !== undefined) window.clearTimeout(sequenceStartTimer);
       if (mascotEntryTimer !== undefined) window.clearTimeout(mascotEntryTimer);
+      if (finishTimer !== undefined) window.clearTimeout(finishTimer);
       if (leaveTimer !== undefined) window.clearTimeout(leaveTimer);
     };
   }, [preloaderVisible]);
@@ -211,17 +185,16 @@ export function SiteLayout({ children, transparentHeader = false }: { children: 
             <div className="gi-preloader__track gi-preloader__foreground"><span /></div>
           </div>
           <div className="gi-preloader__mascot-stage" aria-hidden="true">
-            <img
-              key={gigiFrame}
+            <video
               className="gi-preloader__mascot is-active"
-              src={[
-                "/imagens/gigi-normal.webp",
-                "/imagens/gigi-piscando.webp",
-                "/imagens/gigi-acenando.webp",
-              ][gigiFrame]}
-              alt=""
-              fetchPriority="high"
-              decoding="async"
+              src="/imagens/IMG_4068.mp4"
+              poster="/imagens/gigi-normal.webp"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-label="Animação da mascote Gigi"
             />
           </div>
         </div>
